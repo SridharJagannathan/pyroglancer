@@ -1,6 +1,7 @@
 import neuroglancer as ng
 from ..ngviewer import openviewer
 
+
 def test_newviewer():
     # check if the viewer opens when no object is passed....
 

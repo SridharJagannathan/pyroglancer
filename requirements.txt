@@ -1,2 +1,7 @@
 # List required packages in this file, one per line.
 neuroglancer
+pymaid
+navis
+numpy
+json
+cloudvolume
