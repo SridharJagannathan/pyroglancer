@@ -129,7 +129,7 @@ def uploadskeletons(skelsource, skelseglist, skelnamelist, path):
             "transform": skelsource[0].transform.flatten(),
             "vertex_attributes": [{"id": "radius", "data_type": "float32", "num_components": 1}],
             "scales": "um"}
-
+    path = 'file://' + path + '/precomputed'
     cv = CloudVolume(path, info=info)
 
     # prepare for info file
