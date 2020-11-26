@@ -17,8 +17,7 @@
 # TODO:
 # - Add support for server to look at gzip files using do_GET()
 
-""" This code is used to serve local data via http port, so it can be read by neuroglancer.
-"""
+"""This code is used to serve local data via http port, so it can be read by neuroglancer."""
 
 import argparse
 import os
@@ -50,7 +49,8 @@ def startserver(args):
     os.chdir(temp_dirname)
     server = Server((args.address, args.port))
     socketaddress = server.socket.getsockname()
-    print("Serving directory %s at http://%s:%d" % (os.getcwd(), socketaddress[0], socketaddress[1]))
+    print("Serving directory %s at http://%s:%d" %
+          (os.getcwd(), socketaddress[0], socketaddress[1]))
     try:
         server.serve_forever()
     except KeyboardInterrupt:
