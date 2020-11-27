@@ -5,3 +5,4 @@ navis
 numpy
 json
 cloudvolume
+webbrowser

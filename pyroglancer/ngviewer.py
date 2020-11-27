@@ -12,6 +12,7 @@
 #    GNU General Public License for more details.
 
 import neuroglancer as ng
+import webbrowser
 
 
 def openviewer(ngviewer=None):
@@ -42,6 +43,7 @@ def openviewer(ngviewer=None):
     if ngviewer is None:
         ngviewer = ng.Viewer()
         print('Neuroglancer viewer created at: ', ngviewer)
+        webbrowser.open(ngviewer.get_viewer_url())
     else:
         ngviewer = ngviewer
 
