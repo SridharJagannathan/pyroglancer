@@ -19,8 +19,6 @@ def openviewer(ngviewer=None):
     """
     Open a neuroglancer viewing engine.
 
-
-
     Parameters
     ----------
     ngviewer : ng.viewer.Viewer

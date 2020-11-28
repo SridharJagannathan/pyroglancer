@@ -23,9 +23,9 @@ import json
 
 
 def _generate_skeleton(x, min_radius=0):
-    """Generate skeleton (of cloudvolume class) for given neuron.
+    """
 
-
+    Generate skeleton (of cloudvolume class) for given neuron.
 
     Parameters
     ----------
@@ -91,6 +91,7 @@ def to_ngskeletons(x):
     -------
     skeldatasource :     List containing cloud volume skeletons
     skeldatasegidlist :  List containing the segids(skid)
+    skelsegnamelist:     List containing the names of segments
     """
 
     if isinstance(x, pymaid.core.CatmaidNeuron):
@@ -100,12 +101,14 @@ def to_ngskeletons(x):
 
     skeldatasegidlist = []
     skeldatasource = []
+    skelsegnamelist = []
     for neuronelement in x:
         skeldata = _generate_skeleton(neuronelement)
         skeldatasource.append(skeldata)
         skeldatasegidlist.append(skeldata.id)
+        skelsegnamelist.append(neuronelement.name)
 
-    return skeldatasource, skeldatasegidlist
+    return skeldatasource, skeldatasegidlist, skelsegnamelist
 
 
 def uploadskeletons(skelsource, skelseglist, skelnamelist, path):
@@ -135,7 +138,8 @@ def uploadskeletons(skelsource, skelseglist, skelnamelist, path):
     # prepare for info file
     cv.skeleton.meta.info['@type'] = 'neuroglancer_skeletons'
     cv.skeleton.meta.info['transform'] = skelsource[0].transform.flatten()
-    cv.skeleton.meta.info['vertex_attributes'] = [{'id': 'radius', 'data_type': 'float32', 'num_components': 1}]
+    cv.skeleton.meta.info['vertex_attributes'] = [
+        {'id': 'radius', 'data_type': 'float32', 'num_components': 1}]
     del cv.skeleton.meta.info['sharding']
     del cv.skeleton.meta.info['spatial_index']
 
@@ -148,12 +152,14 @@ def uploadskeletons(skelsource, skelseglist, skelnamelist, path):
     for fileidx in range(len(files)):
         fullfilepath = files[fileidx]
         fullfilepath = os.path.join(cv.basepath, os.path.basename(path), fullfilepath)
-        uploadskel = Skeleton(vertices=skelsource[fileidx].vertices, edges=skelsource[fileidx].edges)
+        uploadskel = Skeleton(
+            vertices=skelsource[fileidx].vertices, edges=skelsource[fileidx].edges)
         print(fullfilepath)
         with open(fullfilepath, 'wb') as f:
             f.write(uploadskel.to_precomputed())
 
-    segfilepath = os.path.join(cv.basepath, os.path.basename(path), cv.skeleton.meta.skeleton_path, 'seg_props')
+    segfilepath = os.path.join(cv.basepath, os.path.basename(
+        path), cv.skeleton.meta.skeleton_path, 'seg_props')
 
     if not os.path.exists(segfilepath):
         os.makedirs(segfilepath)
