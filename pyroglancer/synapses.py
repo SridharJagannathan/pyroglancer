@@ -19,18 +19,7 @@ import navis
 import neuroglancer
 
 
-def omit_nones(seg_list):
-    if seg_list is None:
-        return []
-
-    seg_list = list(filter(lambda x: x is not None, seg_list))
-    if len(seg_list) == 0:
-        return []
-    else:
-        return seg_list
-
-
-def annotate_postsynapses(x, nglayer):
+def annotate_synapses(ngviewer, dimensions, x):
     """
 
     Annotate postsynapses of a neuron/neuronlist.
@@ -40,7 +29,7 @@ def annotate_postsynapses(x, nglayer):
     Parameters
     ----------
     x :             CatmaidNeuron | CatmaidNeuronList or TreeNeuron | NeuronList
-    nglayer:        Neuroglancer layer
+    ngviewer:        Neuroglancer viewer
 
 
     """
@@ -51,17 +40,88 @@ def annotate_postsynapses(x, nglayer):
     elif isinstance(x, navis.core.TreeNeuron):
         neuronlist = navis.core.NeuronList(x)
 
-    for neuronidx in range(len(neuronlist)):
-        neuronelement = neuronlist[neuronidx]
-        annotations = nglayer.layers['post_synapses'].annotations
-        postsynapses = neuronelement.postsynapses
-        postsynapses = postsynapses.reset_index()
-        # segmentlist = [[] for i in range(len(postsynapses))]
-        # segmentlist = [[]] * 1
-        for index, postsyn in postsynapses.iterrows():
-            annotations.append(neuroglancer.PointAnnotation(
-                id=str(postsyn.connector_id),
-                # segments=segmentlist,
-                # segments=omit_nones(linked_segmentation)),
-                point=[postsyn.x/1000, postsyn.y/1000, postsyn.z/1000],
-                props=['#01FE01', 10]))  # 0000ff
+    skeldatasegidlist = []
+    for neuron in neuronlist:
+        skeldatasegidlist.append(neuron.id)
+
+    # postsynapses first..
+    with ngviewer.txn() as s:
+        s.layers.append(
+            name="post_synapses",
+            layer=neuroglancer.LocalAnnotationLayer(
+                dimensions=dimensions,
+                annotation_relationships=['post_synapses'],
+                linked_segmentation_layer={'post_synapses': 'skeletons'},
+                filter_by_segmentation=['post_synapses'],
+                ignore_null_segment_filter=False,
+                annotation_properties=[
+                    neuroglancer.AnnotationPropertySpec(
+                        id='color',
+                        type='rgb',
+                        default='blue',
+                    )
+                ],
+                shader='''
+                        void main() {
+                          setColor(prop_color());
+                          setPointMarkerSize(5.0);
+                        }
+                        ''',
+            ))
+
+    with ngviewer.txn() as s:
+        for neuronidx in range(len(neuronlist)):
+            neuronelement = neuronlist[neuronidx]
+            postsynapses = neuronelement.postsynapses
+            postsynapses = postsynapses.reset_index()
+
+            for index, postsyn in postsynapses.iterrows():
+                s.layers['post_synapses'].annotations.append(
+                    neuroglancer.PointAnnotation(
+                        id=str(index),
+                        point=[postsyn.x/1000, postsyn.y/1000, postsyn.z/1000],
+                        segments=[[skeldatasegidlist[neuronidx]]],
+                        props=['#0000ff'],
+                    )
+                )
+
+    # presynapses next..
+    with ngviewer.txn() as s:
+        s.layers.append(
+            name="pre_synapses",
+            layer=neuroglancer.LocalAnnotationLayer(
+                dimensions=dimensions,
+                annotation_relationships=['pre_synapses'],
+                linked_segmentation_layer={'pre_synapses': 'skeletons'},
+                filter_by_segmentation=['pre_synapses'],
+                ignore_null_segment_filter=False,
+                annotation_properties=[
+                    neuroglancer.AnnotationPropertySpec(
+                        id='color',
+                        type='rgb',
+                        default='red',
+                    )
+                ],
+                shader='''
+                        void main() {
+                          setColor(prop_color());
+                          setPointMarkerSize(5.0);
+                        }
+                        ''',
+            ))
+
+    with ngviewer.txn() as s:
+        for neuronidx in range(len(neuronlist)):
+            neuronelement = neuronlist[neuronidx]
+            presynapses = neuronelement.presynapses
+            presynapses = presynapses.reset_index()
+
+            for index, presyn in presynapses.iterrows():
+                s.layers['pre_synapses'].annotations.append(
+                    neuroglancer.PointAnnotation(
+                        id=str(index),
+                        point=[presyn.x/1000, presyn.y/1000, presyn.z/1000],
+                        segments=[[skeldatasegidlist[neuronidx]]],
+                        props=['#ff0000'],
+                    )
+                )
