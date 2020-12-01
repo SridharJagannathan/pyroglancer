@@ -6,3 +6,4 @@ numpy
 json
 cloudvolume
 webbrowser
+configparser

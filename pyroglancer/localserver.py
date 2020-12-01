@@ -23,6 +23,7 @@ import argparse
 import os
 import sys
 import tempfile
+from configparser import ConfigParser
 
 from http.server import SimpleHTTPRequestHandler, HTTPServer
 
@@ -46,11 +47,29 @@ def startserver(args):
         temp_dirname = temp_dir.name
     else:
         temp_dirname = args.directory
+
     os.chdir(temp_dirname)
     server = Server((args.address, args.port))
     socketaddress = server.socket.getsockname()
-    print("Serving directory %s at http://%s:%d" %
-          (os.getcwd(), socketaddress[0], socketaddress[1]))
+    print("Serving directory at http://%s:%d" %
+          (socketaddress[0], socketaddress[1]))
+
+    # save config information..
+    config = ConfigParser(strict=False)
+    config_dir = os.path.join(os.path.expanduser("~"), '.config/pyroglancer')
+    if not os.path.exists(config_dir):
+        os.makedirs(config_dir)
+
+    config_file = os.path.join(config_dir, 'pyroglancer.ini')
+    config.read(config_file)
+    if not config.has_section('localserver'):
+        config.add_section('localserver')
+    config.set('localserver', 'directory', str(os.getcwd()))
+    config.set('localserver', 'port', str(socketaddress[1]))
+
+    with open(config_file, 'w') as f:
+        config.write(f)
+
     try:
         server.serve_forever()
     except KeyboardInterrupt:
