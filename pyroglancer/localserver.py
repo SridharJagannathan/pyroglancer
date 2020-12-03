@@ -49,6 +49,7 @@ def startserver(args):
         temp_dirname = args.directory
 
     os.chdir(temp_dirname)
+    print(temp_dirname)
     server = Server((args.address, args.port))
     socketaddress = server.socket.getsockname()
     print("Serving directory at http://%s:%d" %

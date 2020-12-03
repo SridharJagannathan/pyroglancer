@@ -17,6 +17,83 @@
 import pymaid
 import navis
 import neuroglancer
+import json
+import os
+import struct
+
+
+def commit_info(synapseinfo, path):
+    synapsefilepath = path + '/precomputed/synapses'
+    if not os.path.exists(synapsefilepath):
+        os.makedirs(synapsefilepath)
+        print('creating:', synapsefilepath)
+    infofile = os.path.join(synapsefilepath, 'info')
+    with open(infofile, 'w') as f:
+        json.dump(synapseinfo, f)
+
+
+def create_synapseinfo(dimensions, path):
+    synapseinfo = {
+        '@type': 'neuroglancer_annotations_v1',
+        "annotation_type": "POINT",
+        "by_id": {
+            "key": "by_id"
+        },
+        "dimensions": {
+            "x": [dimensions['x'].scale, dimensions['x'].unit],
+            "y": [dimensions['y'].scale, dimensions['y'].unit],
+            "z": [dimensions['z'].scale, dimensions['z'].unit]
+        },
+        "lower_bound": [4, 7216, 1734],
+        "properties": [],
+        "relationships": [],
+        "spatial": [
+            {
+                "chunk_size": [34422, 37820, 41362],
+                "grid_shape": [1, 1, 1],
+                "key": "spatial0",
+                "limit": 10000
+            }
+        ],
+        "upper_bound": [34422, 37820, 41362]
+    }
+
+    commit_info(synapseinfo, path)
+    return path
+
+
+def upload_synapses(x, path):
+
+    if isinstance(x, pymaid.core.CatmaidNeuron):
+        neuronlist = pymaid.core.CatmaidNeuronList(x)
+    elif isinstance(x, pymaid.core.CatmaidNeuronList):
+        neuronlist = x
+    elif isinstance(x, navis.core.TreeNeuron):
+        neuronlist = navis.core.NeuronList(x)
+
+    for neuronidx in range(len(neuronlist)):
+        neuronelement = neuronlist[neuronidx]
+        postsynapses = neuronelement.postsynapses
+
+    synapsefilepath = path + '/precomputed/synapses/spatial0'
+    if not os.path.exists(synapsefilepath):
+        os.makedirs(synapsefilepath)
+        print('creating:', synapsefilepath)
+    synapsefile = os.path.join(synapsefilepath, '0_0_0')
+
+    synapselocs = postsynapses[['x', 'y', 'z']].values/1000
+
+    # implementation based on logic suggested by https://github.com/google/neuroglancer/issues/227
+    with open(synapsefile, 'wb') as outputbytefile:
+        total_synapses = len(synapselocs)  # coordinates is a list of tuples (x,y,z)
+        buffer = struct.pack('<Q', total_synapses)
+        for (x, y, z) in synapselocs:
+            synapsepoint = struct.pack('<3f', x, y, z)
+            buffer += synapsepoint
+        # write the ids of the individual points at the very end..
+        synapseid_buffer = struct.pack('<%sQ' % len(synapselocs), *range(len(synapselocs)))
+        buffer += synapseid_buffer
+        outputbytefile.write(buffer)
 
 
 def annotate_synapses(ngviewer, dimensions, x):
