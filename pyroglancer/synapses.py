@@ -57,20 +57,23 @@ def create_synapseinfo(dimensions, path):
         ],
         "upper_bound": [34422, 37820, 41362]
     }
-
+    synapseinfo["relationships"] = [{"id": "presynapses_cell",
+                                     "key": "presynapses_cell"}]
     commit_info(synapseinfo, path, synapsetype='presynapses')
+    synapseinfo["relationships"] = [{"id": "postsynapses_cell",
+                                     "key": "postsynapses_cell"}]
     commit_info(synapseinfo, path, synapsetype='postsynapses')
     return path
 
 
-def put_synapsefile(path, synapsetype, synapses):
+def put_synapsefile(path, synapsetype, synapses, skeletonid):
 
-    synapsefilepath = path + '/precomputed/' + synapsetype + '/spatial0'
+    synapsefilepath = path + '/precomputed/' + synapsetype + '/' + synapsetype + '_cell/'
     if not os.path.exists(synapsefilepath):
         os.makedirs(synapsefilepath)
         print('creating:', synapsefilepath)
-    synapsefile = os.path.join(synapsefilepath, '0_0_0')
-
+    synapsefile = os.path.join(synapsefilepath, str(skeletonid))
+    print('making:', synapsefile)
     synapselocs = synapses[['x', 'y', 'z']].values/1000
 
     # implementation based on logic suggested by https://github.com/google/neuroglancer/issues/227
@@ -99,9 +102,9 @@ def upload_synapses(x, path):
         neuronelement = neuronlist[neuronidx]
         presynapses = neuronelement.presynapses
         postsynapses = neuronelement.postsynapses
-
-    put_synapsefile(path, 'presynapses', presynapses)
-    put_synapsefile(path, 'postsynapses', postsynapses)
+        print('Adding neuron: ', neuronelement.id)
+        put_synapsefile(path, 'presynapses', presynapses, neuronelement.id)
+        put_synapsefile(path, 'postsynapses', postsynapses, neuronelement.id)
 
 
 def annotate_synapses(ngviewer, dimensions, x):
