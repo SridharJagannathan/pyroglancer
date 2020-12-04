@@ -71,9 +71,9 @@ def put_synapsefile(path, synapsetype, synapses, skeletonid):
     synapsefilepath = path + '/precomputed/' + synapsetype + '/' + synapsetype + '_cell/'
     if not os.path.exists(synapsefilepath):
         os.makedirs(synapsefilepath)
-        print('creating:', synapsefilepath)
+        #print('creating:', synapsefilepath)
     synapsefile = os.path.join(synapsefilepath, str(skeletonid))
-    print('making:', synapsefile)
+    #print('making:', synapsefile)
     synapselocs = synapses[['x', 'y', 'z']].values/1000
 
     # implementation based on logic suggested by https://github.com/google/neuroglancer/issues/227
