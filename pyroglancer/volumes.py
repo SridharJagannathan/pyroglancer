@@ -32,7 +32,7 @@ def _generate_mesh(x):
     mesh :      Cloud volume mesh
     """
 
-    mesh = Mesh(segid=x.id, vertices=x.vertices/1000, faces=x.faces)
+    mesh = Mesh(segid=x.id, vertices=x.vertices, faces=x.faces)
 
     return mesh
 
@@ -50,16 +50,18 @@ def to_ngmesh(x):
     -------
     mesh :      Cloud volume mesh
     """
-    if isinstance(x, list):
-        if all(isinstance(volume, navis.core.volumes.Volume) for volume in x):
-            volumeidlist = []
-            volumedatasource = []
-            volumenamelist = []
-            for volumeelement in x:
-                volumedata = _generate_mesh(volumeelement)
-                volumedatasource.append(volumedata)
-                volumeidlist.append(volumeelement.id)
-                volumenamelist.append(volumeelement.name)
+    if not isinstance(x, list):
+        x = [x]
+
+    if all(isinstance(volume, navis.core.volumes.Volume) for volume in x):
+        volumeidlist = []
+        volumedatasource = []
+        volumenamelist = []
+        for volumeelement in x:
+            volumedata = _generate_mesh(volumeelement)
+            volumedatasource.append(volumedata)
+            volumeidlist.append(volumeelement.id)
+            volumenamelist.append(volumeelement.name)
 
     return volumedatasource, volumeidlist, volumenamelist
 
@@ -105,8 +107,8 @@ def uploadmeshes(volumedatasource, volumeidlist, volumenamelist, path):
         fullfilepath = files[fileidx]
         fullfilepath = os.path.join(cv.basepath, os.path.basename(path), fullfilepath)
         uploadvol = Mesh(
-            vertices=volumedatasource[fileidx].vertices, faces=volumedatasource[fileidx].faces,
-            segid=volumedatasource[fileidx].segid)
+            vertices=volumedatasource[fileidx].vertices/1000, faces=volumedatasource[fileidx].faces)
+        # ,segid=volumedatasource[fileidx].segid)
         print(fullfilepath)
         with open(fullfilepath, 'wb') as f:
             f.write(uploadvol.to_precomputed())
