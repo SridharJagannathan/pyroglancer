@@ -14,7 +14,8 @@
 """ Module contains functions to handle mesh data.
 """
 import navis
-from cloudvolume import Mesh
+from cloudvolume import CloudVolume, Mesh
+import os
 
 
 def _generate_mesh(x):
@@ -31,7 +32,7 @@ def _generate_mesh(x):
     mesh :      Cloud volume mesh
     """
 
-    mesh = Mesh(segid=x.id, vertices=x.vertices, faces=x.faces)
+    mesh = Mesh(segid=x.id, vertices=x.vertices/1000, faces=x.faces)
 
     return mesh
 
@@ -61,3 +62,51 @@ def to_ngmesh(x):
                 volumenamelist.append(volumeelement.name)
 
     return volumedatasource, volumeidlist, volumenamelist
+
+
+def uploadmeshes(volumedatasource, volumeidlist, volumenamelist, path):
+    """Upload mesh (of cloudvolume class) to a local server.
+
+
+
+    Parameters
+    ----------
+    volumedatasource :     List containing cloud volume meshes
+    volumeidlist :    List containing the segids(volume id)
+    volumenamelist :   List containing the names of volumes
+    path :           path to the local data server
+
+    Returns
+    -------
+    cv :     cloudvolume class object
+    """
+    # info = {"@type": "neuroglancer_multilod_draco",
+    #         "spatial_index": None,
+    #         'scales': [1, 1, 1],
+    #         'lod_scale_multiplier': 1.0}
+    info = {"@type": "neuroglancer_legacy_mesh",
+            'scales': [1, 1, 1],
+            }
+    path = 'file://' + path + '/precomputed'
+    cv = CloudVolume(path, info=info)
+
+    # # prepare for info file
+    # cv.mesh.meta.info['@type'] = 'neuroglancer_multilod_draco'
+    # cv.mesh.meta.info['vertex_quantization_bits'] = 16
+    # cv.mesh.meta.info['scales'] = [1, 1, 1]
+    # cv.mesh.meta.info['lod_scale_multiplier'] = 1.0
+
+    cv.mesh.meta.info['@type'] = 'neuroglancer_legacy_mesh'
+    cv.mesh.meta.commit_info()
+
+    files = [os.path.join(cv.mesh.meta.mesh_path, str(vol.segid)) for vol in volumedatasource]
+
+    for fileidx in range(len(files)):
+        fullfilepath = files[fileidx]
+        fullfilepath = os.path.join(cv.basepath, os.path.basename(path), fullfilepath)
+        uploadvol = Mesh(
+            vertices=volumedatasource[fileidx].vertices, faces=volumedatasource[fileidx].faces,
+            segid=volumedatasource[fileidx].segid)
+        print(fullfilepath)
+        with open(fullfilepath, 'wb') as f:
+            f.write(uploadvol.to_precomputed())
