@@ -59,6 +59,7 @@ def to_ngmesh(x):
         volumenamelist = []
         for volumeelement in x:
             volumedata = _generate_mesh(volumeelement)
+            volumedata.segid = 1
             volumedatasource.append(volumedata)
             volumeidlist.append(volumeelement.id)
             volumenamelist.append(volumeelement.name)
@@ -107,8 +108,10 @@ def uploadmeshes(volumedatasource, volumeidlist, volumenamelist, path):
         fullfilepath = files[fileidx]
         fullfilepath = os.path.join(cv.basepath, os.path.basename(path), fullfilepath)
         uploadvol = Mesh(
-            vertices=volumedatasource[fileidx].vertices/1000, faces=volumedatasource[fileidx].faces)
-        # ,segid=volumedatasource[fileidx].segid)
-        print(fullfilepath)
+            vertices=volumedatasource[fileidx].vertices, faces=volumedatasource[fileidx].faces,
+            segid=1)
+        print('\nSeg id is:', fileidx)
+        print('\nFull filepath:', fullfilepath)
+        print('\n')
         with open(fullfilepath, 'wb') as f:
             f.write(uploadvol.to_precomputed())
