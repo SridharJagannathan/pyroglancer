@@ -49,27 +49,27 @@ def create_pointinfo(dimensions, path, layer_name):
         "relationships": [],
         "spatial": [
             {
-                "chunk_size": [137216,  264192, 4400],
+                "chunk_size": [137216, 264192, 4400],
                 "grid_shape": [1, 1, 1],
                 "key": "spatial0",
                 "limit": 1000
             }
         ],
-        "upper_bound": [137216,  264192, 4400]
+        "upper_bound": [137216, 264192, 4400]
     }
     commit_info(pointinfo, path, pointlayername=layer_name)
 
     return path
 
 
-def put_pointfile(path, layer_name, points, pointname):
+def put_pointfile(path, layer_name, points, pointsscale, pointname):
 
     pointfilepath = path + '/precomputed/' + layer_name + '/'
     if not os.path.exists(pointfilepath):
         os.makedirs(pointfilepath)
-        #print('creating:', pointfilepath)
-    pointfile = os.path.join(pointfilepath, str(layer_name))
-    #print('making:', pointfile)
+        # print('creating:', pointfilepath)
+    pointfile = os.path.join(pointfilepath, '0')
+    # print('making:', pointfile)
     pointlocs = points[['x', 'y', 'z']]
 
     # implementation based on logic suggested by https://github.com/google/neuroglancer/issues/227
@@ -78,9 +78,9 @@ def put_pointfile(path, layer_name, points, pointname):
         buffer = struct.pack('<Q', total_points)
         print(total_points)
         for index, row in pointlocs.iterrows():
-            x = row['x']
-            y = row['y']
-            z = row['z']
+            x = row['x']*pointsscale[0]
+            y = row['y']*pointsscale[1]
+            z = row['z']*pointsscale[2]
             print(x)
             print(y)
             print(z)
@@ -92,12 +92,13 @@ def put_pointfile(path, layer_name, points, pointname):
         outputbytefile.write(buffer)
 
 
-def upload_points(points_df, path, layer_name):
+def upload_points(points_df, path, layer_name, layer_scale):
 
     pointname = points_df['description']
     points = points_df[['x', 'y', 'z']]
-    #print('Adding neuron: ', neuronelement.id)
-    put_pointfile(path, layer_name, points, pointname)
+    pointsscale = layer_scale
+    # print('Adding neuron: ', neuronelement.id)
+    put_pointfile(path, layer_name, points, pointsscale, pointname)
 
 
 def annotate_points(ngviewer, dimensions, points_df, layer_scale):
@@ -117,7 +118,7 @@ def annotate_points(ngviewer, dimensions, points_df, layer_scale):
 
     """
 
-    #pointname = points_df['description']
+    # pointname = points_df['description']
     pointlocs = points_df[['x', 'y', 'z']]
 
     with ngviewer.txn() as s:
