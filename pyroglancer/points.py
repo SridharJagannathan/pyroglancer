@@ -52,7 +52,7 @@ def create_pointinfo(dimensions, path, layer_name):
                 "chunk_size": [137216, 264192, 4400],
                 "grid_shape": [1, 1, 1],
                 "key": "spatial0",
-                "limit": 1000
+                "limit": 10000
             }
         ],
         "upper_bound": [137216, 264192, 4400]
