@@ -64,29 +64,25 @@ def create_pointinfo(dimensions, path, layer_name):
 
 def put_pointfile(path, layer_name, points, pointsscale, pointname):
 
-    pointfilepath = path + '/precomputed/' + layer_name + '/'
-    if not os.path.exists(pointfilepath):
-        os.makedirs(pointfilepath)
+    pointsfilepath = path + '/precomputed/' + layer_name + '/spatial0'
+    if not os.path.exists(pointsfilepath):
+        os.makedirs(pointsfilepath)
         # print('creating:', pointfilepath)
-    pointfile = os.path.join(pointfilepath, '0')
+    pointsfile = os.path.join(pointsfilepath, '0_0_0')
+    print(pointsfile)
     # print('making:', pointfile)
-    pointlocs = points[['x', 'y', 'z']]
+    pointlocs = points[['x', 'y', 'z']].values
 
     # implementation based on logic suggested by https://github.com/google/neuroglancer/issues/227
-    with open(pointfile, 'wb') as outputbytefile:
-        total_points = len(pointlocs)  # coordinates is a list of tuples (x,y,z)
+    with open(pointsfile, 'wb') as outputbytefile:
+        total_points = len(pointlocs)
         buffer = struct.pack('<Q', total_points)
-        print(total_points)
-        for index, row in pointlocs.iterrows():
-            x = row['x']*pointsscale[0]
-            y = row['y']*pointsscale[1]
-            z = row['z']*pointsscale[2]
-            print(x)
-            print(y)
-            print(z)
+        for (x, y, z) in pointlocs:
+            x = x*pointsscale[0]
+            y = y*pointsscale[1]
+            z = z*pointsscale[2]
             annotpoint = struct.pack('<3f', x, y, z)
             buffer += annotpoint
-        # write the ids of the individual points at the very end..
         pointid_buffer = struct.pack('<%sQ' % len(pointlocs), *range(len(pointlocs)))
         buffer += pointid_buffer
         outputbytefile.write(buffer)
