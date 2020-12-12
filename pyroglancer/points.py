@@ -71,7 +71,7 @@ def put_pointfile(path, layer_name, points, pointsscale, pointname):
     pointsfile = os.path.join(pointsfilepath, '0_0_0')
     print(pointsfile)
     # print('making:', pointfile)
-    pointlocs = points[['x', 'y', 'z']].values
+    pointlocs = points[['x', 'y', 'z']].values/1000
 
     # implementation based on logic suggested by https://github.com/google/neuroglancer/issues/227
     with open(pointsfile, 'wb') as outputbytefile:
