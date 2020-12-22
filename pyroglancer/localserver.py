@@ -19,13 +19,13 @@
 
 """This code is used to serve local data via http port, so it can be read by neuroglancer."""
 
-import argparse
 import os
 import sys
 import tempfile
 from configparser import ConfigParser
-
+from threading import Thread
 from http.server import SimpleHTTPRequestHandler, HTTPServer
+import types
 
 
 class RequestHandler(SimpleHTTPRequestHandler):
@@ -41,7 +41,13 @@ class Server(HTTPServer):
         HTTPServer.__init__(self, server_address, RequestHandler)
 
 
-def startserver(args):
+def startserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDirectory()):
+
+    args = types.SimpleNamespace()
+    args.address = address
+    args.port = port
+    args.directory = directory
+
     if isinstance(args.directory, tempfile.TemporaryDirectory):
         temp_dir = args.directory
         temp_dirname = temp_dir.name
@@ -74,19 +80,16 @@ def startserver(args):
     try:
         server.serve_forever()
     except KeyboardInterrupt:
+        print('Serving now..')
+    finally:
         server.server_close()
         if isinstance(args.directory, tempfile.TemporaryDirectory):
             temp_dir.cleanup()
         sys.exit(0)
 
 
-if __name__ == "__main__":
-    ap = argparse.ArgumentParser()
-    ap.add_argument('-a', '--address', default='127.0.0.1', help='IP address')
-    ap.add_argument('-p', '--port', type=int, default=8000, help='Port to serve data on')
-    ap.add_argument('-d', '--directory', default=tempfile.TemporaryDirectory(),
-                    help='Directory to serve the data from')
+def startdataserver():
 
-    args = ap.parse_args()
-
-    startserver(args)
+    serverthread = Thread(target=startserver)
+    serverthread.daemon = True  # This thread dies when main thread (only non-daemon thread) exits..
+    serverthread.start()
