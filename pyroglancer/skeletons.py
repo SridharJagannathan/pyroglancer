@@ -71,7 +71,8 @@ def _generate_skeleton(x, min_radius=0):
     this_tn.loc[this_tn.type == 'branch', 'label'] = 5
     this_tn.loc[this_tn.type == 'end', 'label'] = 6
     # Add soma label
-    this_tn.loc[x.soma, 'label'] = 1
+    if x.soma is not None:
+        this_tn.loc[x.soma, 'label'] = 1
 
     skeleton.vertex_types = this_tn.label
 
