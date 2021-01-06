@@ -22,10 +22,11 @@
 import os
 import sys
 import tempfile
-from configparser import ConfigParser
+#from configparser import ConfigParser
 from threading import Thread
 from http.server import SimpleHTTPRequestHandler, HTTPServer
 import types
+import shutil
 
 
 class RequestHandler(SimpleHTTPRequestHandler):
@@ -41,7 +42,26 @@ class Server(HTTPServer):
         HTTPServer.__init__(self, server_address, RequestHandler)
 
 
-def startserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDirectory()):
+def startserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDirectory(), restart=True):
+
+    if restart and 'ngserver' in sys.modules:
+        currentserver = sys.modules['ngserver']
+        currentdatadir = sys.modules['ngserverdir']
+        currsocketaddress = currentserver.socket.getsockname()
+        print("Closing server at http://%s:%d" %
+              (currsocketaddress[0], currsocketaddress[1]))
+        print("Cleaning directory at %s" % (currentdatadir))
+
+        # close previously created server..
+        currentserver.server_close()
+
+        # remove only contents inside prev created temp directory
+        for filename in os.listdir(currentdatadir):
+            filepath = os.path.join(currentdatadir, filename)
+            try:
+                shutil.rmtree(filepath)
+            except OSError:
+                os.remove(filepath)
 
     args = types.SimpleNamespace()
     args.address = address
@@ -55,27 +75,30 @@ def startserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDire
         temp_dirname = args.directory
 
     os.chdir(temp_dirname)
-    print(temp_dirname)
+    print("Serving data from: ", temp_dirname)
     server = Server((args.address, args.port))
     socketaddress = server.socket.getsockname()
     print("Serving directory at http://%s:%d" %
           (socketaddress[0], socketaddress[1]))
 
-    # save config information..
-    config = ConfigParser(strict=False)
-    config_dir = os.path.join(os.path.expanduser("~"), '.config/pyroglancer')
-    if not os.path.exists(config_dir):
-        os.makedirs(config_dir)
+    sys.modules['ngserver'] = server
+    sys.modules['ngserverdir'] = str(os.getcwd())
 
-    config_file = os.path.join(config_dir, 'pyroglancer.ini')
-    config.read(config_file)
-    if not config.has_section('localserver'):
-        config.add_section('localserver')
-    config.set('localserver', 'directory', str(os.getcwd()))
-    config.set('localserver', 'port', str(socketaddress[1]))
-
-    with open(config_file, 'w') as f:
-        config.write(f)
+    # # save config information..
+    # config = ConfigParser(strict=False)
+    # config_dir = os.path.join(os.path.expanduser("~"), '.config/pyroglancer')
+    # if not os.path.exists(config_dir):
+    #     os.makedirs(config_dir)
+    #
+    # config_file = os.path.join(config_dir, 'pyroglancer.ini')
+    # config.read(config_file)
+    # if not config.has_section('localserver'):
+    #     config.add_section('localserver')
+    # config.set('localserver', 'directory', str(os.getcwd()))
+    # config.set('localserver', 'port', str(socketaddress[1]))
+    #
+    # with open(config_file, 'w') as f:
+    #     config.write(f)
 
     try:
         server.serve_forever()
