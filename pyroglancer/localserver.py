@@ -55,6 +55,9 @@ def startserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDire
         # close previously created server..
         currentserver.server_close()
 
+        # close previously created ng viewer..
+        del sys.modules['ngviewerinst']
+
         # remove only contents inside prev created temp directory
         for filename in os.listdir(currentdatadir):
             filepath = os.path.join(currentdatadir, filename)

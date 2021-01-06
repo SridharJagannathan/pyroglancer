@@ -13,6 +13,7 @@
 
 import neuroglancer as ng
 import webbrowser
+import sys
 
 
 def openviewer(ngviewer=None):
@@ -39,9 +40,13 @@ def openviewer(ngviewer=None):
     http://127.0.0.1:53890/v/xxyyy/
     """
     if ngviewer is None:
-        ngviewer = ng.Viewer()
-        print('Neuroglancer viewer created at: ', ngviewer)
-        webbrowser.open(ngviewer.get_viewer_url())
+        if 'ngviewerinst' in sys.modules:
+            ngviewer = sys.modules['ngviewerinst']
+        else:
+            ngviewer = ng.Viewer()
+            print('Neuroglancer viewer created at: ', ngviewer)
+            webbrowser.open(ngviewer.get_viewer_url())
+            sys.modules['ngviewerinst'] = ngviewer
     else:
         ngviewer = ngviewer
 
