@@ -42,9 +42,9 @@ class Server(HTTPServer):
         HTTPServer.__init__(self, server_address, RequestHandler)
 
 
-def startserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDirectory(), restart=True):
+def closeserver():
 
-    if restart and 'ngserver' in sys.modules:
+    if (('ngserver' in sys.modules) and ('ngserverdir' in sys.modules)):
         currentserver = sys.modules['ngserver']
         currentdatadir = sys.modules['ngserverdir']
         currsocketaddress = currentserver.socket.getsockname()
@@ -55,8 +55,12 @@ def startserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDire
         # close previously created server..
         currentserver.server_close()
 
+        del sys.modules['ngserver']
+        del sys.modules['ngserverdir']
+
         # close previously created ng viewer..
-        del sys.modules['ngviewerinst']
+        if ('ngviewerinst' in sys.modules):
+            del sys.modules['ngviewerinst']
 
         # remove only contents inside prev created temp directory
         for filename in os.listdir(currentdatadir):
@@ -65,6 +69,12 @@ def startserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDire
                 shutil.rmtree(filepath)
             except OSError:
                 os.remove(filepath)
+
+
+def startserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDirectory(), restart=True):
+
+    if restart and 'ngserver' in sys.modules:
+        closeserver()
 
     args = types.SimpleNamespace()
     args.address = address
@@ -86,22 +96,6 @@ def startserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDire
 
     sys.modules['ngserver'] = server
     sys.modules['ngserverdir'] = str(os.getcwd())
-
-    # # save config information..
-    # config = ConfigParser(strict=False)
-    # config_dir = os.path.join(os.path.expanduser("~"), '.config/pyroglancer')
-    # if not os.path.exists(config_dir):
-    #     os.makedirs(config_dir)
-    #
-    # config_file = os.path.join(config_dir, 'pyroglancer.ini')
-    # config.read(config_file)
-    # if not config.has_section('localserver'):
-    #     config.add_section('localserver')
-    # config.set('localserver', 'directory', str(os.getcwd()))
-    # config.set('localserver', 'port', str(socketaddress[1]))
-    #
-    # with open(config_file, 'w') as f:
-    #     config.write(f)
 
     try:
         server.serve_forever()
