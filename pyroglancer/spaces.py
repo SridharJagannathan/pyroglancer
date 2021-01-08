@@ -18,7 +18,7 @@ from .layers import create_nglayer
 import sys
 
 
-def create_ngspace(space='MANC'):
+def create_ngspace(space='fafb_v14'):
 
     if space == 'MANC':
         ngviewer = create_nglayer(layer_kws={'type': 'emdataset', 'space': space,
@@ -29,11 +29,20 @@ def create_ngspace(space='MANC'):
                                              'name': 'seg_mancv3'})
 
     elif space == 'FANC':
-        create_nglayer(layer_kws={'type': 'emdataset', 'space': space,
-                                  'name': 'fanc_v1'})
-        create_nglayer(layer_kws={'type': 'meshes', 'space': space,
-                                  'name': 'FANC.surf'})
-        create_nglayer(layer_kws={'type': 'segdataset', 'space': space,
-                                  'name': 'seg_fancv1'})
+        ngviewer = create_nglayer(layer_kws={'type': 'emdataset', 'space': space,
+                                             'name': 'fanc_v1'})
+        ngviewer = create_nglayer(layer_kws={'type': 'meshes', 'space': space,
+                                             'name': 'FANC.surf'})
+        ngviewer = create_nglayer(layer_kws={'type': 'segdataset', 'space': space,
+                                             'name': 'seg_fancv1'})
 
+    elif space == 'FAFB':
+        ngviewer = create_nglayer(layer_kws={'type': 'emdataset', 'space': space,
+                                             'name': 'fafb_v14'})
+        ngviewer = create_nglayer(layer_kws={'type': 'meshes', 'space': space,
+                                             'name': 'FAFB.surf'})
+        ngviewer = create_nglayer(layer_kws={'type': 'segdataset', 'space': space,
+                                             'name': 'seg_20200412'})
+
+    print(ngviewer)
     sys.modules['ngspace'] = space
