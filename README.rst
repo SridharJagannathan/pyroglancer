@@ -2,6 +2,7 @@
 pyroglancer
 ===========
 
+.. image:: https://github.com/SridharJagannathan/pyroglancer/raw/master/docs/_static/pyroglancer_logo.png
 .. image:: https://img.shields.io/travis/SridharJagannathan/pyroglancer.svg
         :target: https://travis-ci.org/SridharJagannathan/pyroglancer
 
