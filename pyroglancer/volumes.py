@@ -59,14 +59,14 @@ def to_ngmesh(x):
         volumeidlist = []
         volumedatasource = []
         volumenamelist = []
-        segid = 0
+        # segid = 0
         for volumeelement in x:
             volumedata = _generate_mesh(volumeelement)
-            volumedata.segid = segid
+            volumedata.segid = volumeelement.id
             volumedatasource.append(volumedata)
             volumeidlist.append(volumeelement.id)
             volumenamelist.append(volumeelement.name)
-            segid = segid+1
+            # segid = segid+1
 
     return volumedatasource, volumeidlist, volumenamelist
 
@@ -106,6 +106,7 @@ def uploadmeshes(volumedatasource, volumeidlist, volumenamelist, path):
     cv.mesh.meta.commit_info()
 
     files = [os.path.join(cv.mesh.meta.mesh_path, str(vol.segid)) for vol in volumedatasource]
+    volumeids = [str(vol.segid) for vol in volumedatasource]
 
     for fileidx in range(len(files)):
         fullfilepath = str(files[fileidx])  # files[fileidx]
@@ -114,14 +115,13 @@ def uploadmeshes(volumedatasource, volumeidlist, volumenamelist, path):
             vertices=volumedatasource[fileidx].vertices, faces=volumedatasource[fileidx].faces,
             segid=None)
         precomputed_mesh = to_precomputed(uploadvol)
-        print('\nSeg id is:', fileidx)
-        print('\nFull filepath:', fullfilepath)
-        print('\n')
+        print('Seg id is:', str(volumeids[fileidx]))
+        print('Full filepath:', fullfilepath)
         with open(fullfilepath, 'wb') as f:
             f.write(precomputed_mesh)
 
         manifestinfo = {
-            "fragments": [str(fileidx)]}
+            "fragments": [str(volumeids[fileidx])]}
         manifestfilepath = str(files[fileidx]) + ':' + str(0)  # files[fileidx]
         manifestfilepath = os.path.join(cv.basepath, os.path.basename(path), manifestfilepath)
         with open(manifestfilepath, 'w') as f:
