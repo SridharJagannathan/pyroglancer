@@ -16,6 +16,8 @@
 import navis
 from cloudvolume import CloudVolume, Mesh
 import os
+import numpy as np
+import json
 
 
 def _generate_mesh(x):
@@ -59,12 +61,20 @@ def to_ngmesh(x):
         volumenamelist = []
         for volumeelement in x:
             volumedata = _generate_mesh(volumeelement)
-            volumedata.segid = 1
+            volumedata.segid = 0
             volumedatasource.append(volumedata)
             volumeidlist.append(volumeelement.id)
             volumenamelist.append(volumeelement.name)
 
     return volumedatasource, volumeidlist, volumenamelist
+
+
+def to_precomputed(mesh):
+
+    vertex_index_format = [np.uint32(mesh.vertices.shape[0]),
+                           mesh.vertices, mesh.faces]
+
+    return b''.join([array.tobytes('C') for array in vertex_index_format])
 
 
 def uploadmeshes(volumedatasource, volumeidlist, volumenamelist, path):
@@ -105,13 +115,25 @@ def uploadmeshes(volumedatasource, volumeidlist, volumenamelist, path):
     files = [os.path.join(cv.mesh.meta.mesh_path, str(vol.segid)) for vol in volumedatasource]
 
     for fileidx in range(len(files)):
-        fullfilepath = files[fileidx]
+        fullfilepath = str(files[fileidx])  # files[fileidx]
         fullfilepath = os.path.join(cv.basepath, os.path.basename(path), fullfilepath)
+        print('vertices')
+        print(volumedatasource[fileidx].vertices)
+        print('faces')
+        print(volumedatasource[fileidx].faces)
         uploadvol = Mesh(
             vertices=volumedatasource[fileidx].vertices, faces=volumedatasource[fileidx].faces,
-            segid=1)
+            segid=0)
+        precomputed_mesh = to_precomputed(uploadvol)
         print('\nSeg id is:', fileidx)
         print('\nFull filepath:', fullfilepath)
         print('\n')
         with open(fullfilepath, 'wb') as f:
-            f.write(uploadvol.to_precomputed())
+            f.write(precomputed_mesh)
+
+        manifestinfo = {
+            "fragments": [str(fileidx)]}
+        manifestfilepath = str(files[fileidx]) + ':' + str(fileidx)  # files[fileidx]
+        manifestfilepath = os.path.join(cv.basepath, os.path.basename(path), manifestfilepath)
+        with open(manifestfilepath, 'w') as f:
+            json.dump(manifestinfo, f)
