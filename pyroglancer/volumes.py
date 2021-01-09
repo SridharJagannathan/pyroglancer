@@ -59,12 +59,14 @@ def to_ngmesh(x):
         volumeidlist = []
         volumedatasource = []
         volumenamelist = []
+        segid = 0
         for volumeelement in x:
             volumedata = _generate_mesh(volumeelement)
-            volumedata.segid = 0
+            volumedata.segid = segid
             volumedatasource.append(volumedata)
             volumeidlist.append(volumeelement.id)
             volumenamelist.append(volumeelement.name)
+            segid = segid+1
 
     return volumedatasource, volumeidlist, volumenamelist
 
@@ -93,21 +95,12 @@ def uploadmeshes(volumedatasource, volumeidlist, volumenamelist, path):
     -------
     cv :     cloudvolume class object
     """
-    # info = {"@type": "neuroglancer_multilod_draco",
-    #         "spatial_index": None,
-    #         'scales': [1, 1, 1],
-    #         'lod_scale_multiplier': 1.0}
+
     info = {"@type": "neuroglancer_legacy_mesh",
             'scales': [1, 1, 1],
             }
     path = 'file://' + path + '/precomputed'
     cv = CloudVolume(path, info=info)
-
-    # # prepare for info file
-    # cv.mesh.meta.info['@type'] = 'neuroglancer_multilod_draco'
-    # cv.mesh.meta.info['vertex_quantization_bits'] = 16
-    # cv.mesh.meta.info['scales'] = [1, 1, 1]
-    # cv.mesh.meta.info['lod_scale_multiplier'] = 1.0
 
     cv.mesh.meta.info['@type'] = 'neuroglancer_legacy_mesh'
     cv.mesh.meta.commit_info()
@@ -117,13 +110,9 @@ def uploadmeshes(volumedatasource, volumeidlist, volumenamelist, path):
     for fileidx in range(len(files)):
         fullfilepath = str(files[fileidx])  # files[fileidx]
         fullfilepath = os.path.join(cv.basepath, os.path.basename(path), fullfilepath)
-        print('vertices')
-        print(volumedatasource[fileidx].vertices)
-        print('faces')
-        print(volumedatasource[fileidx].faces)
         uploadvol = Mesh(
             vertices=volumedatasource[fileidx].vertices, faces=volumedatasource[fileidx].faces,
-            segid=0)
+            segid=None)
         precomputed_mesh = to_precomputed(uploadvol)
         print('\nSeg id is:', fileidx)
         print('\nFull filepath:', fullfilepath)
@@ -133,7 +122,7 @@ def uploadmeshes(volumedatasource, volumeidlist, volumenamelist, path):
 
         manifestinfo = {
             "fragments": [str(fileidx)]}
-        manifestfilepath = str(files[fileidx]) + ':' + str(fileidx)  # files[fileidx]
+        manifestfilepath = str(files[fileidx]) + ':' + str(0)  # files[fileidx]
         manifestfilepath = os.path.join(cv.basepath, os.path.basename(path), manifestfilepath)
         with open(manifestfilepath, 'w') as f:
             json.dump(manifestinfo, f)
