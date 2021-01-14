@@ -22,7 +22,6 @@
 import os
 import sys
 import tempfile
-#from configparser import ConfigParser
 from threading import Thread
 from http.server import SimpleHTTPRequestHandler, HTTPServer
 import types

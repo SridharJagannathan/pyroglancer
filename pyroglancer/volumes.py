@@ -59,14 +59,12 @@ def to_ngmesh(x):
         volumeidlist = []
         volumedatasource = []
         volumenamelist = []
-        # segid = 0
         for volumeelement in x:
             volumedata = _generate_mesh(volumeelement)
             volumedata.segid = volumeelement.id
             volumedatasource.append(volumedata)
             volumeidlist.append(volumeelement.id)
             volumenamelist.append(volumeelement.name)
-            # segid = segid+1
 
     return volumedatasource, volumeidlist, volumenamelist
 
