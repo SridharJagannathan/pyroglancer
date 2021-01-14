@@ -8,3 +8,4 @@ cloudvolume
 webbrowser
 configparser
 shutil
+webcolors
