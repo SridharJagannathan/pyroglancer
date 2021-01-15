@@ -11,11 +11,8 @@
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 
-""" Module contains functions to handle point data.
-"""
+"""Module contains functions to handle point data."""
 
-import pymaid
-import navis
 import neuroglancer
 import json
 import os
@@ -23,6 +20,15 @@ import struct
 
 
 def commit_info(pointinfo, path, pointlayername):
+    """
+    Commit the info file created for the points based precomputed format.
+
+    Parameters
+    ----------
+    pointinfo :      info in json format for the points
+    path:            path for the dataserver hosted locally
+    pointlayername : name for the points layer
+    """
     pointfilepath = path + '/precomputed/' + pointlayername
     if not os.path.exists(pointfilepath):
         os.makedirs(pointfilepath)
@@ -33,6 +39,16 @@ def commit_info(pointinfo, path, pointlayername):
 
 
 def create_pointinfo(dimensions, path, layer_name):
+    """
+    Create info file for the points based precomputed format.
+
+    Parameters
+    ----------
+    path:            path for the dataserver hosted locally
+    layer_name :     name for the points layer
+    dimensions :     dimensions used by neuroglancer
+
+    """
     pointinfo = {
         '@type': 'neuroglancer_annotations_v1',
         "annotation_type": "POINT",
@@ -63,14 +79,24 @@ def create_pointinfo(dimensions, path, layer_name):
 
 
 def put_pointfile(path, layer_name, points, pointsscale, pointname):
+    """
+    Put pointfile in the local dataserver.
 
+    Parameters
+    ----------
+    path:            path for the dataserver hosted locally
+    layer_name :     name for the points layer
+    points :         dataframe containing 'x', 'y', 'z' columns
+    pointsscale :    scaling from voxel to native space in 'x', 'y', 'z'
+    pointsname :     name for the points (not yet implemented)
+
+    """
     pointsfilepath = path + '/precomputed/' + layer_name + '/spatial0'
     if not os.path.exists(pointsfilepath):
         os.makedirs(pointsfilepath)
-        # print('creating:', pointfilepath)
+
     pointsfile = os.path.join(pointsfilepath, '0_0_0')
     print(pointsfile)
-    # print('making:', pointfile)
     pointlocs = points[['x', 'y', 'z']].values/1000
 
     # implementation based on logic suggested by https://github.com/google/neuroglancer/issues/227
@@ -89,32 +115,34 @@ def put_pointfile(path, layer_name, points, pointsscale, pointname):
 
 
 def upload_points(points_df, path, layer_name, layer_scale):
-
-    pointname = points_df['description']
-    points = points_df[['x', 'y', 'z']]
-    pointsscale = layer_scale
-    # print('Adding neuron: ', neuronelement.id)
-    put_pointfile(path, layer_name, points, pointsscale, pointname)
-
-
-def annotate_points(ngviewer, dimensions, points_df, layer_scale):
     """
-
-    Annotate points from a dataframe.
-
-    This function annotates points based on a dataframe
+    Upload points from a dataframe.
 
     Parameters
     ----------
     points_df :      dataframe containing 'x', 'y', 'z' columns
+    path:            path for the dataserver hosted locally
+    layer_name :     name for the points layer
     layer_scale :    scaling from voxel to native space in 'x', 'y', 'z'
-    dimensions :     dimensions and units of 'x', 'y', 'z'
-    ngviewer:        Neuroglancer viewer
-
 
     """
+    pointname = points_df['description']
+    points = points_df[['x', 'y', 'z']]
+    pointsscale = layer_scale
+    put_pointfile(path, layer_name, points, pointsscale, pointname)
 
-    # pointname = points_df['description']
+
+def _annotate_points(ngviewer, dimensions, points_df, layer_scale):
+    """
+    Annotate points from a dataframe (defunct do not use..).
+
+    Parameters
+    ----------
+    ngviewer:        Neuroglancer viewer
+    dimensions :     dimensions and units of 'x', 'y', 'z'
+    points_df :      dataframe containing 'x', 'y', 'z' columns
+    layer_scale :    scaling from voxel to native space in 'x', 'y', 'z'
+    """
     pointlocs = points_df[['x', 'y', 'z']]
 
     with ngviewer.txn() as s:

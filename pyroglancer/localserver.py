@@ -29,20 +29,35 @@ import shutil
 
 
 class RequestHandler(SimpleHTTPRequestHandler):
+    """Class for handling HTTP requests arriving at the server."""
+
     def end_headers(self):
+        """Allow responses to be shared with any requester without any credentials."""
         self.send_header('Access-Control-Allow-Origin', '*')
         SimpleHTTPRequestHandler.end_headers(self)
 
 
 class Server(HTTPServer):
+    """Class for basic HTTP server."""
+
     protocol_version = 'HTTP/1.1'
 
     def __init__(self, server_address):
+        """Initialise HTTP server."""
         HTTPServer.__init__(self, server_address, RequestHandler)
 
 
 def closeserver():
+    """Close a already started dataserver.
 
+    Parameters
+    ----------
+    None
+
+    Returns
+    -------
+    None
+    """
     if (('ngserver' in sys.modules) and ('ngserverdir' in sys.modules)):
         currentserver = sys.modules['ngserver']
         currentdatadir = sys.modules['ngserverdir']
@@ -70,8 +85,20 @@ def closeserver():
                 os.remove(filepath)
 
 
-def startserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDirectory(), restart=True):
+def _startserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDirectory(), restart=True):
+    """Start a dataserver that can host local folder via http.
 
+    Parameters
+    ----------
+    address :  ip address to use for the local host server
+    port :     port number to use for the local host server
+    directory :   local directory to be used for hosting
+    restart :   restart/clean up already running data server
+
+    Returns
+    -------
+    None
+    """
     if restart and 'ngserver' in sys.modules:
         closeserver()
 
@@ -107,8 +134,20 @@ def startserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDire
         sys.exit(0)
 
 
-def startdataserver():
+def startdataserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDirectory(), restart=True):
+    """Start a dataserver thread(return control back) that can host local folder via http.
 
-    serverthread = Thread(target=startserver)
+    Parameters
+    ----------
+    address :  ip address to use for the local host server
+    port :     port number to use for the local host server
+    directory :   local directory to be used for hosting
+    restart :   restart/clean up already running data server
+
+    Returns
+    -------
+    None
+    """
+    serverthread = Thread(target=_startserver, args=(address, port, directory, restart))
     serverthread.daemon = True  # This thread dies when main thread (only non-daemon thread) exits..
     serverthread.start()

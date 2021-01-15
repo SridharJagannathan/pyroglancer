@@ -11,8 +11,8 @@
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 
-""" Module contains functions to handle mesh data.
-"""
+"""Module contains functions to handle mesh data."""
+
 import navis
 from cloudvolume import CloudVolume, Mesh
 import os
@@ -22,7 +22,6 @@ import json
 
 def _generate_mesh(x):
     """
-
     Generate mesh (of cloudvolume class) for given navis volume.
 
     Parameters
@@ -33,7 +32,6 @@ def _generate_mesh(x):
     -------
     mesh :      Cloud volume mesh
     """
-
     mesh = Mesh(segid=x.id, vertices=x.vertices, faces=x.faces)
 
     return mesh
@@ -41,7 +39,6 @@ def _generate_mesh(x):
 
 def to_ngmesh(x):
     """
-
     Generate mesh (of cloudvolume class) for given volume.
 
     Parameters
@@ -69,8 +66,8 @@ def to_ngmesh(x):
     return volumedatasource, volumeidlist, volumenamelist
 
 
-def to_precomputed(mesh):
-
+def _to_precomputed(mesh):
+    """Convert mesh to precomputed format."""
     vertex_index_format = [np.uint32(mesh.vertices.shape[0]),
                            mesh.vertices, mesh.faces]
 
@@ -79,8 +76,6 @@ def to_precomputed(mesh):
 
 def uploadmeshes(volumedatasource, volumeidlist, volumenamelist, path):
     """Upload mesh (of cloudvolume class) to a local server.
-
-
 
     Parameters
     ----------
@@ -93,7 +88,6 @@ def uploadmeshes(volumedatasource, volumeidlist, volumenamelist, path):
     -------
     cv :     cloudvolume class object
     """
-
     info = {"@type": "neuroglancer_legacy_mesh",
             'scales': [1, 1, 1],
             }
@@ -115,7 +109,7 @@ def uploadmeshes(volumedatasource, volumeidlist, volumenamelist, path):
         uploadvol = Mesh(
             vertices=volumedatasource[fileidx].vertices, faces=volumedatasource[fileidx].faces,
             segid=None)
-        precomputed_mesh = to_precomputed(uploadvol)
+        precomputed_mesh = _to_precomputed(uploadvol)
         print('Seg id is:', str(volumeids[fileidx]))
         print('Full filepath:', fullfilepath)
         with open(fullfilepath, 'wb') as f:

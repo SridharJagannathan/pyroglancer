@@ -11,8 +11,7 @@
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 
-""" Module contains functions to handle synapse data.
-"""
+"""Module contains functions to handle synapse data."""
 
 import pymaid
 import navis
@@ -23,6 +22,15 @@ import struct
 
 
 def commit_info(synapseinfo, path, synapsetype):
+    """
+    Commit the info file created for the synapses based on precomputed format.
+
+    Parameters
+    ----------
+    synapseinfo : info in json format for the synapses
+    path:         path for the dataserver hosted locally
+    synapsetype : pre or postsynapses
+    """
     synapsefilepath = path + '/precomputed/' + synapsetype
     if not os.path.exists(synapsefilepath):
         os.makedirs(synapsefilepath)
@@ -33,6 +41,15 @@ def commit_info(synapseinfo, path, synapsetype):
 
 
 def create_synapseinfo(dimensions, path):
+    """
+    Create info file for the synapse based precomputed format.
+
+    Parameters
+    ----------
+    path:            path for the dataserver hosted locally
+    dimensions :     dimensions used by neuroglancer
+
+    """
     synapseinfo = {
         '@type': 'neuroglancer_annotations_v1',
         "annotation_type": "POINT",
@@ -67,13 +84,24 @@ def create_synapseinfo(dimensions, path):
 
 
 def put_synapsefile(path, synapsetype, synapses, skeletonid):
+    """
+    Put synapse in the local dataserver.
 
+    Parameters
+    ----------
+    path:            path for the dataserver hosted locally
+    synapsetype :    pre or post synapse
+    synapses :       dataframe containing 'x', 'y', 'z' columns
+    skeletonid :     skeleton id to be associated with the corresponding synapse
+    pointsname :     name for the points (not yet implemented)
+
+    """
     synapsefilepath = path + '/precomputed/' + synapsetype + '/' + synapsetype + '_cell/'
     if not os.path.exists(synapsefilepath):
         os.makedirs(synapsefilepath)
-        #print('creating:', synapsefilepath)
+        # print('creating:', synapsefilepath)
     synapsefile = os.path.join(synapsefilepath, str(skeletonid))
-    #print('making:', synapsefile)
+    # print('making:', synapsefile)
     synapselocs = synapses[['x', 'y', 'z']].values/1000
 
     # implementation based on logic suggested by https://github.com/google/neuroglancer/issues/227
@@ -90,7 +118,15 @@ def put_synapsefile(path, synapsetype, synapses, skeletonid):
 
 
 def upload_synapses(x, path):
+    """
+    Upload synpases from a neuron or neuronlist.
 
+    Parameters
+    ----------
+    x :   neuron or neuronlist
+    path: path for the dataserver hosted locally
+
+    """
     if isinstance(x, pymaid.core.CatmaidNeuron):
         neuronlist = pymaid.core.CatmaidNeuronList(x)
     elif isinstance(x, pymaid.core.CatmaidNeuronList):
@@ -109,8 +145,7 @@ def upload_synapses(x, path):
 
 def annotate_synapses(ngviewer, dimensions, x):
     """
-
-    Annotate postsynapses of a neuron/neuronlist.
+    Annotate postsynapses of a neuron/neuronlist. (defunct do not use..).
 
     This function annotates synapses of a neuron/neuronlist
 

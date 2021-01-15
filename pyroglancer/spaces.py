@@ -11,15 +11,23 @@
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 
-""" Module contains functions to wrap neuroglancer spaces.
-"""
+"""Module contains functions to wrap neuroglancer spaces."""
 
 from .layers import create_nglayer
 import sys
 
 
-def create_ngspace(space='fafb_v14'):
+def create_ngspace(space='FAFB'):
+    """Create a neuroglancer space (EM layers, segmentation, neuropil surfaces.
 
+    Parameters
+    ----------
+    space : dataset to be used for e.g. : FAFB, FANC, MANC
+
+    Returns
+    -------
+    None
+    """
     if space == 'MANC':
         ngviewer = create_nglayer(layer_kws={'type': 'emdataset', 'space': space,
                                              'name': 'manc_v3'})

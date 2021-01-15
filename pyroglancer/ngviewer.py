@@ -11,6 +11,8 @@
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 
+"""Module contains code to open a neuroglancer viewer."""
+
 import neuroglancer as ng
 import webbrowser
 import sys

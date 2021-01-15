@@ -11,8 +11,7 @@
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 
-""" Module contains functions to handle skeleton data.
-"""
+"""Module contains functions to handle skeleton data."""
 
 import numpy as np
 import os
@@ -23,9 +22,7 @@ import json
 
 
 def _generate_skeleton(x, min_radius=0):
-    """
-
-    Generate skeleton (of cloudvolume class) for given neuron.
+    """Generate skeleton (of cloudvolume class) for given neuron.
 
     Parameters
     ----------
@@ -35,7 +32,6 @@ def _generate_skeleton(x, min_radius=0):
     -------
     skeleton :      Cloud volume skeleton
     """
-
     # flatten the list of the segments (sub-trees)..
     nodes_ordered = [n for seg in x.segments for n in seg[::-1]]
     # arrange the nodes in the order of segments..
@@ -82,8 +78,6 @@ def _generate_skeleton(x, min_radius=0):
 def to_ngskeletons(x):
     """Generate skeleton (of cloudvolume class) for given neuron(s).
 
-
-
     Parameters
     ----------
     x :             CatmaidNeuron | CatmaidNeuronList or TreeNeuron | NeuronList
@@ -94,7 +88,6 @@ def to_ngskeletons(x):
     skeldatasegidlist :  List containing the segids(skid)
     skelsegnamelist:     List containing the names of segments
     """
-
     if isinstance(x, pymaid.core.CatmaidNeuron):
         x = pymaid.core.CatmaidNeuronList(x)
     elif isinstance(x, navis.core.TreeNeuron):
@@ -115,8 +108,6 @@ def to_ngskeletons(x):
 def uploadskeletons(skelsource, skelseglist, skelnamelist, path):
     """Upload skeleton (of cloudvolume class) to a local server.
 
-
-
     Parameters
     ----------
     skelsource :     List containing cloud volume skeletons
@@ -128,7 +119,6 @@ def uploadskeletons(skelsource, skelseglist, skelnamelist, path):
     -------
     cv :     cloudvolume class object
     """
-
     info = {"@type": "neuroglancer_skeletons",
             "transform": skelsource[0].transform.flatten(),
             "vertex_attributes": [{"id": "radius", "data_type": "float32", "num_components": 1}],
