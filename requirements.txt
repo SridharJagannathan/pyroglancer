@@ -1,11 +1,10 @@
 # List required packages in this file, one per line.
-neuroglancer
-pymaid
-navis
-numpy
-json
-cloudvolume
+neuroglancer>=2.15
+python-catmaid>=2.0.2
+navis>=0.5.1
+numpy>=1.16.3
+json5>=0.9.5
+cloud-volume
 webbrowser
-configparser
 shutil
-webcolors
+webcolors>=1.3

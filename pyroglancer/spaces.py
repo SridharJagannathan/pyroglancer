@@ -18,7 +18,7 @@ import sys
 
 
 def create_ngspace(space='FAFB'):
-    """Create a neuroglancer space (EM layers, segmentation, neuropil surfaces.
+    """Create a neuroglancer space (EM layers, segmentation, neuropil surfaces).
 
     Parameters
     ----------
