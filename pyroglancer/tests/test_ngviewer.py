@@ -1,19 +1,26 @@
+"""Module contains test cases for ngviewer.py module."""
+
 import neuroglancer as ng
-from ..ngviewer import openviewer
+from pyroglancer.ngviewer import openviewer
+import unittest
 
 
-def test_newviewer():
-    # check if the viewer opens when no object is passed....
+class Testngviewer(unittest.TestCase):
+    """Test pyroglancer.ngviewer."""
 
-    viewer = openviewer(None)
+    def test_newviewer(self):
+        """Check if the viewer opens when no object is passed."""
+        viewer = openviewer(None)
 
-    assert isinstance(viewer, ng.viewer.Viewer)
+        assert isinstance(viewer, ng.viewer.Viewer)
+
+    def test_reuseoldviewer(self):
+        """Check if old viewer is reused incase of new opening request."""
+        viewer1 = openviewer(None)
+        viewer2 = openviewer(viewer1)
+
+        assert viewer1 == viewer2
 
 
-def test_reuseoldviewer():
-    # check if old viewer is reused incase of new opening request....
-
-    viewer1 = openviewer(None)
-    viewer2 = openviewer(viewer1)
-
-    assert viewer1 == viewer2
+if __name__ == '__main__':
+    unittest.main()

@@ -7,13 +7,12 @@ cache:
     - $HOME/.ccache  # https://github.com/travis-ci/travis-ci/issues/5853
 
 install:
-  # The versions of pip and numpy that come pre-installed are often too old and
-  # can cause problems. Upgrade them.
-  - pip install --upgrade pip numpy
-  # Install this package and the packages listed in requirements.txt.
-  - pip install .
-  # Install extra requirements for running tests and building docs.
-  - pip install -r requirements-dev.txt
+  - pip install -U pip
+  - pip install -U setuptools
+  - pip install coveralls
+  - pip install pytest-cov # to get coverage report
+  - pip install . # Install this package and the packages listed in requirements.txt.
+  - pip install -r requirements-dev.txt # Install extra requirements for running tests and building docs.
 
 script:
   - coverage run -m pytest  # Run the tests and check for test coverage.
