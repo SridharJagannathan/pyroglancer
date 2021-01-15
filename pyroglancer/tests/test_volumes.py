@@ -7,7 +7,6 @@ from pyroglancer.localserver import startdataserver, closedataserver
 from pyroglancer.ngviewer import openviewer, closeviewer
 import navis
 import os
-import sys
 
 
 class Testvolumes(unittest.TestCase):
