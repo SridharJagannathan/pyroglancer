@@ -2,9 +2,7 @@
 neuroglancer>=2.15
 python-catmaid>=2.0.2
 navis>=0.5.1
-numpy>=1.16.3
+numpy>=1.16
 json5>=0.9.5
 cloud-volume
-webbrowser
-shutil
 webcolors>=1.3
