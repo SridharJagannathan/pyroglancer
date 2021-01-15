@@ -47,7 +47,7 @@ class Server(HTTPServer):
         HTTPServer.__init__(self, server_address, RequestHandler)
 
 
-def closeserver():
+def closedataserver():
     """Close a already started dataserver.
 
     Parameters

@@ -53,3 +53,23 @@ def openviewer(ngviewer=None):
         ngviewer = ngviewer
 
     return ngviewer
+
+
+def closeviewer():
+    """Close a already started ngviewer.
+
+    Parameters
+    ----------
+    None
+
+    Returns
+    -------
+    None
+    """
+    if 'ngviewerinst' in sys.modules:
+        print('closing already existing ng viewer')
+        del sys.modules['ngviewerinst']
+        # try:
+        #     ng.stop()
+        # except:
+        #     print('exception occurred while stopping')
