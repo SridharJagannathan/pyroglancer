@@ -100,7 +100,7 @@ def _startserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDir
     None
     """
     if restart and 'ngserver' in sys.modules:
-        closeserver()
+        closedataserver()
 
     args = types.SimpleNamespace()
     args.address = address

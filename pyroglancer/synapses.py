@@ -129,10 +129,12 @@ def upload_synapses(x, path):
     """
     if isinstance(x, pymaid.core.CatmaidNeuron):
         neuronlist = pymaid.core.CatmaidNeuronList(x)
-    elif isinstance(x, pymaid.core.CatmaidNeuronList):
-        neuronlist = x
     elif isinstance(x, navis.core.TreeNeuron):
         neuronlist = navis.core.NeuronList(x)
+    elif (isinstance(x, pymaid.core.CatmaidNeuronList) or isinstance(x, navis.core.NeuronList)):
+        neuronlist = x
+    else:
+        raise TypeError(f'Expected neuron or neuronlist, got "{type(x)}"')
 
     for neuronidx in range(len(neuronlist)):
         neuronelement = neuronlist[neuronidx]
@@ -158,10 +160,12 @@ def annotate_synapses(ngviewer, dimensions, x):
     """
     if isinstance(x, pymaid.core.CatmaidNeuron):
         neuronlist = pymaid.core.CatmaidNeuronList(x)
-    elif isinstance(x, pymaid.core.CatmaidNeuronList):
-        neuronlist = x
     elif isinstance(x, navis.core.TreeNeuron):
         neuronlist = navis.core.NeuronList(x)
+    elif (isinstance(x, pymaid.core.CatmaidNeuronList) or isinstance(x, navis.core.NeuronList)):
+        neuronlist = x
+    else:
+        raise TypeError(f'Expected neuron or neuronlist, got "{type(x)}"')
 
     skeldatasegidlist = []
     for neuron in neuronlist:
