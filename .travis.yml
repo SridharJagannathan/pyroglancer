@@ -20,3 +20,6 @@ script:
   - codecov  # Upload the report to codecov.
   - flake8  # Enforce code style ('relaxed' line length limit is set in .flake8 config file).
   - make -C docs html  # Build the documentation.
+
+after_success:
+  - coveralls
