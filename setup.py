@@ -37,7 +37,7 @@ setup(
     name='pyroglancer',
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
-    description="Pythonic interface to neuroglancer for displaying neuron data",
+    description="Pythonic interface to neuroglancer for displaying neuronal and synaptic data",
     long_description=readme,
     author="Sridhar Jagannathan",
     author_email='j.sridharrajan@gmail.com',
@@ -62,6 +62,6 @@ setup(
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Natural Language :: English',
-        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.6',
     ],
 )
