@@ -71,7 +71,7 @@ def closeviewer():
     if 'ngviewerinst' in sys.modules:
         print('closing already existing ng viewer')
         del sys.modules['ngviewerinst']
-        # try:
-        #     ng.stop()
-        # except:
-        #     print('exception occurred while stopping')
+        try:
+            ng.stop()
+        except Exception:
+            print('exception occurred while stopping')
