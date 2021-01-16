@@ -11,7 +11,7 @@ Installation
 
 The easiest way to install the package is via `pip`:
 
-    $ pip3 install git+git://github.com/SridharJagannathan/pyroglancer@master
+    $ pip3 install pyroglancer
 
 Documentation
 =============
@@ -28,10 +28,12 @@ Acknowledgements
 ================
 
 Thanks to [Jeremy Maitin-Shepard](https://github.com/jbms) from google
-for inventing the precomputed format and answering many of my queries.
+for inventing the precomputed format and answering many of my queries. The pyroglancer
+logo was inspired from [PyPy](https://www.pypy.org/). The pyroglancer critically depends on
+packages like [NAVis](https://github.com/schlegelp/navis) for interfacing with neuron data.
 
 Copyright & License
 ===================
 
-Copyright (c) 2021, [Sridhar Jagannathan](https://github.com/SridharJagannathan). 3-clause BSD
-License.
+Copyright (c) 2021, [Sridhar Jagannathan](https://github.com/SridharJagannathan).
+3-clause BSD License.
