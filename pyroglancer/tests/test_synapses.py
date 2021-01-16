@@ -17,12 +17,34 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Add a common viewer, dataserver for each test module..
 closeviewer()
 closedataserver()
-startdataserver()  # start dataserver..
+startdataserver(port=8001)  # start dataserver..
 openviewer(headless=True)  # open ngviewer
+
+
+# def setup_module(module):
+#     """Start all servers."""
+#     # Add a common viewer, dataserver for the whole serie of test..
+#     startdataserver()  # start dataserver..
+#     openviewer(headless=True)  # open ngviewer
+#
+#
+# def teardown_module(module):
+#     """Stop all servers."""
+#     # Stop all viewers..
+#     closedataserver()
+#     closeviewer()
 
 
 class Testsynapses(unittest.TestCase):
     """Test pyroglancer.synapses."""
+
+    # def setUp(self):
+    #     """Perform set up."""
+    #     super(Testsynapses, self).setUp()
+    #
+    # def tearDown(self):
+    #     """Perform tearing down."""
+    #     super(Testsynapses, self).tearDown()
 
     def test_create_synapseinfo(self):
         """Check if the synapse info is stored."""
@@ -125,6 +147,3 @@ class Testsynapses(unittest.TestCase):
 if __name__ == '__main__':
 
     unittest.main()
-    # Add a common viewer, dataserver for each test module..
-    closeviewer()
-    closedataserver()

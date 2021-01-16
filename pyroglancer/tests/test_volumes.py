@@ -8,15 +8,38 @@ from pyroglancer.ngviewer import openviewer, closeviewer
 import navis
 import os
 
+
 # Add a common viewer, dataserver for each test module..
 closeviewer()
 closedataserver()
-startdataserver()  # start dataserver..
+startdataserver(port=8002)  # start dataserver..
 openviewer(headless=True)  # open ngviewer
+
+
+# def setup_module(module):
+#     """Start all servers."""
+#     # Add a common viewer, dataserver for the whole serie of test..
+#     startdataserver()  # start dataserver..
+#     openviewer(headless=True)  # open ngviewer
+#
+#
+# def teardown_module(module):
+#     """Stop all servers."""
+#     # Stop all viewers..
+#     closedataserver()
+#     closeviewer()
 
 
 class Testvolumes(unittest.TestCase):
     """Test pyroglancer.volumes."""
+
+    # def setUp(self):
+    #     """Perform set up."""
+    #     super(Testvolumes, self).setUp()
+    #
+    # def tearDown(self):
+    #     """Perform tearing down."""
+    #     super(Testvolumes, self).tearDown()
 
     def test_convertmesh(self):
         """Check if the meshconversion is done."""
@@ -50,7 +73,3 @@ class Testvolumes(unittest.TestCase):
 if __name__ == '__main__':
 
     unittest.main()
-
-    # Add a common viewer, dataserver for each test module..
-    closeviewer()
-    closedataserver()
