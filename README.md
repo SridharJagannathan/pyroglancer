@@ -1,8 +1,4 @@
-[![Build Status](https://www.travis-ci.com/SridharJagannathan/pyroglancer.svg?branch=master)](https://www.travis-ci.com/SridharJagannathan/pyroglancer)
-
-[![Coverage Status](https://coveralls.io/repos/github/SridharJagannathan/pyroglancer/badge.svg?branch=master)](https://coveralls.io/github/SridharJagannathan/pyroglancer?branch=master)
-
-[![PyPI version](https://badge.fury.io/py/pyroglancer.svg)](https://badge.fury.io/py/pyroglancer)
+[![Build Status](https://www.travis-ci.com/SridharJagannathan/pyroglancer.svg?branch=master)](https://www.travis-ci.com/SridharJagannathan/pyroglancer) [![Coverage Status](https://coveralls.io/repos/github/SridharJagannathan/pyroglancer/badge.svg?branch=master)](https://coveralls.io/github/SridharJagannathan/pyroglancer?branch=master) [![PyPI version](https://badge.fury.io/py/pyroglancer.svg)](https://badge.fury.io/py/pyroglancer)
 
 ![image](https://github.com/SridharJagannathan/pyroglancer/raw/master/docs/_static/pyroglancer_logo.png)
 
