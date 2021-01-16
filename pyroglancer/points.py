@@ -174,3 +174,6 @@ def _annotate_points(ngviewer, dimensions, points_df, layer_scale):
                     props=['#0000ff'],
                 )
             )
+
+    status = True
+    return status
