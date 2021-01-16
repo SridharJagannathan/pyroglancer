@@ -9,7 +9,7 @@ import navis
 import os
 
 
-# Add a common viewer, dataserver for each test module..
+# Add a common viewer, dataserver(specific port for travis) for each test module..
 closeviewer()
 closedataserver()
 startdataserver(port=8002)  # start dataserver..

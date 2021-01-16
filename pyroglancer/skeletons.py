@@ -52,7 +52,7 @@ def _generate_skeleton(x, min_radius=0):
     # get the edges now..
     edges = np.array(this_tn[['index', 'parent_ix']].values[1:] - 1, dtype="uint32")
 
-    skeleton = Skeleton(segid=x.skeleton_id, vertices=vertices, edges=edges)
+    skeleton = Skeleton(segid=x.id, vertices=vertices, edges=edges)
 
     # set the min_radius
     min_radius = 0
@@ -92,6 +92,10 @@ def to_ngskeletons(x):
         x = pymaid.core.CatmaidNeuronList(x)
     elif isinstance(x, navis.core.TreeNeuron):
         x = navis.core.NeuronList(x)
+    elif (isinstance(x, pymaid.core.CatmaidNeuronList) or isinstance(x, navis.core.NeuronList)):
+        pass
+    else:
+        raise TypeError(f'Expected neuron or neuronlist, got "{type(x)}"')
 
     skeldatasegidlist = []
     skeldatasource = []

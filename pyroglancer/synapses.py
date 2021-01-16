@@ -252,3 +252,6 @@ def annotate_synapses(ngviewer, dimensions, x):
                         props=['#ff0000'],
                     )
                 )
+
+    status = True
+    return status

@@ -1,7 +1,7 @@
 """Module contains test cases for synapses.py module."""
 
 import unittest
-from pyroglancer.synapses import create_synapseinfo, put_synapsefile
+from pyroglancer.synapses import create_synapseinfo, put_synapsefile, annotate_synapses
 from pyroglancer.layers import get_ngserver, _handle_ngdimensions
 from pyroglancer.localserver import startdataserver, closedataserver
 from pyroglancer.ngviewer import openviewer, closeviewer
@@ -9,12 +9,14 @@ from pyroglancer.layers import create_nglayer
 import os
 import pandas as pd
 import navis
+import pymaid
 import glob
+import pytest
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Add a common viewer, dataserver for each test module..
+# Add a common viewer, dataserver(specific port for travis) for each test module..
 closeviewer()
 closedataserver()
 startdataserver(port=8001)  # start dataserver..
@@ -110,8 +112,8 @@ class Testsynapses(unittest.TestCase):
 
         assert status
 
-    def test_upload_synapses(self):
-        """Check if synapse upload works in a neuron or neuronlist."""
+    def test_upload_synapsestreeneuronlist(self):
+        """Check if synapse upload works in a tree neuronlist."""
         # load some example neurons..
         swc_path = os.path.join(BASE_DIR, 'data/swc')
         # print('swc_path: ', swc_path)
@@ -142,6 +144,200 @@ class Testsynapses(unittest.TestCase):
         status = os.path.isfile(synapsefilepath)
 
         assert status
+
+    def test_upload_synapsestreeneuron(self):
+        """Check if synapse upload works in a tree neuron."""
+        # load some example neurons..
+        swc_path = os.path.join(BASE_DIR, 'data/swc')
+        # print('swc_path: ', swc_path)
+        swc_files = glob.glob(os.path.join(swc_path, '*.swc'))
+        # print('swc_file: ', swc_files)
+
+        neuronlist = []
+        neuronlist += [navis.read_swc(f, units='8 nm', connector_labels={'presynapse': 7, 'postsynapse': 8},
+                                      id=int(os.path.splitext(os.path.basename(f))[0])) for f in swc_files]
+
+        neuronlist = navis.core.NeuronList(neuronlist)
+
+        layer_serverdir, layer_host = get_ngserver()
+
+        layer_kws = {}
+        layer_kws['space'] = 'FAFB'
+        dimensions = _handle_ngdimensions(layer_kws)
+        synapse_path = create_synapseinfo(dimensions, layer_serverdir)
+
+        presynlayer_kws = {'type': 'synapses', 'space': 'FAFB',
+                           'source': neuronlist[0]}
+
+        create_nglayer(layer_kws=presynlayer_kws)
+        type = 'presynapses'
+        synapsefilepath = synapse_path + '/precomputed/' +\
+            type + '/' + type + '_cell/' + str(neuronlist[0].id)
+
+        status = os.path.isfile(synapsefilepath)
+
+        assert status
+
+    def test_upload_synapsesexception(self):
+        """Check if exception occurs."""
+        neuronlist = (1, 2, 3)
+
+        layer_serverdir, layer_host = get_ngserver()
+
+        presynlayer_kws = {'type': 'synapses', 'space': 'FAFB',
+                           'source': neuronlist}
+
+        with pytest.raises(Exception):
+            create_nglayer(layer_kws=presynlayer_kws)
+
+    def test_upload_synapsescatmaidneuronlist(self):
+        """Check if synapse upload works in a tree neuronlist."""
+        # load some example neurons..
+        swc_path = os.path.join(BASE_DIR, 'data/swc')
+        # print('swc_path: ', swc_path)
+        swc_files = glob.glob(os.path.join(swc_path, '*.swc'))
+        # print('swc_file: ', swc_files)
+
+        neuronlist = []
+        neuronlist += [navis.read_swc(f, units='8 nm', connector_labels={'presynapse': 7, 'postsynapse': 8},
+                                      id=int(os.path.splitext(os.path.basename(f))[0])) for f in swc_files]
+
+        neuronlist = pymaid.core.CatmaidNeuronList(neuronlist)
+
+        layer_serverdir, layer_host = get_ngserver()
+
+        layer_kws = {}
+        layer_kws['space'] = 'FAFB'
+        dimensions = _handle_ngdimensions(layer_kws)
+        synapse_path = create_synapseinfo(dimensions, layer_serverdir)
+
+        presynlayer_kws = {'type': 'synapses', 'space': 'FAFB',
+                           'source': neuronlist}
+
+        create_nglayer(layer_kws=presynlayer_kws)
+        type = 'presynapses'
+        synapsefilepath = synapse_path + '/precomputed/' +\
+            type + '/' + type + '_cell/' + str(neuronlist[0].id)
+
+        status = os.path.isfile(synapsefilepath)
+
+        assert status
+
+    def test_upload_synapsescatmaidneuron(self):
+        """Check if synapse upload works in a tree neuronlist."""
+        # load some example neurons..
+        swc_path = os.path.join(BASE_DIR, 'data/swc')
+        # print('swc_path: ', swc_path)
+        swc_files = glob.glob(os.path.join(swc_path, '*.swc'))
+        # print('swc_file: ', swc_files)
+
+        neuronlist = []
+        neuronlist += [navis.read_swc(f, units='8 nm', connector_labels={'presynapse': 7, 'postsynapse': 8},
+                                      id=int(os.path.splitext(os.path.basename(f))[0])) for f in swc_files]
+
+        catmaidneuron = pymaid.core.CatmaidNeuron(neuronlist[0])
+
+        layer_serverdir, layer_host = get_ngserver()
+
+        layer_kws = {}
+        layer_kws['space'] = 'FAFB'
+        dimensions = _handle_ngdimensions(layer_kws)
+        synapse_path = create_synapseinfo(dimensions, layer_serverdir)
+
+        presynlayer_kws = {'type': 'synapses', 'space': 'FAFB',
+                           'source': catmaidneuron}
+
+        create_nglayer(layer_kws=presynlayer_kws)
+        type = 'presynapses'
+        synapsefilepath = synapse_path + '/precomputed/' +\
+            type + '/' + type + '_cell/' + str(catmaidneuron.id)
+
+        status = os.path.isfile(synapsefilepath)
+
+        assert status
+
+    def test_annotate_synapsestreeneuronlist(self):
+        """Check if individual annotation works."""
+        # load some example neurons..
+        swc_path = os.path.join(BASE_DIR, 'data/swc')
+        # print('swc_path: ', swc_path)
+        swc_files = glob.glob(os.path.join(swc_path, '*.swc'))
+        # print('swc_file: ', swc_files)
+
+        neuronlist = []
+        neuronlist += [navis.read_swc(f, units='8 nm', connector_labels={'presynapse': 7, 'postsynapse': 8},
+                                      id=int(os.path.splitext(os.path.basename(f))[0])) for f in swc_files]
+
+        neuronlist = navis.core.NeuronList(neuronlist)
+
+        ngviewer = openviewer(None)
+        layer_kws = {}
+        layer_kws['space'] = 'FAFB'
+        dimensions = _handle_ngdimensions(layer_kws)
+
+        status = annotate_synapses(ngviewer, dimensions, neuronlist)
+
+        assert status
+
+    def test_annotate_synapsestreeneuron(self):
+        """Check if individual annotation works."""
+        # load some example neurons..
+        swc_path = os.path.join(BASE_DIR, 'data/swc')
+        # print('swc_path: ', swc_path)
+        swc_files = glob.glob(os.path.join(swc_path, '*.swc'))
+        # print('swc_file: ', swc_files)
+
+        neuronlist = []
+        neuronlist += [navis.read_swc(f, units='8 nm', connector_labels={'presynapse': 7, 'postsynapse': 8},
+                                      id=int(os.path.splitext(os.path.basename(f))[0])) for f in swc_files]
+
+        neuronlist = navis.core.NeuronList(neuronlist)
+
+        ngviewer = openviewer(None)
+        layer_kws = {}
+        layer_kws['space'] = 'FAFB'
+        dimensions = _handle_ngdimensions(layer_kws)
+
+        status = annotate_synapses(ngviewer, dimensions, neuronlist[0])
+
+        assert status
+
+    def test_annotate_synapsescatmaidneuron(self):
+        """Check if individual annotation works."""
+        # load some example neurons..
+        swc_path = os.path.join(BASE_DIR, 'data/swc')
+        # print('swc_path: ', swc_path)
+        swc_files = glob.glob(os.path.join(swc_path, '*.swc'))
+        # print('swc_file: ', swc_files)
+
+        neuronlist = []
+        neuronlist += [navis.read_swc(f, units='8 nm', connector_labels={'presynapse': 7, 'postsynapse': 8},
+                                      id=int(os.path.splitext(os.path.basename(f))[0])) for f in swc_files]
+
+        catmaidneuron = pymaid.core.CatmaidNeuron(neuronlist[0])
+
+        ngviewer = openviewer(None)
+        layer_kws = {}
+        layer_kws['space'] = 'FAFB'
+        dimensions = _handle_ngdimensions(layer_kws)
+
+        status = annotate_synapses(ngviewer, dimensions, catmaidneuron)
+
+        assert status
+
+    def test_annotate_synapsesexception(self):
+        """Check if exception occurs."""
+        neuronlist = (1, 2, 3)
+
+        layer_serverdir, layer_host = get_ngserver()
+
+        ngviewer = openviewer(None)
+        layer_kws = {}
+        layer_kws['space'] = 'FAFB'
+        dimensions = _handle_ngdimensions(layer_kws)
+
+        with pytest.raises(Exception):
+            annotate_synapses(ngviewer, dimensions, neuronlist)
 
 
 if __name__ == '__main__':
