@@ -14,8 +14,7 @@
 .. image:: https://github.com/SridharJagannathan/pyroglancer/raw/master/docs/_static/pyroglancer_logo.png
 
 
-Pythonic interface to neuroglancer for displaying neuronal data like neurons, synapses, meshes (surfaces, volumes),
-annotations (points) in the precomputed format.
+Pythonic interface to neuroglancer for displaying neuronal data like neurons, synapses, meshes (surfaces, volumes), annotations (points) in the precomputed format.
 
 Installation
 ------------
@@ -25,7 +24,7 @@ The easiest way to install the package is via ``pip``::
     $ pip3 install git+git://github.com/SridharJagannathan/pyroglancer@master
 
 Documentation
-------------
+-------------
 (COMING SOON!) https://SridharJagannathan.github.io/pyroglancer
 
 Features
@@ -34,11 +33,11 @@ Features
  - Display synapse annotations etc
 
 Acknowledgements
-------------
+----------------
 Thanks to Jeremy Maitin-Shepard <https://github.com/jbms> from google for inventing the precomputed format and answering
 many of my queries.
 
 Copyright & License
 -------------------
 
-Copyright (c) 2021, `Sridhar Jagannathan`_. 3-clause BSD License.
+Copyright (c) 2021, `Sridhar Jagannathan <https://github.com/SridharJagannathan>`_. 3-clause BSD License.
