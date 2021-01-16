@@ -4,6 +4,11 @@
     :alt: Build status
     :target: https://www.travis-ci.com/SridharJagannathan/pyroglancer
 
+.. image:: https://coveralls.io/repos/github/SridharJagannathan/pyroglancer/badge.svg?branch=master
+    :alt: Code coverage
+    :target: https://coveralls.io/github/SridharJagannathan/pyroglancer?branch=master
+
+
 .. image:: https://img.shields.io/pypi/v/pyroglancer.svg
         :alt: pypi version
         :target: https://pypi.python.org/pypi/pyroglancer
