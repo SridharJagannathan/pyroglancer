@@ -18,7 +18,7 @@ import webbrowser
 import sys
 
 
-def openviewer(ngviewer=None):
+def openviewer(ngviewer=None, headless=False):
     """
     Open a neuroglancer viewing engine.
 
@@ -26,6 +26,7 @@ def openviewer(ngviewer=None):
     ----------
     ngviewer : ng.viewer.Viewer
         object of Neuroglancer viewer class.
+    headless : if True, then operating in servers or testcase mode.
 
     Returns
     -------
@@ -47,8 +48,9 @@ def openviewer(ngviewer=None):
         else:
             ngviewer = ng.Viewer()
             print('Neuroglancer viewer created at: ', ngviewer)
-            webbrowser.open(ngviewer.get_viewer_url())
             sys.modules['ngviewerinst'] = ngviewer
+            if not headless:
+                webbrowser.open(ngviewer.get_viewer_url())
     else:
         ngviewer = ngviewer
 

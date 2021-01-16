@@ -14,17 +14,18 @@ import glob
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Add a common viewer, dataserver for each test module..
+closeviewer()
+closedataserver()
+startdataserver()  # start dataserver..
+openviewer(headless=True)  # open ngviewer
+
 
 class Testsynapses(unittest.TestCase):
     """Test pyroglancer.synapses."""
 
     def test_create_synapseinfo(self):
         """Check if the synapse info is stored."""
-        closeviewer()
-        closedataserver()
-        startdataserver()  # start dataserver..
-        openviewer()  # open ngviewer
-
         layer_serverdir, layer_host = get_ngserver()
 
         layer_kws = {}
@@ -39,11 +40,6 @@ class Testsynapses(unittest.TestCase):
 
     def test_put_presynapsefile(self):
         """Check if the synapse file is stored."""
-        closeviewer()
-        closedataserver()
-        startdataserver()  # start dataserver..
-        openviewer()  # open ngviewer
-
         layer_serverdir, layer_host = get_ngserver()
 
         layer_kws = {}
@@ -69,11 +65,6 @@ class Testsynapses(unittest.TestCase):
 
     def test_put_postsynapsefile(self):
         """Check if the synapse file is stored."""
-        closeviewer()
-        closedataserver()
-        startdataserver()  # start dataserver..
-        openviewer()  # open ngviewer
-
         layer_serverdir, layer_host = get_ngserver()
 
         layer_kws = {}
@@ -99,11 +90,6 @@ class Testsynapses(unittest.TestCase):
 
     def test_upload_synapses(self):
         """Check if synapse upload works in a neuron or neuronlist."""
-        closeviewer()
-        closedataserver()
-        startdataserver()  # start dataserver..
-        openviewer()  # open ngviewer
-
         # load some example neurons..
         swc_path = os.path.join(BASE_DIR, 'data/swc')
         # print('swc_path: ', swc_path)

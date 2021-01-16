@@ -8,6 +8,12 @@ from pyroglancer.ngviewer import openviewer, closeviewer
 import navis
 import os
 
+# Add a common viewer, dataserver for each test module..
+closeviewer()
+closedataserver()
+startdataserver()  # start dataserver..
+openviewer(headless=True)  # open ngviewer
+
 
 class Testvolumes(unittest.TestCase):
     """Test pyroglancer.volumes."""
@@ -32,10 +38,6 @@ class Testvolumes(unittest.TestCase):
 
         volumedatasource, volumeidlist, volumenamelist = to_ngmesh(testvolume)
         # segmentColors = dict(zip(volumeidlist, '#ffff00'))
-        closeviewer()
-        closedataserver()
-        startdataserver()  # start dataserver..
-        openviewer()  # open ngviewer
 
         layer_serverdir, layer_host = get_ngserver()
         uploadmeshes(volumedatasource, volumeidlist, volumenamelist, layer_serverdir)
