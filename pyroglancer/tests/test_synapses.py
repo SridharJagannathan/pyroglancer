@@ -123,4 +123,8 @@ class Testsynapses(unittest.TestCase):
 
 
 if __name__ == '__main__':
+
     unittest.main()
+    # Add a common viewer, dataserver for each test module..
+    closeviewer()
+    closedataserver()
