@@ -28,13 +28,13 @@ Documentation
 (COMING SOON!) https://SridharJagannathan.github.io/pyroglancer
 
 Features
-------------
+--------
  - Fetch and display neurons from the hemibrain, FAFB dataset
  - Display synapse annotations etc
 
 Acknowledgements
 ----------------
-Thanks to Jeremy Maitin-Shepard <https://github.com/jbms> from google for inventing the precomputed format and answering
+Thanks to `Jeremy Maitin-Shepard <https://github.com/jbms>`_ from google for inventing the precomputed format and answering
 many of my queries.
 
 Copyright & License
