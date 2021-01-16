@@ -14,8 +14,8 @@ else:
 
 here = path.abspath(path.dirname(__file__))
 
-with open(path.join(here, 'README.rst'), encoding='utf-8') as readme_file:
-    readme = readme_file.read()
+with open(path.join(here, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
 
 with open(path.join(here, 'requirements.txt')) as requirements_file:
     # Parse requirements.txt, ignoring any commented-out lines.
@@ -27,7 +27,8 @@ setup(
     name='pyroglancer',
     version=verstr,
     description="Pythonic interface to neuroglancer for displaying neuronal and synaptic data",
-    long_description=readme,
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     author="Sridhar Jagannathan",
     author_email='j.sridharrajan@gmail.com',
     url='https://github.com/SridharJagannathan/pyroglancer',
