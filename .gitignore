@@ -81,3 +81,4 @@ target/
 #Ipython Notebook
 .ipynb_checkpoints
 layers.py
+pyroglancer/layers.py
