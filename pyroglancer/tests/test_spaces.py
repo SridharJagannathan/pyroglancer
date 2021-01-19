@@ -51,25 +51,14 @@ class Testspaces(unittest.TestCase):
         assert space == 'FAFB'
 
     def test_create_fancspace(self):
-        """Check if the fanc space is created."""
+        """Check if the hemibrain space is created."""
         layer_serverdir, layer_host = get_ngserver()
 
-        create_ngspace(space='FANC')
+        create_ngspace(space='hemibrain')
 
         space = sys.modules['ngspace']
 
-        assert space == 'FANC'
-
-    def test_create_mancspace(self):
-        """Check if the manc space is created."""
-        layer_serverdir, layer_host = get_ngserver()
-
-        create_ngspace(space='MANC')
-
-        space = sys.modules['ngspace']
-
-        assert space == 'MANC'
-
+        assert space == 'hemibrain'
 
 if __name__ == '__main__':
 

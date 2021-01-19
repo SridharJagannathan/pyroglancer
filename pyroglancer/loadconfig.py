@@ -11,29 +11,28 @@
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 
-"""Module contains functions to wrap neuroglancer spaces."""
+"""Module contains functions to handle configuratio data fron YAML files"""
+import os
+import yaml
 
-from .layers import create_nglayer, _get_ngspace
-import sys
-
-
-def create_ngspace(space='FAFB'):
-    """Create a neuroglancer space (EM layers, segmentation, neuropil surfaces).
+def getconfigdata(configfileloc=None):
+    """Get the YAML config data from the default location.
 
     Parameters
     ----------
-    space : dataset to be used for e.g. : FAFB etc
+    configfileloc :  override the default location if configfileloc is present
 
     Returns
     -------
-    None
+    spaces
     """
-    layer_kws = {}
-    layer_kws['space'] = space
-    ngspace = _get_ngspace(layer_kws)
-    for layername in ngspace['layers']:
-        create_nglayer(layer_kws={'type': ngspace['layers'][layername]['type'], 
-                                  'space': space, 'name': layername})
+    if configfileloc is not None:
+        print('using custom location at: ', configfileloc)
+    else:
+        configfileloc = os.environ['PYROGLANCER_CONFIG']
+        print('using default location at: ', configfileloc)
 
-    #print(ngviewer)
-    sys.modules['ngspace'] = space
+    configfileloc = os.path.expanduser(configfileloc)
+    with open(configfileloc, "r") as fh:
+        configdata = yaml.load(fh, Loader=yaml.SafeLoader)
+    return configdata
