@@ -26,6 +26,7 @@ import os
 import shutil
 import sys
 
+
 def _get_ngspace(layer_kws):
     space = layer_kws['space']
     if 'configfileloc' not in layer_kws:
@@ -55,15 +56,16 @@ def _handle_ngdimensions(layer_kws):
 
         print('Dimensions are in :', ngspace['space'])
         dimensions = neuroglancer.CoordinateSpace(
-                     names=['x', 'y', 'z'], units=ngspace['dimension']['units'], 
-                     scales=[ngspace['dimension']['x'], 
-                             ngspace['dimension']['y'], 
+                     names=['x', 'y', 'z'], units=ngspace['dimension']['units'],
+                     scales=[ngspace['dimension']['x'],
+                             ngspace['dimension']['y'],
                              ngspace['dimension']['z']])
 
     if dimensions is None:
         raise ValueError("dimensions is not set already: either use 'space' or 'dimensions'")
 
     return dimensions
+
 
 def flush_precomputed(path, subdir):
     """Delete/Flush a subfolder inside the precomputed folder that is hosted via http."""
@@ -91,16 +93,13 @@ def handle_emdata(ngviewer, layer_kws):
     """Add the electron microscopy layer as a neuroglancer layer."""
     # This function adds EM layer to a neuroglancer instance.
     # The EM layers are usually corresponding to spaces like 'FAFB', etc
-    
     ngspace = _get_ngspace(layer_kws)
 
     for layername in ngspace['layers']:
         if ngspace['layers'][layername]['type'] == 'image':
             with ngviewer.txn() as s:
-                 s.layers[layername] = neuroglancer.ImageLayer(
+                s.layers[layername] = neuroglancer.ImageLayer(
                         source=ngspace['layers'][layername]['source'],)
-
-
 
     return ngviewer
 
@@ -109,13 +108,12 @@ def handle_segmentdata(ngviewer, layer_kws):
     """Add the different neuron segmentation datasets as a neuroglancer layer."""
     # This function adds segmentation of EM layer to a neuroglancer instance.
     # The EM segmentations usually correspond to autosegs from google for datasets like 'FAFB' etc
-    
     ngspace = _get_ngspace(layer_kws)
 
     for layername in ngspace['layers']:
         if ngspace['layers'][layername]['type'] == 'segmentation':
             with ngviewer.txn() as s:
-                 s.layers[layername] = neuroglancer.SegmentationLayer(
+                s.layers[layername] = neuroglancer.SegmentationLayer(
                         source=ngspace['layers'][layername]['source'],)
 
     return ngviewer
@@ -130,10 +128,10 @@ def handle_synapticdata(ngviewer, layer_kws):
     for layername in ngspace['layers']:
         if ngspace['layers'][layername]['type'] == 'synapsepred':
             with ngviewer.txn() as s:
-                 s.layers[layername] = neuroglancer.AnnotationLayer(
+                s.layers[layername] = neuroglancer.AnnotationLayer(
                         source=ngspace['layers'][layername]['source'],
                         linked_segmentation_layer={'pre_segment': ngspace['layers'][layername]['linkedseg'],
-                                           'post_segment': ngspace['layers'][layername]['linkedseg']},
+                                                   'post_segment': ngspace['layers'][layername]['linkedseg']},
                         filter_by_segmentation=['post_segment', 'pre_segment'],
                         shader='''#uicontrol vec3 preColor color(default=\"blue\")
                                   # uicontrol vec3 postColor color(default=\"red\")
@@ -155,6 +153,7 @@ def handle_synapticdata(ngviewer, layer_kws):
 
     return ngviewer
 
+
 def handle_synapticclefts(ngviewer, layer_kws):
     """Add the synapse cleft predictions for the em dataset as a neuroglancer layer."""
     # This function adds synapse cleft predictions to a neuroglancer instance.
@@ -164,7 +163,7 @@ def handle_synapticclefts(ngviewer, layer_kws):
     for layername in ngspace['layers']:
         if ngspace['layers'][layername]['type'] == 'synapticcleft':
             with ngviewer.txn() as s:
-                 s.layers[layername] = neuroglancer.ImageLayer(
+                s.layers[layername] = neuroglancer.ImageLayer(
                         source=ngspace['layers'][layername]['source'],
                         shader='void main() {emitRGBA(vec4(0.0,0.0,1.0,toNormalized(getDataValue())));}',
                         opacity=0.73)
@@ -178,19 +177,19 @@ def handle_meshes(ngviewer, layer_kws):
 
     ngspace = _get_ngspace(layer_kws)
 
-    #for meshes as a mesh layer
+    # for meshes as a mesh layer
     for layername in ngspace['layers']:
         if ngspace['layers'][layername]['type'] == 'surfacemesh':
             with ngviewer.txn() as s:
-                 s.layers[layername] = neuroglancer.SingleMeshLayer(
+                s.layers[layername] = neuroglancer.SingleMeshLayer(
                         source=ngspace['layers'][layername]['source'],
                         shader='void main() {emitRGBA(vec4(0.859, 0.859, 0.859, 0.3));}')
 
-    #for meshes as a segment layer
+    # for meshes as a segment layer
     for layername in ngspace['layers']:
         if ngspace['layers'][layername]['type'] == 'segmentmesh':
             with ngviewer.txn() as s:
-                 s.layers[layername] = neuroglancer.SegmentationLayer(
+                s.layers[layername] = neuroglancer.SegmentationLayer(
                         source=ngspace['layers'][layername]['source'],
                         segmentQuery='/',
                         objectAlpha=0.3)

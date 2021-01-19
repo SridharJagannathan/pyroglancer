@@ -60,6 +60,7 @@ class Testspaces(unittest.TestCase):
 
         assert space == 'hemibrain'
 
+
 if __name__ == '__main__':
 
     unittest.main()

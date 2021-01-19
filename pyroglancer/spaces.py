@@ -32,8 +32,8 @@ def create_ngspace(space='FAFB'):
     layer_kws['space'] = space
     ngspace = _get_ngspace(layer_kws)
     for layername in ngspace['layers']:
-        create_nglayer(layer_kws={'type': ngspace['layers'][layername]['type'], 
+        create_nglayer(layer_kws={'type': ngspace['layers'][layername]['type'],
                                   'space': space, 'name': layername})
 
-    #print(ngviewer)
+    # print(ngviewer)
     sys.modules['ngspace'] = space

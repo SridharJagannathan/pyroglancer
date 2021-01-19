@@ -11,9 +11,10 @@
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 
-"""Module contains functions to handle configuratio data fron YAML files"""
+"""Module contains functions to handle configuratio data fron YAML files."""
 import os
 import yaml
+
 
 def getconfigdata(configfileloc=None):
     """Get the YAML config data from the default location.

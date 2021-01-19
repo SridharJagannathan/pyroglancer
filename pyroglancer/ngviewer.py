@@ -14,8 +14,8 @@
 """Module contains code to open a neuroglancer viewer."""
 
 import neuroglancer as ng
-import webbrowser
 import sys
+import webbrowser
 
 
 def openviewer(ngviewer=None, headless=False):
