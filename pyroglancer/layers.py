@@ -28,33 +28,33 @@ import sys
 
 
 def _get_ngspace(layer_kws):
-    space = layer_kws['space']
+    space = layer_kws['ngspace']
     if 'configfileloc' not in layer_kws:
         layer_kws['configfileloc'] = None
     configdata = getconfigdata(layer_kws['configfileloc'])
 
     try:
-        ngspace = next(filter(lambda ngspace: ngspace['space'] == space, configdata))
+        ngspaceconfig = next(filter(lambda ngspace: ngspace['ngspace'] == space, configdata))
     except Exception:
         ValueError("exception has occured, perhaps the requested space is not present in the yml file??")
         return None
 
-    return ngspace
+    return ngspaceconfig
 
 
 def _handle_ngdimensions(layer_kws):
     """Return the dimensions of different neuroglancer spaces."""
-    # return dimensions either based on already set ngspace or a string 'space'.
+    # return dimensions either based on already set ngspace or a string 'ngspace'.
     dimensions = None
     if 'ngspace' in sys.modules:
-        layer_kws['space'] = sys.modules['ngspace']
+        layer_kws['ngspace'] = sys.modules['ngspace']
 
     if 'dimensions' in layer_kws:
         dimensions = layer_kws['dimensions']
-    if 'space' in layer_kws:
+    if 'ngspace' in layer_kws:
         ngspace = _get_ngspace(layer_kws)
 
-        print('Dimensions are in :', ngspace['space'])
+        print('Dimensions are in :', ngspace['ngspace'])
         dimensions = neuroglancer.CoordinateSpace(
                      names=['x', 'y', 'z'], units=ngspace['dimension']['units'],
                      scales=[ngspace['dimension']['x'],
@@ -62,7 +62,7 @@ def _handle_ngdimensions(layer_kws):
                              ngspace['dimension']['z']])
 
     if dimensions is None:
-        raise ValueError("dimensions is not set already: either use 'space' or 'dimensions'")
+        raise ValueError("dimensions is not set already: either use 'ngspace' or 'dimensions'")
 
     return dimensions
 

@@ -17,23 +17,23 @@ from .layers import create_nglayer, _get_ngspace
 import sys
 
 
-def create_ngspace(space='FAFB'):
+def create_ngspace(ngspace='FAFB'):
     """Create a neuroglancer space (EM layers, segmentation, neuropil surfaces).
 
     Parameters
     ----------
-    space : dataset to be used for e.g. : FAFB etc
+    ngspace : dataset to be used for e.g. : FAFB etc
 
     Returns
     -------
     None
     """
     layer_kws = {}
-    layer_kws['space'] = space
-    ngspace = _get_ngspace(layer_kws)
-    for layername in ngspace['layers']:
-        create_nglayer(layer_kws={'type': ngspace['layers'][layername]['type'],
-                                  'space': space, 'name': layername})
+    layer_kws['ngspace'] = ngspace
+    ngspaceconfig = _get_ngspace(layer_kws)
+    for layername in ngspaceconfig['layers']:
+        create_nglayer(layer_kws={'type': ngspaceconfig['layers'][layername]['type'],
+                                  'ngspace': ngspace, 'name': layername})
 
     # print(ngviewer)
-    sys.modules['ngspace'] = space
+    sys.modules['ngspace'] = ngspace

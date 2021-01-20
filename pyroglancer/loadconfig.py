@@ -26,7 +26,7 @@ def getconfigdata(configfileloc=None):
 
     Returns
     -------
-    spaces
+    configdata
     """
     if configfileloc is not None:
         print('using custom location at: ', configfileloc)

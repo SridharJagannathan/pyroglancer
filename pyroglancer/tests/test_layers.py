@@ -53,7 +53,7 @@ class Testlayers(unittest.TestCase):
         ngviewer = openviewer(None)
 
         ngviewer2 = create_nglayer(ngviewer=ngviewer,
-                                   layer_kws={'type': 'segdataset', 'space': 'FAFB', 'name': 'seg_20190805'})
+                                   layer_kws={'type': 'segdataset', 'ngspace': 'FAFB', 'name': 'seg_20190805'})
 
         assert ngviewer2 == ngviewer
 
@@ -64,7 +64,7 @@ class Testlayers(unittest.TestCase):
         ngviewer = openviewer(None)
 
         ngviewer2 = create_nglayer(ngviewer=ngviewer,
-                                   layer_kws={'type': 'synapticlayer', 'space': 'FAFB',
+                                   layer_kws={'type': 'synapticlayer', 'ngspace': 'FAFB',
                                               'name': 'synapses_buhmann2019'})
 
         assert ngviewer2 == ngviewer
@@ -76,7 +76,7 @@ class Testlayers(unittest.TestCase):
         ngviewer = openviewer(None)
 
         ngviewer2 = create_nglayer(ngviewer=ngviewer,
-                                   layer_kws={'type': 'synapticclefts', 'space': 'FAFB',
+                                   layer_kws={'type': 'synapticclefts', 'ngspace': 'FAFB',
                                               'name': 'clefts_Heinrich_etal'})
 
         assert ngviewer2 == ngviewer
@@ -97,7 +97,7 @@ class Testlayers(unittest.TestCase):
 
         ngviewer = openviewer(None)
 
-        ngviewer2 = create_nglayer(layer_kws={'type': 'skeletons', 'source': neuronlist, 'space': 'FAFB',
+        ngviewer2 = create_nglayer(layer_kws={'type': 'skeletons', 'source': neuronlist, 'ngspace': 'FAFB',
                                               'color': ['white', 'green', 'grey', 'yellow', 'magenta'],
                                               'alpha': 0.9})
 
@@ -114,7 +114,7 @@ class Testlayers(unittest.TestCase):
         points = pd.DataFrame(location_data)
         points['description'] = 'dummy data'
 
-        ngviewer2 = create_nglayer(layer_kws={'type': 'points', 'name': 'points1', 'space': 'FAFB',
+        ngviewer2 = create_nglayer(layer_kws={'type': 'points', 'name': 'points1', 'ngspace': 'FAFB',
                                               'source': points, 'scale': [8, 8, 8], 'color': 'yellow'})
 
         assert ngviewer2 == ngviewer
@@ -164,7 +164,7 @@ class Testlayers(unittest.TestCase):
         faces = [(0, 1, 2)]
         testvolume = navis.Volume(vertices=vertices, faces=faces, name='test', id=segid)
 
-        ngviewer2 = create_nglayer(layer_kws={'type': 'volumes', 'source': testvolume, 'space': 'FAFB',
+        ngviewer2 = create_nglayer(layer_kws={'type': 'volumes', 'source': testvolume, 'ngspace': 'FAFB',
                                               'color': 'white', 'alpha': 0.3})
 
         assert ngviewer2 == ngviewer

@@ -48,7 +48,7 @@ class Testpoints(unittest.TestCase):
         layer_serverdir, layer_host = get_ngserver()
 
         layer_kws = {}
-        layer_kws['space'] = 'FAFB'
+        layer_kws['ngspace'] = 'FAFB'
         dimensions = _handle_ngdimensions(layer_kws)
         create_pointinfo(dimensions, layer_serverdir, 'points')
 
@@ -62,7 +62,7 @@ class Testpoints(unittest.TestCase):
         layer_serverdir, layer_host = get_ngserver()
 
         layer_kws = {}
-        layer_kws['space'] = 'FAFB'
+        layer_kws['ngspace'] = 'FAFB'
         dimensions = _handle_ngdimensions(layer_kws)
         layer_name = 'points'
         points_path = create_pointinfo(dimensions, layer_serverdir, layer_name)
@@ -85,7 +85,7 @@ class Testpoints(unittest.TestCase):
         layer_serverdir, layer_host = get_ngserver()
 
         layer_kws = {}
-        layer_kws['space'] = 'FAFB'
+        layer_kws['ngspace'] = 'FAFB'
         dimensions = _handle_ngdimensions(layer_kws)
 
         location_data = [{'x': 5, 'y': 10, 'z': 20}, {'x': 15, 'y': 25, 'z': 30}]

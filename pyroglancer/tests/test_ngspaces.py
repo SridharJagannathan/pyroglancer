@@ -1,7 +1,7 @@
-"""Module contains test cases for spaces.py module."""
+"""Module contains test cases for ngspaces.py module."""
 
 import unittest
-from pyroglancer.spaces import create_ngspace
+from pyroglancer.ngspaces import create_ngspace
 from pyroglancer.layers import get_ngserver
 from pyroglancer.localserver import startdataserver, closedataserver
 from pyroglancer.ngviewer import openviewer, closeviewer
@@ -30,7 +30,7 @@ openviewer(headless=True)  # open ngviewer
 
 
 class Testspaces(unittest.TestCase):
-    """Test pyroglancer.spaces."""
+    """Test pyroglancer.ngspaces."""
 
     # def setUp(self):
     #     """Perform set up."""
@@ -41,24 +41,24 @@ class Testspaces(unittest.TestCase):
     #     super(Testsynapses, self).tearDown()
 
     def test_create_fafbspace(self):
-        """Check if the fafb space is created."""
+        """Check if the fafb ngspace is created."""
         layer_serverdir, layer_host = get_ngserver()
 
-        create_ngspace(space='FAFB')
+        create_ngspace(ngspace='FAFB')
 
-        space = sys.modules['ngspace']
+        ngspace = sys.modules['ngspace']
 
-        assert space == 'FAFB'
+        assert ngspace == 'FAFB'
 
     def test_create_fancspace(self):
         """Check if the hemibrain space is created."""
         layer_serverdir, layer_host = get_ngserver()
 
-        create_ngspace(space='hemibrain')
+        create_ngspace(ngspace='hemibrain')
 
-        space = sys.modules['ngspace']
+        ngspace = sys.modules['ngspace']
 
-        assert space == 'hemibrain'
+        assert ngspace == 'hemibrain'
 
 
 if __name__ == '__main__':

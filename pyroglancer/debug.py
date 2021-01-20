@@ -15,7 +15,7 @@
 
 # from pyroglancer.layers import handle_emdata, handle_segmentdata, handle_synapticdata
 # from pyroglancer.layers import handle_synapticclefts, handle_meshes
-# from pyroglancer.spaces import create_ngspace
+from pyroglancer.ngspaces import create_ngspace
 # from pyroglancer.ngviewer import openviewer
 # import neuroglancer as ng
 
@@ -23,31 +23,31 @@
 
 
 # layer_kws = {}
-# layer_kws['space'] = "FAFB"
+# layer_kws['ngspace'] = "FAFB"
 # layer_kws['name'] = "fafb_v14_orig"
 # handle_emdata(ngviewer, layer_kws)
 
 # layer_kws = {}
-# layer_kws['space'] = "FAFB"
+# layer_kws['ngspace'] = "FAFB"
 # layer_kws['name'] = "seg_20200412"
 # handle_segmentdata(ngviewer, layer_kws)
 
 # layer_kws = {}
-# layer_kws['space'] = "FAFB"
+# layer_kws['ngspace'] = "FAFB"
 # layer_kws['name'] = "synapses_buhmann2019"
 # handle_synapticdata(ngviewer, layer_kws)
 
 # layer_kws = {}
-# layer_kws['space'] = "FAFB"
+# layer_kws['ngspace'] = "FAFB"
 # layer_kws['name'] = "clefts_Heinrich_etal"
 # handle_synapticclefts(ngviewer, layer_kws)
 
 # layer_kws = {}
-# layer_kws['space'] = "FAFB"
+# layer_kws['ngspace'] = "FAFB"
 # layer_kws['name'] = "FAFB.surf"
 # handle_meshes(ngviewer, layer_kws)
 
-# create_ngspace(space='FAFB')
-# create_ngspace(space='FANC')
-# create_ngspace(space='MANC')
-# create_ngspace(space='hemibrain')
+create_ngspace(ngspace='FAFB')
+# create_ngspace(ngspace='FANC')
+# create_ngspace(ngspace='MANC')
+# create_ngspace(ngspace='hemibrain')

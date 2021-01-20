@@ -16,7 +16,7 @@ import os
 import yaml
 
 configdata = [
-    dict(space='FAFB',
+    dict(ngspace='FAFB',
          dimension=dict(
              x=1,
              y=1,
@@ -33,7 +33,7 @@ configdata = [
                     )
             )
          ),
-    dict(space='hemibrain',
+    dict(ngspace='hemibrain',
          dimension=dict(
             x=1,
             y=1,

@@ -53,7 +53,7 @@ class Testsynapses(unittest.TestCase):
         layer_serverdir, layer_host = get_ngserver()
 
         layer_kws = {}
-        layer_kws['space'] = 'FAFB'
+        layer_kws['ngspace'] = 'FAFB'
         dimensions = _handle_ngdimensions(layer_kws)
         create_synapseinfo(dimensions, layer_serverdir)
 
@@ -67,7 +67,7 @@ class Testsynapses(unittest.TestCase):
         layer_serverdir, layer_host = get_ngserver()
 
         layer_kws = {}
-        layer_kws['space'] = 'FAFB'
+        layer_kws['ngspace'] = 'FAFB'
         dimensions = _handle_ngdimensions(layer_kws)
         synapse_path = create_synapseinfo(dimensions, layer_serverdir)
 
@@ -92,7 +92,7 @@ class Testsynapses(unittest.TestCase):
         layer_serverdir, layer_host = get_ngserver()
 
         layer_kws = {}
-        layer_kws['space'] = 'FAFB'
+        layer_kws['ngspace'] = 'FAFB'
         dimensions = _handle_ngdimensions(layer_kws)
         synapse_path = create_synapseinfo(dimensions, layer_serverdir)
 
@@ -129,11 +129,11 @@ class Testsynapses(unittest.TestCase):
         layer_serverdir, layer_host = get_ngserver()
 
         layer_kws = {}
-        layer_kws['space'] = 'FAFB'
+        layer_kws['ngspace'] = 'FAFB'
         dimensions = _handle_ngdimensions(layer_kws)
         synapse_path = create_synapseinfo(dimensions, layer_serverdir)
 
-        presynlayer_kws = {'type': 'synapses', 'space': 'FAFB',
+        presynlayer_kws = {'type': 'synapses', 'ngspace': 'FAFB',
                            'source': neuronlist}
 
         create_nglayer(layer_kws=presynlayer_kws)
@@ -162,11 +162,11 @@ class Testsynapses(unittest.TestCase):
         layer_serverdir, layer_host = get_ngserver()
 
         layer_kws = {}
-        layer_kws['space'] = 'FAFB'
+        layer_kws['ngspace'] = 'FAFB'
         dimensions = _handle_ngdimensions(layer_kws)
         synapse_path = create_synapseinfo(dimensions, layer_serverdir)
 
-        presynlayer_kws = {'type': 'synapses', 'space': 'FAFB',
+        presynlayer_kws = {'type': 'synapses', 'ngspace': 'FAFB',
                            'source': neuronlist[0]}
 
         create_nglayer(layer_kws=presynlayer_kws)
@@ -184,7 +184,7 @@ class Testsynapses(unittest.TestCase):
 
         layer_serverdir, layer_host = get_ngserver()
 
-        presynlayer_kws = {'type': 'synapses', 'space': 'FAFB',
+        presynlayer_kws = {'type': 'synapses', 'ngspace': 'FAFB',
                            'source': neuronlist}
 
         with pytest.raises(Exception):
@@ -207,11 +207,11 @@ class Testsynapses(unittest.TestCase):
         layer_serverdir, layer_host = get_ngserver()
 
         layer_kws = {}
-        layer_kws['space'] = 'FAFB'
+        layer_kws['ngspace'] = 'FAFB'
         dimensions = _handle_ngdimensions(layer_kws)
         synapse_path = create_synapseinfo(dimensions, layer_serverdir)
 
-        presynlayer_kws = {'type': 'synapses', 'space': 'FAFB',
+        presynlayer_kws = {'type': 'synapses', 'ngspace': 'FAFB',
                            'source': neuronlist}
 
         create_nglayer(layer_kws=presynlayer_kws)
@@ -240,11 +240,11 @@ class Testsynapses(unittest.TestCase):
         layer_serverdir, layer_host = get_ngserver()
 
         layer_kws = {}
-        layer_kws['space'] = 'FAFB'
+        layer_kws['ngspace'] = 'FAFB'
         dimensions = _handle_ngdimensions(layer_kws)
         synapse_path = create_synapseinfo(dimensions, layer_serverdir)
 
-        presynlayer_kws = {'type': 'synapses', 'space': 'FAFB',
+        presynlayer_kws = {'type': 'synapses', 'ngspace': 'FAFB',
                            'source': catmaidneuron}
 
         create_nglayer(layer_kws=presynlayer_kws)
@@ -272,7 +272,7 @@ class Testsynapses(unittest.TestCase):
 
         ngviewer = openviewer(None)
         layer_kws = {}
-        layer_kws['space'] = 'FAFB'
+        layer_kws['ngspace'] = 'FAFB'
         dimensions = _handle_ngdimensions(layer_kws)
 
         status = annotate_synapses(ngviewer, dimensions, neuronlist)
@@ -295,7 +295,7 @@ class Testsynapses(unittest.TestCase):
 
         ngviewer = openviewer(None)
         layer_kws = {}
-        layer_kws['space'] = 'FAFB'
+        layer_kws['ngspace'] = 'FAFB'
         dimensions = _handle_ngdimensions(layer_kws)
 
         status = annotate_synapses(ngviewer, dimensions, neuronlist[0])
@@ -318,7 +318,7 @@ class Testsynapses(unittest.TestCase):
 
         ngviewer = openviewer(None)
         layer_kws = {}
-        layer_kws['space'] = 'FAFB'
+        layer_kws['ngspace'] = 'FAFB'
         dimensions = _handle_ngdimensions(layer_kws)
 
         status = annotate_synapses(ngviewer, dimensions, catmaidneuron)
@@ -333,7 +333,7 @@ class Testsynapses(unittest.TestCase):
 
         ngviewer = openviewer(None)
         layer_kws = {}
-        layer_kws['space'] = 'FAFB'
+        layer_kws['ngspace'] = 'FAFB'
         dimensions = _handle_ngdimensions(layer_kws)
 
         with pytest.raises(Exception):
