@@ -56,6 +56,6 @@ def createconfig(configfileloc=None):
         configfileloc = os.environ['PYROGLANCER_CONFIG']
 
     if not os.path.exists(configfileloc):
-        with open(configfileloc, 'w') as outfile:
+        with open(configfileloc, 'w+') as outfile:
             print('adding default config file..')
             yaml.dump(data, outfile, sort_keys=False, default_flow_style=False)
