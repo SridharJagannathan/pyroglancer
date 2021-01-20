@@ -23,6 +23,7 @@ from .synapses import create_synapseinfo
 from .synapses import upload_synapses
 from .utils import get_alphavalue
 from .utils import get_hexcolor
+from .utils import get_scalevalue
 from .volumes import to_ngmesh
 from .volumes import uploadmeshes
 
@@ -35,8 +36,7 @@ import sys
 
 def _get_ngspace(layer_kws):
     space = layer_kws['ngspace']
-    if 'configfileloc' not in layer_kws:
-        layer_kws['configfileloc'] = None
+    layer_kws['configfileloc'] = layer_kws.get('configfileloc', None)
     configdata = getconfigdata(layer_kws['configfileloc'])
 
     try:
@@ -352,9 +352,7 @@ def create_nglayer(ngviewer=None, layout='xy-3d', **kwargs):
             layer_source = layer_kws['source']
             layer_name = layer_kws['name']
             hexcolor = get_hexcolor(layer_kws)
-            layer_scale = layer_kws['scale']
-            print(layer_scale)
-
+            layer_scale = get_scalevalue(layer_kws)
             annotationColors = hexcolor[0]
             # alpha = get_alphavalue(layer_kws)
 

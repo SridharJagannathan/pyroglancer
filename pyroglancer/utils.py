@@ -12,6 +12,7 @@
 #    GNU General Public License for more details.
 
 """Module contains utility functions."""
+from .loadconfig import getconfigdata
 import webcolors
 
 
@@ -38,8 +39,26 @@ def get_hexcolor(layer_kws):
 def get_alphavalue(layer_kws):
     """Get alpha values from the interface APIs."""
     # This function gets alpha/transparency values.
-    if 'alpha' in layer_kws:
-        layer_alpha = layer_kws['alpha']
-    else:
-        layer_alpha = 1.0
+    layer_alpha = layer_kws.get("alpha", 1.0)
     return layer_alpha
+
+
+def _get_configvox2physical(layer_kws):
+    layer_kws['configfileloc'] = layer_kws.get('configfileloc', None)
+    configdata = getconfigdata(layer_kws['configfileloc'])
+    ngspaceconfig = next(filter(lambda ngspace: ngspace['ngspace'] == layer_kws['ngspace'], configdata))
+    scale = [ngspaceconfig['voxelsize'].get(key) for key in ['x', 'y', 'z']]
+    return scale
+
+
+def get_scalevalue(layer_kws):
+    """Get scale values from the interface APIs."""
+    # This function gets scale values for annotations.
+    space = layer_kws.get("space", "voxel")
+    if space == "voxel":
+        scale = layer_kws.get("scale", _get_configvox2physical(layer_kws))
+    else:
+        scale = [1, 1, 1]
+    print('using ', space, 'space', 'with scale: ', scale)
+
+    return scale

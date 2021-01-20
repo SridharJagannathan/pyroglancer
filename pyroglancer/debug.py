@@ -15,9 +15,12 @@
 
 # from pyroglancer.layers import handle_emdata, handle_segmentdata, handle_synapticdata
 # from pyroglancer.layers import handle_synapticclefts, handle_meshes
-from pyroglancer.ngspaces import create_ngspace
+# from pyroglancer.ngspaces import create_ngspace
 # from pyroglancer.ngviewer import openviewer
 # import neuroglancer as ng
+
+import pandas as pd
+from pyroglancer.layers import create_nglayer
 
 # ngviewer = openviewer(ngviewer = None)
 
@@ -47,7 +50,12 @@ from pyroglancer.ngspaces import create_ngspace
 # layer_kws['name'] = "FAFB.surf"
 # handle_meshes(ngviewer, layer_kws)
 
-create_ngspace(ngspace='FAFB')
+# create_ngspace(ngspace='FAFB')
 # create_ngspace(ngspace='FANC')
 # create_ngspace(ngspace='MANC')
 # create_ngspace(ngspace='hemibrain')
+
+location_data = [{'x': 5, 'y': 10, 'z': 20}, {'x': 15, 'y': 25, 'z': 30}]
+points = pd.DataFrame(location_data)
+tmpviewer = create_nglayer(layer_kws={'type': 'points', 'name': 'landmarks', 'ngspace': 'MANC',
+                                      'source': points, 'color': 'yellow'})

@@ -48,7 +48,7 @@ def to_ngmesh(x):
     -------
     mesh :      Cloud volume mesh
     """
-    volumeidlist, volumedatasource, volumenamelist = []
+    volumeidlist, volumedatasource, volumenamelist = ([] for i in range(3))
 
     if not isinstance(x, list):
         x = [x]
