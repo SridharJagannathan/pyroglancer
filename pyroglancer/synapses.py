@@ -13,17 +13,16 @@
 
 """Module contains functions to handle synapse data."""
 
-import pymaid
+import json
 import navis
 import neuroglancer
-import json
 import os
+import pymaid
 import struct
 
 
 def commit_info(synapseinfo, path, synapsetype):
-    """
-    Commit the info file created for the synapses based on precomputed format.
+    """Commit the info file created for the synapses based on precomputed format.
 
     Parameters
     ----------
@@ -41,8 +40,7 @@ def commit_info(synapseinfo, path, synapsetype):
 
 
 def create_synapseinfo(dimensions, path):
-    """
-    Create info file for the synapse based precomputed format.
+    """Create info file for the synapse based precomputed format.
 
     Parameters
     ----------
@@ -84,8 +82,7 @@ def create_synapseinfo(dimensions, path):
 
 
 def put_synapsefile(path, synapsetype, synapses, skeletonid):
-    """
-    Put synapse in the local dataserver.
+    """Put synapse in the local dataserver.
 
     Parameters
     ----------
@@ -118,8 +115,7 @@ def put_synapsefile(path, synapsetype, synapses, skeletonid):
 
 
 def upload_synapses(x, path):
-    """
-    Upload synpases from a neuron or neuronlist.
+    """Upload synpases from a neuron or neuronlist.
 
     Parameters
     ----------
@@ -146,8 +142,7 @@ def upload_synapses(x, path):
 
 
 def annotate_synapses(ngviewer, dimensions, x):
-    """
-    Annotate postsynapses of a neuron/neuronlist. (defunct do not use..).
+    """Annotate postsynapses of a neuron/neuronlist. (defunct do not use..).
 
     This function annotates synapses of a neuron/neuronlist
 

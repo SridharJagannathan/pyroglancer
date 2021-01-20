@@ -1,12 +1,14 @@
 """Module contains test cases for ngspaces.py module."""
 
-import unittest
-from pyroglancer.ngspaces import create_ngspace
-from pyroglancer.layers import get_ngserver
-from pyroglancer.localserver import startdataserver, closedataserver
-from pyroglancer.ngviewer import openviewer, closeviewer
 import sys
+import unittest
 
+from pyroglancer.layers import get_ngserver
+from pyroglancer.localserver import closedataserver
+from pyroglancer.localserver import startdataserver
+from pyroglancer.ngspaces import create_ngspace
+from pyroglancer.ngviewer import closeviewer
+from pyroglancer.ngviewer import openviewer
 
 # Add a common viewer, dataserver(specific port for travis) for each test module..
 closeviewer()

@@ -13,13 +13,19 @@
 
 """Module contains functions to handle neuroglancer layers."""
 
-from .ngviewer import openviewer
-from .skeletons import to_ngskeletons, uploadskeletons
-from .synapses import create_synapseinfo, upload_synapses
-from .points import create_pointinfo, upload_points  # , annotate_points
-from .volumes import to_ngmesh, uploadmeshes
-from .utils import get_hexcolor, get_alphavalue
 from .loadconfig import getconfigdata
+from .ngviewer import openviewer
+from .points import create_pointinfo
+from .points import upload_points  # , annotate_points
+from .skeletons import to_ngskeletons
+from .skeletons import uploadskeletons
+from .synapses import create_synapseinfo
+from .synapses import upload_synapses
+from .utils import get_alphavalue
+from .utils import get_hexcolor
+from .volumes import to_ngmesh
+from .volumes import uploadmeshes
+
 
 import neuroglancer
 import os

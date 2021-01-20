@@ -13,16 +13,16 @@
 
 """Module contains functions to handle mesh data."""
 
-import navis
-from cloudvolume import CloudVolume, Mesh
-import os
-import numpy as np
+from cloudvolume import CloudVolume
+from cloudvolume import Mesh
 import json
+import navis
+import numpy as np
+import os
 
 
 def _generate_mesh(x):
-    """
-    Generate mesh (of cloudvolume class) for given navis volume.
+    """Generate mesh (of cloudvolume class) for given navis volume.
 
     Parameters
     ----------
@@ -38,8 +38,7 @@ def _generate_mesh(x):
 
 
 def to_ngmesh(x):
-    """
-    Generate mesh (of cloudvolume class) for given volume.
+    """Generate mesh (of cloudvolume class) for given volume.
 
     Parameters
     ----------
@@ -49,13 +48,12 @@ def to_ngmesh(x):
     -------
     mesh :      Cloud volume mesh
     """
+    volumeidlist, volumedatasource, volumenamelist = []
+
     if not isinstance(x, list):
         x = [x]
 
     if all(isinstance(volume, navis.core.volumes.Volume) for volume in x):
-        volumeidlist = []
-        volumedatasource = []
-        volumenamelist = []
         for volumeelement in x:
             volumedata = _generate_mesh(volumeelement)
             volumedata.segid = volumeelement.id

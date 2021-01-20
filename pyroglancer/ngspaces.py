@@ -13,7 +13,8 @@
 
 """Module contains functions to wrap neuroglancer spaces."""
 
-from .layers import create_nglayer, _get_ngspace
+from .layers import _get_ngspace
+from .layers import create_nglayer
 import sys
 
 

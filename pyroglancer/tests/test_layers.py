@@ -1,15 +1,20 @@
 """Module contains test cases for layers.py module."""
 
-import unittest
-from pyroglancer.layers import create_nglayer, get_ngserver, _handle_ngdimensions
-from pyroglancer.localserver import startdataserver, closedataserver
-from pyroglancer.ngviewer import openviewer, closeviewer
-import os
-import navis
 import glob
-import pandas as pd
-import pytest
+import os
+import unittest
+
+import navis
 import neuroglancer as ng
+import pandas as pd
+from pyroglancer.layers import _handle_ngdimensions
+from pyroglancer.layers import create_nglayer
+from pyroglancer.layers import get_ngserver
+from pyroglancer.localserver import closedataserver
+from pyroglancer.localserver import startdataserver
+from pyroglancer.ngviewer import closeviewer
+from pyroglancer.ngviewer import openviewer
+import pytest
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

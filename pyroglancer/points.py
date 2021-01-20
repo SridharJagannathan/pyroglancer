@@ -13,15 +13,14 @@
 
 """Module contains functions to handle point data."""
 
-import neuroglancer
 import json
+import neuroglancer
 import os
 import struct
 
 
 def commit_info(pointinfo, path, pointlayername):
-    """
-    Commit the info file created for the points based precomputed format.
+    """Commit the info file created for the points based precomputed format.
 
     Parameters
     ----------
@@ -39,8 +38,7 @@ def commit_info(pointinfo, path, pointlayername):
 
 
 def create_pointinfo(dimensions, path, layer_name):
-    """
-    Create info file for the points based precomputed format.
+    """Create info file for the points based precomputed format.
 
     Parameters
     ----------
@@ -79,8 +77,7 @@ def create_pointinfo(dimensions, path, layer_name):
 
 
 def put_pointfile(path, layer_name, points, pointsscale, pointname):
-    """
-    Put pointfile in the local dataserver.
+    """Put pointfile in the local dataserver.
 
     Parameters
     ----------
@@ -115,8 +112,7 @@ def put_pointfile(path, layer_name, points, pointsscale, pointname):
 
 
 def upload_points(points_df, path, layer_name, layer_scale):
-    """
-    Upload points from a dataframe.
+    """Upload points from a dataframe.
 
     Parameters
     ----------
@@ -133,8 +129,7 @@ def upload_points(points_df, path, layer_name, layer_scale):
 
 
 def _annotate_points(ngviewer, dimensions, points_df, layer_scale):
-    """
-    Annotate points from a dataframe (defunct do not use..).
+    """Annotate points from a dataframe (defunct do not use..).
 
     Parameters
     ----------

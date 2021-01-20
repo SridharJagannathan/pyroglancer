@@ -19,8 +19,7 @@ import webbrowser
 
 
 def openviewer(ngviewer=None, headless=False):
-    """
-    Open a neuroglancer viewing engine.
+    """Open a neuroglancer viewing engine.
 
     Parameters
     ----------
