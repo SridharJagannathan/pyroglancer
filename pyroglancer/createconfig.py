@@ -12,6 +12,7 @@
 #    GNU General Public License for more details.
 
 """Module contains test data to create a sample yaml config file."""
+import os
 import yaml
 
 data = [
@@ -47,5 +48,14 @@ data = [
             )
          )
          ]
-with open('config.yml', 'w') as outfile:
-    yaml.dump(data, outfile, sort_keys=False, default_flow_style=False)
+
+
+def createconfig(configfileloc=None):
+    """Create config file in case it is not found."""
+    if configfileloc is None:
+        configfileloc = os.environ['PYROGLANCER_CONFIG']
+
+    if not os.path.exists(configfileloc):
+        with open(configfileloc, 'w') as outfile:
+            print('adding default config file..')
+            yaml.dump(data, outfile, sort_keys=False, default_flow_style=False)
