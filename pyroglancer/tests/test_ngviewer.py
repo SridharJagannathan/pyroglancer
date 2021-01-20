@@ -2,7 +2,12 @@
 
 import neuroglancer as ng
 from pyroglancer.ngviewer import openviewer
+from pyroglancer.createconfig import createconfig
 import unittest
+
+
+# create configuration file..
+createconfig()
 
 
 class Testngviewer(unittest.TestCase):

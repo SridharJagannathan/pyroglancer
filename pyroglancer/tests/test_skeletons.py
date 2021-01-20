@@ -5,6 +5,7 @@ from pyroglancer.skeletons import to_ngskeletons, uploadskeletons
 from pyroglancer.layers import get_ngserver
 from pyroglancer.localserver import startdataserver, closedataserver
 from pyroglancer.ngviewer import openviewer, closeviewer
+from pyroglancer.createconfig import createconfig
 import os
 import navis
 import pymaid
@@ -13,6 +14,9 @@ import pytest
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# create configuration file..
+createconfig()
 
 # Add a common viewer, dataserver(specific port for travis) for each test module..
 closeviewer()

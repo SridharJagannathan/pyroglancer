@@ -5,8 +5,12 @@ from pyroglancer.spaces import create_ngspace
 from pyroglancer.layers import get_ngserver
 from pyroglancer.localserver import startdataserver, closedataserver
 from pyroglancer.ngviewer import openviewer, closeviewer
+from pyroglancer.createconfig import createconfig
 import sys
 
+
+# create configuration file..
+createconfig()
 
 # Add a common viewer, dataserver(specific port for travis) for each test module..
 closeviewer()
