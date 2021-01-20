@@ -14,6 +14,7 @@ The easiest way to install the package is via `pip`:
     $ pip3 install pyroglancer
 
 If you want to install the latest developments from `GitHub`:
+
     $ pip3 install git+git://github.com/SridharJagannathan/pyroglancer@master
 
 Documentation
