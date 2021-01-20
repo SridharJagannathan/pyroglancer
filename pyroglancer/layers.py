@@ -35,7 +35,7 @@ def _get_ngspace(layer_kws):
 
     try:
         ngspace = next(filter(lambda ngspace: ngspace['space'] == space, configdata))
-    except:
+    except Exception:
         ValueError("exception has occured, perhaps the requested space is not present in the yml file??")
         return None
 

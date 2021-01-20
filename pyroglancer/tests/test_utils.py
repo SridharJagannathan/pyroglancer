@@ -2,10 +2,6 @@
 
 import unittest
 from pyroglancer.utils import get_hexcolor, get_alphavalue
-from pyroglancer.createconfig import createconfig
-
-# create configuration file..
-createconfig()
 
 
 class Testutils(unittest.TestCase):

@@ -5,12 +5,8 @@ from pyroglancer.volumes import uploadmeshes, to_ngmesh
 from pyroglancer.layers import get_ngserver
 from pyroglancer.localserver import startdataserver, closedataserver
 from pyroglancer.ngviewer import openviewer, closeviewer
-from pyroglancer.createconfig import createconfig
 import navis
 import os
-
-# create configuration file..
-createconfig()
 
 # Add a common viewer, dataserver(specific port for travis) for each test module..
 closeviewer()

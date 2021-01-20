@@ -12,6 +12,7 @@
 #    GNU General Public License for more details.
 
 """Module contains functions to handle configuratio data fron YAML files."""
+from .createconfig import getdefaultconfigdata
 import os
 import yaml
 
@@ -34,6 +35,10 @@ def getconfigdata(configfileloc=None):
         print('using default location at: ', configfileloc)
 
     configfileloc = os.path.expanduser(configfileloc)
-    with open(configfileloc, "r") as fh:
-        configdata = yaml.load(fh, Loader=yaml.SafeLoader)
+    if os.path.isfile(configfileloc):
+        with open(configfileloc, "r") as fh:
+            configdata = yaml.load(fh, Loader=yaml.SafeLoader)
+    else:
+        print('using default config data..')
+        configdata = getdefaultconfigdata()
     return configdata

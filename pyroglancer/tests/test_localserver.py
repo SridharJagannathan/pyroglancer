@@ -3,14 +3,10 @@
 import unittest
 from pyroglancer.localserver import startdataserver, closedataserver
 from pyroglancer.ngviewer import openviewer, closeviewer
-from pyroglancer.createconfig import createconfig
 import os
 import sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# create configuration file..
-createconfig()
 
 # Add a common viewer, dataserver(specific port for travis) for each test module..
 closeviewer()

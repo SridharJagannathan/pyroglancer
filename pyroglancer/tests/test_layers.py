@@ -4,7 +4,6 @@ import unittest
 from pyroglancer.layers import create_nglayer, get_ngserver, _handle_ngdimensions
 from pyroglancer.localserver import startdataserver, closedataserver
 from pyroglancer.ngviewer import openviewer, closeviewer
-from pyroglancer.createconfig import createconfig
 import os
 import navis
 import glob
@@ -14,9 +13,6 @@ import neuroglancer as ng
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# create configuration file..
-createconfig()
 
 # Add a common viewer, dataserver(specific port for travis) for each test module..
 closeviewer()

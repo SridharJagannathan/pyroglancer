@@ -15,7 +15,7 @@
 import os
 import yaml
 
-data = [
+configdata = [
     dict(space='FAFB',
          dimension=dict(
              x=1,
@@ -62,4 +62,9 @@ def createconfig(configfileloc=None):
             os.makedirs(configfolder)
         with open(configfileloc, 'w+') as outfile:
             print('adding default config file..')
-            yaml.dump(data, outfile, sort_keys=False, default_flow_style=False)
+            yaml.dump(configdata, outfile, sort_keys=False, default_flow_style=False)
+
+
+def getdefaultconfigdata():
+    """Get data from default config file in case it is not found."""
+    return configdata
