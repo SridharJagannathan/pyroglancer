@@ -72,7 +72,7 @@ def _to_precomputed(mesh):
     return b''.join([array.tobytes('C') for array in vertex_index_format])
 
 
-def uploadmeshes(volumedatasource, volumeidlist, volumenamelist, path):
+def uploadmeshes(volumedatasource, volumeidlist, volumenamelist, path, layer_name):
     """Upload mesh (of cloudvolume class) to a local server.
 
     Parameters
@@ -81,6 +81,7 @@ def uploadmeshes(volumedatasource, volumeidlist, volumenamelist, path):
     volumeidlist :    List containing the segids(volume id)
     volumenamelist :   List containing the names of volumes
     path :           path to the local data server
+    layer_name:      name of layer/path to add to
 
     Returns
     -------
@@ -89,7 +90,7 @@ def uploadmeshes(volumedatasource, volumeidlist, volumenamelist, path):
     info = {"@type": "neuroglancer_legacy_mesh",
             'scales': [1, 1, 1],
             }
-    path = 'file://' + path + '/precomputed'
+    path = 'file://' + path + '/precomputed/' + layer_name
     cv = CloudVolume(path, info=info)
 
     cv.mesh.meta.info['@type'] = 'neuroglancer_legacy_mesh'

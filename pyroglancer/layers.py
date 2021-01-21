@@ -218,13 +218,13 @@ def handle_skels(ngviewer, path, segmentColors, alpha):
     return ngviewer
 
 
-def handle_vols(ngviewer, path, segmentColors, alpha):
+def handle_vols(ngviewer, path, layer_name, segmentColors, alpha):
     """Add volumes hosted via http as a neuroglancer layer."""
     # This function adds volumes in the precomputed format hosted locally via http to a neuroglancer instance.
 
-    precomputepath = 'precomputed://' + path + '/precomputed/mesh#type=mesh'
+    precomputepath = 'precomputed://' + path + '/precomputed/' + layer_name + '/mesh#type=mesh'
     with ngviewer.txn() as s:
-        s.layers['volume'] = neuroglancer.SegmentationLayer(
+        s.layers[layer_name] = neuroglancer.SegmentationLayer(
             source=precomputepath,
             segmentQuery='/',
             segmentColors=segmentColors,
@@ -325,17 +325,18 @@ def create_nglayer(ngviewer=None, layout='xy-3d', **kwargs):
 
         if layer_type == 'volumes':
             layer_source = layer_kws['source']
+            layer_name = layer_kws.get('name', 'volumes')
             layer_serverdir, layer_host = get_ngserver()
             hexcolor = get_hexcolor(layer_kws)
-            flush_precomputed(layer_serverdir, 'mesh')
+            flush_precomputed(layer_serverdir, layer_name+'/mesh')
             alpha = get_alphavalue(layer_kws)
 
             volumedatasource, volumeidlist, volumenamelist = to_ngmesh(layer_source)
             print(hexcolor)
             segmentColors = dict(zip(volumeidlist, hexcolor))
             print(segmentColors)
-            uploadmeshes(volumedatasource, volumeidlist, volumenamelist, layer_serverdir)
-            ngviewer = handle_vols(ngviewer, layer_host, segmentColors, alpha)
+            uploadmeshes(volumedatasource, volumeidlist, volumenamelist, layer_serverdir, layer_name)
+            ngviewer = handle_vols(ngviewer, layer_host, layer_name, segmentColors, alpha)
 
         if layer_type == 'synapses':
             layer_source = layer_kws['source']

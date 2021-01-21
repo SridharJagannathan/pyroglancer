@@ -62,9 +62,9 @@ class Testvolumes(unittest.TestCase):
         # segmentColors = dict(zip(volumeidlist, '#ffff00'))
 
         layer_serverdir, layer_host = get_ngserver()
-        uploadmeshes(volumedatasource, volumeidlist, volumenamelist, layer_serverdir)
+        uploadmeshes(volumedatasource, volumeidlist, volumenamelist, layer_serverdir, 'testvolume')
 
-        status = os.path.exists(os.path.join(layer_serverdir, 'precomputed/mesh', str(segid)))
+        status = os.path.exists(os.path.join(layer_serverdir, 'precomputed/testvolume/mesh', str(segid)))
 
         assert status
 
