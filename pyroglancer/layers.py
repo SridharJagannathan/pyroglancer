@@ -15,13 +15,15 @@
 
 from .loadconfig import getconfigdata
 from .ngviewer import openviewer
+from .points import annotate_points
 from .points import create_pointinfo
-from .points import upload_points  # , annotate_points
+from .points import upload_points
 from .skeletons import to_ngskeletons
 from .skeletons import uploadskeletons
 from .synapses import create_synapseinfo
 from .synapses import upload_synapses
 from .utils import get_alphavalue
+from .utils import get_annotationstatetype
 from .utils import get_hexcolor
 from .utils import get_scalevalue
 from .volumes import to_ngmesh
@@ -359,13 +361,15 @@ def create_nglayer(ngviewer=None, layout='xy-3d', **kwargs):
 
             layer_serverdir, layer_host = get_ngserver()
 
-            flush_precomputed(layer_serverdir, layer_name)
+            layer_annottype = get_annotationstatetype(layer_kws)
 
-            points_path = create_pointinfo(dimensions, layer_serverdir, layer_name)
-            upload_points(layer_source, points_path, layer_name, layer_scale)
-            ngviewer = handle_points(ngviewer, layer_host, layer_name, annotationColors)
-
-            # annotate_points(ngviewer, dimensions, layer_source, layer_scale)
+            if layer_annottype == 'precomputed':
+                flush_precomputed(layer_serverdir, layer_name)
+                points_path = create_pointinfo(dimensions, layer_serverdir, layer_name)
+                upload_points(layer_source, points_path, layer_name, layer_scale)
+                ngviewer = handle_points(ngviewer, layer_host, layer_name, annotationColors)
+            else:
+                annotate_points(ngviewer, dimensions, annotationColors, layer_source, layer_name, layer_scale)
 
     if layout:
         with ngviewer.txn() as s:

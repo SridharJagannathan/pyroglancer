@@ -15,7 +15,8 @@
 
 # from pyroglancer.layers import handle_emdata, handle_segmentdata, handle_synapticdata
 # from pyroglancer.layers import handle_synapticclefts, handle_meshes
-# from pyroglancer.ngspaces import create_ngspace
+from pyroglancer.ngspaces import create_ngspace
+from pyroglancer.localserver import startdataserver, closedataserver
 # from pyroglancer.ngviewer import openviewer
 # import neuroglancer as ng
 
@@ -55,7 +56,11 @@ from pyroglancer.layers import create_nglayer
 # create_ngspace(ngspace='MANC')
 # create_ngspace(ngspace='hemibrain')
 
-location_data = [{'x': 5, 'y': 10, 'z': 20}, {'x': 15, 'y': 25, 'z': 30}]
-points = pd.DataFrame(location_data)
-tmpviewer = create_nglayer(layer_kws={'type': 'points', 'name': 'landmarks', 'ngspace': 'MANC',
-                                      'source': points, 'color': 'yellow'})
+startdataserver()
+create_ngspace(ngspace='FAFB')
+temp_pts = pd.DataFrame([[123072, 47001, 3375], [120000, 17001, 3000]], columns=['x', 'y', 'z'])
+temp_pts['description'] = 'temp_pts'
+tmpviewer = create_nglayer(layer_kws={'type': 'points', 'name': 'landmarks',
+                                      'source': temp_pts, 'color': 'magenta'})
+
+temp_pts = []

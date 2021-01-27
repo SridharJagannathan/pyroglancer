@@ -110,6 +110,21 @@ def put_pointfile(path, layer_name, points, pointsscale, pointname):
         buffer += pointid_buffer
         outputbytefile.write(buffer)
 
+    idfilepath = path + '/precomputed/' + layer_name + '/by_id'
+    if not os.path.exists(idfilepath):
+        os.makedirs(idfilepath)
+    
+    for idfileidx in range(len(pointlocs)):
+        filename = str(idfileidx)
+        idfile = os.path.join(idfilepath, filename)
+        print(idfile)
+        with open(idfile, 'wb') as outputbytefile:
+            x = pointlocs[idfileidx][0]*pointsscale[0]
+            y = pointlocs[idfileidx][1]*pointsscale[1]
+            z = pointlocs[idfileidx][2]*pointsscale[2]
+            annotpoint = struct.pack('<3f', x, y, z)
+            outputbytefile.write(annotpoint)
+
 
 def upload_points(points_df, path, layer_name, layer_scale):
     """Upload points from a dataframe.
@@ -128,7 +143,7 @@ def upload_points(points_df, path, layer_name, layer_scale):
     put_pointfile(path, layer_name, points, pointsscale, pointname)
 
 
-def _annotate_points(ngviewer, dimensions, points_df, layer_scale):
+def annotate_points(ngviewer, dimensions, pointscolor, points_df, layer_name, layer_scale):
     """Annotate points from a dataframe (defunct do not use..).
 
     Parameters
@@ -138,11 +153,17 @@ def _annotate_points(ngviewer, dimensions, points_df, layer_scale):
     points_df :      dataframe containing 'x', 'y', 'z' columns
     layer_scale :    scaling from voxel to native space in 'x', 'y', 'z'
     """
-    pointlocs = points_df[['x', 'y', 'z']]
+    pointname = points_df['description']
+    points_df['x'] = points_df['x']/1000
+    points_df['y'] = points_df['y']/1000
+    points_df['z'] = points_df['z']/1000
+
+
+    # pointsscale = layer_scale
 
     with ngviewer.txn() as s:
         s.layers.append(
-            name="points",
+            name=layer_name,
             layer=neuroglancer.LocalAnnotationLayer(
                 dimensions=dimensions,
                 ignore_null_segment_filter=False,
@@ -160,13 +181,14 @@ def _annotate_points(ngviewer, dimensions, points_df, layer_scale):
                         }
                         ''',
             ))
-        for index, indivpoints in pointlocs.iterrows():
-            s.layers['points'].annotations.append(
+        for index, indivpoints in points_df.iterrows():
+            s.layers[layer_name].annotations.append(
                 neuroglancer.PointAnnotation(
                     id=str(index),
                     point=[indivpoints.x*layer_scale[0], indivpoints.y*layer_scale[1],
                            indivpoints.z*layer_scale[2]],
-                    props=['#0000ff'],
+                    props=[pointscolor],
+                    description=pointname[index]
                 )
             )
 

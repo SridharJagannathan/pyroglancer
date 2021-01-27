@@ -1,7 +1,7 @@
 """Module contains test cases for points.py module."""
 
 import unittest
-from pyroglancer.points import create_pointinfo, upload_points, _annotate_points
+from pyroglancer.points import create_pointinfo, upload_points, annotate_points
 from pyroglancer.layers import get_ngserver, _handle_ngdimensions
 from pyroglancer.localserver import startdataserver, closedataserver
 from pyroglancer.ngviewer import openviewer, closeviewer
@@ -95,8 +95,9 @@ class Testpoints(unittest.TestCase):
 
         ngviewer = openviewer(None)
         layer_scale = (1, 1, 1)
+        annot_colors = '#ff0000'
 
-        status = _annotate_points(ngviewer, dimensions, points, layer_scale)
+        status = annotate_points(ngviewer, dimensions, annot_colors, points, 'points', layer_scale)
 
         assert status
 

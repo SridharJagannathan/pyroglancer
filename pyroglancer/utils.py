@@ -43,6 +43,13 @@ def get_alphavalue(layer_kws):
     return layer_alpha
 
 
+def get_annotationstatetype(layer_kws):
+    """Get alpha values from the interface APIs."""
+    # This function gets alpha/transparency values.
+    layer_statetype = layer_kws.get("annotationstatetype", 'in-json')
+    return layer_statetype
+
+
 def _get_configvox2physical(layer_kws):
     layer_kws['configfileloc'] = layer_kws.get('configfileloc', None)
     configdata = getconfigdata(layer_kws['configfileloc'])
