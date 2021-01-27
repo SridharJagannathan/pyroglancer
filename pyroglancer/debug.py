@@ -15,16 +15,13 @@
 
 # from pyroglancer.layers import handle_emdata, handle_segmentdata, handle_synapticdata
 # from pyroglancer.layers import handle_synapticclefts, handle_meshes
-from pyroglancer.ngspaces import create_ngspace
-from pyroglancer.localserver import startdataserver, closedataserver
+# from pyroglancer.ngspaces import create_ngspace
+# from pyroglancer.localserver import startdataserver, closedataserver
 # from pyroglancer.ngviewer import openviewer
 # import neuroglancer as ng
-
-import pandas as pd
-from pyroglancer.layers import create_nglayer
-
+# import pandas as pd
+# from pyroglancer.layers import create_nglayer
 # ngviewer = openviewer(ngviewer = None)
-
 
 # layer_kws = {}
 # layer_kws['ngspace'] = "FAFB"
@@ -56,11 +53,11 @@ from pyroglancer.layers import create_nglayer
 # create_ngspace(ngspace='MANC')
 # create_ngspace(ngspace='hemibrain')
 
-startdataserver()
-create_ngspace(ngspace='FAFB')
-temp_pts = pd.DataFrame([[123072, 47001, 3375], [120000, 17001, 3000]], columns=['x', 'y', 'z'])
-temp_pts['description'] = 'temp_pts'
-tmpviewer = create_nglayer(layer_kws={'type': 'points', 'name': 'landmarks',
-                                      'source': temp_pts, 'color': 'magenta'})
+# startdataserver()
+# create_ngspace(ngspace='FAFB')
+# temp_pts = pd.DataFrame([[123072, 47001, 3375], [120000, 17001, 3000]], columns=['x', 'y', 'z'])
+# temp_pts['description'] = 'temp_pts'
+# tmpviewer = create_nglayer(layer_kws={'type': 'points', 'name': 'landmarks',
+#                                       'source': temp_pts, 'color': 'magenta'})
 
-temp_pts = []
+# temp_pts = []

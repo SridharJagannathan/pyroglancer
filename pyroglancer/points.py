@@ -113,7 +113,7 @@ def put_pointfile(path, layer_name, points, pointsscale, pointname):
     idfilepath = path + '/precomputed/' + layer_name + '/by_id'
     if not os.path.exists(idfilepath):
         os.makedirs(idfilepath)
-    
+
     for idfileidx in range(len(pointlocs)):
         filename = str(idfileidx)
         idfile = os.path.join(idfilepath, filename)
@@ -154,12 +154,7 @@ def annotate_points(ngviewer, dimensions, pointscolor, points_df, layer_name, la
     layer_scale :    scaling from voxel to native space in 'x', 'y', 'z'
     """
     pointname = points_df['description']
-    points_df['x'] = points_df['x']/1000
-    points_df['y'] = points_df['y']/1000
-    points_df['z'] = points_df['z']/1000
-
-
-    # pointsscale = layer_scale
+    points_df.loc[:, ['x', 'y', 'z']] = points_df.loc[:, ['x', 'y', 'z']].values/1000
 
     with ngviewer.txn() as s:
         s.layers.append(
