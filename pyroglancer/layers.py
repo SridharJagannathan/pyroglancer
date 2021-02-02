@@ -75,6 +75,34 @@ def _handle_ngdimensions(layer_kws):
     return dimensions
 
 
+def add_precomputed(layer_kws):
+    """Add data in a precomputed format to the specific folder hosted via http."""
+    # This function is for adding data to the precomputed folders.
+    layer_type = layer_kws['type']
+    if layer_type == 'skeletons':
+        layer_source = layer_kws['source']
+        layer_serverdir, layer_host = get_ngserver()
+        flush_precomputed(layer_serverdir, 'skeletons')
+
+        skelsource, skelseglist, skelsegnamelist = to_ngskeletons(layer_source)
+        uploadskeletons(skelsource, skelseglist, skelsegnamelist, layer_serverdir)
+
+        return skelseglist, layer_host
+    elif layer_type == 'volumes':
+        layer_source = layer_kws['source']
+        layer_name = layer_kws.get('name', 'volumes')
+        layer_serverdir, layer_host = get_ngserver()
+
+        flush_precomputed(layer_serverdir, layer_name+'/mesh')
+
+        volumedatasource, volumeidlist, volumenamelist = to_ngmesh(layer_source)
+        uploadmeshes(volumedatasource, volumeidlist, volumenamelist, layer_serverdir, layer_name)
+
+        return volumeidlist, layer_host
+    else:
+        return None
+
+
 def flush_precomputed(path, subdir):
     """Delete/Flush a subfolder inside the precomputed folder that is hosted via http."""
     # This function is for deleting the subfolders, usually for cleaning up.
@@ -312,32 +340,22 @@ def create_nglayer(ngviewer=None, layout='xy-3d', **kwargs):
             handle_meshes(ngviewer, layer_kws)
 
         if layer_type == 'skeletons':
-            layer_source = layer_kws['source']
-            layer_serverdir, layer_host = get_ngserver()
-            hexcolor = get_hexcolor(layer_kws)
-            flush_precomputed(layer_serverdir, 'skeletons')
-            alpha = get_alphavalue(layer_kws)
+            skelseglist, layer_host = add_precomputed(layer_kws)
 
-            skelsource, skelseglist, skelsegnamelist = to_ngskeletons(layer_source)
-            print(hexcolor)
+            hexcolor = get_hexcolor(layer_kws)
+            alpha = get_alphavalue(layer_kws)
             segmentColors = dict(zip(skelseglist, hexcolor))
-            print(segmentColors)
-            uploadskeletons(skelsource, skelseglist, skelsegnamelist, layer_serverdir)
+
             ngviewer = handle_skels(ngviewer, layer_host, segmentColors, alpha)
 
         if layer_type == 'volumes':
-            layer_source = layer_kws['source']
             layer_name = layer_kws.get('name', 'volumes')
-            layer_serverdir, layer_host = get_ngserver()
-            hexcolor = get_hexcolor(layer_kws)
-            flush_precomputed(layer_serverdir, layer_name+'/mesh')
-            alpha = get_alphavalue(layer_kws)
+            volumeidlist, layer_host = add_precomputed(layer_kws)
 
-            volumedatasource, volumeidlist, volumenamelist = to_ngmesh(layer_source)
-            print(hexcolor)
+            hexcolor = get_hexcolor(layer_kws)
+            alpha = get_alphavalue(layer_kws)
             segmentColors = dict(zip(volumeidlist, hexcolor))
-            print(segmentColors)
-            uploadmeshes(volumedatasource, volumeidlist, volumenamelist, layer_serverdir, layer_name)
+            
             ngviewer = handle_vols(ngviewer, layer_host, layer_name, segmentColors, alpha)
 
         if layer_type == 'synapses':

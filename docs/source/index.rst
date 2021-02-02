@@ -10,6 +10,8 @@ pyroglancer Documentation
    :maxdepth: 2
 
    installation
+   configuration
    usage
-   release-history
+   fafbdataset.ipynb
+   examples
    min_versions
