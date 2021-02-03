@@ -106,18 +106,18 @@ todo_include_todos = False
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'pytorch_sphinx_theme'
-import pytorch_sphinx_theme
-html_theme_path = [pytorch_sphinx_theme.get_html_theme_path()]
+html_theme = 'default'
+#import pytorch_sphinx_theme
+#html_theme_path = [pytorch_sphinx_theme.get_html_theme_path()]
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-html_theme_options = {
-    'canonical_url': '',
-    'pytorch_project': {'docs'}
-}
+# html_theme_options = {
+#     'canonical_url': '',
+#     'pytorch_project': {'docs'}
+# }
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
