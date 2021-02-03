@@ -118,6 +118,39 @@ def add_flywirelayer(ngdict, layer_kws):
         flywireurl = flywiredict2url(ngdict)
         print('flywire url at:', flywireurl)
 
+    elif layer_type == 'synapses':
+        layer_host = add_precomputed(layer_kws)
+        presynapsepath = 'precomputed://' + layer_host + '/precomputed/presynapses'
+        postsynapsepath = 'precomputed://' + layer_host + '/precomputed/postsynapses'
+        presynapse_layer = {"type": "annotation",
+                            "source": presynapsepath,
+                            "annotationColor": "#ff0000",
+                            "linkedSegmentationLayer": {"presynapses_cell": "skeleton"},
+                            "filterBySegmentation": ["postsynapses_cell"],
+                            "name": "presynapses"}
+        postsynapse_layer = {"type": "annotation",
+                             "source": postsynapsepath,
+                             "annotationColor": "#0000ff",
+                             "linkedSegmentationLayer": {"postsynapses_cell": "skeleton"},
+                             "filterBySegmentation": ["postsynapses_cell"],
+                             "name": "postsynapses"}
+
+        ngdict['layers'].append(presynapse_layer)
+        ngdict['layers'].append(postsynapse_layer)
+
+        flywireurl = flywiredict2url(ngdict)
+        print('flywire url at:', flywireurl)
+    elif layer_type == 'points':
+        layer_host, layer_name = add_precomputed(layer_kws)
+        pointpath = 'precomputed://' + layer_host + '/precomputed/' + layer_name
+        point_layer = {"type": "annotation",
+                       "source": pointpath,
+                       "annotationColor": "#ff0000",
+                       "name": layer_name}
+        ngdict['layers'].append(point_layer)
+        flywireurl = flywiredict2url(ngdict)
+        print('flywire url at:', flywireurl)
+
     else:
         flywireurl = None
 

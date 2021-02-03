@@ -99,6 +99,30 @@ def add_precomputed(layer_kws):
         uploadmeshes(volumedatasource, volumeidlist, volumenamelist, layer_serverdir, layer_name)
 
         return volumeidlist, layer_host
+    elif layer_type == 'synapses':
+        dimensions = _handle_ngdimensions(layer_kws)
+        layer_source = layer_kws['source']
+        layer_serverdir, layer_host = get_ngserver()
+
+        flush_precomputed(layer_serverdir, 'presynapses')
+        flush_precomputed(layer_serverdir, 'postsynapses')
+
+        synapse_path = create_synapseinfo(dimensions, layer_serverdir)
+        upload_synapses(layer_source, synapse_path)
+        return layer_host
+    elif layer_type == 'points':
+        layer_source = layer_kws['source']
+        layer_name = layer_kws['name']
+        dimensions = _handle_ngdimensions(layer_kws)
+        layer_serverdir, layer_host = get_ngserver()
+        layer_scale = get_scalevalue(layer_kws)
+
+        flush_precomputed(layer_serverdir, layer_name)
+        points_path = create_pointinfo(dimensions, layer_serverdir, layer_name)
+        upload_points(layer_source, points_path, layer_name, layer_scale)
+
+        return layer_host, layer_name
+
     else:
         return None
 
@@ -359,34 +383,40 @@ def create_nglayer(ngviewer=None, layout='xy-3d', **kwargs):
             ngviewer = handle_vols(ngviewer, layer_host, layer_name, segmentColors, alpha)
 
         if layer_type == 'synapses':
-            layer_source = layer_kws['source']
-            layer_serverdir, layer_host = get_ngserver()
+            layer_host = add_precomputed(layer_kws)
 
-            flush_precomputed(layer_serverdir, 'presynapses')
-            flush_precomputed(layer_serverdir, 'postsynapses')
+            # layer_source = layer_kws['source']
+            # layer_serverdir, layer_host = get_ngserver()
 
-            synapse_path = create_synapseinfo(dimensions, layer_serverdir)
-            upload_synapses(layer_source, synapse_path)
+            # flush_precomputed(layer_serverdir, 'presynapses')
+            # flush_precomputed(layer_serverdir, 'postsynapses')
+
+            # synapse_path = create_synapseinfo(dimensions, layer_serverdir)
+            # upload_synapses(layer_source, synapse_path)
+
             ngviewer = handle_synapses(ngviewer, layer_host)
 
         if layer_type == 'points':
-            layer_source = layer_kws['source']
+            layer_annottype = get_annotationstatetype(layer_kws)
             layer_name = layer_kws['name']
+
             hexcolor = get_hexcolor(layer_kws)
-            layer_scale = get_scalevalue(layer_kws)
             annotationColors = hexcolor[0]
             # alpha = get_alphavalue(layer_kws)
 
             layer_serverdir, layer_host = get_ngserver()
 
-            layer_annottype = get_annotationstatetype(layer_kws)
-
             if layer_annottype == 'precomputed':
-                flush_precomputed(layer_serverdir, layer_name)
-                points_path = create_pointinfo(dimensions, layer_serverdir, layer_name)
-                upload_points(layer_source, points_path, layer_name, layer_scale)
+                add_precomputed(layer_kws)
+
+                # flush_precomputed(layer_serverdir, layer_name)
+                # points_path = create_pointinfo(dimensions, layer_serverdir, layer_name)
+                # upload_points(layer_source, points_path, layer_name, layer_scale)
+
                 ngviewer = handle_points(ngviewer, layer_host, layer_name, annotationColors)
             else:
+                layer_source = layer_kws['source']
+                layer_scale = get_scalevalue(layer_kws)
                 annotate_points(ngviewer, dimensions, annotationColors, layer_source, layer_name, layer_scale)
 
     if layout:
