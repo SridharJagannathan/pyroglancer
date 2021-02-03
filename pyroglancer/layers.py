@@ -379,7 +379,6 @@ def create_nglayer(ngviewer=None, layout='xy-3d', **kwargs):
             hexcolor = get_hexcolor(layer_kws)
             alpha = get_alphavalue(layer_kws)
             segmentColors = dict(zip(volumeidlist, hexcolor))
-            
             ngviewer = handle_vols(ngviewer, layer_host, layer_name, segmentColors, alpha)
 
         if layer_type == 'synapses':

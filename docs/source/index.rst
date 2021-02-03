@@ -12,6 +12,3 @@ pyroglancer Documentation
    installation
    configuration
    usage
-   fafbdataset.ipynb
-   examples
-   min_versions
