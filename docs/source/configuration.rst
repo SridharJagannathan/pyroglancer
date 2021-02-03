@@ -40,7 +40,6 @@ like electron microscopy images, segmentation, synapse predictions etc per datas
 
 #. Save the above `config.yml` file in a directory like `~./pyroglancer/config.yml`
 
-
 #. Set an environment variable in your bash profile like below ::
 
     export PYROGLANCER_CONFIG='~/.pyroglancer/config.yml'
