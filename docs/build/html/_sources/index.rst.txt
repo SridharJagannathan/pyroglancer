@@ -12,3 +12,4 @@ pyroglancer Documentation
    installation
    configuration
    usage
+   flywiredataset.ipynb
