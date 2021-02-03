@@ -10,6 +10,6 @@ pyroglancer Documentation
    :maxdepth: 2
 
    installation
+   catmaid2flywire
    configuration
    usage
-   flywiredataset.ipynb
