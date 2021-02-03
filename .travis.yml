@@ -20,11 +20,12 @@ script:
   - coverage report -m  # Generate test coverage report.
   - codecov  # Upload the report to codecov.
   - flake8  # Enforce code style ('relaxed' line length limit is set in .flake8 config file).
+  - rm -rf docs/build/html
   - make -C docs html  # Build the documentation.
 
 after_success:
   - coveralls
-  #- git subtree push --prefix docs/build/html origin gh-pages
+
 deploy:
   # Use Github pages deploy process
   provider: pages
