@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Configure ngspaces &#8212; Pyroglancer 0.0.3 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Usage" href="usage.html" />
+    <link rel="prev" title="Install Pyroglancer" href="installation.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="usage.html" title="Usage"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Install Pyroglancer"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Pyroglancer 0.0.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Configure ngspaces</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="configure-ngspaces">
+<h1>Configure ngspaces<a class="headerlink" href="#configure-ngspaces" title="Permalink to this headline">¶</a></h1>
+<p>After installation, you need to configure ngspaces (neuroglancer spaces), a shorthand convention for different configurations
+like electron microscopy images, segmentation, synapse predictions etc per dataset.</p>
+<ol class="arabic">
+<li><p>An example <cite>config.yml</cite> file for the <cite>FAFB</cite> dataset looks like below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">ngspace</span><span class="p">:</span> <span class="n">FAFB</span>
+<span class="n">dimension</span><span class="p">:</span>
+    <span class="n">x</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="n">y</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="n">z</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="n">units</span><span class="p">:</span> <span class="n">um</span>
+<span class="n">voxelsize</span><span class="p">:</span>
+    <span class="n">x</span><span class="p">:</span> <span class="mi">4</span>
+    <span class="n">y</span><span class="p">:</span> <span class="mi">4</span>
+    <span class="n">z</span><span class="p">:</span> <span class="mi">40</span>
+    <span class="n">units</span><span class="p">:</span> <span class="n">nm</span>
+<span class="n">layers</span><span class="p">:</span>
+    <span class="n">fafb_v14_orig</span><span class="p">:</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="n">image</span>
+    <span class="n">source</span><span class="p">:</span> <span class="n">precomputed</span><span class="p">:</span><span class="o">//</span><span class="n">gs</span><span class="p">:</span><span class="o">//</span><span class="n">neuroglancer</span><span class="o">-</span><span class="n">fafb</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">fafb_v14</span><span class="o">/</span><span class="n">fafb_v14_orig</span>
+    <span class="n">fafb_v14_clahe</span><span class="p">:</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="n">image</span>
+    <span class="n">source</span><span class="p">:</span> <span class="n">precomputed</span><span class="p">:</span><span class="o">//</span><span class="n">gs</span><span class="p">:</span><span class="o">//</span><span class="n">neuroglancer</span><span class="o">-</span><span class="n">fafb</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">fafb_v14</span><span class="o">/</span><span class="n">fafb_v14_clahe</span>
+    <span class="n">FAFB</span><span class="o">.</span><span class="n">surf</span><span class="p">:</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="n">surfacemesh</span>
+    <span class="n">source</span><span class="p">:</span> <span class="n">vtk</span><span class="p">:</span><span class="o">//</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">storage</span><span class="o">.</span><span class="n">googleapis</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">neuroglancer</span><span class="o">-</span><span class="n">fafb</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">elmr</span><span class="o">-</span><span class="n">data</span><span class="o">/</span><span class="n">FAFB</span><span class="o">.</span><span class="n">surf</span><span class="o">.</span><span class="n">vtk</span><span class="o">.</span><span class="n">gz</span>
+    <span class="n">seg_20190805</span><span class="p">:</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="n">segmentation</span>
+    <span class="n">source</span><span class="p">:</span> <span class="n">precomputed</span><span class="p">:</span><span class="o">//</span><span class="n">gs</span><span class="p">:</span><span class="o">//</span><span class="n">fafb</span><span class="o">-</span><span class="n">ffn1</span><span class="o">-</span><span class="mi">20190805</span><span class="o">/</span><span class="n">segmentation</span>
+    <span class="n">synapses_buhmann2019</span><span class="p">:</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="n">synapsepred</span>
+    <span class="n">source</span><span class="p">:</span> <span class="n">precomputed</span><span class="p">:</span><span class="o">//</span><span class="n">gs</span><span class="p">:</span><span class="o">//</span><span class="n">neuroglancer</span><span class="o">-</span><span class="mi">20191211</span><span class="n">_fafbv14_buhmann2019_li20190805</span>
+    <span class="n">linkedseg</span><span class="p">:</span> <span class="n">seg_20190805</span>
+    <span class="n">clefts_Heinrich_etal</span><span class="p">:</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="n">synapticcleft</span>
+    <span class="n">source</span><span class="p">:</span> <span class="n">n5</span><span class="p">:</span><span class="o">//</span><span class="n">gs</span><span class="p">:</span><span class="o">//</span><span class="n">fafb</span><span class="o">-</span><span class="n">v14</span><span class="o">-</span><span class="n">synaptic</span><span class="o">-</span><span class="n">clefts</span><span class="o">-</span><span class="n">heinrich</span><span class="o">-</span><span class="n">et</span><span class="o">-</span><span class="n">al</span><span class="o">-</span><span class="mi">2018</span><span class="o">-</span><span class="n">n5</span><span class="o">/</span><span class="n">synapses_dt_reblocked</span>
+</pre></div>
+</div>
+</li>
+<li><p>Save the above <cite>config.yml</cite> file in a directory like <cite>~./pyroglancer/config.yml</cite></p></li>
+<li><p>Set an environment variable in your bash profile like below</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">PYROGLANCER_CONFIG</span><span class="o">=</span><span class="s1">&#39;~/.pyroglancer/config.yml&#39;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are having trouble in configuring, please don’t hesitate to ask</p>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/pyroglancer_logo.svg" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="previous chapter">Install Pyroglancer</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="usage.html"
+                        title="next chapter">Usage</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="usage.html" title="Usage"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Install Pyroglancer"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Pyroglancer 0.0.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Configure ngspaces</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Sridhar Jagannathan.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.3.1.
+    </div>
+  </body>
+</html>

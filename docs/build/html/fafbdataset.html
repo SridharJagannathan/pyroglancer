@@ -1,0 +1,816 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Example notebook illustrating FAFB dataset &#8212; Pyroglancer 0.0.3 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Usage" href="usage.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="usage.html" title="Usage"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Pyroglancer 0.0.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Example notebook illustrating FAFB dataset</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="section" id="Example-notebook-illustrating-FAFB-dataset">
+<h1>Example notebook illustrating FAFB dataset<a class="headerlink" href="#Example-notebook-illustrating-FAFB-dataset" title="Permalink to this headline">¶</a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">navis</span>
+<span class="kn">import</span> <span class="nn">fafbseg</span>
+<span class="kn">import</span> <span class="nn">pymaid</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<script type="text/javascript">
+window.PlotlyConfig = {MathJaxConfig: 'local'};
+if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+if (typeof require !== 'undefined') {
+require.undef("plotly");
+requirejs.config({
+    paths: {
+        'plotly': ['https://cdn.plot.ly/plotly-latest.min']
+    }
+});
+require(['plotly'], function(Plotly) {
+    window._Plotly = Plotly;
+});
+}
+</script></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pyroglancer.layers</span> <span class="kn">import</span> <span class="n">create_nglayer</span>
+<span class="kn">from</span> <span class="nn">pyroglancer.localserver</span> <span class="kn">import</span> <span class="n">startdataserver</span><span class="p">,</span> <span class="n">closedataserver</span>
+<span class="kn">from</span> <span class="nn">pyroglancer.ngviewer</span> <span class="kn">import</span> <span class="n">openviewer</span><span class="p">,</span> <span class="n">closeviewer</span>
+<span class="kn">from</span> <span class="nn">pyroglancer.ngspaces</span> <span class="kn">import</span> <span class="n">create_ngspace</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">working_rm</span> <span class="o">=</span> <span class="n">pymaid</span><span class="o">.</span><span class="n">CatmaidInstance</span><span class="p">(</span><span class="s1">&#39;https://neuropil.janelia.org/tracing/fafb/v14&#39;</span><span class="p">,</span>
+                            <span class="n">api_token</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;TOKEN&#39;</span><span class="p">],</span>
+                            <span class="n">http_user</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;authname&#39;</span><span class="p">],</span> <span class="c1"># omit if not required</span>
+                            <span class="n">http_password</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;authpassword&#39;</span><span class="p">],</span> <span class="n">project_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># omit if not required</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO  : Global CATMAID instance set. Caching is ON. (pymaid)
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">#sample_skids = [&#39;40637&#39;,&#39;27295&#39;,&#39;57311&#39;,&#39;2863104&#39;,&#39;57323&#39;]</span>
+<span class="n">sample_skids</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;40637&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">catmiad_neuronlist</span><span class="o">=</span><span class="n">pymaid</span><span class="o">.</span><span class="n">get_neurons</span><span class="p">(</span><span class="n">sample_skids</span><span class="p">,</span><span class="n">remote_instance</span> <span class="o">=</span> <span class="n">working_rm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">vols</span> <span class="o">=</span> <span class="n">pymaid</span><span class="o">.</span><span class="n">get_volume</span><span class="p">([</span><span class="s1">&#39;AL_L&#39;</span><span class="p">,</span> <span class="s1">&#39;AL_R&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">vols</span><span class="p">[</span><span class="s1">&#39;AL_R&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">vols</span><span class="p">[</span><span class="s1">&#39;AL_L&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">vols</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;AL_R&#39;: &lt;navis.Volume(name=AL_R, id=200, color=(255, 0, 0, 0.2), vertices.shape=(622, 3), faces.shape=(1240, 3))&gt;,
+ &#39;AL_L&#39;: &lt;navis.Volume(name=AL_L, id=300, color=(255, 0, 0, 0.2), vertices.shape=(612, 3), faces.shape=(1228, 3))&gt;}
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">startdataserver</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Serving data from:  /var/folders/6x/d_rd5yr937vbq8f46d4yzrsw0000gn/T/tmp4ub8k32x
+Serving directory at http://127.0.0.1:8000
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">create_ngspace</span><span class="p">(</span><span class="s1">&#39;FAFB&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+using default location at:  ~/.pyroglancer/config.yml
+Neuroglancer viewer created at:  http://127.0.0.1:49456/v/ebf6ddebc99701f5359bbcc1fb53c227fb27cf5f/
+using default location at:  ~/.pyroglancer/config.yml
+Dimensions are in : FAFB
+Layer created:  image
+using default location at:  ~/.pyroglancer/config.yml
+Using layout : xy-3d
+using default location at:  ~/.pyroglancer/config.yml
+Dimensions are in : FAFB
+Layer created:  image
+using default location at:  ~/.pyroglancer/config.yml
+Using layout : xy-3d
+using default location at:  ~/.pyroglancer/config.yml
+Dimensions are in : FAFB
+Layer created:  surfacemesh
+using default location at:  ~/.pyroglancer/config.yml
+Using layout : xy-3d
+using default location at:  ~/.pyroglancer/config.yml
+Dimensions are in : FAFB
+Layer created:  segmentation
+using default location at:  ~/.pyroglancer/config.yml
+Using layout : xy-3d
+using default location at:  ~/.pyroglancer/config.yml
+Dimensions are in : FAFB
+Layer created:  synapsepred
+using default location at:  ~/.pyroglancer/config.yml
+Using layout : xy-3d
+using default location at:  ~/.pyroglancer/config.yml
+Dimensions are in : FAFB
+Layer created:  synapticcleft
+using default location at:  ~/.pyroglancer/config.yml
+Using layout : xy-3d
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">tmpviewer</span> <span class="o">=</span> <span class="n">create_nglayer</span><span class="p">(</span><span class="n">layer_kws</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;skeletons&#39;</span><span class="p">,</span><span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="n">catmiad_neuronlist</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+using default location at:  ~/.pyroglancer/config.yml
+Dimensions are in : FAFB
+Layer created:  skeletons
+/private/var/folders/6x/d_rd5yr937vbq8f46d4yzrsw0000gn/T/tmp4ub8k32x/precomputed/skeletons/40637
+creating: /private/var/folders/6x/d_rd5yr937vbq8f46d4yzrsw0000gn/T/tmp4ub8k32x/precomputed/skeletons/seg_props
+Using layout : xy-3d
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">tmpviewer</span> <span class="o">=</span> <span class="n">create_nglayer</span><span class="p">(</span><span class="n">layer_kws</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;synapses&#39;</span><span class="p">,</span><span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="n">catmiad_neuronlist</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+using default location at:  ~/.pyroglancer/config.yml
+Dimensions are in : FAFB
+Layer created:  synapses
+using default location at:  ~/.pyroglancer/config.yml
+Dimensions are in : FAFB
+creating: /private/var/folders/6x/d_rd5yr937vbq8f46d4yzrsw0000gn/T/tmp4ub8k32x/precomputed/presynapses
+creating: /private/var/folders/6x/d_rd5yr937vbq8f46d4yzrsw0000gn/T/tmp4ub8k32x/precomputed/postsynapses
+Adding neuron:  40637
+making: /private/var/folders/6x/d_rd5yr937vbq8f46d4yzrsw0000gn/T/tmp4ub8k32x/precomputed/presynapses/presynapses_cell/40637
+making: /private/var/folders/6x/d_rd5yr937vbq8f46d4yzrsw0000gn/T/tmp4ub8k32x/precomputed/postsynapses/postsynapses_cell/40637
+Using layout : xy-3d
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">vols</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;AL_R&#39;: &lt;navis.Volume(name=AL_R, id=200, color=(255, 0, 0, 0.2), vertices.shape=(622, 3), faces.shape=(1240, 3))&gt;,
+ &#39;AL_L&#39;: &lt;navis.Volume(name=AL_L, id=300, color=(255, 0, 0, 0.2), vertices.shape=(612, 3), faces.shape=(1228, 3))&gt;}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">tmpviewer</span> <span class="o">=</span> <span class="n">create_nglayer</span><span class="p">(</span><span class="n">layer_kws</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;volumes&#39;</span><span class="p">,</span><span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">vols</span><span class="p">[</span><span class="s1">&#39;AL_R&#39;</span><span class="p">],</span><span class="n">vols</span><span class="p">[</span><span class="s1">&#39;AL_L&#39;</span><span class="p">]],</span>
+                                        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;neuropils&#39;</span><span class="p">,</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;magenta&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">],</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+using default location at:  ~/.pyroglancer/config.yml
+Dimensions are in : FAFB
+Layer created:  volumes
+mesh/200
+Seg id is: 200
+Full filepath: /private/var/folders/6x/d_rd5yr937vbq8f46d4yzrsw0000gn/T/tmp4ub8k32x/precomputed/neuropils/mesh/200
+mesh/300
+Seg id is: 300
+Full filepath: /private/var/folders/6x/d_rd5yr937vbq8f46d4yzrsw0000gn/T/tmp4ub8k32x/precomputed/neuropils/mesh/300
+creating: /private/var/folders/6x/d_rd5yr937vbq8f46d4yzrsw0000gn/T/tmp4ub8k32x/precomputed/neuropils/mesh/segment_properties
+creating: /private/var/folders/6x/d_rd5yr937vbq8f46d4yzrsw0000gn/T/tmp4ub8k32x/precomputed/neuropils/mesh/segment_names
+Using layout : xy-3d
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+127.0.0.1 - - [03/Feb/2021 01:56:26] &#34;GET /precomputed/skeletons/info HTTP/1.1&#34; 200 -
+127.0.0.1 - - [03/Feb/2021 01:56:26] &#34;GET /precomputed/presynapses/info HTTP/1.1&#34; 200 -
+127.0.0.1 - - [03/Feb/2021 01:56:26] &#34;GET /precomputed/postsynapses/info HTTP/1.1&#34; 200 -
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">temp_pts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="mi">123072</span><span class="p">,</span> <span class="mi">47001</span><span class="p">,</span> <span class="mi">3375</span><span class="p">]],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">])</span>
+<span class="n">temp_pts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="mi">123072</span><span class="p">,</span> <span class="mi">47001</span><span class="p">,</span> <span class="mi">3375</span><span class="p">],</span> <span class="p">[</span><span class="mi">120000</span><span class="p">,</span> <span class="mi">17001</span><span class="p">,</span> <span class="mi">3000</span><span class="p">]],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">])</span>
+<span class="n">temp_pts</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;center_pt&#39;</span><span class="p">,</span><span class="s1">&#39;above_pt&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">#plot landmarks..</span>
+<span class="n">tmpviewer</span> <span class="o">=</span> <span class="n">create_nglayer</span><span class="p">(</span><span class="n">layer_kws</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;points&#39;</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;landmarks&#39;</span><span class="p">,</span>
+                                        <span class="s2">&quot;annotationstatetype&quot;</span><span class="p">:</span> <span class="s1">&#39;precomputed&#39;</span><span class="p">,</span>
+                                        <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="n">temp_pts</span><span class="p">,</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+using default location at:  ~/.pyroglancer/config.yml
+Dimensions are in : FAFB
+Layer created:  points
+using default location at:  ~/.pyroglancer/config.yml
+Dimensions are in : FAFB
+using default location at:  ~/.pyroglancer/config.yml
+using  voxel space with scale:  [4, 4, 40]
+creating: /private/var/folders/6x/d_rd5yr937vbq8f46d4yzrsw0000gn/T/tmp4ub8k32x/precomputed/landmarks
+/private/var/folders/6x/d_rd5yr937vbq8f46d4yzrsw0000gn/T/tmp4ub8k32x/precomputed/landmarks/spatial0/0_0_0
+/private/var/folders/6x/d_rd5yr937vbq8f46d4yzrsw0000gn/T/tmp4ub8k32x/precomputed/landmarks/by_id/0
+/private/var/folders/6x/d_rd5yr937vbq8f46d4yzrsw0000gn/T/tmp4ub8k32x/precomputed/landmarks/by_id/1
+Using layout : xy-3d
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+127.0.0.1 - - [03/Feb/2021 01:56:26] &#34;GET /precomputed/neuropils/mesh/info HTTP/1.1&#34; 200 -
+127.0.0.1 - - [03/Feb/2021 01:56:26] &#34;GET /precomputed/landmarks/info HTTP/1.1&#34; 200 -
+127.0.0.1 - - [03/Feb/2021 01:56:26] &#34;GET /precomputed/skeletons/seg_props/info HTTP/1.1&#34; 200 -
+127.0.0.1 - - [03/Feb/2021 01:56:26] code 404, message File not found
+127.0.0.1 - - [03/Feb/2021 01:56:26] &#34;GET /precomputed/presynapses/spatial0/0_0_0 HTTP/1.1&#34; 404 -
+127.0.0.1 - - [03/Feb/2021 01:56:26] code 404, message File not found
+127.0.0.1 - - [03/Feb/2021 01:56:26] &#34;GET /precomputed/postsynapses/spatial0/0_0_0 HTTP/1.1&#34; 404 -
+127.0.0.1 - - [03/Feb/2021 01:56:27] &#34;GET /precomputed/neuropils/mesh/segment_properties/info HTTP/1.1&#34; 200 -
+127.0.0.1 - - [03/Feb/2021 01:56:27] &#34;GET /precomputed/landmarks/spatial0/0_0_0 HTTP/1.1&#34; 200 -
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">closeviewer</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+closing already existing ng viewer
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">closedataserver</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Closing server at http://127.0.0.1:8000
+Cleaning directory at /private/var/folders/6x/d_rd5yr937vbq8f46d4yzrsw0000gn/T/tmp4ub8k32x
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/pyroglancer_logo.svg" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="usage.html"
+                        title="previous chapter">Usage</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="usage.html" title="Usage"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Pyroglancer 0.0.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Example notebook illustrating FAFB dataset</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Sridhar Jagannathan.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.3.1.
+    </div>
+  </body>
+</html>
