@@ -13,12 +13,15 @@
 
 """Module contains functions to handle neuroglancer layers for flywire tracing."""
 
+from .utils import get_alphavalue
+from .utils import get_hexcolor
 import cloudvolume
 import json
 from pyroglancer.layers import add_precomputed
 import requests
 from urllib.parse import parse_qs
 from urllib.parse import urlparse
+
 
 FLYWIRESTATE_URL = 'https://globalv1.flywire-daf.com/nglstate'
 FLYWIREHOST_URL = 'https://ngl.flywire.ai'
@@ -97,11 +100,22 @@ def add_flywirelayer(ngdict, layer_kws):
     layer_type = layer_kws['type']
     if layer_type == 'skeletons':
         skelseglist, layer_host = add_precomputed(layer_kws)
+        hexcolor = get_hexcolor(layer_kws)
+        alpha = get_alphavalue(layer_kws)
+        if len(hexcolor) == 1:
+            segmentColors = dict(map(lambda e: (e, hexcolor), skelseglist))
+        else:
+            segmentColors = dict(zip(skelseglist, hexcolor))
+
+        print(segmentColors)
         skeleton_layer = {"type": "segmentation",
                           "skeletons": "precomputed://" + layer_host + "/precomputed/skeletons",
                           "skeletonRendering": {"mode2d": "lines_and_points", "mode3d": "lines"},
                           "segments": skelseglist,
-                          "name": "skeleton"}
+                          "name": "skeleton",
+                          "objectAlpha": alpha,
+                          "segmentColors": segmentColors
+                          }
         ngdict['layers'].append(skeleton_layer)
         flywireurl = flywiredict2url(ngdict)
         print('flywire url at:', flywireurl)
@@ -109,11 +123,21 @@ def add_flywirelayer(ngdict, layer_kws):
     elif layer_type == 'volumes':
         volumeidlist, layer_host = add_precomputed(layer_kws)
         layer_name = layer_kws.get('name', 'volumes')
+
+        hexcolor = get_hexcolor(layer_kws)
+        alpha = get_alphavalue(layer_kws)
+        if len(hexcolor) == 1:
+            segmentColors = dict(map(lambda e: (e, hexcolor), volumeidlist))
+        else:
+            segmentColors = dict(zip(volumeidlist, hexcolor))
+
         volume_layer = {"type": "segmentation",
                         "mesh": "precomputed://" + layer_host + "/precomputed/" + layer_name + "/mesh",
                         "skeletonRendering": {"mode2d": "lines_and_points", "mode3d": "lines"},
                         "segments": volumeidlist,
-                        "name": "volumes"}
+                        "name": "volumes",
+                        "objectAlpha": alpha,
+                        "segmentColors": segmentColors}
         ngdict['layers'].append(volume_layer)
         flywireurl = flywiredict2url(ngdict)
         print('flywire url at:', flywireurl)
