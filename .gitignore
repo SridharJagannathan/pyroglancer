@@ -81,3 +81,5 @@ target/
 #Ipython Notebook
 .ipynb_checkpoints
 
+docs/.DS_Store
+pyroglancer/.DS_Store
