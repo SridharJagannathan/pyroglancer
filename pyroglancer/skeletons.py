@@ -16,6 +16,7 @@
 import numpy as np
 import os
 from cloudvolume import Skeleton, CloudVolume
+import pandas as pd
 import pymaid
 import navis
 import json
@@ -177,3 +178,44 @@ def uploadskeletons(skelsource, skelseglist, skelnamelist, path):
         json.dump(seginfo, segfile)
 
     return cv
+
+
+def skeletons2nodepoints(x, layer_scale):
+    """Generate nodepoints (point A, point B) from skeletons for given neuron(s).
+
+    Parameters
+    ----------
+    x :             CatmaidNeuron | CatmaidNeuronList or TreeNeuron | NeuronList
+    layer_scale:    value for scaling the voxel coordinates to physical coordinates
+
+    Returns
+    -------
+    nodepointscollec_df : Dataframe containing node points in point A - point B format used in flywire annotations.
+    """
+    if isinstance(x, pymaid.core.CatmaidNeuron):
+        x = pymaid.core.CatmaidNeuronList(x)
+    elif isinstance(x, navis.core.TreeNeuron):
+        x = navis.core.NeuronList(x)
+    elif (isinstance(x, pymaid.core.CatmaidNeuronList) or isinstance(x, navis.core.NeuronList)):
+        pass
+    else:
+        raise TypeError(f'Expected neuron or neuronlist, got "{type(x)}"')
+
+    nodepointscollec_df = []
+    for neuronelement in x:
+        nodes = neuronelement.nodes
+        nonrootnodes = nodes[nodes.parent_id >= 0]
+        ptA = nonrootnodes[['x', 'y', 'z']].values
+        ptB = nodes.set_index('node_id').loc[nonrootnodes.parent_id.values, ['x', 'y', 'z']].values
+
+        # scale the points incase it is in voxel coordinates..
+        ptA = ptA / layer_scale
+        ptB = ptB / layer_scale
+
+        pts_df = pd.DataFrame(pd.Series(ptA.tolist()), columns=['pointA'])
+        pts_df['pointB'] = pd.Series(ptB.tolist())
+
+        nodepointscollec_df.append([neuronelement.id, pts_df])
+    nodepointscollec_df = pd.DataFrame(nodepointscollec_df, columns=['id', 'points_df'])
+
+    return nodepointscollec_df

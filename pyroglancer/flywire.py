@@ -17,10 +17,14 @@ from .utils import get_alphavalue
 from .utils import get_hexcolor
 import cloudvolume
 import json
+from nglui.statebuilder import LineMapper, AnnotationLayerConfig, StateBuilder
 from pyroglancer.layers import add_precomputed
 import requests
+from .skeletons import skeletons2nodepoints
 from urllib.parse import parse_qs
 from urllib.parse import urlparse
+from .utils import get_annotationstatetype
+from .utils import get_scalevalue
 
 
 FLYWIRESTATE_URL = 'https://globalv1.flywire-daf.com/nglstate'
@@ -99,26 +103,45 @@ def add_flywirelayer(ngdict, layer_kws):
     """
     layer_type = layer_kws['type']
     if layer_type == 'skeletons':
-        skelseglist, layer_host = add_precomputed(layer_kws)
+        layer_annottype = get_annotationstatetype(layer_kws)
         hexcolor = get_hexcolor(layer_kws)
         alpha = get_alphavalue(layer_kws)
-        if len(hexcolor) == 1:
-            segmentColors = dict(map(lambda e: (e, hexcolor), skelseglist))
-        else:
-            segmentColors = dict(zip(skelseglist, hexcolor))
+        if layer_annottype == 'precomputed':
+            skelseglist, layer_host = add_precomputed(layer_kws)
+            if len(hexcolor) == 1:
+                segmentColors = dict(map(lambda e: (e, hexcolor), skelseglist))
+            else:
+                segmentColors = dict(zip(skelseglist, hexcolor))
 
-        print(segmentColors)
-        skeleton_layer = {"type": "segmentation",
-                          "skeletons": "precomputed://" + layer_host + "/precomputed/skeletons",
-                          "skeletonRendering": {"mode2d": "lines_and_points", "mode3d": "lines"},
-                          "segments": skelseglist,
-                          "name": "skeleton",
-                          "objectAlpha": alpha,
-                          "segmentColors": segmentColors
-                          }
-        ngdict['layers'].append(skeleton_layer)
-        flywireurl = flywiredict2url(ngdict)
-        print('flywire url at:', flywireurl)
+            print(segmentColors)
+            skeleton_layer = {"type": "segmentation",
+                              "skeletons": "precomputed://" + layer_host + "/precomputed/skeletons",
+                              "skeletonRendering": {"mode2d": "lines_and_points", "mode3d": "lines"},
+                              "segments": skelseglist,
+                              "name": "skeleton",
+                              "objectAlpha": alpha,
+                              "segmentColors": segmentColors
+                              }
+            ngdict['layers'].append(skeleton_layer)
+            flywireurl = flywiredict2url(ngdict)
+            print('flywire url at:', flywireurl)
+        else:
+            # construct as an annotation now..
+            layer_source = layer_kws['source']
+            layer_scale = get_scalevalue(layer_kws)
+            nodepointscollec_df = skeletons2nodepoints(layer_source, layer_scale)
+
+            for index, neuronnodepts in nodepointscollec_df.iterrows():
+                points_df = neuronnodepts['points_df']
+                neuronid = neuronnodepts['id']
+                lines = LineMapper(point_column_a='pointA', point_column_b='pointB')
+                name = f'skel_annot_{neuronid}'
+                anno_layer = AnnotationLayerConfig(name=name, mapping_rules=lines)
+                sb = StateBuilder([anno_layer])
+                ngdict = sb.render_state(points_df, base_state=ngdict, return_as='dict')
+
+            flywireurl = flywiredict2url(ngdict)
+            print('flywire url at:', flywireurl)
 
     elif layer_type == 'volumes':
         volumeidlist, layer_host = add_precomputed(layer_kws)

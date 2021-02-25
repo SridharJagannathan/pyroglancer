@@ -51,10 +51,12 @@ def get_annotationstatetype(layer_kws):
 
 
 def _get_configvox2physical(layer_kws):
-    layer_kws['configfileloc'] = layer_kws.get('configfileloc', None)
-    configdata = getconfigdata(layer_kws['configfileloc'])
-    ngspaceconfig = next(filter(lambda ngspace: ngspace['ngspace'] == layer_kws['ngspace'], configdata))
-    scale = [ngspaceconfig['voxelsize'].get(key) for key in ['x', 'y', 'z']]
+    scale = layer_kws.get("scale", None)
+    if scale is None:
+        layer_kws['configfileloc'] = layer_kws.get('configfileloc', None)
+        configdata = getconfigdata(layer_kws['configfileloc'])
+        ngspaceconfig = next(filter(lambda ngspace: ngspace['ngspace'] == layer_kws['ngspace'], configdata))
+        scale = [ngspaceconfig['voxelsize'].get(key) for key in ['x', 'y', 'z']]
     return scale
 
 
@@ -63,7 +65,7 @@ def get_scalevalue(layer_kws):
     # This function gets scale values for annotations.
     space = layer_kws.get("space", "voxel")
     if space == "voxel":
-        scale = layer_kws.get("scale", _get_configvox2physical(layer_kws))
+        scale = _get_configvox2physical(layer_kws)
     else:
         scale = [1, 1, 1]
     print('using ', space, 'space', 'with scale: ', scale)
