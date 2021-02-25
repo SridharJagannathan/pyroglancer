@@ -17,6 +17,7 @@ import json
 import navis
 import neuroglancer
 import os
+import pandas as pd
 import pymaid
 import struct
 
@@ -250,3 +251,45 @@ def annotate_synapses(ngviewer, dimensions, x):
 
     status = True
     return status
+
+
+def synapses2nodepoints(x, layer_scale):
+    """Generate nodepoints (point A, point B) from synapses for given neuron(s).
+
+    Parameters
+    ----------
+    x :             CatmaidNeuron | CatmaidNeuronList or TreeNeuron | NeuronList
+    layer_scale:    value for scaling the voxel coordinates to physical coordinates
+
+    Returns
+    -------
+    synapsepointscollec_df : Dataframe containing synapse points in point A - point B format used in flywire annotations.
+    """
+    if isinstance(x, pymaid.core.CatmaidNeuron):
+        x = pymaid.core.CatmaidNeuronList(x)
+    elif isinstance(x, navis.core.TreeNeuron):
+        x = navis.core.NeuronList(x)
+    elif (isinstance(x, pymaid.core.CatmaidNeuronList) or isinstance(x, navis.core.NeuronList)):
+        pass
+    else:
+        raise TypeError(f'Expected neuron or neuronlist, got "{type(x)}"')
+
+    synapsepointscollec_df = []
+    for neuronelement in x:
+        presynapses = neuronelement.presynapses
+        postsynapses = neuronelement.postsynapses
+
+        presyn_pt = presynapses[['x', 'y', 'z']].values
+        postsyn_pt = postsynapses[['x', 'y', 'z']].values
+
+        # scale the points incase it is in voxel coordinates..
+        presyn_pt = presyn_pt / layer_scale
+        postsyn_pt = postsyn_pt / layer_scale
+
+        pre_syn_df = pd.DataFrame(pd.Series(presyn_pt.tolist()), columns=['presyn_pt'])
+        post_syn_df = pd.DataFrame(pd.Series(postsyn_pt.tolist()), columns=['postsyn_pt'])
+
+        synapsepointscollec_df.append([neuronelement.id, pre_syn_df, post_syn_df])
+    synapsepointscollec_df = pd.DataFrame(synapsepointscollec_df, columns=['id', 'pre_syn_df', 'post_syn_df'])
+
+    return synapsepointscollec_df

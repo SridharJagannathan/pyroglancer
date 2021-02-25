@@ -71,11 +71,11 @@
 
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# shorturl = 'https://ngl.flywire.ai/?json_url=https://globalv1.flywire-daf.com/nglstate/5586873250480128'
+# shorturl = 'https://ngl.flywire.ai/?json_url=https://globalv1.flywire-daf.com/nglstate/5692426366746624'
 # ngdict = flywireurl2dict(shorturl)
 
 # swc_path = os.path.join(BASE_DIR, 'pyroglancer/data/swc')
-# swc_files = glob.glob(os.path.join(swc_path, '57*.swc'))
+# swc_files = glob.glob(os.path.join(swc_path, '57323.swc'))
 
 # neuronlist = []
 # neuronlist += [navis.read_swc(f, units='8 nm', connector_labels={'presynapse': 7, 'postsynapse': 8},
@@ -101,11 +101,12 @@
 
 # startdataserver()
 
-# pre_syn_df = pd.read_hdf('/Users/sri/Downloads/test_data.h5', 'presyn').head(5)
+# pre_syn_df2 = pd.read_hdf('/Users/sri/Downloads/test_data.h5', 'presyn').head(5)
 # flywire_neuron = navis.xform_brain(neuronlist, source='FAFB14', target='FLYWIRE')
 # flywire_neuron = navis.resample_neuron(flywire_neuron, resample_to=1000*8, inplace=False)
-# layer_kws = {'type': 'skeletons', 'source': flywire_neuron, 'annotationstatetype': 'in-json',
-#              "scale": [4,4,40]}
+# layer_kws = {'type': 'synapses', 'source': flywire_neuron, 'annotationstatetype': 'in-json',
+#              'color': ['red', 'blue'],
+#               "scale": [4,4,40]}
 # flywireurl = add_flywirelayer(ngdict, layer_kws)
 
 # tempval = []
