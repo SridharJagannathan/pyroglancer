@@ -46,7 +46,7 @@ def get_alphavalue(layer_kws):
 def get_annotationstatetype(layer_kws):
     """Get alpha values from the interface APIs."""
     # This function gets alpha/transparency values.
-    layer_statetype = layer_kws.get("annotationstatetype", 'in-json')
+    layer_statetype = layer_kws.get("annotationstatetype", 'precomputed')
     return layer_statetype
 
 
