@@ -19,6 +19,7 @@ from .points import annotate_points
 from .points import create_pointinfo
 from .points import upload_points
 from .skeletons import to_ngskeletons
+from .skeletons import uploadshardedskeletons
 from .skeletons import uploadskeletons
 from .synapses import create_synapseinfo
 from .synapses import upload_synapses
@@ -85,7 +86,11 @@ def add_precomputed(layer_kws):
         flush_precomputed(layer_serverdir, 'skeletons')
 
         skelsource, skelseglist, skelsegnamelist = to_ngskeletons(layer_source)
-        uploadskeletons(skelsource, skelseglist, skelsegnamelist, layer_serverdir)
+        layer_shard = layer_kws.get('sharding', False)
+        if layer_shard:
+            uploadshardedskeletons(skelsource, skelseglist, skelsegnamelist, layer_serverdir)
+        else:
+            uploadskeletons(skelsource, skelseglist, skelsegnamelist, layer_serverdir)
 
         return skelseglist, layer_host
     elif layer_type == 'volumes':

@@ -16,6 +16,7 @@
 import numpy as np
 import os
 from cloudvolume import Skeleton, CloudVolume
+from cloudvolume.datasource.precomputed.sharding import ShardingSpecification
 import pandas as pd
 import pymaid
 import navis
@@ -156,6 +157,91 @@ def uploadskeletons(skelsource, skelseglist, skelnamelist, path):
 
     segfilepath = os.path.join(cv.basepath, os.path.basename(
         path), cv.skeleton.meta.skeleton_path, 'seg_props')
+
+    if not os.path.exists(segfilepath):
+        os.makedirs(segfilepath)
+        print('creating:', segfilepath)
+
+    allsegproplist = []
+    for segid in skelseglist:
+        segpropdict = {}
+        segpropdict['id'] = segid
+        segpropdict['type'] = 'label'
+        segpropdict['values'] = skelnamelist
+        allsegproplist.append(segpropdict)
+
+    seginfo = {"@type": "neuroglancer_segment_properties",
+               "inline": {"ids": skelseglist,
+                          "properties": allsegproplist}}
+
+    segfile = os.path.join(segfilepath, 'info')
+    with open(segfile, 'w') as segfile:
+        json.dump(seginfo, segfile)
+
+    return cv
+
+
+def uploadshardedskeletons(skelsource, skelseglist, skelnamelist, path):
+    """Upload sharded skeletons to a local server.
+
+    Parameters
+    ----------
+    skelsource :     List containing cloud volume skeletons
+    skelseglist :    List containing the segids(skid)
+    skelnamelist :   List containing the names of skeletons
+    path :           path to the local data server
+
+    Returns
+    -------
+    cv :     cloudvolume class object
+    """
+    info = {"@type": "neuroglancer_skeletons",
+            "transform": skelsource[0].transform.flatten(),
+            "vertex_attributes": [{"id": "radius", "data_type": "float32", "num_components": 1}],
+            "scales": "um"}
+    path = 'file://' + path + '/precomputed'
+    cv = CloudVolume(path, info=info)
+
+    # prepare for info file
+    cv.skeleton.meta.info['@type'] = 'neuroglancer_skeletons'
+    cv.skeleton.meta.info['transform'] = skelsource[0].transform.flatten()
+    cv.skeleton.meta.info['vertex_attributes'] = [
+        {'id': 'radius', 'data_type': 'float32', 'num_components': 1}]
+
+    # prepare sharding info
+    spec = ShardingSpecification('neuroglancer_uint64_sharded_v1',
+                                 preshift_bits = 1,
+                                 hash = 'murmurhash3_x86_128',
+                                 minishard_bits = 2,
+                                 shard_bits = 1,
+                                 minishard_index_encoding ='raw',
+                                 data_encoding = 'raw',)
+    cv.skeleton.meta.info['sharding'] = spec.to_dict()
+
+    cv.skeleton.meta.info['segment_properties'] = 'seg_props'
+
+    cv.skeleton.meta.commit_info()
+
+    precomputedskels = {}
+    for skelidx in range(len(skelsource)):
+        skelid = int(skelsource[skelidx].id)
+        skel = Skeleton(skelsource[skelidx].vertices,
+                        edges=skelsource[skelidx].edges,
+                        segid=skelid,
+                        extra_attributes=[{"id": "radius",
+                                           "data_type": "float32",
+                                           "num_components": 1, }]
+                        ).physical_space()
+        precomputedskels[skelid] = skel.to_precomputed()
+
+    shardfiles = spec.synthesize_shards(precomputedskels)
+    shardedfilepath = os.path.join(cv.basepath, os.path.basename(path), cv.skeleton.meta.skeleton_path)
+
+    for fname in shardfiles.keys():
+        with open(shardedfilepath + '/' + fname, 'wb') as f:
+            f.write(shardfiles[fname])
+
+    segfilepath = os.path.join(cv.basepath, os.path.basename(path), cv.skeleton.meta.skeleton_path, 'seg_props')
 
     if not os.path.exists(segfilepath):
         os.makedirs(segfilepath)
