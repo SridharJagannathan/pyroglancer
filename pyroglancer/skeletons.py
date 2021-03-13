@@ -210,12 +210,12 @@ def uploadshardedskeletons(skelsource, skelseglist, skelnamelist, path):
 
     # prepare sharding info
     spec = ShardingSpecification('neuroglancer_uint64_sharded_v1',
-                                 preshift_bits = 1,
-                                 hash = 'murmurhash3_x86_128',
-                                 minishard_bits = 2,
-                                 shard_bits = 1,
-                                 minishard_index_encoding ='raw',
-                                 data_encoding = 'raw',)
+                                 preshift_bits=9,
+                                 hash='murmurhash3_x86_128',
+                                 minishard_bits=6,
+                                 shard_bits=15,
+                                 minishard_index_encoding='raw',
+                                 data_encoding='raw',)
     cv.skeleton.meta.info['sharding'] = spec.to_dict()
 
     cv.skeleton.meta.info['segment_properties'] = 'seg_props'

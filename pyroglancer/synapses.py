@@ -263,7 +263,8 @@ def synapses2nodepoints(x, layer_scale):
 
     Returns
     -------
-    synapsepointscollec_df : Dataframe containing synapse points in point A - point B format used in flywire annotations.
+    synapsepointscollec_df : Dataframe containing synapse points in point A - point B format
+                             used in flywire annotations.
     """
     if isinstance(x, pymaid.core.CatmaidNeuron):
         x = pymaid.core.CatmaidNeuronList(x)

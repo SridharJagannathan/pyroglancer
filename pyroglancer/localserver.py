@@ -1,6 +1,7 @@
 #    This script is part of pyroglancer (https://github.com/SridharJagannathan/pyroglancer).
 #    This code was adapted using the cors_webserver module present in the neuroglancer package
 #    for serving data from a local directory via http port.
+#    The implementation for the range requests was adapted from RangeHTTPServer module.
 
 #    Copyright (C) 2020 Sridhar Jagannathan
 #
@@ -63,19 +64,17 @@ def parse_byte_range(byte_range):
     return first, last
 
 
-class RangeRequestHandler(SimpleHTTPRequestHandler):
-    """Adds support for HTTP 'Range' requests to SimpleHTTPRequestHandler
-    The approach is to:
+class RequestHandler(SimpleHTTPRequestHandler):
+    """This class provides support for generic cors access, HTTP 'Range' requests
+    In case of the range implementation, the approach is to:
     - Override send_head to look for 'Range' and respond appropriately.
     - Override copyfile to only transmit a range when requested.
     """
 
     def do_OPTIONS(self):
         self.send_response(200, "ok")
-        #self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS')
         self.send_header("Access-Control-Allow-Headers", "Range")
-        #self.send_header("Access-Control-Allow-Headers", "X-Requested-With")
         self.send_head()
 
     def send_head(self):
@@ -85,7 +84,8 @@ class RangeRequestHandler(SimpleHTTPRequestHandler):
         try:
             self.range = parse_byte_range(self.headers['Range'])
         except ValueError as e:
-            self.send_error(400, 'Invalid byte range')
+            err_string = 'Invalid byte range with: ' + e
+            self.send_error(400, err_string)
             return None
         first, last = self.range
 
@@ -135,15 +135,6 @@ class RangeRequestHandler(SimpleHTTPRequestHandler):
         copy_byte_range(source, outputfile, start, stop)
 
 
-class RequestHandler(SimpleHTTPRequestHandler):
-    """Class for handling HTTP requests arriving at the server."""
-
-    def end_headers(self):
-        """Allow responses to be shared with any requester without any credentials."""
-        self.send_header('Access-Control-Allow-Origin', '*')
-        SimpleHTTPRequestHandler.end_headers(self)
-
-
 class Server(HTTPServer):
     """Class for basic HTTP server."""
 
@@ -154,22 +145,12 @@ class Server(HTTPServer):
         HTTPServer.__init__(self, server_address, RequestHandler)
 
 
-class RangeServer(HTTPServer):
-    """Class for basic HTTP server."""
-
-    protocol_version = 'HTTP/1.1'
-
-    def __init__(self, server_address):
-        """Initialise HTTP server."""
-        HTTPServer.__init__(self, server_address, RangeRequestHandler)
-
-
-def closedataserver():
+def closedataserver(removefiles=True):
     """Close a already started dataserver.
 
     Parameters
     ----------
-    None
+    removefiles :  flag to remove the created contents in the hosted server
 
     Returns
     -------
@@ -181,7 +162,6 @@ def closedataserver():
         currsocketaddress = currentserver.socket.getsockname()
         print("Closing server at http://%s:%d" %
               (currsocketaddress[0], currsocketaddress[1]))
-        print("Cleaning directory at %s" % (currentdatadir))
 
         # close previously created server..
         currentserver.server_close()
@@ -193,16 +173,20 @@ def closedataserver():
         if ('ngviewerinst' in sys.modules):
             del sys.modules['ngviewerinst']
 
-        # remove only contents inside prev created temp directory
-        for filename in os.listdir(currentdatadir):
-            filepath = os.path.join(currentdatadir, filename)
-            try:
-                shutil.rmtree(filepath)
-            except OSError:
-                os.remove(filepath)
+        if removefiles:
+            print("Cleaning directory at %s" % (currentdatadir))
+            # remove only contents inside prev created temp directory
+            for filename in os.listdir(currentdatadir):
+                filepath = os.path.join(currentdatadir, filename)
+                try:
+                    shutil.rmtree(filepath)
+                except OSError:
+                    os.remove(filepath)
+        else:
+            print("Directory is not cleaned at %s" % (currentdatadir))
 
 
-def _startserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDirectory(), restart=True, sharded=False):
+def _startserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDirectory(), restart=True):
     """Start a dataserver that can host local folder via http.
 
     Parameters
@@ -232,11 +216,7 @@ def _startserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDir
 
     os.chdir(temp_dirname)
     print("Serving data from: ", temp_dirname)
-    if sharded is False:
-        server = Server((args.address, args.port))
-    else:
-        print("Using range server")
-        server = RangeServer((args.address, args.port))
+    server = Server((args.address, args.port))
 
     socketaddress = server.socket.getsockname()
     print("Serving directory at http://%s:%d" %
@@ -256,7 +236,7 @@ def _startserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDir
         sys.exit(0)
 
 
-def startdataserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDirectory(), restart=True, sharded=False):
+def startdataserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDirectory(), restart=True):
     """Start a dataserver thread(return control back) that can host local folder via http.
 
     Parameters
@@ -270,6 +250,6 @@ def startdataserver(address='127.0.0.1', port=8000, directory=tempfile.Temporary
     -------
     None
     """
-    serverthread = Thread(target=_startserver, args=(address, port, directory, restart, sharded))
+    serverthread = Thread(target=_startserver, args=(address, port, directory, restart))
     serverthread.daemon = True  # This thread dies when main thread (only non-daemon thread) exits..
     serverthread.start()

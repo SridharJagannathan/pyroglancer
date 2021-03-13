@@ -180,11 +180,11 @@ def add_flywirelayer(ngdict, layer_kws):
                                 "filterBySegmentation": ["postsynapses_cell"],
                                 "name": "presynapses"}
             postsynapse_layer = {"type": "annotation",
-                                "source": postsynapsepath,
-                                "annotationColor": "#0000ff",
-                                "linkedSegmentationLayer": {"postsynapses_cell": "skeleton"},
-                                "filterBySegmentation": ["postsynapses_cell"],
-                                "name": "postsynapses"}
+                                 "source": postsynapsepath,
+                                 "annotationColor": "#0000ff",
+                                 "linkedSegmentationLayer": {"postsynapses_cell": "skeleton"},
+                                 "filterBySegmentation": ["postsynapses_cell"],
+                                 "name": "postsynapses"}
 
             ngdict['layers'].append(presynapse_layer)
             ngdict['layers'].append(postsynapse_layer)
@@ -208,7 +208,8 @@ def add_flywirelayer(ngdict, layer_kws):
 
                 postsyn_mapper = PointMapper(point_column='postsyn_pt')
                 postname = f'postsyn_annot_{neuronid}'
-                postsyn_annos = AnnotationLayerConfig(name=postname, color=hexcolor[1], mapping_rules=postsyn_mapper)
+                postsyn_annos = AnnotationLayerConfig(name=postname, color=hexcolor[1],
+                                                      mapping_rules=postsyn_mapper)
                 postsyn_sb = StateBuilder(layers=[postsyn_annos])
 
                 # Chained state builder
