@@ -29,6 +29,8 @@ from .utils import get_hexcolor
 from .utils import get_scalevalue
 from .volumes import to_ngmesh
 from .volumes import uploadmeshes
+from .volumes import uploadmultiresmeshes
+# from .volumes import uploadshardedmeshes
 
 
 import neuroglancer
@@ -88,7 +90,8 @@ def add_precomputed(layer_kws):
         skelsource, skelseglist, skelsegnamelist = to_ngskeletons(layer_source)
         layer_shard = layer_kws.get('sharding', False)
         if layer_shard:
-            uploadshardedskeletons(skelsource, skelseglist, skelsegnamelist, layer_serverdir)
+            shardprogress = layer_kws.get('progress', False)
+            uploadshardedskeletons(skelsource, skelseglist, skelsegnamelist, layer_serverdir, shardprogress)
         else:
             uploadskeletons(skelsource, skelseglist, skelsegnamelist, layer_serverdir)
 
@@ -97,11 +100,21 @@ def add_precomputed(layer_kws):
         layer_source = layer_kws['source']
         layer_name = layer_kws.get('name', 'volumes')
         layer_serverdir, layer_host = get_ngserver()
-
         flush_precomputed(layer_serverdir, layer_name+'/mesh')
 
         volumedatasource, volumeidlist, volumenamelist = to_ngmesh(layer_source)
-        uploadmeshes(volumedatasource, volumeidlist, volumenamelist, layer_serverdir, layer_name)
+        layer_shard = layer_kws.get('sharding', False)
+        layer_res = layer_kws.get('multires', False)
+        if layer_res:
+            uploadmultiresmeshes(volumedatasource, volumeidlist, volumenamelist, layer_serverdir, layer_name)
+        else:
+            uploadmeshes(volumedatasource, volumeidlist, volumenamelist, layer_serverdir, layer_name)
+        # if layer_shard:
+        #     shardprogress = layer_kws.get('progress', False)
+        #     uploadshardedmeshes(volumedatasource, volumeidlist, volumenamelist,
+        #                         layer_serverdir, layer_name, shardprogress)
+        # else:
+        #     uploadmeshes(volumedatasource, volumeidlist, volumenamelist, layer_serverdir, layer_name)
 
         return volumeidlist, layer_host
     elif layer_type == 'synapses':
@@ -277,11 +290,13 @@ def handle_skels(ngviewer, path, segmentColors, alpha):
     return ngviewer
 
 
-def handle_vols(ngviewer, path, layer_name, segmentColors, alpha):
+def handle_vols(ngviewer, path, layer_name, segmentColors, alpha, layer_res):
     """Add volumes hosted via http as a neuroglancer layer."""
     # This function adds volumes in the precomputed format hosted locally via http to a neuroglancer instance.
-
-    precomputepath = 'precomputed://' + path + '/precomputed/' + layer_name + '/mesh#type=mesh'
+    if layer_res:
+        precomputepath = 'precomputed://' + path + '/precomputed/' + layer_name + '/mesh'
+    else:
+        precomputepath = 'precomputed://' + path + '/precomputed/' + layer_name + '/mesh#type=mesh'
     with ngviewer.txn() as s:
         s.layers[layer_name] = neuroglancer.SegmentationLayer(
             source=precomputepath,
@@ -384,7 +399,8 @@ def create_nglayer(ngviewer=None, layout='xy-3d', **kwargs):
             hexcolor = get_hexcolor(layer_kws)
             alpha = get_alphavalue(layer_kws)
             segmentColors = dict(zip(volumeidlist, hexcolor))
-            ngviewer = handle_vols(ngviewer, layer_host, layer_name, segmentColors, alpha)
+            layer_res = layer_kws.get('multires', False)
+            ngviewer = handle_vols(ngviewer, layer_host, layer_name, segmentColors, alpha, layer_res)
 
         if layer_type == 'synapses':
             layer_host = add_precomputed(layer_kws)

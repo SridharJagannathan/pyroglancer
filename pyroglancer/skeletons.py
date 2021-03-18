@@ -181,7 +181,7 @@ def uploadskeletons(skelsource, skelseglist, skelnamelist, path):
     return cv
 
 
-def uploadshardedskeletons(skelsource, skelseglist, skelnamelist, path):
+def uploadshardedskeletons(skelsource, skelseglist, skelnamelist, path, shardprogress=False):
     """Upload sharded skeletons to a local server.
 
     Parameters
@@ -190,6 +190,7 @@ def uploadshardedskeletons(skelsource, skelseglist, skelnamelist, path):
     skelseglist :    List containing the segids(skid)
     skelnamelist :   List containing the names of skeletons
     path :           path to the local data server
+    shardprogress:   progress bar for sharding operation
 
     Returns
     -------
@@ -234,7 +235,7 @@ def uploadshardedskeletons(skelsource, skelseglist, skelnamelist, path):
                         ).physical_space()
         precomputedskels[skelid] = skel.to_precomputed()
 
-    shardfiles = spec.synthesize_shards(precomputedskels)
+    shardfiles = spec.synthesize_shards(precomputedskels, progress=shardprogress)
     shardedfilepath = os.path.join(cv.basepath, os.path.basename(path), cv.skeleton.meta.skeleton_path)
 
     for fname in shardfiles.keys():
