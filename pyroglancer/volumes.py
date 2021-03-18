@@ -359,6 +359,7 @@ def uploadshardedmultiresmeshes(volumedatasource, volumeidlist, volumenamelist, 
     quant_bits = 16  # number of bits needed to encode for each vertex position
 
     cv.mesh.meta.info['@type'] = 'neuroglancer_multilod_draco'
+    cv.mesh.meta.info['scales'] = [1, 1, 1]
     cv.mesh.meta.info['vertex_quantization_bits'] = quant_bits
     cv.mesh.meta.info['transform'] = [1, 0, 0, 0,
                                       0, 1, 0, 0,
