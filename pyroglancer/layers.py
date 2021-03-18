@@ -30,7 +30,7 @@ from .utils import get_scalevalue
 from .volumes import to_ngmesh
 from .volumes import uploadmeshes
 from .volumes import uploadmultiresmeshes
-# from .volumes import uploadshardedmeshes
+from .volumes import uploadshardedmultiresmeshes
 
 
 import neuroglancer
@@ -105,16 +105,15 @@ def add_precomputed(layer_kws):
         volumedatasource, volumeidlist, volumenamelist = to_ngmesh(layer_source)
         layer_shard = layer_kws.get('sharding', False)
         layer_res = layer_kws.get('multires', False)
-        if layer_res:
-            uploadmultiresmeshes(volumedatasource, volumeidlist, volumenamelist, layer_serverdir, layer_name)
+        if layer_res or layer_shard:
+            if layer_shard:
+                shardprogress = layer_kws.get('progress', False)
+                uploadshardedmultiresmeshes(volumedatasource, volumeidlist, volumenamelist, layer_serverdir,
+                                            layer_name, shardprogress)
+            else:
+                uploadmultiresmeshes(volumedatasource, volumeidlist, volumenamelist, layer_serverdir, layer_name)
         else:
             uploadmeshes(volumedatasource, volumeidlist, volumenamelist, layer_serverdir, layer_name)
-        # if layer_shard:
-        #     shardprogress = layer_kws.get('progress', False)
-        #     uploadshardedmeshes(volumedatasource, volumeidlist, volumenamelist,
-        #                         layer_serverdir, layer_name, shardprogress)
-        # else:
-        #     uploadmeshes(volumedatasource, volumeidlist, volumenamelist, layer_serverdir, layer_name)
 
         return volumeidlist, layer_host
     elif layer_type == 'synapses':
