@@ -108,6 +108,9 @@ def to_ngskeletons(x):
         skeldatasegidlist.append(skeldata.id)
         skelsegnamelist.append(neuronelement.name)
 
+    skeldatasegidlist = list(map(str, skeldatasegidlist))
+    skelsegnamelist = list(map(str, skelsegnamelist))
+
     return skeldatasource, skeldatasegidlist, skelsegnamelist
 
 
@@ -179,6 +182,105 @@ def uploadskeletons(skelsource, skelseglist, skelnamelist, path):
         json.dump(seginfo, segfile)
 
     return cv
+
+
+def to_precomputedskels(skelsource, path):
+    """Upload skeleton (of cloudvolume class) to a local path.
+
+    Parameters
+    ----------
+    skelsource :     List containing cloud volume skeletons
+    path :           path to the local folder
+
+    """
+    info = {"@type": "neuroglancer_skeletons",
+            "transform": skelsource[0].transform.flatten(),
+            "vertex_attributes": [{"id": "radius", "data_type": "float32", "num_components": 1}],
+            "scales": "um"}
+    path = 'file://' + path + '/precomputed'
+    cv = CloudVolume(path, info=info)
+
+    # prepare for info file
+    cv.skeleton.meta.info['@type'] = 'neuroglancer_skeletons'
+    cv.skeleton.meta.info['transform'] = skelsource[0].transform.flatten()
+    cv.skeleton.meta.info['vertex_attributes'] = [
+        {'id': 'radius', 'data_type': 'float32', 'num_components': 1}]
+    del cv.skeleton.meta.info['sharding']
+    del cv.skeleton.meta.info['spatial_index']
+
+    cv.skeleton.meta.info['segment_properties'] = 'seg_props'
+
+    cv.skeleton.meta.commit_info()
+
+    files = [os.path.join(cv.skeleton.meta.skeleton_path, str(skel.id)) for skel in skelsource]
+
+    for fileidx in range(len(files)):
+        fullfilepath = files[fileidx]
+        fullfilepath = os.path.join(cv.basepath, os.path.basename(path), fullfilepath)
+        uploadskel = Skeleton(
+            vertices=skelsource[fileidx].vertices, edges=skelsource[fileidx].edges)
+        # print(fullfilepath)
+        with open(fullfilepath, 'wb') as f:
+            f.write(uploadskel.to_precomputed())
+
+    # delete the info file path, as they will be updated seperately..
+    info_file = os.path.join(cv.basepath, os.path.basename(path), 'skeletons', 'info')
+    os.remove(info_file)
+
+
+def to_precomputedskelsinfo(skelseglist, skelnamelist, path):
+    """Upload skeleton info to a local path.
+
+    Parameters
+    ----------
+    skelseglist :    List containing the segids(skid)
+    skelnamelist :   List containing the names of skeletons
+    path :           path to the local folder
+
+    """
+
+    info = {"@type": "neuroglancer_skeletons",
+            "transform": [1, 0, 0, 0,
+                          0, 1, 0, 0,
+                          0, 0, 1, 0],
+            "vertex_attributes": [{"id": "radius", "data_type": "float32", "num_components": 1}],
+            "scales": "um"}
+    path = 'file://' + path + '/precomputed'
+    cv = CloudVolume(path, info=info)
+
+    # prepare for info file
+    cv.skeleton.meta.info['@type'] = 'neuroglancer_skeletons'
+    cv.skeleton.meta.info['vertex_attributes'] = [
+        {'id': 'radius', 'data_type': 'float32', 'num_components': 1}]
+    del cv.skeleton.meta.info['sharding']
+    del cv.skeleton.meta.info['spatial_index']
+
+    cv.skeleton.meta.info['segment_properties'] = 'seg_props'
+
+    cv.skeleton.meta.commit_info()
+
+    segfilepath = os.path.join(cv.basepath, os.path.basename(
+        path), cv.skeleton.meta.skeleton_path, 'seg_props')
+
+    if not os.path.exists(segfilepath):
+        os.makedirs(segfilepath)
+        print('creating:', segfilepath)
+
+    allsegproplist = []
+    for segid in skelseglist:
+        segpropdict = {}
+        segpropdict['id'] = segid
+        segpropdict['type'] = 'label'
+        segpropdict['values'] = skelnamelist
+        allsegproplist.append(segpropdict)
+
+    seginfo = {"@type": "neuroglancer_segment_properties",
+               "inline": {"ids": skelseglist,
+                          "properties": allsegproplist}}
+
+    segfile = os.path.join(segfilepath, 'info')
+    with open(segfile, 'w') as segfile:
+        json.dump(seginfo, segfile)
 
 
 def uploadshardedskeletons(skelsource, skelseglist, skelnamelist, path, shardprogress=False):
