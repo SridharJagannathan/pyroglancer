@@ -45,8 +45,8 @@ class Testspaces(unittest.TestCase):
     def test_create_fafbspace(self):
         """Check if the fafb ngspace is created."""
         layer_serverdir, layer_host = get_ngserver()
-
-        create_ngspace(ngspace='FAFB')
+        layer_kws = {'ngspace': 'FAFB'}
+        create_ngspace(layer_kws)
 
         ngspace = sys.modules['ngspace']
 
@@ -55,8 +55,8 @@ class Testspaces(unittest.TestCase):
     def test_create_fancspace(self):
         """Check if the hemibrain space is created."""
         layer_serverdir, layer_host = get_ngserver()
-
-        create_ngspace(ngspace='hemibrain')
+        layer_kws = {'ngspace': 'hemibrain'}
+        create_ngspace(layer_kws)
 
         ngspace = sys.modules['ngspace']
 
