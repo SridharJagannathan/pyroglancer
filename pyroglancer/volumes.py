@@ -49,7 +49,7 @@ def to_ngmesh(x):
 
     Parameters
     ----------
-    volume :             Navis Volume | List
+    volume :             Navis Volume or Navis mesh neuron | List
 
     Returns
     -------
@@ -57,16 +57,24 @@ def to_ngmesh(x):
     """
     volumeidlist, volumedatasource, volumenamelist = ([] for i in range(3))
 
-    if not isinstance(x, list):
-        x = [x]
-
-    if all(isinstance(volume, navis.core.volumes.Volume) for volume in x):
-        for volumeelement in x:
-            volumedata = _generate_mesh(volumeelement)
-            volumedata.segid = volumeelement.id
+    if all(isinstance(meshneuron, navis.core.MeshNeuron) for meshneuron in x):
+        for neuronelement in x:
+            volumedata = _generate_mesh(neuronelement)
+            volumedata.segid = neuronelement.id
             volumedatasource.append(volumedata)
-            volumeidlist.append(volumeelement.id)
-            volumenamelist.append(volumeelement.name)
+            volumeidlist.append(neuronelement.id)
+            volumenamelist.append(neuronelement.name)
+    else:
+        if not isinstance(x, list):
+            x = [x]
+
+        if all(isinstance(volume, navis.core.volumes.Volume) for volume in x):
+            for volumeelement in x:
+                volumedata = _generate_mesh(volumeelement)
+                volumedata.segid = volumeelement.id
+                volumedatasource.append(volumedata)
+                volumeidlist.append(volumeelement.id)
+                volumenamelist.append(volumeelement.name)
 
     return volumedatasource, volumeidlist, volumenamelist
 
@@ -176,7 +184,7 @@ def _to_multires_shardedprecomputed(vertices, faces, quant_bits):
     return fragmentdata.getvalue()
 
 
-def uploadmeshes(volumedatasource, volumeidlist, volumenamelist, path, layer_name):
+def uploadsingleresmeshes(volumedatasource, volumeidlist, volumenamelist, path, layer_name):
     """Upload mesh (of cloudvolume class) to a local server.
 
     Parameters
@@ -224,6 +232,111 @@ def uploadmeshes(volumedatasource, volumeidlist, volumenamelist, path, layer_nam
         manifestfilepath = os.path.join(cv.basepath, os.path.basename(path), manifestfilepath)
         with open(manifestfilepath, 'w') as f:
             json.dump(manifestinfo, f)
+
+    # create the file for segment_properties
+    allvolproplist = {"id": "label",
+                      "type": "label",
+                      "values": volumenamelist}
+
+    volinfo = {"@type": "neuroglancer_segment_properties",
+               "inline": {"ids": list(map(str, volumeidlist)),
+                          "properties": [allvolproplist]}}
+    volfilepath = os.path.join(cv.basepath, os.path.basename(path), os.path.join(cv.mesh.meta.mesh_path),
+                               'segment_properties')
+    if not os.path.exists(volfilepath):
+        os.makedirs(volfilepath)
+        print('creating:', volfilepath)
+    volinfofile = os.path.join(volfilepath, 'info')
+    with open(volinfofile, 'w') as volinfofile:
+        json.dump(volinfo, volinfofile)
+
+    # create the file for segment_names
+    volumenamedict = dict(zip(map(str, volumeidlist), volumenamelist))
+    volnamemap = {"@type": "neuroglancer_segment_name_map",
+                  "map": volumenamedict}
+    volnamefilepath = os.path.join(cv.basepath, os.path.basename(path), os.path.join(cv.mesh.meta.mesh_path),
+                                   'segment_names')
+    if not os.path.exists(volnamefilepath):
+        os.makedirs(volnamefilepath)
+        print('creating:', volnamefilepath)
+    volnamemapfile = os.path.join(volnamefilepath, 'info')
+    with open(volnamemapfile, 'w') as volnamemapfile:
+        json.dump(volnamemap, volnamemapfile)
+
+
+def to_precomputedsingleresmeshes(volumedatasource, path, layer_name):
+    """Upload mesh (of cloudvolume class) to a local server.
+
+    Parameters
+    ----------
+    volumedatasource :     List containing cloud volume meshes
+    path :           path to the local data server
+    layer_name:      name of layer/path to add to
+
+    """
+    info = {"@type": "neuroglancer_legacy_mesh",
+            'scales': [1, 1, 1],
+            }
+    path = 'file://' + path + '/precomputed/' + layer_name
+    cv = CloudVolume(path, info=info)
+
+    cv.mesh.meta.info['@type'] = 'neuroglancer_legacy_mesh'
+    cv.mesh.meta.info['segment_name_map'] = 'segment_names'
+    cv.mesh.meta.info['segment_properties'] = 'segment_properties'
+    cv.mesh.meta.commit_info()
+
+    files = [os.path.join(cv.mesh.meta.mesh_path, str(vol.segid)) for vol in volumedatasource]
+    volumeids = [str(vol.segid) for vol in volumedatasource]
+
+    for fileidx in range(len(files)):
+        fullfilepath = str(files[fileidx])  # files[fileidx]
+        # print(files[fileidx])
+        fullfilepath = os.path.join(cv.basepath, os.path.basename(path), fullfilepath)
+        uploadvol = Mesh(
+            vertices=volumedatasource[fileidx].vertices, faces=volumedatasource[fileidx].faces,
+            segid=None)
+        precomputed_mesh = _to_precomputed(uploadvol)
+        # print('Seg id is:', str(volumeids[fileidx]))
+        # print('Full filepath:', fullfilepath)
+        with open(fullfilepath, 'wb') as f:
+            f.write(precomputed_mesh)
+
+        manifestinfo = {
+            "fragments": [str(volumeids[fileidx])]}
+        manifestfilepath = str(files[fileidx]) + ':' + str(0)  # files[fileidx]
+        manifestfilepath = os.path.join(cv.basepath, os.path.basename(path), manifestfilepath)
+        with open(manifestfilepath, 'w') as f:
+            json.dump(manifestinfo, f)
+
+    # delete the info file path, as they will be updated seperately..
+    info_file = os.path.join(cv.basepath, os.path.basename(path), cv.mesh.meta.mesh_path, 'info')
+    os.remove(info_file)
+
+
+def to_precomputedsingleresmeshesinfo(volumeidlist, volumenamelist, path, layer_name):
+    """Upload mesh (of cloudvolume class) info to a local server.
+
+    Parameters
+    ----------
+    volumeidlist :    List containing the segids(volume id)
+    volumenamelist :   List containing the names of volumes
+    path :           path to the local data server
+    layer_name:      name of layer/path to add to
+
+    Returns
+    -------
+    cv :     cloudvolume class object
+    """
+    info = {"@type": "neuroglancer_legacy_mesh",
+            'scales': [1, 1, 1],
+            }
+    path = 'file://' + path + '/precomputed/' + layer_name
+    cv = CloudVolume(path, info=info)
+
+    cv.mesh.meta.info['@type'] = 'neuroglancer_legacy_mesh'
+    cv.mesh.meta.info['segment_name_map'] = 'segment_names'
+    cv.mesh.meta.info['segment_properties'] = 'segment_properties'
+    cv.mesh.meta.commit_info()
 
     # create the file for segment_properties
     allvolproplist = {"id": "label",

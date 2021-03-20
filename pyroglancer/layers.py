@@ -28,7 +28,7 @@ from .utils import get_annotationstatetype
 from .utils import get_hexcolor
 from .utils import get_scalevalue
 from .volumes import to_ngmesh
-from .volumes import uploadmeshes
+from .volumes import uploadsingleresmeshes
 from .volumes import uploadmultiresmeshes
 from .volumes import uploadshardedmultiresmeshes
 
@@ -113,7 +113,7 @@ def add_precomputed(layer_kws):
             else:
                 uploadmultiresmeshes(volumedatasource, volumeidlist, volumenamelist, layer_serverdir, layer_name)
         else:
-            uploadmeshes(volumedatasource, volumeidlist, volumenamelist, layer_serverdir, layer_name)
+            uploadsingleresmeshes(volumedatasource, volumeidlist, volumenamelist, layer_serverdir, layer_name)
 
         return volumeidlist, layer_host
     elif layer_type == 'synapses':
@@ -289,6 +289,35 @@ def handle_skels(ngviewer, path, segmentColors, alpha):
     return ngviewer
 
 
+def add_hostedlayer(ngviewer=None, **kwargs):
+    """Add already hosted layers (via url) directly."""
+    layer_kws = kwargs.get('layer_kws', {})
+    layer_type = layer_kws['type']
+    path = layer_kws['host']
+    alpha = get_alphavalue(layer_kws)
+    ngviewer = openviewer(ngviewer)
+
+    if layer_type == 'skeletons':
+        precomputepath = 'precomputed://' + path + '/precomputed/skeletons'
+        layer_name = layer_kws.get('name', 'skeletons')
+        with ngviewer.txn() as s:
+            s.layers[layer_name] = neuroglancer.SegmentationLayer(
+                source=precomputepath,
+                segmentQuery='/',
+                objectAlpha=alpha)
+
+    if layer_type == 'volumes':
+        precomputepath = 'precomputed://' + path + '/precomputed/neuronmeshes/mesh#type=mesh'
+        layer_name = layer_kws.get('name', 'neuronmeshes')
+        with ngviewer.txn() as s:
+            s.layers[layer_name] = neuroglancer.SegmentationLayer(
+                source=precomputepath,
+                segmentQuery='/',
+                objectAlpha=alpha)
+
+    return ngviewer
+
+
 def handle_vols(ngviewer, path, layer_name, segmentColors, alpha, layer_res):
     """Add volumes hosted via http as a neuroglancer layer."""
     # This function adds volumes in the precomputed format hosted locally via http to a neuroglancer instance.
@@ -387,7 +416,11 @@ def create_nglayer(ngviewer=None, layout='xy-3d', **kwargs):
 
             hexcolor = get_hexcolor(layer_kws)
             alpha = get_alphavalue(layer_kws)
-            segmentColors = dict(zip(skelseglist, hexcolor))
+
+            if len(hexcolor) == 1:
+                segmentColors = dict(map(lambda e: (e, hexcolor), skelseglist))
+            else:
+                segmentColors = dict(zip(skelseglist, hexcolor))
 
             ngviewer = handle_skels(ngviewer, layer_host, segmentColors, alpha)
 
@@ -397,7 +430,12 @@ def create_nglayer(ngviewer=None, layout='xy-3d', **kwargs):
 
             hexcolor = get_hexcolor(layer_kws)
             alpha = get_alphavalue(layer_kws)
-            segmentColors = dict(zip(volumeidlist, hexcolor))
+
+            if len(hexcolor) == 1:
+                segmentColors = dict(map(lambda e: (e, hexcolor), volumeidlist))
+            else:
+                segmentColors = dict(zip(volumeidlist, hexcolor))
+
             layer_res = layer_kws.get('multires', False)
             ngviewer = handle_vols(ngviewer, layer_host, layer_name, segmentColors, alpha, layer_res)
 

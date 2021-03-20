@@ -91,7 +91,7 @@ def flywiredict2url(ngdict):
 
 
 def add_flywirelayer(ngdict, layer_kws):
-    """Return dict from a flywire based short or long url.
+    """Add a layer to flywire from different datasources.
 
     Parameters
     ----------
@@ -227,6 +227,52 @@ def add_flywirelayer(ngdict, layer_kws):
                        "annotationColor": "#ff0000",
                        "name": layer_name}
         ngdict['layers'].append(point_layer)
+        flywireurl = flywiredict2url(ngdict)
+        print('flywire url at:', flywireurl)
+
+    else:
+        flywireurl = None
+
+    return flywireurl
+
+
+def add_flywirehostedlayer(ngdict, layer_kws):
+    """Add a layer to flywire from hosted source.
+
+    Parameters
+    ----------
+    ngdict: a dict containing different layers of the flywire instance
+    layer_kws: a dict containing different parameters about the layer to add
+
+    Returns
+    -------
+    flywireurl: url containing the updated flywire instance
+    """
+    layer_type = layer_kws['type']
+    path = layer_kws['host']
+
+    if layer_type == 'skeletons':
+        alpha = get_alphavalue(layer_kws)
+        layer_name = layer_kws.get('name', 'skeletons')
+        skeleton_layer = {"type": "segmentation",
+                          "skeletons": "precomputed://" + path + "/precomputed/skeletons",
+                          "skeletonRendering": {"mode2d": "lines_and_points", "mode3d": "lines"},
+                          "name": layer_name,
+                          "objectAlpha": alpha,
+                          }
+        ngdict['layers'].append(skeleton_layer)
+        flywireurl = flywiredict2url(ngdict)
+        print('flywire url at:', flywireurl)
+
+    elif layer_type == 'volumes':
+        alpha = get_alphavalue(layer_kws)
+        layer_name = layer_kws.get('name', 'volumes')
+        volume_layer = {"type": "segmentation",
+                        "mesh": "precomputed://" + path + "/precomputed/neuronmeshes/mesh",
+                        "name": layer_name,
+                        "objectAlpha": alpha
+                        }
+        ngdict['layers'].append(volume_layer)
         flywireurl = flywiredict2url(ngdict)
         print('flywire url at:', flywireurl)
 
