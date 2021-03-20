@@ -41,8 +41,9 @@ import sys
 
 def _get_ngspace(layer_kws):
     space = layer_kws['ngspace']
-    layer_kws['configfileloc'] = layer_kws.get('configfileloc', None)
-    configdata = getconfigdata(layer_kws['configfileloc'])
+    configfileloc = layer_kws.get('configfileloc', None)
+    print('config file loc is at:', configfileloc)
+    configdata = getconfigdata(configfileloc)
 
     try:
         ngspaceconfig = next(filter(lambda ngspace: ngspace['ngspace'] == space, configdata))

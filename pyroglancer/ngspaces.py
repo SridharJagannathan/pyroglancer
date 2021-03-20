@@ -18,7 +18,7 @@ from .layers import create_nglayer
 import sys
 
 
-def create_ngspace(ngspace='FAFB'):
+def create_ngspace(layer_kws):
     """Create a neuroglancer space (EM layers, segmentation, neuropil surfaces).
 
     Parameters
@@ -29,8 +29,7 @@ def create_ngspace(ngspace='FAFB'):
     -------
     None
     """
-    layer_kws = {}
-    layer_kws['ngspace'] = ngspace
+    ngspace = layer_kws.get('ngspace', 'FAFB')
     ngspaceconfig = _get_ngspace(layer_kws)
     for layername in ngspaceconfig['layers']:
         create_nglayer(layer_kws={'type': ngspaceconfig['layers'][layername]['type'],

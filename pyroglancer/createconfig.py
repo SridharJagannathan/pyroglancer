@@ -15,7 +15,7 @@
 import os
 import yaml
 
-configdata = [
+defaultconfigdata = [
     dict(ngspace='FAFB',
          dimension=dict(
              x=1,
@@ -60,7 +60,7 @@ configdata = [
          ]
 
 
-def createconfig(configfileloc=None):
+def createconfig(configdata, configfileloc=None):
     """Create config file in case it is not found."""
     if configfileloc is None:
         configfileloc = os.environ['PYROGLANCER_CONFIG']
@@ -74,7 +74,10 @@ def createconfig(configfileloc=None):
             print('adding default config file..')
             yaml.dump(configdata, outfile, sort_keys=False, default_flow_style=False)
 
+    print('setting default config file loc')
+    os.environ["PYROGLANCER_CONFIG"] = configfileloc
+
 
 def getdefaultconfigdata():
     """Get data from default config file in case it is not found."""
-    return configdata
+    return defaultconfigdata
