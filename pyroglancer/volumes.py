@@ -57,6 +57,9 @@ def to_ngmesh(x):
     """
     volumeidlist, volumedatasource, volumenamelist = ([] for i in range(3))
 
+    if isinstance(x, navis.core.volumes.Volume):
+        x = [x]  # if a simple volume, convert to list..
+
     if all(isinstance(meshneuron, navis.core.MeshNeuron) for meshneuron in x):
         for neuronelement in x:
             volumedata = _generate_mesh(neuronelement)
@@ -64,17 +67,13 @@ def to_ngmesh(x):
             volumedatasource.append(volumedata)
             volumeidlist.append(neuronelement.id)
             volumenamelist.append(neuronelement.name)
-    else:
-        if not isinstance(x, list):
-            x = [x]
-
-        if all(isinstance(volume, navis.core.volumes.Volume) for volume in x):
-            for volumeelement in x:
-                volumedata = _generate_mesh(volumeelement)
-                volumedata.segid = volumeelement.id
-                volumedatasource.append(volumedata)
-                volumeidlist.append(volumeelement.id)
-                volumenamelist.append(volumeelement.name)
+    if all(isinstance(volume, navis.core.volumes.Volume) for volume in x):
+        for volumeelement in x:
+            volumedata = _generate_mesh(volumeelement)
+            volumedata.segid = volumeelement.id
+            volumedatasource.append(volumedata)
+            volumeidlist.append(volumeelement.id)
+            volumenamelist.append(volumeelement.name)
 
     return volumedatasource, volumeidlist, volumenamelist
 
