@@ -1,7 +1,7 @@
 """Module contains test cases for volumes.py module."""
 
 import unittest
-from pyroglancer.volumes import uploadmeshes, to_ngmesh
+from pyroglancer.volumes import uploadsingleresmeshes, to_ngmesh
 from pyroglancer.layers import get_ngserver
 from pyroglancer.localserver import startdataserver, closedataserver
 from pyroglancer.ngviewer import openviewer, closeviewer
@@ -62,7 +62,7 @@ class Testvolumes(unittest.TestCase):
         # segmentColors = dict(zip(volumeidlist, '#ffff00'))
 
         layer_serverdir, layer_host = get_ngserver()
-        uploadmeshes(volumedatasource, volumeidlist, volumenamelist, layer_serverdir, 'testvolume')
+        uploadsingleresmeshes(volumedatasource, volumeidlist, volumenamelist, layer_serverdir, 'testvolume')
 
         status = os.path.exists(os.path.join(layer_serverdir, 'precomputed/testvolume/mesh', str(segid)))
 
