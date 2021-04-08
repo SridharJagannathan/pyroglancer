@@ -16,6 +16,7 @@
 from .utils import get_alphavalue
 from .utils import get_hexcolor
 import cloudvolume
+from more_itertools.more import always_iterable
 import json
 from nglui.statebuilder import PointMapper, LineMapper, AnnotationLayerConfig, StateBuilder, ChainedStateBuilder
 from pyroglancer.layers import add_precomputed
@@ -90,7 +91,7 @@ def flywiredict2url(ngdict):
     return flywireurl
 
 
-def add_flywirelayer(ngdict, layer_kws):
+def add_flywirelayer(ngdict=None, layer_kws={}):
     """Add a layer to flywire from different datasources.
 
     Parameters
@@ -164,6 +165,40 @@ def add_flywirelayer(ngdict, layer_kws):
                         "objectAlpha": alpha,
                         "segmentColors": segmentColors}
         ngdict['layers'].append(volume_layer)
+        flywireurl = flywiredict2url(ngdict)
+        print('flywire url at:', flywireurl)
+
+    elif layer_type == 'segments':
+        # add segments to the flywire layers..
+        segidlist = always_iterable(layer_kws['segmentid'])
+        segidlist = list(map(str, segidlist))
+        hexcolor = get_hexcolor(layer_kws)
+        alpha = get_alphavalue(layer_kws)
+        if len(hexcolor) == 1:
+            segmentColors = dict(map(lambda e: (e, hexcolor), segidlist))
+        else:
+            segmentColors = dict(zip(segidlist, hexcolor))
+
+        if ngdict is None:
+            # get the default layers from a empty flywire configuration..
+            defaulturl = 'https://ngl.flywire.ai/?json_url'\
+                         '=https://globalv1.flywire-daf.com/nglstate/6316590609989632'
+            ngdict = flywireurl2dict(defaulturl)
+
+        # Get the index of the layer with segments..
+        seglayer_idx = [i for i, l in enumerate(ngdict['layers']) if l['type'] == 'segmentation_with_graph']
+        seglayer_idx = seglayer_idx[0]
+        if 'segments' in ngdict['layers'][seglayer_idx]:
+            ngdict['layers'][seglayer_idx]['segments'] += segidlist
+        else:
+            ngdict['layers'][seglayer_idx]['segments'] = segidlist
+
+        if 'segmentColors' in ngdict['layers'][seglayer_idx]:
+            ngdict['layers'][seglayer_idx]['segmentColors'].update(segmentColors)
+        else:
+            ngdict['layers'][seglayer_idx]['segmentColors'] = segmentColors
+
+        ngdict['layers'][seglayer_idx]['objectAlpha'] = alpha
         flywireurl = flywiredict2url(ngdict)
         print('flywire url at:', flywireurl)
 
