@@ -75,6 +75,9 @@ def to_ngmesh(x):
             volumeidlist.append(volumeelement.id)
             volumenamelist.append(volumeelement.name)
 
+    volumeidlist = list(map(str, volumeidlist))
+    volumenamelist = list(map(str, volumenamelist))
+
     return volumedatasource, volumeidlist, volumenamelist
 
 
