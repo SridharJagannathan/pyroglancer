@@ -346,7 +346,7 @@ def to_precomputedsingleresmeshesinfo(volumeidlist, volumenamelist, path, layer_
                       "values": volumenamelist}
 
     volinfo = {"@type": "neuroglancer_segment_properties",
-               "inline": {"ids": list(map(str, volumeidlist)),
+               "inline": {"ids": volumeidlist,
                           "properties": [allvolproplist]}}
     volfilepath = os.path.join(cv.basepath, os.path.basename(path), os.path.join(cv.mesh.meta.mesh_path),
                                'segment_properties')
@@ -358,7 +358,7 @@ def to_precomputedsingleresmeshesinfo(volumeidlist, volumenamelist, path, layer_
         json.dump(volinfo, volinfofile)
 
     # create the file for segment_names
-    volumenamedict = dict(zip(map(str, volumeidlist), volumenamelist))
+    volumenamedict = dict(zip(volumeidlist, volumenamelist))
     volnamemap = {"@type": "neuroglancer_segment_name_map",
                   "map": volumenamedict}
     volnamefilepath = os.path.join(cv.basepath, os.path.basename(path), os.path.join(cv.mesh.meta.mesh_path),

@@ -49,7 +49,7 @@ class Testvolumes(unittest.TestCase):
 
         volumedatasource, volumeidlist, volumenamelist = to_ngmesh(testvolume)
 
-        assert volumeidlist[0] == 10
+        assert volumeidlist[0] == '10'
 
     def test_meshupload(self):
         """Check if the meshupload is done."""

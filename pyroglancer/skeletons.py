@@ -266,17 +266,14 @@ def to_precomputedskelsinfo(skelseglist, skelnamelist, path):
         os.makedirs(segfilepath)
         print('creating:', segfilepath)
 
-    allsegproplist = []
-    for segid in skelseglist:
-        segpropdict = {}
-        segpropdict['id'] = segid
-        segpropdict['type'] = 'label'
-        segpropdict['values'] = skelnamelist
-        allsegproplist.append(segpropdict)
+    allsegproplist = {}
+    allsegproplist['id'] = 'label'
+    allsegproplist['type'] = 'label'
+    allsegproplist['values'] = skelnamelist
 
     seginfo = {"@type": "neuroglancer_segment_properties",
                "inline": {"ids": skelseglist,
-                          "properties": allsegproplist}}
+                          "properties": [allsegproplist]}}
 
     segfile = os.path.join(segfilepath, 'info')
     with open(segfile, 'w') as segfile:
