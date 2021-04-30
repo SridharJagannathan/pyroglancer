@@ -74,3 +74,45 @@ def closeviewer():
             ng.stop()
         except Exception:
             print('exception occurred while stopping')
+
+
+def setviewerstate(ngviewer=None, axis_lines=True, bounding_box=True, layout=None):
+    """Set state of neuroglancer viewing engine.
+
+    Parameters
+    ----------
+    ngviewer : ng.viewer.Viewer
+        object of Neuroglancer viewer class.
+    axis_lines : if False, then disable the axis lines.
+    bounding_box : if False, then disable the default annotations like bounding box.
+    layout:  string or dict indicating possible layout options.
+
+    Returns
+    -------
+    ngviewer : ng.viewer.Viewer
+        object of Neuroglancer viewer class.
+
+    Examples
+    --------
+    Set a viewer state with axis lines disabled.
+
+
+    >>> setviewerstate(axis_lines=False)
+    """
+    if ngviewer is None:
+        if 'ngviewerinst' in sys.modules:
+            ngviewer = sys.modules['ngviewerinst']
+        else:
+            raise RuntimeError("no known neuroglancer instances were set already")
+    else:
+        ngviewer = ngviewer
+
+    with ngviewer.txn() as s:
+        s.show_axis_lines = axis_lines
+        s.show_default_annotations = bounding_box
+
+    if layout is not None:
+        with ngviewer.txn() as s:
+            s.layout = layout
+
+    return ngviewer
