@@ -13,6 +13,12 @@
 
 """Module contains utility functions."""
 from .loadconfig import getconfigdata
+import navis
+import numpy as np
+import open3d as o3d
+from scipy import ndimage
+from skimage import measure
+import trimesh as tm
 import webcolors
 
 
@@ -71,3 +77,73 @@ def get_scalevalue(layer_kws):
     print('using ', space, 'space', 'with scale: ', scale)
 
     return scale
+
+
+def pointcloud2meshes(ply_file, algorithm='rollingball', **kwargs):
+    """Convert point cloud files to volumetric meshes.
+
+    Parameters
+    ----------
+    ply_file : poin cloud file location in polygon file format.
+    algorithm : Either 'rollingball' or 'marchingcubes' to convert points to meshes.
+
+    Returns
+    -------
+    ret_mesh : mesh object of navis volume class.
+
+    """
+    # read point cloud data and compute normals
+    pcd = o3d.io.read_point_cloud(ply_file)
+    pcd.estimate_normals()
+
+    if algorithm == 'rollingball':
+
+        # estimate radius for rolling ball
+        distances = pcd.compute_nearest_neighbor_distance()
+        avg_dist = np.mean(distances)
+        radius_scale = kwargs.get('radius_scale', 3)
+        radius = radius_scale * avg_dist
+
+        # compute mesh
+        mesh = o3d.geometry.TriangleMesh.create_from_point_cloud_ball_pivoting(pcd, o3d.utility.DoubleVector(
+                            [radius, radius * 2]))
+
+        # create the triangular mesh with the vertices and faces from open3d
+        tri_mesh = tm.Trimesh(np.asarray(mesh.vertices), np.asarray(mesh.triangles),
+                              vertex_normals=np.asarray(mesh.vertex_normals))
+
+    elif algorithm == 'marchingcubes':
+        point_vals = np.asarray(pcd.points)
+        x_coords = point_vals[:, 2]
+        y_coords = point_vals[:, 1]
+        z_coords = point_vals[:, 0]
+
+        # input: z_coords, y_coords, x_coords
+        zint, yint, xint = [np.floor(coords).astype(int) for coords in [z_coords, y_coords, x_coords]]
+        shape = tuple([np.max(intcoords) + 1 for intcoords in [zint, yint, xint]])
+        mat = np.zeros(shape)
+        mat[zint, yint, xint] += 1
+
+        # Remove binary holes
+        mat = ndimage.binary_fill_holes(mat)
+
+        # We need one round of erodes
+        mat = ndimage.binary_erosion(mat)
+
+        step_size = kwargs.get('step_size', 1)
+
+        verts, faces, normals, values = measure.marching_cubes_lewiner(mat.astype(float),
+                                                                       level=0,
+                                                                       allow_degenerate=False, step_size=step_size)
+
+        # create the triangular mesh with the vertices and faces from open3d
+        tri_mesh = tm.Trimesh(vertices=verts, faces=faces, normals=normals)
+
+    if tm.convex.is_convex(tri_mesh):
+        print('The mesh is convex')
+    else:
+        print('The mesh is not convex')
+
+    ret_mesh = navis.Volume(tri_mesh)
+
+    return ret_mesh
