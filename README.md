@@ -9,18 +9,18 @@ the precomputed format.
 Installation
 ============
 
-The easiest way to install the package is via `pip`:
+<!-- The easiest way to install the package is via `pip`:
 
-    $ pip3 install pyroglancer
+    $ pip3 install pyroglancer -->
 
-If you want to install the latest developments from `GitHub`:
+The easiest way to install the latest developments from `GitHub` is:
 
     $ pip3 install git+git://github.com/SridharJagannathan/pyroglancer@master
 
 Documentation
 =============
 
-(COMING SOON!) <https://SridharJagannathan.github.io/pyroglancer>
+<https://SridharJagannathan.github.io/pyroglancer>
 
 Features
 ========
