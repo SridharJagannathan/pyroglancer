@@ -315,3 +315,34 @@ def add_flywirehostedlayer(ngdict, layer_kws):
         flywireurl = None
 
     return flywireurl
+
+
+def set_flywireviewerstate(flywireurl, axis_lines=True, bounding_box=True, layout=None):
+    """Set state of neuroglancer viewing engine.
+
+    Parameters
+    ----------
+    flywireurl : flywire url.
+    axis_lines : if False, then disable the axis lines.
+    bounding_box : if False, then disable the default annotations like bounding box.
+    layout:  string or dict indicating possible layout options.
+
+    Returns
+    -------
+    ngviewer: object of Neuroglancer viewer class.
+    flywireurl: url containing the updated flywire instance
+    """
+    ngdict = flywireurl2dict(flywireurl)
+
+    ngdict['showAxisLines'] = axis_lines
+    ngdict['showDefaultAnnotations'] = bounding_box
+    if layout is not None:
+        ngdict['layout'] = layout
+
+    flywireurl = flywiredict2url(ngdict)
+    print('flywire url at:', flywireurl)
+
+    sb = StateBuilder()
+    ngviewer = sb.render_state(base_state=ngdict, return_as='viewer')
+
+    return ngviewer, flywireurl
