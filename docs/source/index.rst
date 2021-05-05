@@ -8,11 +8,13 @@ Pyroglancer
    installation
 
 .. toctree::
-   :maxdepth: 0
+   :titlesonly:
+   :maxdepth: 1
    :caption: Tutorials
    
    tutorials/local_neuroglancer.ipynb
    tutorials/examples_flywirecoplotting.ipynb
+   tutorials/catmaid2flywire.ipynb
 
 .. toctree::
    :maxdepth: 2
