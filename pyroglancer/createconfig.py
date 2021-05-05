@@ -60,12 +60,12 @@ defaultconfigdata = [
          ]
 
 
-def createconfig(configdata, configfileloc=None):
+def createconfig(configdata, configfileloc=None, overwrite=False):
     """Create config file in case it is not found."""
     if configfileloc is None:
         configfileloc = os.environ['PYROGLANCER_CONFIG']
 
-    if not os.path.exists(configfileloc):
+    if not os.path.exists(configfileloc) or overwrite:
         configfolder = os.path.dirname(configfileloc)
         if not os.path.exists(configfolder):
             print('creating default config directory..')
