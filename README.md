@@ -9,9 +9,9 @@ the precomputed format.
 Installation
 ============
 
-<!-- The easiest way to install the package is via `pip`:
+The easiest way to install the package is via `pip`:
 
-    $ pip3 install pyroglancer -->
+    $ pip3 install pyroglancer
 
 The easiest way to install the latest developments from `GitHub` is:
 
