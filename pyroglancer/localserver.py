@@ -208,6 +208,9 @@ def _startserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDir
     args.port = port
     args.directory = directory
 
+    if args.directory is None:
+        args.directory = tempfile.TemporaryDirectory()
+
     if isinstance(args.directory, tempfile.TemporaryDirectory):
         temp_dir = args.directory
         temp_dirname = temp_dir.name
@@ -236,7 +239,7 @@ def _startserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDir
         sys.exit(0)
 
 
-def startdataserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDirectory(),
+def startdataserver(address='127.0.0.1', port=8000, directory=None,
                     restart=True):
     """Start a dataserver thread(return control back) that can host local folder via http.
 

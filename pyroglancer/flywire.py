@@ -338,7 +338,7 @@ def set_flywireviewerstate(flywireurl, axis_lines=True, bounding_box=True, layou
         if False, then disable the axis lines.
     bounding_box : bool
         if False, then disable the default annotations like bounding box.
-    layout:  string or dict
+    layout:  string | dict
         indicating possible layout options.
 
     Returns

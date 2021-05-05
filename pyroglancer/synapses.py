@@ -27,9 +27,12 @@ def commit_info(synapseinfo, path, synapsetype):
 
     Parameters
     ----------
-    synapseinfo : info in json format for the synapses
-    path:         path for the dataserver hosted locally
-    synapsetype : pre or postsynapses
+    synapseinfo : dict
+        info in json format for the synapses
+    path: str
+        local path of the precomputed hosted layer.
+    synapsetype : str
+        pre or postsynapses
     """
     synapsefilepath = path + '/precomputed/' + synapsetype
     if not os.path.exists(synapsefilepath):
@@ -45,8 +48,10 @@ def create_synapseinfo(dimensions, path):
 
     Parameters
     ----------
-    path:            path for the dataserver hosted locally
-    dimensions :     dimensions used by neuroglancer
+    path: str
+        local path of the precomputed hosted layer.
+    dimensions:  neuroglancer.CoordinateSpace
+        object of neuroglancer coordinate space class.
 
     """
     synapseinfo = {
@@ -87,11 +92,16 @@ def put_synapsefile(path, synapsetype, synapses, skeletonid):
 
     Parameters
     ----------
-    path:            path for the dataserver hosted locally
-    synapsetype :    pre or post synapse
-    synapses :       dataframe containing 'x', 'y', 'z' columns
-    skeletonid :     skeleton id to be associated with the corresponding synapse
-    pointsname :     name for the points (not yet implemented)
+    path: str
+        local path of the precomputed hosted layer.
+    synapsetype : str
+        pre or postsynapses
+    synapses : dataframe
+        contains 'x', 'y', 'z' columns
+    skeletonid : int
+        skeleton id to be associated with the corresponding synapse
+    pointsname : str
+        name for the points (not yet implemented)
 
     """
     synapsefilepath = path + '/precomputed/' + synapsetype + '/' + synapsetype + '_cell/'
@@ -120,8 +130,10 @@ def upload_synapses(x, path):
 
     Parameters
     ----------
-    x :   neuron or neuronlist
-    path: path for the dataserver hosted locally
+    x :  CatmaidNeuron | CatmaidNeuronList or TreeNeuron | NeuronList
+       neuron or neuronlist of different formats
+    path: str
+        local path of the precomputed hosted layer.
 
     """
     if isinstance(x, pymaid.core.CatmaidNeuron):
@@ -149,10 +161,17 @@ def annotate_synapses(ngviewer, dimensions, x):
 
     Parameters
     ----------
-    x :             CatmaidNeuron | CatmaidNeuronList or TreeNeuron | NeuronList
-    ngviewer:        Neuroglancer viewer
+    ngviewer : ng.viewer.Viewer
+        object of Neuroglancer viewer class.
+    dimensions:  neuroglancer.CoordinateSpace
+        object of neuroglancer coordinate space class.
+    x :  CatmaidNeuron | CatmaidNeuronList or TreeNeuron | NeuronList
+       neuron or neuronlist of different formats
 
-
+    Returns
+    -------
+    status :     bool
+        annotation status
     """
     if isinstance(x, pymaid.core.CatmaidNeuron):
         neuronlist = pymaid.core.CatmaidNeuronList(x)
@@ -259,12 +278,14 @@ def synapses2nodepoints(x, layer_scale):
     Parameters
     ----------
     x :             CatmaidNeuron | CatmaidNeuronList or TreeNeuron | NeuronList
-    layer_scale:    value for scaling the voxel coordinates to physical coordinates
+       neuron or neuronlist of different formats
+    layer_scale : int | float
+        scaling from voxel to native space in 'x', 'y', 'z'
 
     Returns
     -------
-    synapsepointscollec_df : Dataframe containing synapse points in point A - point B format
-                             used in flywire annotations.
+    synapsepointscollec_df : dataframe
+      contains synapse points in point A - point B format used in flywire annotations.
     """
     if isinstance(x, pymaid.core.CatmaidNeuron):
         x = pymaid.core.CatmaidNeuronList(x)

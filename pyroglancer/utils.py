@@ -43,7 +43,8 @@ def get_hexcolor(layer_kws):
 
 
 def get_alphavalue(layer_kws):
-    """Get alpha values from the interface APIs."""
+    """Get alpha values from the interface APIs.
+    """
     # This function gets alpha/transparency values.
     layer_alpha = layer_kws.get("alpha", 1.0)
     return layer_alpha
@@ -84,12 +85,15 @@ def pointcloud2meshes(ply_file, algorithm='rollingball', **kwargs):
 
     Parameters
     ----------
-    ply_file : poin cloud file location in polygon file format.
-    algorithm : Either 'rollingball' or 'marchingcubes' to convert points to meshes.
+    ply_file : str
+        point cloud file location in polygon file format.
+    algorithm : str
+        algorithm of either 'rollingball' or 'marchingcubes' to convert points to meshes.
 
     Returns
     -------
-    ret_mesh : mesh object of navis volume class.
+    ret_mesh : navis.Volume
+        mesh object of navis volume class.
 
     """
     # read point cloud data and compute normals

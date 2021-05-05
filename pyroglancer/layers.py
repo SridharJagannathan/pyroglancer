@@ -102,7 +102,7 @@ def add_precomputed(layer_kws):
     -------
     layer_host:  str
         port number of the http host.
-    layer_name or skelseglist or volumeidlist:  list
+    layer_name | skelseglist | volumeidlist:  str | list
         either a layer name or list containing ids of skeletons or volume ids.
     """
     # This function is for adding data to the precomputed folders.

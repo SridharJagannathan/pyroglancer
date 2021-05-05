@@ -25,21 +25,14 @@ def openviewer(ngviewer=None, headless=False):
     ----------
     ngviewer : ng.viewer.Viewer
         object of Neuroglancer viewer class.
-    headless : if True, then operating in servers or testcase mode.
+    headless : bool
+        if True, then operating in servers or testcase mode.
 
     Returns
     -------
     ngviewer : ng.viewer.Viewer
         object of Neuroglancer viewer class.
 
-    Examples
-    --------
-    Open a neuroglancer viewer.
-
-
-    >>> openviewer()
-    Neuroglancer viewer created at:  http://127.0.0.1:53890/v/xxyyy/
-    http://127.0.0.1:53890/v/xxyyy/
     """
     if ngviewer is None:
         if 'ngviewerinst' in sys.modules:
@@ -58,14 +51,6 @@ def openviewer(ngviewer=None, headless=False):
 
 def closeviewer():
     """Close a already started ngviewer.
-
-    Parameters
-    ----------
-    None
-
-    Returns
-    -------
-    None
     """
     if 'ngviewerinst' in sys.modules:
         print('closing already existing ng viewer')
@@ -83,21 +68,18 @@ def setviewerstate(ngviewer=None, axis_lines=True, bounding_box=True, layout=Non
     ----------
     ngviewer : ng.viewer.Viewer
         object of Neuroglancer viewer class.
-    axis_lines : if False, then disable the axis lines.
-    bounding_box : if False, then disable the default annotations like bounding box.
-    layout:  string or dict indicating possible layout options.
+    axis_lines : bool
+        if False, then disable the axis lines.
+    bounding_box : bool
+        if False, then disable the default annotations like bounding box.
+    layout:  string | dict
+        possible layout options.
 
     Returns
     -------
     ngviewer : ng.viewer.Viewer
         object of Neuroglancer viewer class.
 
-    Examples
-    --------
-    Set a viewer state with axis lines disabled.
-
-
-    >>> setviewerstate(axis_lines=False)
     """
     if ngviewer is None:
         if 'ngviewerinst' in sys.modules:

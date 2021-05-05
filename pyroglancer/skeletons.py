@@ -82,13 +82,17 @@ def to_ngskeletons(x):
 
     Parameters
     ----------
-    x :             CatmaidNeuron | CatmaidNeuronList or TreeNeuron | NeuronList
+     x :             CatmaidNeuron | CatmaidNeuronList or TreeNeuron | NeuronList
+       neuron or neuronlist of different formats
 
     Returns
     -------
-    skeldatasource :     List containing cloud volume skeletons
-    skeldatasegidlist :  List containing the segids(skid)
-    skelsegnamelist:     List containing the names of segments
+    skeldatasource:  list
+        contains cloud volume skeletons.
+    skeldatasegidlist:  list
+        contains the segids(skid).
+    skelsegnamelist:  list
+        contains the names of segments.
     """
     if isinstance(x, pymaid.core.CatmaidNeuron):
         x = pymaid.core.CatmaidNeuronList(x)
@@ -119,14 +123,19 @@ def uploadskeletons(skelsource, skelseglist, skelnamelist, path):
 
     Parameters
     ----------
-    skelsource :     List containing cloud volume skeletons
-    skelseglist :    List containing the segids(skid)
-    skelnamelist :   List containing the names of skeletons
-    path :           path to the local data server
+    skeldatasource:  list
+        contains cloud volume skeletons.
+    skeldatasegidlist:  list
+        contains the segids(skid).
+    skelsegnamelist:  list
+        contains the names of segments.
+    path: str
+        local path of the precomputed hosted layer.
 
     Returns
     -------
-    cv :     cloudvolume class object
+    cv :     CloudVolume
+        object of cloudvolume class
     """
     info = {"@type": "neuroglancer_skeletons",
             "transform": skelsource[0].transform.flatten(),
@@ -189,8 +198,10 @@ def to_precomputedskels(skelsource, path):
 
     Parameters
     ----------
-    skelsource :     List containing cloud volume skeletons
-    path :           path to the local folder
+    skelsource:  list
+        contains the cloud volume skeletons.
+    path: str
+        local path of the precomputed hosted layer.
 
     """
     info = {"@type": "neuroglancer_skeletons",
@@ -233,10 +244,12 @@ def to_precomputedskelsinfo(skelseglist, skelnamelist, path):
 
     Parameters
     ----------
-    skelseglist :    List containing the segids(skid)
-    skelnamelist :   List containing the names of skeletons
-    path :           path to the local folder
-
+    skelseglist:  list
+        contains the segids(skid).
+    skelnamelist:  list
+        contains the names of skeletons.
+    path: str
+        local path of the precomputed hosted layer.
     """
 
     info = {"@type": "neuroglancer_skeletons",
@@ -285,15 +298,21 @@ def uploadshardedskeletons(skelsource, skelseglist, skelnamelist, path, shardpro
 
     Parameters
     ----------
-    skelsource :     List containing cloud volume skeletons
-    skelseglist :    List containing the segids(skid)
-    skelnamelist :   List containing the names of skeletons
-    path :           path to the local data server
-    shardprogress:   progress bar for sharding operation
+    skelsource:  list
+        contains cloud volume skeletons.
+    skelseglist:  list
+        contains the segids(skid).
+    skelnamelist:  list
+        contains the names of segments.
+    path: str
+        local path of the precomputed hosted layer.
+    shardprogress:   bool
+        progress bar for sharding operation
 
     Returns
     -------
-    cv :     cloudvolume class object
+    cv :     CloudVolume
+        object of cloudvolume class
     """
     info = {"@type": "neuroglancer_skeletons",
             "transform": skelsource[0].transform.flatten(),
@@ -372,11 +391,14 @@ def skeletons2nodepoints(x, layer_scale):
     Parameters
     ----------
     x :             CatmaidNeuron | CatmaidNeuronList or TreeNeuron | NeuronList
-    layer_scale:    value for scaling the voxel coordinates to physical coordinates
+       neuron or neuronlist of different formats
+    layer_scale : int | float
+        scaling from voxel to native space in 'x', 'y', 'z'
 
     Returns
     -------
-    nodepointscollec_df : Dataframe containing node points in point A - point B format used in flywire annotations.
+    nodepointscollec_df : dataframe
+     contains node points in point A - point B format used in flywire annotations.
     """
     if isinstance(x, pymaid.core.CatmaidNeuron):
         x = pymaid.core.CatmaidNeuronList(x)

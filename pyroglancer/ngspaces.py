@@ -23,11 +23,8 @@ def create_ngspace(layer_kws):
 
     Parameters
     ----------
-    ngspace : dataset to be used for e.g. : FAFB etc
-
-    Returns
-    -------
-    None
+    layer_kws: dict
+        containing details about different neuroglancer layers
     """
     ngspace = layer_kws.get('ngspace', 'FAFB')
     ngspaceconfig = _get_ngspace(layer_kws)

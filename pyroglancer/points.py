@@ -24,9 +24,12 @@ def commit_info(pointinfo, path, pointlayername):
 
     Parameters
     ----------
-    pointinfo :      info in json format for the points
-    path:            path for the dataserver hosted locally
-    pointlayername : name for the points layer
+    pointinfo : dict
+        info in json format for the points
+    path: str
+        local path of the precomputed hosted layer.
+    pointlayername : str
+      name for the points layer
     """
     pointfilepath = path + '/precomputed/' + pointlayername
     if not os.path.exists(pointfilepath):
@@ -42,10 +45,17 @@ def create_pointinfo(dimensions, path, layer_name):
 
     Parameters
     ----------
-    path:            path for the dataserver hosted locally
-    layer_name :     name for the points layer
-    dimensions :     dimensions used by neuroglancer
+    path: str
+        local path of the precomputed hosted layer.
+    layer_name : str
+      name for the points layer
+    dimensions:  neuroglancer.CoordinateSpace
+        object of neuroglancer coordinate space class.
 
+    Returns
+    -------
+    path: str
+        local path of the precomputed hosted layer.
     """
     pointinfo = {
         '@type': 'neuroglancer_annotations_v1',
@@ -81,11 +91,16 @@ def put_pointfile(path, layer_name, points, pointsscale, pointname):
 
     Parameters
     ----------
-    path:            path for the dataserver hosted locally
-    layer_name :     name for the points layer
-    points :         dataframe containing 'x', 'y', 'z' columns
-    pointsscale :    scaling from voxel to native space in 'x', 'y', 'z'
-    pointsname :     name for the points (not yet implemented)
+    path: str
+        local path of the precomputed hosted layer.
+    layer_name : str
+      name for the points layer
+    points :  dataframe
+        should contain 'x', 'y', 'z' columns
+    pointsscale : int | float
+        scaling from voxel to native space in 'x', 'y', 'z'
+    pointsname :  str
+        name for the points (not yet implemented)
 
     """
     pointsfilepath = path + '/precomputed/' + layer_name + '/spatial0'
@@ -131,10 +146,14 @@ def upload_points(points_df, path, layer_name, layer_scale):
 
     Parameters
     ----------
-    points_df :      dataframe containing 'x', 'y', 'z' columns
-    path:            path for the dataserver hosted locally
-    layer_name :     name for the points layer
-    layer_scale :    scaling from voxel to native space in 'x', 'y', 'z'
+    points_df :  dataframe
+        should contain 'x', 'y', 'z' columns
+    path: str
+        local path of the precomputed hosted layer.
+    layer_name : str
+      name for the points layer
+    layer_scale : int | float
+        scaling from voxel to native space in 'x', 'y', 'z'
 
     """
     pointname = points_df['description']
@@ -148,10 +167,14 @@ def annotate_points(ngviewer, dimensions, pointscolor, points_df, layer_name, la
 
     Parameters
     ----------
-    ngviewer:        Neuroglancer viewer
-    dimensions :     dimensions and units of 'x', 'y', 'z'
-    points_df :      dataframe containing 'x', 'y', 'z' columns
-    layer_scale :    scaling from voxel to native space in 'x', 'y', 'z'
+    ngviewer : ng.viewer.Viewer
+        object of Neuroglancer viewer class.
+    dimensions:  neuroglancer.CoordinateSpace
+        object of neuroglancer coordinate space class.
+    points_df :  dataframe
+        should contain 'x', 'y', 'z' columns
+    layer_scale : int | float
+        scaling from voxel to native space in 'x', 'y', 'z'
     """
     pointname = points_df['description']
     points_df.loc[:, ['x', 'y', 'z']] = points_df.loc[:, ['x', 'y', 'z']].values/1000

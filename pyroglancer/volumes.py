@@ -49,11 +49,17 @@ def to_ngmesh(x):
 
     Parameters
     ----------
-    volume :             Navis Volume or Navis mesh neuron | List
+    volume :  Navis Volume | Navis mesh neuron | List
+      volume or volumelist of different formats
 
     Returns
     -------
-    mesh :      Cloud volume mesh
+    volumedatasource:  list
+        contains volumes of cloud volume class.
+    volumeidlist:  list
+        contains the volume ids.
+    volumenamelist:  list
+        contains the names of volumes.
     """
     volumeidlist, volumedatasource, volumenamelist = ([] for i in range(3))
 
@@ -191,11 +197,16 @@ def uploadsingleresmeshes(volumedatasource, volumeidlist, volumenamelist, path, 
 
     Parameters
     ----------
-    volumedatasource :     List containing cloud volume meshes
-    volumeidlist :    List containing the segids(volume id)
-    volumenamelist :   List containing the names of volumes
-    path :           path to the local data server
-    layer_name:      name of layer/path to add to
+    volumedatasource:  list
+        contains volumes of cloud volume class.
+    volumeidlist:  list
+        contains the volume ids.
+    volumenamelist:  list
+        contains the names of volumes.
+    path: str
+        local path of the precomputed hosted layer.
+    layer_name: str
+        layer name.
 
     Returns
     -------
@@ -271,9 +282,12 @@ def to_precomputedsingleresmeshes(volumedatasource, path, layer_name):
 
     Parameters
     ----------
-    volumedatasource :     List containing cloud volume meshes
-    path :           path to the local data server
-    layer_name:      name of layer/path to add to
+    volumedatasource:  list
+        contains cloud volume meshes.
+    path: str
+        local path of the precomputed hosted layer.
+    layer_name: str
+        layer name.
 
     """
     info = {"@type": "neuroglancer_legacy_mesh",
@@ -320,14 +334,19 @@ def to_precomputedsingleresmeshesinfo(volumeidlist, volumenamelist, path, layer_
 
     Parameters
     ----------
-    volumeidlist :    List containing the segids(volume id)
-    volumenamelist :   List containing the names of volumes
-    path :           path to the local data server
-    layer_name:      name of layer/path to add to
+    volumeidlist:  list
+        contains the volume ids.
+    volumenamelist:  list
+        contains the names of volumes.
+    path: str
+        local path of the precomputed hosted layer.
+    layer_name: str
+        layer name.
 
     Returns
     -------
-    cv :     cloudvolume class object
+    cv :     CloudVolume
+        object of cloudvolume class
     """
     info = {"@type": "neuroglancer_legacy_mesh",
             'scales': [1, 1, 1],
@@ -376,11 +395,16 @@ def uploadmultiresmeshes(volumedatasource, volumeidlist, volumenamelist, path, l
 
     Parameters
     ----------
-    volumedatasource :     List containing cloud volume meshes
-    volumeidlist :    List containing the segids(volume id)
-    volumenamelist :   List containing the names of volumes
-    path :           path to the local data server
-    layer_name:      name of layer/path to add to
+    volumedatasource:  list
+        contains cloud volume meshes.
+    volumeidlist:  list
+        contains the volume ids.
+    volumenamelist:  list
+        contains the names of volumes.
+    path: str
+        local path of the precomputed hosted layer.
+    layer_name: str
+        layer name.
 
     Returns
     -------
@@ -454,12 +478,18 @@ def uploadshardedmultiresmeshes(volumedatasource, volumeidlist, volumenamelist, 
 
     Parameters
     ----------
-    volumedatasource :     List containing cloud volume meshes
-    volumeidlist :    List containing the segids(volume id)
-    volumenamelist :   List containing the names of volumes
-    path :           path to the local data server
-    layer_name:      name of layer/path to add to
-    shardprogress:   progress bar for sharding operation
+    volumedatasource:  list
+        contains cloud volume meshes.
+    volumeidlist:  list
+        contains the volume ids.
+    volumenamelist:  list
+        contains the names of volumes.
+    path: str
+        local path of the precomputed hosted layer.
+    layer_name: str
+        layer name.
+    shardprogress:   bool
+        progress bar for sharding operation
 
     Returns
     -------
