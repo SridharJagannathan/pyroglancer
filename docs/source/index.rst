@@ -17,6 +17,7 @@ Pyroglancer
    tutorials/catmaid2flywire.ipynb
    tutorials/flywire2fafb.ipynb
    tutorials/hemibrain2flywire.ipynb
+   tutorials/gal4line2flywire.ipynb
 
 .. toctree::
    :maxdepth: 2
