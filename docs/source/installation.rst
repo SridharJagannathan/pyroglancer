@@ -3,11 +3,11 @@ Install Pyroglancer
 
 There are two ways to install Pyroglancer.
 
-#. You can get the stable version from `pypi` like below. On the command line, enter::
+#. The stable version from `pypi` like below::
 
     pip3 install pyroglancer
 
-#. You can get the latest development version like below. On the command line, enter::
+#. The latest development version from `GitHub` like below::
 
     pip3 install git+git://github.com/SridharJagannathan/pyroglancer@master
 
