@@ -19,13 +19,6 @@ pyroglancer.createconfig module
    :undoc-members:
    :show-inheritance:
 
-pyroglancer.debug module
-------------------------
-
-.. automodule:: pyroglancer.debug
-   :members:
-   :undoc-members:
-   :show-inheritance:
 
 pyroglancer.flywire module
 --------------------------

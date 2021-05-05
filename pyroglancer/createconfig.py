@@ -11,7 +11,7 @@
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 
-"""Module contains test data to create a sample yaml config file."""
+"""Module for creating yaml based configuration files for adding layers in the neuroglancer."""
 import os
 import yaml
 
@@ -61,7 +61,17 @@ defaultconfigdata = [
 
 
 def createconfig(configdata, configfileloc=None, overwrite=False):
-    """Create config file in case it is not found."""
+    """Create config file in case it is not found.
+
+    Parameters
+    ----------
+        configdata : dict
+            different layers to be added in the neuroglancer instance
+        configfileloc: str
+            location of the configuration file
+        overwrite: bool
+            if set to True, then overwrites the existing configuration file
+    """
     if configfileloc is None:
         configfileloc = os.environ['PYROGLANCER_CONFIG']
 
@@ -79,5 +89,5 @@ def createconfig(configdata, configfileloc=None, overwrite=False):
 
 
 def getdefaultconfigdata():
-    """Get data from default config file in case it is not found."""
+    """Get neuroglancer layer data from default configuration in case configuration fileit is not found."""
     return defaultconfigdata

@@ -11,7 +11,7 @@
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 
-"""Module contains functions to handle neuroglancer layers."""
+"""Module contains functions to handle different types of neuroglancer layers."""
 
 from .loadconfig import getconfigdata
 from .ngviewer import openviewer
@@ -55,7 +55,18 @@ def _get_ngspace(layer_kws):
 
 
 def _handle_ngdimensions(layer_kws):
-    """Return the dimensions of different neuroglancer spaces."""
+    """Return the dimensions of different neuroglancer spaces.
+
+    Parameters
+    ----------
+    layer_kws: dict
+        containing details about dimensions or neuroglancer space name
+
+    Returns
+    -------
+    dimensions:  neuroglancer.CoordinateSpace
+        object of neuroglancer coordinate space class.
+    """
     # return dimensions either based on already set ngspace or a string 'ngspace'.
     dimensions = None
     if 'ngspace' in sys.modules:
@@ -80,7 +91,20 @@ def _handle_ngdimensions(layer_kws):
 
 
 def add_precomputed(layer_kws):
-    """Add data in a precomputed format to the specific folder hosted via http."""
+    """Add data in a precomputed format to the specific folder hosted via http.
+
+    Parameters
+    ----------
+    layer_kws: dict
+        containing details about different neuroglancer layers
+
+    Returns
+    -------
+    layer_host:  str
+        port number of the http host.
+    layer_name or skelseglist or volumeidlist:  list
+        either a layer name or list containing ids of skeletons or volume ids.
+    """
     # This function is for adding data to the precomputed folders.
     layer_type = layer_kws['type']
     if layer_type == 'skeletons':
@@ -146,7 +170,15 @@ def add_precomputed(layer_kws):
 
 
 def flush_precomputed(path, subdir):
-    """Delete/Flush a subfolder inside the precomputed folder that is hosted via http."""
+    """Delete/Flush a subfolder inside the precomputed folder that is hosted via http.
+
+    Parameters
+    ----------
+    path: str
+        local path of the precomputed hosted layer
+    subdir: str
+        name of the subdirectory inside the local precomputed layer to flush
+    """
     # This function is for deleting the subfolders, usually for cleaning up.
 
     path = os.path.join(path, 'precomputed', subdir)
@@ -156,7 +188,15 @@ def flush_precomputed(path, subdir):
 
 
 def get_ngserver():
-    """Return the local folder hosted via http and its corresponding port."""
+    """Return the local folder hosted via http and its corresponding port.
+
+    Returns
+    -------
+    layer_serverdir:  str
+        local directory for hosting the precomputed layer.
+    layer_host:  str
+        port number of the http host.
+    """
     # This function fetches: a)the already set neuroglancer local folder(hosted via http).
     # b)the port number of the http host
 
@@ -168,7 +208,20 @@ def get_ngserver():
 
 
 def handle_emdata(ngviewer, layer_kws):
-    """Add the electron microscopy layer as a neuroglancer layer."""
+    """Add the electron microscopy layer as a neuroglancer layer.
+
+    Parameters
+    ----------
+    ngviewer : ng.viewer.Viewer
+        object of Neuroglancer viewer class.
+    layer_kws: dict
+        containing details about different neuroglancer layers
+
+    Returns
+    -------
+    ngviewer : ng.viewer.Viewer
+        updated object of neuroglancer viewer class.
+    """
     # This function adds EM layer to a neuroglancer instance.
     # The EM layers are usually corresponding to spaces like 'FAFB', etc
     ngspace = _get_ngspace(layer_kws)
@@ -183,7 +236,20 @@ def handle_emdata(ngviewer, layer_kws):
 
 
 def handle_segmentdata(ngviewer, layer_kws):
-    """Add the different neuron segmentation datasets as a neuroglancer layer."""
+    """Add the different neuron segmentation datasets as a neuroglancer layer.
+
+    Parameters
+    ----------
+    ngviewer : ng.viewer.Viewer
+        object of Neuroglancer viewer class.
+    layer_kws: dict
+        containing details about different neuroglancer layers
+
+    Returns
+    -------
+    ngviewer : ng.viewer.Viewer
+        updated object of neuroglancer viewer class.
+    """
     # This function adds segmentation of EM layer to a neuroglancer instance.
     # The EM segmentations usually correspond to autosegs from google for datasets like 'FAFB' etc
     ngspace = _get_ngspace(layer_kws)
@@ -198,7 +264,20 @@ def handle_segmentdata(ngviewer, layer_kws):
 
 
 def handle_synapticdata(ngviewer, layer_kws):
-    """Add the synapse predictions for the em datasets as a neuroglancer layer."""
+    """Add the synapse predictions for the em datasets as a neuroglancer layer.
+
+    Parameters
+    ----------
+    ngviewer : ng.viewer.Viewer
+        object of Neuroglancer viewer class.
+    layer_kws: dict
+        containing details about different neuroglancer layers
+
+    Returns
+    -------
+    ngviewer : ng.viewer.Viewer
+        updated object of neuroglancer viewer class.
+    """
     # This function adds synapse predictions to a neuroglancer instance.
 
     ngspace = _get_ngspace(layer_kws)
@@ -233,7 +312,20 @@ def handle_synapticdata(ngviewer, layer_kws):
 
 
 def handle_synapticclefts(ngviewer, layer_kws):
-    """Add the synapse cleft predictions for the em dataset as a neuroglancer layer."""
+    """Add the synapse cleft predictions for the em dataset as a neuroglancer layer.
+
+    Parameters
+    ----------
+    ngviewer : ng.viewer.Viewer
+        object of Neuroglancer viewer class.
+    layer_kws: dict
+        containing details about different neuroglancer layers
+
+    Returns
+    -------
+    ngviewer : ng.viewer.Viewer
+        updated object of neuroglancer viewer class.
+    """
     # This function adds synapse cleft predictions to a neuroglancer instance.
 
     ngspace = _get_ngspace(layer_kws)
@@ -250,7 +342,20 @@ def handle_synapticclefts(ngviewer, layer_kws):
 
 
 def handle_meshes(ngviewer, layer_kws):
-    """Add the different surface meshes as a neuroglancer layer."""
+    """Add the different surface meshes as a neuroglancer layer.
+
+    Parameters
+    ----------
+    ngviewer : ng.viewer.Viewer
+        object of Neuroglancer viewer class.
+    layer_kws: dict
+        containing details about different neuroglancer layers
+
+    Returns
+    -------
+    ngviewer : ng.viewer.Viewer
+        updated object of neuroglancer viewer class.
+    """
     # This function adds meshes usually based on neuropil boundaries to a neuroglancer instance.
 
     ngspace = _get_ngspace(layer_kws)
@@ -276,7 +381,24 @@ def handle_meshes(ngviewer, layer_kws):
 
 
 def handle_skels(ngviewer, path, segmentColors, alpha):
-    """Add skeletons hosted via http as a neuroglancer layer."""
+    """Add skeletons hosted via http as a neuroglancer layer.
+
+    Parameters
+    ----------
+    ngviewer : ng.viewer.Viewer
+        object of Neuroglancer viewer class.
+    layer_kws: dict
+        containing details about different neuroglancer layers
+    segmentColors: str
+        colors of segments in named or hexformat
+    alpha: float
+        transparency value
+
+    Returns
+    -------
+    ngviewer : ng.viewer.Viewer
+        updated object of neuroglancer viewer class.
+    """
     # This function adds skeletons in the precomputed format hosted locally via http to a neuroglancer instance.
 
     precomputepath = 'precomputed://' + path + '/precomputed/skeletons'
@@ -291,7 +413,18 @@ def handle_skels(ngviewer, path, segmentColors, alpha):
 
 
 def add_hostedlayer(ngviewer=None, **kwargs):
-    """Add already hosted layers (via url) directly."""
+    """Add already hosted layers (via url) directly.
+
+    Parameters
+    ----------
+    ngviewer : ng.viewer.Viewer
+        object of Neuroglancer viewer class.
+
+    Returns
+    -------
+    ngviewer : ng.viewer.Viewer
+        updated object of neuroglancer viewer class.
+    """
     layer_kws = kwargs.get('layer_kws', {})
     layer_type = layer_kws['type']
     path = layer_kws['host']
@@ -320,7 +453,28 @@ def add_hostedlayer(ngviewer=None, **kwargs):
 
 
 def handle_vols(ngviewer, path, layer_name, segmentColors, alpha, layer_res):
-    """Add volumes hosted via http as a neuroglancer layer."""
+    """Add volumes hosted via http as a neuroglancer layer.
+
+    Parameters
+    ----------
+    ngviewer : ng.viewer.Viewer
+        object of Neuroglancer viewer class.
+    path: str
+        local path of the precomputed hosted layer.
+    layer_name: str
+        layer name.
+    segmentColors: str
+        colors of segments in named or hexformat
+    alpha: float
+        transparency value
+    layer_res: bool
+        single or multi resolution meshes
+
+    Returns
+    -------
+    ngviewer : ng.viewer.Viewer
+        updated object of neuroglancer viewer class.
+    """
     # This function adds volumes in the precomputed format hosted locally via http to a neuroglancer instance.
     if layer_res:
         precomputepath = 'precomputed://' + path + '/precomputed/' + layer_name + '/mesh'
@@ -337,7 +491,20 @@ def handle_vols(ngviewer, path, layer_name, segmentColors, alpha, layer_res):
 
 
 def handle_synapses(ngviewer, path):
-    """Add pre/post-synapses hosted via http as a neuroglancer layer."""
+    """Add pre/post-synapses hosted via http as a neuroglancer layer.
+
+    Parameters
+    ----------
+    ngviewer : ng.viewer.Viewer
+        object of Neuroglancer viewer class.
+    path: str
+        local path of the precomputed hosted layer
+
+    Returns
+    -------
+    ngviewer : ng.viewer.Viewer
+        updated object of neuroglancer viewer class.
+    """
     # This function adds synapses in the precomputed format hosted remotely via http to a neuroglancer instance.
     presynapsepath = 'precomputed://' + path + '/precomputed/presynapses'
     postsynapsepath = 'precomputed://' + path + '/precomputed/postsynapses'
@@ -357,7 +524,24 @@ def handle_synapses(ngviewer, path):
 
 
 def handle_points(ngviewer, path, layer_name, annotationColor):
-    """Add points hosted via http as a neuroglancer layer."""
+    """Add points hosted via http as a neuroglancer layer.
+
+    Parameters
+    ----------
+    ngviewer : ng.viewer.Viewer
+        object of Neuroglancer viewer class.
+    path: str
+        local path of the precomputed hosted layer.
+    layer_name: str
+        layer name.
+    annotationColor: str
+        color in either named or hexcode format.
+
+    Returns
+    -------
+    ngviewer : ng.viewer.Viewer
+        updated object of neuroglancer viewer class.
+    """
     # This function adds points in the precomputed format hosted locally via http to a neuroglancer instance.
     pointpath = 'precomputed://' + path + '/precomputed/' + layer_name
     with ngviewer.txn() as s:
@@ -375,7 +559,8 @@ def create_nglayer(ngviewer=None, layout='xy-3d', **kwargs):
     ----------
     ngviewer :  ng.viewer.Viewer
         object of Neuroglancer viewer class.
-    layout :   layout of neuroglancer window
+    layout :   str
+        layout of neuroglancer window
 
     Returns
     -------

@@ -236,19 +236,20 @@ def _startserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDir
         sys.exit(0)
 
 
-def startdataserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDirectory(), restart=True):
+def startdataserver(address='127.0.0.1', port=8000, directory=tempfile.TemporaryDirectory(),
+                    restart=True):
     """Start a dataserver thread(return control back) that can host local folder via http.
 
     Parameters
     ----------
-    address :  ip address to use for the local host server
-    port :     port number to use for the local host server
-    directory :   local directory to be used for hosting
-    restart :   restart/clean up already running data server
-
-    Returns
-    -------
-    None
+    address :  str
+        ip address to use for the local host server
+    port :  int
+        port number to use for the local host server
+    directory :  str
+        local directory to be used for hosting
+    restart :  bool
+        restart/clean up already running data server
     """
     serverthread = Thread(target=_startserver, args=(address, port, directory, restart))
     serverthread.daemon = True  # This thread dies when main thread (only non-daemon thread) exits..

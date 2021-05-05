@@ -22,11 +22,13 @@ def getconfigdata(configfileloc=None):
 
     Parameters
     ----------
-    configfileloc :  override the default location if configfileloc is present
+    configfileloc :  str
+        override the default location if configfileloc is present
 
     Returns
     -------
-    configdata
+    configdata : dict
+        different layers to be added in the neuroglancer instance
     """
     if configfileloc is not None:
         print('using custom location at: ', configfileloc)

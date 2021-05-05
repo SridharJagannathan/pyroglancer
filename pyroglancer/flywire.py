@@ -34,15 +34,17 @@ FLYWIREHOST_URL = 'https://ngl.flywire.ai'
 
 
 def flywireurl2dict(flywireurl):
-    """Return dict from a flywire based short or long url.
+    """Return layers from a flywire based short or long url.
 
     Parameters
     ----------
-    flywireurl: short or long url of the flywire instance
+    flywireurl:  str
+        short or long url of the flywire instance
 
     Returns
     -------
-    ngdict: dict containing different layers of the flywire instance
+    ngdict: dict
+        different layers of the flywire instance
     """
     assert isinstance(flywireurl, (str, dict))
 
@@ -69,11 +71,13 @@ def flywiredict2url(ngdict):
 
     Parameters
     ----------
-    ngdict: dict containing different layers of the flywire instance
+    ngdict: dict
+        different layers of the flywire instance
 
     Returns
     -------
-    flywireurl: short url of the flywire instance
+    flywireurl:  str
+        short or long url of the flywire instance
     """
     token = cloudvolume.secrets.chunkedgraph_credentials['token']
     jsonbaseurl = FLYWIRESTATE_URL
@@ -96,12 +100,15 @@ def add_flywirelayer(ngdict=None, layer_kws={}):
 
     Parameters
     ----------
-    ngdict: a dict containing different layers of the flywire instance
-    layer_kws: a dict containing different parameters about the layer to add
+    ngdict: dict
+        different layers of the flywire instance
+    layer_kws: dict
+        different parameters about the layer to add
 
     Returns
     -------
-    flywireurl: url containing the updated flywire instance
+    flywireurl:  str
+        short or long url of the updated flywire instance
     """
     layer_type = layer_kws['type']
     if layer_type == 'skeletons':
@@ -276,12 +283,15 @@ def add_flywirehostedlayer(ngdict, layer_kws):
 
     Parameters
     ----------
-    ngdict: a dict containing different layers of the flywire instance
-    layer_kws: a dict containing different parameters about the layer to add
+    ngdict: dict
+        different layers of the flywire instance
+    layer_kws: dict
+        different parameters about the layer to add
 
     Returns
     -------
-    flywireurl: url containing the updated flywire instance
+    flywireurl:  str
+        short or long url of the updated flywire instance
     """
     layer_type = layer_kws['type']
     path = layer_kws['host']
@@ -322,15 +332,22 @@ def set_flywireviewerstate(flywireurl, axis_lines=True, bounding_box=True, layou
 
     Parameters
     ----------
-    flywireurl : flywire url.
-    axis_lines : if False, then disable the axis lines.
-    bounding_box : if False, then disable the default annotations like bounding box.
-    layout:  string or dict indicating possible layout options.
+    flywireurl:  str
+        short or long url of the flywire instance
+    axis_lines : bool
+        if False, then disable the axis lines.
+    bounding_box : bool
+        if False, then disable the default annotations like bounding box.
+    layout:  string or dict
+        indicating possible layout options.
 
     Returns
     -------
-    ngviewer: object of Neuroglancer viewer class.
-    flywireurl: url containing the updated flywire instance
+    ngviewer : ng.viewer.Viewer
+        object of Neuroglancer viewer class.
+    flywireurl:  str
+        short or long url of the updated flywire instance
+
     """
     ngdict = flywireurl2dict(flywireurl)
 
