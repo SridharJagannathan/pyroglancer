@@ -4,7 +4,7 @@ python-catmaid>=2.0.2
 navis>=0.5.1
 numpy>=1.16
 json5>=0.9.5
-cloud-volume
+cloud-volume==3.12.1
 webcolors>=1.3
 pyyaml
 nglui>=2.4.0
