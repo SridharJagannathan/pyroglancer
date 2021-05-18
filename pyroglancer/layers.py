@@ -187,6 +187,35 @@ def flush_precomputed(path, subdir):
         shutil.rmtree(path)
 
 
+def setlayerproperty(ngviewer, property_kws):
+    """Set the property of a specific layer.
+
+    Parameters
+    ----------
+    ngviewer : ng.viewer.Viewer
+        object of Neuroglancer viewer class.
+    property_kws: dict
+        containing details about layer name and property value to be set
+
+    Returns
+    -------
+    ngviewer : ng.viewer.Viewer
+        updated object of neuroglancer viewer class.
+    """
+    # This function is for setting properties of specific layers by name.
+    layer_name = property_kws['name']
+
+    with ngviewer.txn() as s:
+        for layer in s.layers:
+            if layer.name == layer_name:
+                if 'visibility' in property_kws:
+                    layer.visible = property_kws['visibility']
+                if 'segments' in property_kws:
+                    layer.segments = property_kws['segments']
+
+    return ngviewer
+
+
 def get_ngserver():
     """Return the local folder hosted via http and its corresponding port.
 

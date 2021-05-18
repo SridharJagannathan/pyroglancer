@@ -61,7 +61,7 @@ def closeviewer():
             print('exception occurred while stopping')
 
 
-def setviewerstate(ngviewer=None, axis_lines=True, bounding_box=True, layout=None):
+def setviewerstate(ngviewer=None, axis_lines=True, bounding_box=True, layout=None, zoom_factor=None):
     """Set state of neuroglancer viewing engine.
 
     Parameters
@@ -74,6 +74,8 @@ def setviewerstate(ngviewer=None, axis_lines=True, bounding_box=True, layout=Non
         if False, then disable the default annotations like bounding box.
     layout:  string | dict
         possible layout options.
+    zoom_factor : float
+        zoom factor of image.
 
     Returns
     -------
@@ -93,8 +95,35 @@ def setviewerstate(ngviewer=None, axis_lines=True, bounding_box=True, layout=Non
         s.show_axis_lines = axis_lines
         s.show_default_annotations = bounding_box
 
-    if layout is not None:
-        with ngviewer.txn() as s:
+    with ngviewer.txn() as s:
+        if layout is not None:
             s.layout = layout
+        if zoom_factor is not None:
+            s.projectionScale = zoom_factor
 
     return ngviewer
+
+
+def get_ngscreenshot(ngviewer, viewer_size=[1000, 1000]):
+    """Get screenshot of neuroglancer viewing engine.
+    Parameters
+    ----------
+    ngviewer : ng.viewer.Viewer
+        object of Neuroglancer viewer class.
+    viewer_size: screenshot size
+
+    Returns
+    -------
+    screenshot: screenshot image.
+    """
+
+    with ngviewer.txn() as s:
+        # s.show_ui_controls = False
+        # s.show_panel_borders = False
+        # s.layout = 'xy'
+        # s.cross_section_scale = 1e-6
+        s.show_axis_lines = False
+
+    screenshot = ngviewer.screenshot(size=viewer_size).screenshot
+
+    return screenshot
