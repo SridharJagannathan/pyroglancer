@@ -109,16 +109,18 @@ def add_precomputed(layer_kws):
     layer_type = layer_kws['type']
     if layer_type == 'skeletons':
         layer_source = layer_kws['source']
+        layer_name = layer_kws.get('name', 'skeletons')
         layer_serverdir, layer_host = get_ngserver()
-        flush_precomputed(layer_serverdir, 'skeletons')
+        flush_precomputed(layer_serverdir, layer_name)
 
         skelsource, skelseglist, skelsegnamelist = to_ngskeletons(layer_source)
         layer_shard = layer_kws.get('sharding', False)
         if layer_shard:
             shardprogress = layer_kws.get('progress', False)
-            uploadshardedskeletons(skelsource, skelseglist, skelsegnamelist, layer_serverdir, shardprogress)
+            uploadshardedskeletons(skelsource, skelseglist, skelsegnamelist,
+                                   layer_serverdir, layer_name, shardprogress)
         else:
-            uploadskeletons(skelsource, skelseglist, skelsegnamelist, layer_serverdir)
+            uploadskeletons(skelsource, skelseglist, skelsegnamelist, layer_serverdir, layer_name)
 
         return skelseglist, layer_host
     elif layer_type == 'volumes':

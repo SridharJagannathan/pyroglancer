@@ -80,13 +80,35 @@ def get_scalevalue(layer_kws):
     return scale
 
 
-def pointcloud2meshes(ply_file, algorithm='rollingball', **kwargs):
+def obj2pointcloud(objurl=None):
+    """Convert object url to point cloud data in open3d format.
+
+    Parameters
+    ----------
+    objurl : str
+        url containing the obj file.
+
+    Returns
+    -------
+    pcd : o3d.geometry.PointCloud
+        point cloud object of open3d PointCloud class.
+
+    """
+
+    tm_mesh = tm.load_remote(objurl)
+    pcd = o3d.geometry.PointCloud()
+    pcd.points = o3d.utility.Vector3dVector(tm_mesh.vertices)
+
+    return pcd
+
+
+def pointcloud2meshes(pcd_data, algorithm='rollingball', **kwargs):
     """Convert point cloud files to volumetric meshes.
 
     Parameters
     ----------
-    ply_file : str
-        point cloud file location in polygon file format.
+    pcd_data : o3d.geometry.PointCloud or str
+        pointcloud object or file location in polygon file format.
     algorithm : str
         algorithm of either 'rollingball' or 'marchingcubes' to convert points to meshes.
 
@@ -97,7 +119,10 @@ def pointcloud2meshes(ply_file, algorithm='rollingball', **kwargs):
 
     """
     # read point cloud data and compute normals
-    pcd = o3d.io.read_point_cloud(ply_file)
+    if isinstance(pcd_data, o3d.geometry.PointCloud):
+        pcd = pcd_data
+    else:
+        pcd = o3d.io.read_point_cloud(pcd_data)
     pcd.estimate_normals()
 
     if algorithm == 'rollingball':

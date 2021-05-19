@@ -115,6 +115,7 @@ def add_flywirelayer(ngdict=None, layer_kws={}):
         layer_annottype = get_annotationstatetype(layer_kws)
         hexcolor = get_hexcolor(layer_kws)
         alpha = get_alphavalue(layer_kws)
+        layer_name = layer_kws.get('name', 'skeletons')
         if layer_annottype == 'precomputed':
             skelseglist, layer_host = add_precomputed(layer_kws)
             if len(hexcolor) == 1:
@@ -124,10 +125,11 @@ def add_flywirelayer(ngdict=None, layer_kws={}):
 
             print(segmentColors)
             skeleton_layer = {"type": "segmentation",
-                              "skeletons": "precomputed://" + layer_host + "/precomputed/skeletons",
+                              "skeletons": "precomputed://" + layer_host +
+                                           "/precomputed/" + layer_name + '/skeletons/',
                               "skeletonRendering": {"mode2d": "lines_and_points", "mode3d": "lines"},
                               "segments": skelseglist,
-                              "name": "skeleton",
+                              "name": layer_name,
                               "objectAlpha": alpha,
                               "segmentColors": segmentColors
                               }
@@ -168,7 +170,7 @@ def add_flywirelayer(ngdict=None, layer_kws={}):
                         "mesh": "precomputed://" + layer_host + "/precomputed/" + layer_name + "/mesh",
                         "skeletonRendering": {"mode2d": "lines_and_points", "mode3d": "lines"},
                         "segments": volumeidlist,
-                        "name": "volumes",
+                        "name": layer_name,
                         "objectAlpha": alpha,
                         "segmentColors": segmentColors}
         ngdict['layers'].append(volume_layer)

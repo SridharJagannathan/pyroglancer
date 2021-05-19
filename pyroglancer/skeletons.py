@@ -118,7 +118,7 @@ def to_ngskeletons(x):
     return skeldatasource, skeldatasegidlist, skelsegnamelist
 
 
-def uploadskeletons(skelsource, skelseglist, skelnamelist, path):
+def uploadskeletons(skelsource, skelseglist, skelnamelist, path, layer_name):
     """Upload skeleton (of cloudvolume class) to a local server.
 
     Parameters
@@ -131,6 +131,8 @@ def uploadskeletons(skelsource, skelseglist, skelnamelist, path):
         contains the names of segments.
     path: str
         local path of the precomputed hosted layer.
+    layer_name: str
+        layer name.
 
     Returns
     -------
@@ -141,7 +143,7 @@ def uploadskeletons(skelsource, skelseglist, skelnamelist, path):
             "transform": skelsource[0].transform.flatten(),
             "vertex_attributes": [{"id": "radius", "data_type": "float32", "num_components": 1}],
             "scales": "um"}
-    path = 'file://' + path + '/precomputed'
+    path = 'file://' + path + '/precomputed/' + layer_name
     cv = CloudVolume(path, info=info)
 
     # prepare for info file
@@ -293,7 +295,7 @@ def to_precomputedskelsinfo(skelseglist, skelnamelist, path):
         json.dump(seginfo, segfile)
 
 
-def uploadshardedskeletons(skelsource, skelseglist, skelnamelist, path, shardprogress=False):
+def uploadshardedskeletons(skelsource, skelseglist, skelnamelist, path, layer_name, shardprogress=False):
     """Upload sharded skeletons to a local server.
 
     Parameters
@@ -306,6 +308,8 @@ def uploadshardedskeletons(skelsource, skelseglist, skelnamelist, path, shardpro
         contains the names of segments.
     path: str
         local path of the precomputed hosted layer.
+    layer_name: str
+        layer name.
     shardprogress:   bool
         progress bar for sharding operation
 
@@ -318,7 +322,7 @@ def uploadshardedskeletons(skelsource, skelseglist, skelnamelist, path, shardpro
             "transform": skelsource[0].transform.flatten(),
             "vertex_attributes": [{"id": "radius", "data_type": "float32", "num_components": 1}],
             "scales": "um"}
-    path = 'file://' + path + '/precomputed'
+    path = 'file://' + path + '/precomputed/' + layer_name
     cv = CloudVolume(path, info=info)
 
     # prepare for info file
