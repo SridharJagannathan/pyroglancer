@@ -146,12 +146,19 @@ def add_precomputed(layer_kws):
     elif layer_type == 'synapses':
         dimensions = _handle_ngdimensions(layer_kws)
         layer_source = layer_kws['source']
+        linked_layername = layer_kws['linked_layername']
         layer_serverdir, layer_host = get_ngserver()
+        presynapsedir = '/precomputed/' + linked_layername + '/presynapses'
+        postsynapsedir = '/precomputed/' + linked_layername + '/postsynapses'
+        print('flushing stuff..')
+        flush_precomputed(layer_serverdir, presynapsedir)
+        flush_precomputed(layer_serverdir, postsynapsedir)
+        print('presynapse stuff at:', layer_serverdir, presynapsedir)
+        print('postsynapse stuff at:', layer_serverdir, postsynapsedir)
 
-        flush_precomputed(layer_serverdir, 'presynapses')
-        flush_precomputed(layer_serverdir, 'postsynapses')
+        layer_path = layer_serverdir + '/precomputed/' + linked_layername
 
-        synapse_path = create_synapseinfo(dimensions, layer_serverdir)
+        synapse_path = create_synapseinfo(dimensions, layer_path)
         upload_synapses(layer_source, synapse_path)
         return layer_host
     elif layer_type == 'points':
@@ -411,15 +418,17 @@ def handle_meshes(ngviewer, layer_kws):
     return ngviewer
 
 
-def handle_skels(ngviewer, path, segmentColors, alpha):
+def handle_skels(ngviewer, path, layer_name, segmentColors, alpha):
     """Add skeletons hosted via http as a neuroglancer layer.
 
     Parameters
     ----------
     ngviewer : ng.viewer.Viewer
         object of Neuroglancer viewer class.
-    layer_kws: dict
-        containing details about different neuroglancer layers
+    path: str
+        local path of the precomputed hosted layer.
+    layer_name: str
+        layer name.
     segmentColors: str
         colors of segments in named or hexformat
     alpha: float
@@ -432,9 +441,9 @@ def handle_skels(ngviewer, path, segmentColors, alpha):
     """
     # This function adds skeletons in the precomputed format hosted locally via http to a neuroglancer instance.
 
-    precomputepath = 'precomputed://' + path + '/precomputed/skeletons'
+    precomputepath = 'precomputed://' + path + '/precomputed/' + layer_name + '/skeletons/'
     with ngviewer.txn() as s:
-        s.layers['skeleton'] = neuroglancer.SegmentationLayer(
+        s.layers[layer_name] = neuroglancer.SegmentationLayer(
             source=precomputepath,
             segmentQuery='/',
             segmentColors=segmentColors,
@@ -521,7 +530,7 @@ def handle_vols(ngviewer, path, layer_name, segmentColors, alpha, layer_res):
     return ngviewer
 
 
-def handle_synapses(ngviewer, path):
+def handle_synapses(ngviewer, path, layer_linked):
     """Add pre/post-synapses hosted via http as a neuroglancer layer.
 
     Parameters
@@ -529,7 +538,9 @@ def handle_synapses(ngviewer, path):
     ngviewer : ng.viewer.Viewer
         object of Neuroglancer viewer class.
     path: str
-        local path of the precomputed hosted layer
+        local path of the precomputed hosted layer.
+    layer_linked: str
+        name of the linked layer.
 
     Returns
     -------
@@ -537,18 +548,18 @@ def handle_synapses(ngviewer, path):
         updated object of neuroglancer viewer class.
     """
     # This function adds synapses in the precomputed format hosted remotely via http to a neuroglancer instance.
-    presynapsepath = 'precomputed://' + path + '/precomputed/presynapses'
-    postsynapsepath = 'precomputed://' + path + '/precomputed/postsynapses'
+    presynapsepath = 'precomputed://' + path + '/precomputed/' + layer_linked + '/presynapses'
+    postsynapsepath = 'precomputed://' + path + '/precomputed/' + layer_linked + '/postsynapses'
     with ngviewer.txn() as s:
         s.layers['presynapses'] = neuroglancer.AnnotationLayer(
             source=presynapsepath,
             annotationColor='#ff0000',
-            linked_segmentation_layer={'presynapses_cell': 'skeleton'},
+            linked_segmentation_layer={'presynapses_cell': layer_linked},
             filter_by_segmentation=['presynapses_cell'])
         s.layers['postsynapses'] = neuroglancer.AnnotationLayer(
             source=postsynapsepath,
             annotationColor='#0000ff',
-            linked_segmentation_layer={'postsynapses_cell': 'skeleton'},
+            linked_segmentation_layer={'postsynapses_cell': layer_linked},
             filter_by_segmentation=['postsynapses_cell'])
 
     return ngviewer
@@ -629,6 +640,7 @@ def create_nglayer(ngviewer=None, layout='xy-3d', **kwargs):
             handle_meshes(ngviewer, layer_kws)
 
         if layer_type == 'skeletons':
+            layer_name = layer_kws.get('name', 'skeletons')
             skelseglist, layer_host = add_precomputed(layer_kws)
 
             hexcolor = get_hexcolor(layer_kws)
@@ -639,7 +651,7 @@ def create_nglayer(ngviewer=None, layout='xy-3d', **kwargs):
             else:
                 segmentColors = dict(zip(skelseglist, hexcolor))
 
-            ngviewer = handle_skels(ngviewer, layer_host, segmentColors, alpha)
+            ngviewer = handle_skels(ngviewer, layer_host, layer_name, segmentColors, alpha)
 
         if layer_type == 'volumes':
             layer_name = layer_kws.get('name', 'volumes')
@@ -657,6 +669,7 @@ def create_nglayer(ngviewer=None, layout='xy-3d', **kwargs):
             ngviewer = handle_vols(ngviewer, layer_host, layer_name, segmentColors, alpha, layer_res)
 
         if layer_type == 'synapses':
+            layer_linked = layer_kws['linked_layername']
             layer_host = add_precomputed(layer_kws)
 
             # layer_source = layer_kws['source']
@@ -668,7 +681,7 @@ def create_nglayer(ngviewer=None, layout='xy-3d', **kwargs):
             # synapse_path = create_synapseinfo(dimensions, layer_serverdir)
             # upload_synapses(layer_source, synapse_path)
 
-            ngviewer = handle_synapses(ngviewer, layer_host)
+            ngviewer = handle_synapses(ngviewer, layer_host, layer_linked)
 
         if layer_type == 'points':
             layer_annottype = get_annotationstatetype(layer_kws)

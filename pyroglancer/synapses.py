@@ -34,7 +34,7 @@ def commit_info(synapseinfo, path, synapsetype):
     synapsetype : str
         pre or postsynapses
     """
-    synapsefilepath = path + '/precomputed/' + synapsetype
+    synapsefilepath = path + '/' + synapsetype
     if not os.path.exists(synapsefilepath):
         os.makedirs(synapsefilepath)
         print('creating:', synapsefilepath)
@@ -80,6 +80,7 @@ def create_synapseinfo(dimensions, path):
     }
     synapseinfo["relationships"] = [{"id": "presynapses_cell",
                                      "key": "presynapses_cell"}]
+    print('synapses info path:', path)
     commit_info(synapseinfo, path, synapsetype='presynapses')
     synapseinfo["relationships"] = [{"id": "postsynapses_cell",
                                      "key": "postsynapses_cell"}]
@@ -104,7 +105,7 @@ def put_synapsefile(path, synapsetype, synapses, skeletonid):
         name for the points (not yet implemented)
 
     """
-    synapsefilepath = path + '/precomputed/' + synapsetype + '/' + synapsetype + '_cell/'
+    synapsefilepath = path + '/' + synapsetype + '/' + synapsetype + '_cell/'
     if not os.path.exists(synapsefilepath):
         os.makedirs(synapsefilepath)
         # print('creating:', synapsefilepath)

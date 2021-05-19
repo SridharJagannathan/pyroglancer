@@ -215,18 +215,19 @@ def add_flywirelayer(ngdict=None, layer_kws={}):
         layer_annottype = get_annotationstatetype(layer_kws)
         if layer_annottype == 'precomputed':
             layer_host = add_precomputed(layer_kws)
+            linked_layername = layer_kws['linked_layername']
             presynapsepath = 'precomputed://' + layer_host + '/precomputed/presynapses'
             postsynapsepath = 'precomputed://' + layer_host + '/precomputed/postsynapses'
             presynapse_layer = {"type": "annotation",
                                 "source": presynapsepath,
                                 "annotationColor": "#ff0000",
-                                "linkedSegmentationLayer": {"presynapses_cell": "skeleton"},
+                                "linkedSegmentationLayer": {"presynapses_cell": linked_layername},
                                 "filterBySegmentation": ["postsynapses_cell"],
                                 "name": "presynapses"}
             postsynapse_layer = {"type": "annotation",
                                  "source": postsynapsepath,
                                  "annotationColor": "#0000ff",
-                                 "linkedSegmentationLayer": {"postsynapses_cell": "skeleton"},
+                                 "linkedSegmentationLayer": {"postsynapses_cell": linked_layername},
                                  "filterBySegmentation": ["postsynapses_cell"],
                                  "name": "postsynapses"}
 

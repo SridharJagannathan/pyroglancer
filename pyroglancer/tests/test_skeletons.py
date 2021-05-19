@@ -63,10 +63,10 @@ class Testskeleton(unittest.TestCase):
         layer_serverdir, layer_host = get_ngserver()
 
         skelsource, skelseglist, skelsegnamelist = to_ngskeletons(neuronlist)
-        uploadskeletons(skelsource, skelseglist, skelsegnamelist, layer_serverdir)
+        uploadskeletons(skelsource, skelseglist, skelsegnamelist, layer_serverdir, 'catmaid_test')
 
         skeleton_path = os.path.join(
-            layer_serverdir, 'precomputed/skeletons/', str(neuronlist[0].id))
+            layer_serverdir, 'precomputed/catmaid_test/skeletons/', str(neuronlist[0].id))
         # print('skel path: ', skeleton_path)
 
         status = os.path.isfile(skeleton_path)
@@ -91,10 +91,10 @@ class Testskeleton(unittest.TestCase):
         layer_serverdir, layer_host = get_ngserver()
 
         skelsource, skelseglist, skelsegnamelist = to_ngskeletons(treeneuron)
-        uploadskeletons(skelsource, skelseglist, skelsegnamelist, layer_serverdir)
+        uploadskeletons(skelsource, skelseglist, skelsegnamelist, layer_serverdir, 'catmaid_test')
 
         skeleton_path = os.path.join(
-            layer_serverdir, 'precomputed/skeletons/', str(treeneuron.id))
+            layer_serverdir, 'precomputed/catmaid_test/skeletons/', str(treeneuron.id))
 
         status = os.path.isfile(skeleton_path)
 
@@ -117,10 +117,10 @@ class Testskeleton(unittest.TestCase):
         layer_serverdir, layer_host = get_ngserver()
 
         skelsource, skelseglist, skelsegnamelist = to_ngskeletons(neuronlist)
-        uploadskeletons(skelsource, skelseglist, skelsegnamelist, layer_serverdir)
+        uploadskeletons(skelsource, skelseglist, skelsegnamelist, layer_serverdir, 'catmaid_test')
 
         skeleton_path = os.path.join(
-            layer_serverdir, 'precomputed/skeletons/', str(neuronlist[0].id))
+            layer_serverdir, 'precomputed/catmaid_test/skeletons/', str(neuronlist[0].id))
 
         status = os.path.isfile(skeleton_path)
 
@@ -144,10 +144,10 @@ class Testskeleton(unittest.TestCase):
         layer_serverdir, layer_host = get_ngserver()
 
         skelsource, skelseglist, skelsegnamelist = to_ngskeletons(catmaidneuron)
-        uploadskeletons(skelsource, skelseglist, skelsegnamelist, layer_serverdir)
+        uploadskeletons(skelsource, skelseglist, skelsegnamelist, layer_serverdir, 'catmaid_test')
 
         skeleton_path = os.path.join(
-            layer_serverdir, 'precomputed/skeletons/', str(catmaidneuron.id))
+            layer_serverdir, 'precomputed/catmaid_test/skeletons/', str(catmaidneuron.id))
 
         status = os.path.isfile(skeleton_path)
 

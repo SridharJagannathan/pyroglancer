@@ -58,7 +58,7 @@ class Testsynapses(unittest.TestCase):
         create_synapseinfo(dimensions, layer_serverdir)
 
         status = os.path.isfile(os.path.join(
-            layer_serverdir, 'precomputed/presynapses', 'info'))
+            layer_serverdir, 'presynapses', 'info'))
 
         assert status
 
@@ -80,8 +80,7 @@ class Testsynapses(unittest.TestCase):
 
         put_synapsefile(synapse_path, type, presynapses, skeletonid)
 
-        synapsefilepath = synapse_path + '/precomputed/' + \
-            type + '/' + type + '_cell/' + str(skeletonid)
+        synapsefilepath = synapse_path + '/' + type + '/' + type + '_cell/' + str(skeletonid)
 
         status = os.path.isfile(synapsefilepath)
 
@@ -105,8 +104,7 @@ class Testsynapses(unittest.TestCase):
 
         put_synapsefile(synapse_path, type, presynapses, skeletonid)
 
-        synapsefilepath = synapse_path + '/precomputed/' + \
-            type + '/' + type + '_cell/' + str(skeletonid)
+        synapsefilepath = synapse_path + '/' + type + '/' + type + '_cell/' + str(skeletonid)
 
         status = os.path.isfile(synapsefilepath)
 
@@ -134,11 +132,12 @@ class Testsynapses(unittest.TestCase):
         synapse_path = create_synapseinfo(dimensions, layer_serverdir)
 
         presynlayer_kws = {'type': 'synapses', 'ngspace': 'FAFB',
+                           'linked_layername': 'test_neurons',
                            'source': neuronlist}
 
         create_nglayer(layer_kws=presynlayer_kws)
         type = 'presynapses'
-        synapsefilepath = synapse_path + '/precomputed/' +\
+        synapsefilepath = synapse_path + '/precomputed/' + 'test_neurons/' + \
             type + '/' + type + '_cell/' + str(neuronlist[0].id)
 
         status = os.path.isfile(synapsefilepath)
@@ -167,11 +166,12 @@ class Testsynapses(unittest.TestCase):
         synapse_path = create_synapseinfo(dimensions, layer_serverdir)
 
         presynlayer_kws = {'type': 'synapses', 'ngspace': 'FAFB',
+                           'linked_layername': 'test_neurons',
                            'source': neuronlist[0]}
 
         create_nglayer(layer_kws=presynlayer_kws)
         type = 'presynapses'
-        synapsefilepath = synapse_path + '/precomputed/' +\
+        synapsefilepath = synapse_path + '/precomputed/' + 'test_neurons/' + \
             type + '/' + type + '_cell/' + str(neuronlist[0].id)
 
         status = os.path.isfile(synapsefilepath)
@@ -212,11 +212,12 @@ class Testsynapses(unittest.TestCase):
         synapse_path = create_synapseinfo(dimensions, layer_serverdir)
 
         presynlayer_kws = {'type': 'synapses', 'ngspace': 'FAFB',
+                           'linked_layername': 'test_neurons',
                            'source': neuronlist}
 
         create_nglayer(layer_kws=presynlayer_kws)
         type = 'presynapses'
-        synapsefilepath = synapse_path + '/precomputed/' +\
+        synapsefilepath = synapse_path + '/precomputed/' + 'test_neurons/' + \
             type + '/' + type + '_cell/' + str(neuronlist[0].id)
 
         status = os.path.isfile(synapsefilepath)
@@ -245,11 +246,12 @@ class Testsynapses(unittest.TestCase):
         synapse_path = create_synapseinfo(dimensions, layer_serverdir)
 
         presynlayer_kws = {'type': 'synapses', 'ngspace': 'FAFB',
+                           'linked_layername': 'test_neurons',
                            'source': catmaidneuron}
 
         create_nglayer(layer_kws=presynlayer_kws)
         type = 'presynapses'
-        synapsefilepath = synapse_path + '/precomputed/' +\
+        synapsefilepath = synapse_path + '/precomputed/' + 'test_neurons/' + \
             type + '/' + type + '_cell/' + str(catmaidneuron.id)
 
         status = os.path.isfile(synapsefilepath)
