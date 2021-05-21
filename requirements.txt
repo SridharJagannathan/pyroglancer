@@ -15,6 +15,4 @@ scipy==1.5.2
 webcolors==1.11.1
 navis==0.6.0
 neuroglancer==2.21
-pymaid==0.3.8.post4
 PyYAML==5.4.1
-skimage==0.0
