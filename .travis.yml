@@ -10,10 +10,8 @@ cache:
     - $HOME/.cache/pip
     - $HOME/.ccache  # https://github.com/travis-ci/travis-ci/issues/5853
 
-before_install:
-  - python -m pip install --upgrade pip
-
 install:
+  - pip install -U pip
   - pip install -U setuptools
   - pip install coveralls
   - pip install pytest-cov # to get coverage report
