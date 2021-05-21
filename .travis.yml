@@ -5,7 +5,7 @@ jobs:
       dist: bionic
     - os: osx
 python:
-  - 3.6
+  - 3.8
 cache:
   directories:
     - $HOME/.cache/pip
