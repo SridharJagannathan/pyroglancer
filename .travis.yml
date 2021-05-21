@@ -17,7 +17,7 @@ install:
   - pip install -U setuptools
   - pip install coveralls
   - pip install pytest-cov # to get coverage report
-  - pip install --user -r requirements.txt --use-feature=2020-resolver
+  - pip install . # Install this package and the packages listed in requirements.txt.
   - pip install -r requirements-dev.txt # Install extra requirements for running tests and building docs.
   - sudo apt-get install pandoc
 
