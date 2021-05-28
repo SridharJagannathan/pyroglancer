@@ -55,7 +55,7 @@ def flywireurl2dict(flywireurl):
 
     if 'json_url' in querystring:
         # Get the layers from the json file as query
-        token = cloudvolume.secrets.cave_credentials()
+        token = cloudvolume.secrets.cave_credentials()['token']
         response = requests.get(querystring['json_url'][0], headers={'Authorization': f"Bearer {token}"})
         response.raise_for_status()
 
@@ -79,7 +79,7 @@ def flywiredict2url(ngdict):
     flywireurl:  str
         short or long url of the flywire instance
     """
-    token = cloudvolume.secrets.cave_credentials()
+    token = cloudvolume.secrets.cave_credentials()['token']
     jsonbaseurl = FLYWIRESTATE_URL
     flywirebaseurl = FLYWIREHOST_URL
     session = requests.Session()
