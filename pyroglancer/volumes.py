@@ -159,6 +159,7 @@ def _to_multires_shardedprecomputed(vertices, faces, quant_bits):
     fragment_offsets = []
     fragment_positions = []
 
+    manifestdata = BytesIO()
     fragmentdata = BytesIO()
 
     # write the mesh fragment data file first..
@@ -179,17 +180,17 @@ def _to_multires_shardedprecomputed(vertices, faces, quant_bits):
     num_fragments_per_lod = np.array([len(nodes) for nodes in fragment_positions])
 
     # write the mesh manifest file now..
-    fragmentdata.write(chunk_shape.astype('<f').tobytes())
-    fragmentdata.write(grid_origin.astype('<f').tobytes())
-    fragmentdata.write(struct.pack('<I', num_lods))
-    fragmentdata.write(lod_scales.astype('<f').tobytes())
-    fragmentdata.write(vertex_offsets.astype('<f').tobytes(order='C'))
-    fragmentdata.write(num_fragments_per_lod.astype('<I').tobytes())
+    manifestdata.write(chunk_shape.astype('<f').tobytes())
+    manifestdata.write(grid_origin.astype('<f').tobytes())
+    manifestdata.write(struct.pack('<I', num_lods))
+    manifestdata.write(lod_scales.astype('<f').tobytes())
+    manifestdata.write(vertex_offsets.astype('<f').tobytes(order='C'))
+    manifestdata.write(num_fragments_per_lod.astype('<I').tobytes())
     for frag_pos, frag_offset in zip(fragment_positions, fragment_offsets):
-        fragmentdata.write(frag_pos.T.astype('<I').tobytes(order='C'))
-        fragmentdata.write(frag_offset.astype('<I').tobytes(order='C'))
+        manifestdata.write(frag_pos.T.astype('<I').tobytes(order='C'))
+        manifestdata.write(frag_offset.astype('<I').tobytes(order='C'))
 
-    return fragmentdata.getvalue()
+    return fragmentdata.getvalue(), manifestdata.getvalue()
 
 
 def uploadsingleresmeshes(volumedatasource, volumeidlist, volumenamelist, path, layer_name):
@@ -529,7 +530,8 @@ def uploadshardedmultiresmeshes(volumedatasource, volumeidlist, volumenamelist, 
     files = [os.path.join(cv.mesh.meta.mesh_path, str(vol.segid)) for vol in volumedatasource]
     volumeids = [str(vol.segid) for vol in volumedatasource]
 
-    precomputedmeshes = {}
+    precomp_manifest = {}
+    precomp_fragdata = {}
     for fileidx in range(len(files)):
         fullfilepath = str(files[fileidx])  # files[fileidx]
         print(files[fileidx])
@@ -540,9 +542,10 @@ def uploadshardedmultiresmeshes(volumedatasource, volumeidlist, volumenamelist, 
         print('Full filepath:', fullfilepath)
         volumeid = int(volumeids[fileidx])
         print('Vol id is:', str(volumeid))
-        precomputedmeshes[volumeid] = _to_multires_shardedprecomputed(vertices, faces, quant_bits)
+        precomp_fragdata[volumeid], precomp_manifest[volumeid] = _to_multires_shardedprecomputed(
+            vertices, faces, quant_bits)
 
-    shardfiles = spec.synthesize_shards(precomputedmeshes, progress=shardprogress)
+    shardfiles = spec.synthesize_shards(precomp_manifest, progress=shardprogress)
     shardedfilepath = os.path.join(cv.basepath, os.path.basename(path), cv.mesh.meta.mesh_path)
 
     for fname in shardfiles.keys():
