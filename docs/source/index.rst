@@ -18,6 +18,7 @@ Pyroglancer
    tutorials/flywire2fafb.ipynb
    tutorials/hemibrain2flywire.ipynb
    tutorials/gal4line2flywire.ipynb
+   tutorials/shardeddataset.ipynb
 
 .. toctree::
    :maxdepth: 2
