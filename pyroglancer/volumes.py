@@ -161,6 +161,7 @@ def _to_multires_shardedprecomputed(vertices, faces, quant_bits):
 
     manifestdata = BytesIO()
     fragmentdata = BytesIO()
+    combineddata = BytesIO()
 
     # write the mesh fragment data file first..
     # for each level now decompose the mesh into submeshes with lower resolution..
@@ -190,7 +191,11 @@ def _to_multires_shardedprecomputed(vertices, faces, quant_bits):
         manifestdata.write(frag_pos.T.astype('<I').tobytes(order='C'))
         manifestdata.write(frag_offset.astype('<I').tobytes(order='C'))
 
-    return fragmentdata.getvalue(), manifestdata.getvalue()
+    combineddata.write(fragmentdata.getvalue())
+    combineddata.write(manifestdata.getvalue())
+    offset = len(fragmentdata.getvalue())
+
+    return combineddata.getvalue(), offset
 
 
 def uploadsingleresmeshes(volumedatasource, volumeidlist, volumenamelist, path, layer_name):
@@ -530,8 +535,8 @@ def uploadshardedmultiresmeshes(volumedatasource, volumeidlist, volumenamelist, 
     files = [os.path.join(cv.mesh.meta.mesh_path, str(vol.segid)) for vol in volumedatasource]
     volumeids = [str(vol.segid) for vol in volumedatasource]
 
-    precomp_manifest = {}
-    precomp_fragdata = {}
+    precomp_data = {}
+    offset = {}
     for fileidx in range(len(files)):
         fullfilepath = str(files[fileidx])  # files[fileidx]
         print(files[fileidx])
@@ -542,10 +547,9 @@ def uploadshardedmultiresmeshes(volumedatasource, volumeidlist, volumenamelist, 
         print('Full filepath:', fullfilepath)
         volumeid = int(volumeids[fileidx])
         print('Vol id is:', str(volumeid))
-        precomp_fragdata[volumeid], precomp_manifest[volumeid] = _to_multires_shardedprecomputed(
-            vertices, faces, quant_bits)
+        precomp_data[volumeid], offset[volumeid] = _to_multires_shardedprecomputed(vertices, faces, quant_bits)
 
-    shardfiles = spec.synthesize_shards(precomp_manifest, progress=shardprogress)
+    shardfiles = spec.synthesize_shards(precomp_data, offset, progress=shardprogress)
     shardedfilepath = os.path.join(cv.basepath, os.path.basename(path), cv.mesh.meta.mesh_path)
 
     for fname in shardfiles.keys():
