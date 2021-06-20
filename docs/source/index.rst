@@ -22,6 +22,12 @@ Pyroglancer
 
 .. toctree::
    :maxdepth: 2
+   :caption: hemibraindataset
+
+   30k_hemibraindataset
+
+.. toctree::
+   :maxdepth: 2
    :caption: API Documentation
    
    modules
