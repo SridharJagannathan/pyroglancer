@@ -6,7 +6,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest] 
         python-version: [3.9]
     runs-on: ${{ matrix.os }}
     steps:
@@ -24,8 +24,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements-dev.txt
 
-    - name: Run pytest
-      run: pytest --cov
+    - name: Test with pytest
+      run: |
+        pytest --exitfirst --verbose --failed-first \
+        --cov=. --cov-report html
 
     - name: Coverage report
       run: bash <(curl -s https://codecov.io/bash)
