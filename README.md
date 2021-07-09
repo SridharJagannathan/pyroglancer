@@ -25,8 +25,17 @@ Documentation
 Features
 ========
 
--   Fetch and display neurons from the hemibrain, FAFB dataset
+-   Fetch and display neurons/neuropil meshes from electron microscopy (EM) datasets like hemibrain, FAFB etc and light microscopy (LM) 
+    neurons in mesh format.
+-   Display locally modified neurons or neuropil meshes.
 -   Display synapse annotations etc
+
+| Elements | Format |  Source |  Datasets |
+| --- | --- | --- | --- |
+| `neuron` | skeletons (swc) or volumetric meshes | `CATMAID`, `neuprint`, `vritualflybrain` or other locally modified data | EM datasets like FAFB, hemibrain or any other LM dataset like lineage clones etc |
+| `neuropils` | volumetric meshes | `CATMAID`, `neuprint` or other locally modified data | FAFB, hemibrain |
+| `synapses` | point annotations or precomputed format | neuroglancer layers or other locally modified data | FAFB, hemibrain |
+
 
 Acknowledgements
 ================
