@@ -1,0 +1,1472 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>pyroglancer package &mdash; Pyroglancer 0.0.4 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="pyroglancer" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Pyroglancer
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Install Pyroglancer</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/local_neuroglancer.html">Starting a local neuroglancer session with FAFB dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/examples_flywirecoplotting.html">Examples of different co-plotting with flywire</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/catmaid2flywire.html">Co-plotting CATMAID skeleton with flywire dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/flywire2fafb.html">Co-plotting flywire mesh with FAFB autosegments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/hemibrain2flywire.html">Co-plotting hemibrain skeleton with flywire dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/gal4line2flywire.html">Co-plotting split-gal4 line, hemibrain skeleton with flywire dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/shardeddataset.html">Creating sharded datasets with FAFB</a></li>
+</ul>
+<p class="caption"><span class="caption-text">hemibraindataset</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="30k_hemibraindataset.html">30k hemibrain2fafb</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">pyroglancer</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">pyroglancer package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyroglancer.createconfig">pyroglancer.createconfig module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyroglancer.flywire">pyroglancer.flywire module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyroglancer.layers">pyroglancer.layers module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyroglancer.loadconfig">pyroglancer.loadconfig module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyroglancer.localserver">pyroglancer.localserver module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyroglancer.meshgenerator">pyroglancer.meshgenerator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyroglancer.ngspaces">pyroglancer.ngspaces module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyroglancer.ngviewer">pyroglancer.ngviewer module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyroglancer.points">pyroglancer.points module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyroglancer.skeletons">pyroglancer.skeletons module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyroglancer.synapses">pyroglancer.synapses module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyroglancer.utils">pyroglancer.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyroglancer.volumes">pyroglancer.volumes module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyroglancer">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Pyroglancer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">pyroglancer</a> &raquo;</li>
+        
+      <li>pyroglancer package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/pyroglancer.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="pyroglancer-package">
+<h1>pyroglancer package<a class="headerlink" href="#pyroglancer-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pyroglancer.createconfig">
+<span id="pyroglancer-createconfig-module"></span><h2>pyroglancer.createconfig module<a class="headerlink" href="#module-pyroglancer.createconfig" title="Permalink to this headline">¶</a></h2>
+<p>Module for creating yaml based configuration files for adding layers in the neuroglancer.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.createconfig.createconfig">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.createconfig.</span></span><span class="sig-name descname"><span class="pre">createconfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">configfileloc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/createconfig.html#createconfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.createconfig.createconfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create config file in case it is not found.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>configdata</strong> (<em>dict</em>) – different layers to be added in the neuroglancer instance</p></li>
+<li><p><strong>configfileloc</strong> (<em>str</em>) – location of the configuration file</p></li>
+<li><p><strong>overwrite</strong> (<em>bool</em>) – if set to True, then overwrites the existing configuration file</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.createconfig.getdefaultconfigdata">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.createconfig.</span></span><span class="sig-name descname"><span class="pre">getdefaultconfigdata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/createconfig.html#getdefaultconfigdata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.createconfig.getdefaultconfigdata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get neuroglancer layer data from default configuration in case configuration fileit is not found.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyroglancer.flywire">
+<span id="pyroglancer-flywire-module"></span><h2>pyroglancer.flywire module<a class="headerlink" href="#module-pyroglancer.flywire" title="Permalink to this headline">¶</a></h2>
+<p>Module contains functions to handle neuroglancer layers for flywire tracing.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.flywire.add_flywirehostedlayer">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.flywire.</span></span><span class="sig-name descname"><span class="pre">add_flywirehostedlayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngdict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_kws</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/flywire.html#add_flywirehostedlayer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.flywire.add_flywirehostedlayer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a layer to flywire from hosted source.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ngdict</strong> (<em>dict</em>) – different layers of the flywire instance</p></li>
+<li><p><strong>layer_kws</strong> (<em>dict</em>) – different parameters about the layer to add</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>flywireurl</strong> – short or long url of the updated flywire instance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.flywire.add_flywirelayer">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.flywire.</span></span><span class="sig-name descname"><span class="pre">add_flywirelayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngdict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_kws</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/flywire.html#add_flywirelayer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.flywire.add_flywirelayer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a layer to flywire from different datasources.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ngdict</strong> (<em>dict</em>) – different layers of the flywire instance</p></li>
+<li><p><strong>layer_kws</strong> (<em>dict</em>) – different parameters about the layer to add</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>flywireurl</strong> – short or long url of the updated flywire instance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.flywire.flywiredict2url">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.flywire.</span></span><span class="sig-name descname"><span class="pre">flywiredict2url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngdict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/flywire.html#flywiredict2url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.flywire.flywiredict2url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a flywire based short url.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ngdict</strong> (<em>dict</em>) – different layers of the flywire instance</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>flywireurl</strong> – short or long url of the flywire instance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.flywire.flywireurl2dict">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.flywire.</span></span><span class="sig-name descname"><span class="pre">flywireurl2dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flywireurl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/flywire.html#flywireurl2dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.flywire.flywireurl2dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return layers from a flywire based short or long url.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>flywireurl</strong> (<em>str</em>) – short or long url of the flywire instance</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ngdict</strong> – different layers of the flywire instance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.flywire.set_flywireviewerstate">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.flywire.</span></span><span class="sig-name descname"><span class="pre">set_flywireviewerstate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flywireurl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis_lines</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounding_box</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/flywire.html#set_flywireviewerstate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.flywire.set_flywireviewerstate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set state of neuroglancer viewing engine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>flywireurl</strong> (<em>str</em>) – short or long url of the flywire instance</p></li>
+<li><p><strong>axis_lines</strong> (<em>bool</em>) – if False, then disable the axis lines.</p></li>
+<li><p><strong>bounding_box</strong> (<em>bool</em>) – if False, then disable the default annotations like bounding box.</p></li>
+<li><p><strong>layout</strong> (<em>string | dict</em>) – indicating possible layout options.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>ngviewer</strong> (<em>ng.viewer.Viewer</em>) – object of Neuroglancer viewer class.</p></li>
+<li><p><strong>flywireurl</strong> (<em>str</em>) – short or long url of the updated flywire instance</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyroglancer.layers">
+<span id="pyroglancer-layers-module"></span><h2>pyroglancer.layers module<a class="headerlink" href="#module-pyroglancer.layers" title="Permalink to this headline">¶</a></h2>
+<p>Module contains functions to handle different types of neuroglancer layers.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.layers.add_hostedlayer">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.layers.</span></span><span class="sig-name descname"><span class="pre">add_hostedlayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngviewer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/layers.html#add_hostedlayer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.layers.add_hostedlayer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add already hosted layers (via url) directly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ngviewer</strong> (<em>ng.viewer.Viewer</em>) – object of Neuroglancer viewer class.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ngviewer</strong> – updated object of neuroglancer viewer class.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ng.viewer.Viewer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.layers.add_precomputed">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.layers.</span></span><span class="sig-name descname"><span class="pre">add_precomputed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer_kws</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/layers.html#add_precomputed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.layers.add_precomputed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add data in a precomputed format to the specific folder hosted via http.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>layer_kws</strong> (<em>dict</em>) – containing details about different neuroglancer layers</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>layer_host</strong> (<em>str</em>) – port number of the http host.</p></li>
+<li><p><strong>layer_name | skelseglist | volumeidlist</strong> (<em>str | list</em>) – either a layer name or list containing ids of skeletons or volume ids.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.layers.create_nglayer">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.layers.</span></span><span class="sig-name descname"><span class="pre">create_nglayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngviewer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xy-3d'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/layers.html#create_nglayer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.layers.create_nglayer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a neuroglancer layer and print the url as output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ngviewer</strong> (<em>ng.viewer.Viewer</em>) – object of Neuroglancer viewer class.</p></li>
+<li><p><strong>layout</strong> (<em>str</em>) – layout of neuroglancer window</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ngviewer</strong> – object of Neuroglancer viewer class.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ng.viewer.Viewer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.layers.flush_precomputed">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.layers.</span></span><span class="sig-name descname"><span class="pre">flush_precomputed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subdir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/layers.html#flush_precomputed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.layers.flush_precomputed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete/Flush a subfolder inside the precomputed folder that is hosted via http.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – local path of the precomputed hosted layer</p></li>
+<li><p><strong>subdir</strong> (<em>str</em>) – name of the subdirectory inside the local precomputed layer to flush</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.layers.get_ngserver">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.layers.</span></span><span class="sig-name descname"><span class="pre">get_ngserver</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/layers.html#get_ngserver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.layers.get_ngserver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the local folder hosted via http and its corresponding port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>layer_serverdir</strong> (<em>str</em>) – local directory for hosting the precomputed layer.</p></li>
+<li><p><strong>layer_host</strong> (<em>str</em>) – port number of the http host.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.layers.handle_emdata">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.layers.</span></span><span class="sig-name descname"><span class="pre">handle_emdata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngviewer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_kws</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/layers.html#handle_emdata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.layers.handle_emdata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the electron microscopy layer as a neuroglancer layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ngviewer</strong> (<em>ng.viewer.Viewer</em>) – object of Neuroglancer viewer class.</p></li>
+<li><p><strong>layer_kws</strong> (<em>dict</em>) – containing details about different neuroglancer layers</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ngviewer</strong> – updated object of neuroglancer viewer class.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ng.viewer.Viewer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.layers.handle_meshes">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.layers.</span></span><span class="sig-name descname"><span class="pre">handle_meshes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngviewer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_kws</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/layers.html#handle_meshes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.layers.handle_meshes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the different surface meshes as a neuroglancer layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ngviewer</strong> (<em>ng.viewer.Viewer</em>) – object of Neuroglancer viewer class.</p></li>
+<li><p><strong>layer_kws</strong> (<em>dict</em>) – containing details about different neuroglancer layers</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ngviewer</strong> – updated object of neuroglancer viewer class.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ng.viewer.Viewer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.layers.handle_points">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.layers.</span></span><span class="sig-name descname"><span class="pre">handle_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngviewer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotationColor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/layers.html#handle_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.layers.handle_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add points hosted via http as a neuroglancer layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ngviewer</strong> (<em>ng.viewer.Viewer</em>) – object of Neuroglancer viewer class.</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – local path of the precomputed hosted layer.</p></li>
+<li><p><strong>layer_name</strong> (<em>str</em>) – layer name.</p></li>
+<li><p><strong>annotationColor</strong> (<em>str</em>) – color in either named or hexcode format.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ngviewer</strong> – updated object of neuroglancer viewer class.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ng.viewer.Viewer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.layers.handle_segmentdata">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.layers.</span></span><span class="sig-name descname"><span class="pre">handle_segmentdata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngviewer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_kws</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/layers.html#handle_segmentdata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.layers.handle_segmentdata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the different neuron segmentation datasets as a neuroglancer layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ngviewer</strong> (<em>ng.viewer.Viewer</em>) – object of Neuroglancer viewer class.</p></li>
+<li><p><strong>layer_kws</strong> (<em>dict</em>) – containing details about different neuroglancer layers</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ngviewer</strong> – updated object of neuroglancer viewer class.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ng.viewer.Viewer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.layers.handle_skels">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.layers.</span></span><span class="sig-name descname"><span class="pre">handle_skels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngviewer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segmentColors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/layers.html#handle_skels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.layers.handle_skels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add skeletons hosted via http as a neuroglancer layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ngviewer</strong> (<em>ng.viewer.Viewer</em>) – object of Neuroglancer viewer class.</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – local path of the precomputed hosted layer.</p></li>
+<li><p><strong>layer_name</strong> (<em>str</em>) – layer name.</p></li>
+<li><p><strong>segmentColors</strong> (<em>str</em>) – colors of segments in named or hexformat</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – transparency value</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ngviewer</strong> – updated object of neuroglancer viewer class.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ng.viewer.Viewer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.layers.handle_synapses">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.layers.</span></span><span class="sig-name descname"><span class="pre">handle_synapses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngviewer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_linked</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/layers.html#handle_synapses"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.layers.handle_synapses" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add pre/post-synapses hosted via http as a neuroglancer layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ngviewer</strong> (<em>ng.viewer.Viewer</em>) – object of Neuroglancer viewer class.</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – local path of the precomputed hosted layer.</p></li>
+<li><p><strong>layer_linked</strong> (<em>str</em>) – name of the linked layer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ngviewer</strong> – updated object of neuroglancer viewer class.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ng.viewer.Viewer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.layers.handle_synapticclefts">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.layers.</span></span><span class="sig-name descname"><span class="pre">handle_synapticclefts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngviewer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_kws</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/layers.html#handle_synapticclefts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.layers.handle_synapticclefts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the synapse cleft predictions for the em dataset as a neuroglancer layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ngviewer</strong> (<em>ng.viewer.Viewer</em>) – object of Neuroglancer viewer class.</p></li>
+<li><p><strong>layer_kws</strong> (<em>dict</em>) – containing details about different neuroglancer layers</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ngviewer</strong> – updated object of neuroglancer viewer class.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ng.viewer.Viewer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.layers.handle_synapticdata">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.layers.</span></span><span class="sig-name descname"><span class="pre">handle_synapticdata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngviewer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_kws</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/layers.html#handle_synapticdata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.layers.handle_synapticdata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the synapse predictions for the em datasets as a neuroglancer layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ngviewer</strong> (<em>ng.viewer.Viewer</em>) – object of Neuroglancer viewer class.</p></li>
+<li><p><strong>layer_kws</strong> (<em>dict</em>) – containing details about different neuroglancer layers</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ngviewer</strong> – updated object of neuroglancer viewer class.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ng.viewer.Viewer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.layers.handle_vols">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.layers.</span></span><span class="sig-name descname"><span class="pre">handle_vols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngviewer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segmentColors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_res</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/layers.html#handle_vols"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.layers.handle_vols" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add volumes hosted via http as a neuroglancer layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ngviewer</strong> (<em>ng.viewer.Viewer</em>) – object of Neuroglancer viewer class.</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – local path of the precomputed hosted layer.</p></li>
+<li><p><strong>layer_name</strong> (<em>str</em>) – layer name.</p></li>
+<li><p><strong>segmentColors</strong> (<em>str</em>) – colors of segments in named or hexformat</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – transparency value</p></li>
+<li><p><strong>layer_res</strong> (<em>bool</em>) – single or multi resolution meshes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ngviewer</strong> – updated object of neuroglancer viewer class.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ng.viewer.Viewer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.layers.setlayerproperty">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.layers.</span></span><span class="sig-name descname"><span class="pre">setlayerproperty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngviewer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">property_kws</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/layers.html#setlayerproperty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.layers.setlayerproperty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the property of a specific layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ngviewer</strong> (<em>ng.viewer.Viewer</em>) – object of Neuroglancer viewer class.</p></li>
+<li><p><strong>property_kws</strong> (<em>dict</em>) – containing details about layer name and property value to be set</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ngviewer</strong> – updated object of neuroglancer viewer class.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ng.viewer.Viewer</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyroglancer.loadconfig">
+<span id="pyroglancer-loadconfig-module"></span><h2>pyroglancer.loadconfig module<a class="headerlink" href="#module-pyroglancer.loadconfig" title="Permalink to this headline">¶</a></h2>
+<p>Module contains functions to handle configuratio data fron YAML files.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.loadconfig.getconfigdata">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.loadconfig.</span></span><span class="sig-name descname"><span class="pre">getconfigdata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configfileloc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/loadconfig.html#getconfigdata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.loadconfig.getconfigdata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the YAML config data from the default location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>configfileloc</strong> (<em>str</em>) – override the default location if configfileloc is present</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>configdata</strong> – different layers to be added in the neuroglancer instance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyroglancer.localserver">
+<span id="pyroglancer-localserver-module"></span><h2>pyroglancer.localserver module<a class="headerlink" href="#module-pyroglancer.localserver" title="Permalink to this headline">¶</a></h2>
+<p>This code is used to serve local data via http port, so it can be read by neuroglancer.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyroglancer.localserver.RequestHandler">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pyroglancer.localserver.</span></span><span class="sig-name descname"><span class="pre">RequestHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/localserver.html#RequestHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.localserver.RequestHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">http.server.SimpleHTTPRequestHandler</span></code></p>
+<p>This class provides support for generic cors access, HTTP ‘Range’ requests
+In case of the range implementation, the approach is to:
+- Override send_head to look for ‘Range’ and respond appropriately.
+- Override copyfile to only transmit a range when requested.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyroglancer.localserver.RequestHandler.copyfile">
+<span class="sig-name descname"><span class="pre">copyfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/localserver.html#RequestHandler.copyfile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.localserver.RequestHandler.copyfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy all data between two file objects.</p>
+<p>The SOURCE argument is a file object open for reading
+(or anything with a read() method) and the DESTINATION
+argument is a file object open for writing (or
+anything with a write() method).</p>
+<p>The only reason for overriding this would be to change
+the block size or perhaps to replace newlines by CRLF
+– note however that this the default server uses this
+to copy binary data as well.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyroglancer.localserver.RequestHandler.do_OPTIONS">
+<span class="sig-name descname"><span class="pre">do_OPTIONS</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/localserver.html#RequestHandler.do_OPTIONS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.localserver.RequestHandler.do_OPTIONS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyroglancer.localserver.RequestHandler.end_headers">
+<span class="sig-name descname"><span class="pre">end_headers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/localserver.html#RequestHandler.end_headers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.localserver.RequestHandler.end_headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allow responses to be shared with any requester without any credentials.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyroglancer.localserver.RequestHandler.send_head">
+<span class="sig-name descname"><span class="pre">send_head</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/localserver.html#RequestHandler.send_head"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.localserver.RequestHandler.send_head" title="Permalink to this definition">¶</a></dt>
+<dd><p>Common code for GET and HEAD commands.</p>
+<p>This sends the response code and MIME headers.</p>
+<p>Return value is either a file object (which has to be copied
+to the outputfile by the caller unless the command was HEAD,
+and must be closed by the caller under all circumstances), or
+None, in which case the caller has nothing further to do.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyroglancer.localserver.Server">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pyroglancer.localserver.</span></span><span class="sig-name descname"><span class="pre">Server</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server_address</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/localserver.html#Server"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.localserver.Server" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">http.server.HTTPServer</span></code></p>
+<p>Class for basic HTTP server.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyroglancer.localserver.Server.protocol_version">
+<span class="sig-name descname"><span class="pre">protocol_version</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'HTTP/1.1'</span></em><a class="headerlink" href="#pyroglancer.localserver.Server.protocol_version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.localserver.closedataserver">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.localserver.</span></span><span class="sig-name descname"><span class="pre">closedataserver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">removefiles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/localserver.html#closedataserver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.localserver.closedataserver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close a already started dataserver.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>removefiles</strong> (<em>flag to remove the created contents in the hosted server</em>) – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.localserver.copy_byte_range">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.localserver.</span></span><span class="sig-name descname"><span class="pre">copy_byte_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bufsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">16384</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/localserver.html#copy_byte_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.localserver.copy_byte_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like shutil.copyfileobj, but only copy a range of the streams.
+Both start and stop are inclusive.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.localserver.parse_byte_range">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.localserver.</span></span><span class="sig-name descname"><span class="pre">parse_byte_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">byte_range</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/localserver.html#parse_byte_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.localserver.parse_byte_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the two numbers in ‘bytes=123-456’ or throws ValueError.
+The last number or both numbers may be None.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.localserver.startdataserver">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.localserver.</span></span><span class="sig-name descname"><span class="pre">startdataserver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'127.0.0.1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">restart</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/localserver.html#startdataserver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.localserver.startdataserver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start a dataserver thread(return control back) that can host local folder via http.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>address</strong> (<em>str</em>) – ip address to use for the local host server</p></li>
+<li><p><strong>port</strong> (<em>int</em>) – port number to use for the local host server</p></li>
+<li><p><strong>directory</strong> (<em>str</em>) – local directory to be used for hosting</p></li>
+<li><p><strong>restart</strong> (<em>bool</em>) – restart/clean up already running data server</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyroglancer.meshgenerator">
+<span id="pyroglancer-meshgenerator-module"></span><h2>pyroglancer.meshgenerator module<a class="headerlink" href="#module-pyroglancer.meshgenerator" title="Permalink to this headline">¶</a></h2>
+<p>Module contains functions to generate multi-resolution meshes.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyroglancer.meshgenerator.Quantize">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pyroglancer.meshgenerator.</span></span><span class="sig-name descname"><span class="pre">Quantize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fragment_origin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fragment_shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_origin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantization_bits</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/meshgenerator.html#Quantize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.meshgenerator.Quantize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.meshgenerator.cmp_zorder">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.meshgenerator.</span></span><span class="sig-name descname"><span class="pre">cmp_zorder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lhs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/meshgenerator.html#cmp_zorder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.meshgenerator.cmp_zorder" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.meshgenerator.decompose_meshes">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.meshgenerator.</span></span><span class="sig-name descname"><span class="pre">decompose_meshes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">faces</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nodes_per_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bits</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/meshgenerator.html#decompose_meshes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.meshgenerator.decompose_meshes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-pyroglancer.ngspaces">
+<span id="pyroglancer-ngspaces-module"></span><h2>pyroglancer.ngspaces module<a class="headerlink" href="#module-pyroglancer.ngspaces" title="Permalink to this headline">¶</a></h2>
+<p>Module contains functions to wrap neuroglancer spaces.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.ngspaces.create_ngspace">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.ngspaces.</span></span><span class="sig-name descname"><span class="pre">create_ngspace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer_kws</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/ngspaces.html#create_ngspace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.ngspaces.create_ngspace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a neuroglancer space (EM layers, segmentation, neuropil surfaces).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>layer_kws</strong> (<em>dict</em>) – containing details about different neuroglancer layers</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyroglancer.ngviewer">
+<span id="pyroglancer-ngviewer-module"></span><h2>pyroglancer.ngviewer module<a class="headerlink" href="#module-pyroglancer.ngviewer" title="Permalink to this headline">¶</a></h2>
+<p>Module contains code to open a neuroglancer viewer.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.ngviewer.closeviewer">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.ngviewer.</span></span><span class="sig-name descname"><span class="pre">closeviewer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/ngviewer.html#closeviewer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.ngviewer.closeviewer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close a already started ngviewer.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.ngviewer.get_ngscreenshot">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.ngviewer.</span></span><span class="sig-name descname"><span class="pre">get_ngscreenshot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngviewer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">viewer_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1000,</span> <span class="pre">1000]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/ngviewer.html#get_ngscreenshot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.ngviewer.get_ngscreenshot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get screenshot of neuroglancer viewing engine.
+:param ngviewer: object of Neuroglancer viewer class.
+:type ngviewer: ng.viewer.Viewer
+:param viewer_size:
+:type viewer_size: screenshot size</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>screenshot</strong></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>screenshot image.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.ngviewer.openviewer">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.ngviewer.</span></span><span class="sig-name descname"><span class="pre">openviewer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngviewer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headless</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/ngviewer.html#openviewer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.ngviewer.openviewer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open a neuroglancer viewing engine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ngviewer</strong> (<em>ng.viewer.Viewer</em>) – object of Neuroglancer viewer class.</p></li>
+<li><p><strong>headless</strong> (<em>bool</em>) – if True, then operating in servers or testcase mode.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ngviewer</strong> – object of Neuroglancer viewer class.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ng.viewer.Viewer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.ngviewer.setviewerstate">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.ngviewer.</span></span><span class="sig-name descname"><span class="pre">setviewerstate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngviewer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis_lines</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounding_box</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/ngviewer.html#setviewerstate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.ngviewer.setviewerstate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set state of neuroglancer viewing engine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ngviewer</strong> (<em>ng.viewer.Viewer</em>) – object of Neuroglancer viewer class.</p></li>
+<li><p><strong>axis_lines</strong> (<em>bool</em>) – if False, then disable the axis lines.</p></li>
+<li><p><strong>bounding_box</strong> (<em>bool</em>) – if False, then disable the default annotations like bounding box.</p></li>
+<li><p><strong>layout</strong> (<em>string | dict</em>) – possible layout options.</p></li>
+<li><p><strong>zoom_factor</strong> (<em>float</em>) – zoom factor of image.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ngviewer</strong> – object of Neuroglancer viewer class.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ng.viewer.Viewer</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyroglancer.points">
+<span id="pyroglancer-points-module"></span><h2>pyroglancer.points module<a class="headerlink" href="#module-pyroglancer.points" title="Permalink to this headline">¶</a></h2>
+<p>Module contains functions to handle point data.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.points.annotate_points">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.points.</span></span><span class="sig-name descname"><span class="pre">annotate_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngviewer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointscolor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_scale</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/points.html#annotate_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.points.annotate_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annotate points from a dataframe (defunct do not use..).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ngviewer</strong> (<em>ng.viewer.Viewer</em>) – object of Neuroglancer viewer class.</p></li>
+<li><p><strong>dimensions</strong> (<em>neuroglancer.CoordinateSpace</em>) – object of neuroglancer coordinate space class.</p></li>
+<li><p><strong>points_df</strong> (<em>dataframe</em>) – should contain ‘x’, ‘y’, ‘z’ columns</p></li>
+<li><p><strong>layer_scale</strong> (<em>int | float</em>) – scaling from voxel to native space in ‘x’, ‘y’, ‘z’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.points.commit_info">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.points.</span></span><span class="sig-name descname"><span class="pre">commit_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pointinfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointlayername</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/points.html#commit_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.points.commit_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Commit the info file created for the points based precomputed format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pointinfo</strong> (<em>dict</em>) – info in json format for the points</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – local path of the precomputed hosted layer.</p></li>
+<li><p><strong>pointlayername</strong> (<em>str</em>) – name for the points layer</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.points.create_pointinfo">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.points.</span></span><span class="sig-name descname"><span class="pre">create_pointinfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimensions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/points.html#create_pointinfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.points.create_pointinfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create info file for the points based precomputed format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – local path of the precomputed hosted layer.</p></li>
+<li><p><strong>layer_name</strong> (<em>str</em>) – name for the points layer</p></li>
+<li><p><strong>dimensions</strong> (<em>neuroglancer.CoordinateSpace</em>) – object of neuroglancer coordinate space class.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>path</strong> – local path of the precomputed hosted layer.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.points.put_pointfile">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.points.</span></span><span class="sig-name descname"><span class="pre">put_pointfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointsscale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/points.html#put_pointfile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.points.put_pointfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Put pointfile in the local dataserver.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – local path of the precomputed hosted layer.</p></li>
+<li><p><strong>layer_name</strong> (<em>str</em>) – name for the points layer</p></li>
+<li><p><strong>points</strong> (<em>dataframe</em>) – should contain ‘x’, ‘y’, ‘z’ columns</p></li>
+<li><p><strong>pointsscale</strong> (<em>int | float</em>) – scaling from voxel to native space in ‘x’, ‘y’, ‘z’</p></li>
+<li><p><strong>pointsname</strong> (<em>str</em>) – name for the points (not yet implemented)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.points.upload_points">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.points.</span></span><span class="sig-name descname"><span class="pre">upload_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_scale</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/points.html#upload_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.points.upload_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upload points from a dataframe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>points_df</strong> (<em>dataframe</em>) – should contain ‘x’, ‘y’, ‘z’ columns</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – local path of the precomputed hosted layer.</p></li>
+<li><p><strong>layer_name</strong> (<em>str</em>) – name for the points layer</p></li>
+<li><p><strong>layer_scale</strong> (<em>int | float</em>) – scaling from voxel to native space in ‘x’, ‘y’, ‘z’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyroglancer.skeletons">
+<span id="pyroglancer-skeletons-module"></span><h2>pyroglancer.skeletons module<a class="headerlink" href="#module-pyroglancer.skeletons" title="Permalink to this headline">¶</a></h2>
+<p>Module contains functions to handle skeleton data.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.skeletons.skeletons2nodepoints">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.skeletons.</span></span><span class="sig-name descname"><span class="pre">skeletons2nodepoints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_scale</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/skeletons.html#skeletons2nodepoints"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.skeletons.skeletons2nodepoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate nodepoints (point A, point B) from skeletons for given neuron(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>CatmaidNeuron | CatmaidNeuronList</em><em> or </em><em>TreeNeuron | NeuronList</em>) – neuron or neuronlist of different formats</p></li>
+<li><p><strong>layer_scale</strong> (<em>int | float</em>) – scaling from voxel to native space in ‘x’, ‘y’, ‘z’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>nodepointscollec_df</strong> – contains node points in point A - point B format used in flywire annotations.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.skeletons.to_ngskeletons">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.skeletons.</span></span><span class="sig-name descname"><span class="pre">to_ngskeletons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/skeletons.html#to_ngskeletons"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.skeletons.to_ngskeletons" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate skeleton (of cloudvolume class) for given neuron(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>CatmaidNeuron | CatmaidNeuronList</em><em> or </em><em>TreeNeuron | NeuronList</em>) – neuron or neuronlist of different formats</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>skeldatasource</strong> (<em>list</em>) – contains cloud volume skeletons.</p></li>
+<li><p><strong>skeldatasegidlist</strong> (<em>list</em>) – contains the segids(skid).</p></li>
+<li><p><strong>skelsegnamelist</strong> (<em>list</em>) – contains the names of segments.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.skeletons.to_precomputedskels">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.skeletons.</span></span><span class="sig-name descname"><span class="pre">to_precomputedskels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skelsource</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/skeletons.html#to_precomputedskels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.skeletons.to_precomputedskels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upload skeleton (of cloudvolume class) to a local path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>skelsource</strong> (<em>list</em>) – contains the cloud volume skeletons.</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – local path of the precomputed hosted layer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.skeletons.to_precomputedskelsinfo">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.skeletons.</span></span><span class="sig-name descname"><span class="pre">to_precomputedskelsinfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skelseglist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skelnamelist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/skeletons.html#to_precomputedskelsinfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.skeletons.to_precomputedskelsinfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upload skeleton info to a local path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>skelseglist</strong> (<em>list</em>) – contains the segids(skid).</p></li>
+<li><p><strong>skelnamelist</strong> (<em>list</em>) – contains the names of skeletons.</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – local path of the precomputed hosted layer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.skeletons.uploadshardedskeletons">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.skeletons.</span></span><span class="sig-name descname"><span class="pre">uploadshardedskeletons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skelsource</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skelseglist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skelnamelist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shardprogress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/skeletons.html#uploadshardedskeletons"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.skeletons.uploadshardedskeletons" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upload sharded skeletons to a local server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>skelsource</strong> (<em>list</em>) – contains cloud volume skeletons.</p></li>
+<li><p><strong>skelseglist</strong> (<em>list</em>) – contains the segids(skid).</p></li>
+<li><p><strong>skelnamelist</strong> (<em>list</em>) – contains the names of segments.</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – local path of the precomputed hosted layer.</p></li>
+<li><p><strong>layer_name</strong> (<em>str</em>) – layer name.</p></li>
+<li><p><strong>shardprogress</strong> (<em>bool</em>) – progress bar for sharding operation</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>cv</strong> – object of cloudvolume class</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>CloudVolume</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.skeletons.uploadskeletons">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.skeletons.</span></span><span class="sig-name descname"><span class="pre">uploadskeletons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skelsource</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skelseglist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skelnamelist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/skeletons.html#uploadskeletons"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.skeletons.uploadskeletons" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upload skeleton (of cloudvolume class) to a local server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>skeldatasource</strong> (<em>list</em>) – contains cloud volume skeletons.</p></li>
+<li><p><strong>skeldatasegidlist</strong> (<em>list</em>) – contains the segids(skid).</p></li>
+<li><p><strong>skelsegnamelist</strong> (<em>list</em>) – contains the names of segments.</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – local path of the precomputed hosted layer.</p></li>
+<li><p><strong>layer_name</strong> (<em>str</em>) – layer name.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>cv</strong> – object of cloudvolume class</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>CloudVolume</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyroglancer.synapses">
+<span id="pyroglancer-synapses-module"></span><h2>pyroglancer.synapses module<a class="headerlink" href="#module-pyroglancer.synapses" title="Permalink to this headline">¶</a></h2>
+<p>Module contains functions to handle synapse data.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.synapses.annotate_synapses">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.synapses.</span></span><span class="sig-name descname"><span class="pre">annotate_synapses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngviewer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/synapses.html#annotate_synapses"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.synapses.annotate_synapses" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annotate postsynapses of a neuron/neuronlist. (defunct do not use..).</p>
+<p>This function annotates synapses of a neuron/neuronlist</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ngviewer</strong> (<em>ng.viewer.Viewer</em>) – object of Neuroglancer viewer class.</p></li>
+<li><p><strong>dimensions</strong> (<em>neuroglancer.CoordinateSpace</em>) – object of neuroglancer coordinate space class.</p></li>
+<li><p><strong>x</strong> (<em>CatmaidNeuron | CatmaidNeuronList</em><em> or </em><em>TreeNeuron | NeuronList</em>) – neuron or neuronlist of different formats</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>status</strong> – annotation status</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.synapses.commit_info">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.synapses.</span></span><span class="sig-name descname"><span class="pre">commit_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">synapseinfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synapsetype</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/synapses.html#commit_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.synapses.commit_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Commit the info file created for the synapses based on precomputed format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>synapseinfo</strong> (<em>dict</em>) – info in json format for the synapses</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – local path of the precomputed hosted layer.</p></li>
+<li><p><strong>synapsetype</strong> (<em>str</em>) – pre or postsynapses</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.synapses.create_synapseinfo">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.synapses.</span></span><span class="sig-name descname"><span class="pre">create_synapseinfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimensions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/synapses.html#create_synapseinfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.synapses.create_synapseinfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create info file for the synapse based precomputed format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – local path of the precomputed hosted layer.</p></li>
+<li><p><strong>dimensions</strong> (<em>neuroglancer.CoordinateSpace</em>) – object of neuroglancer coordinate space class.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.synapses.put_synapsefile">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.synapses.</span></span><span class="sig-name descname"><span class="pre">put_synapsefile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synapsetype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synapses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skeletonid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/synapses.html#put_synapsefile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.synapses.put_synapsefile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Put synapse in the local dataserver.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – local path of the precomputed hosted layer.</p></li>
+<li><p><strong>synapsetype</strong> (<em>str</em>) – pre or postsynapses</p></li>
+<li><p><strong>synapses</strong> (<em>dataframe</em>) – contains ‘x’, ‘y’, ‘z’ columns</p></li>
+<li><p><strong>skeletonid</strong> (<em>int</em>) – skeleton id to be associated with the corresponding synapse</p></li>
+<li><p><strong>pointsname</strong> (<em>str</em>) – name for the points (not yet implemented)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.synapses.synapses2nodepoints">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.synapses.</span></span><span class="sig-name descname"><span class="pre">synapses2nodepoints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_scale</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/synapses.html#synapses2nodepoints"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.synapses.synapses2nodepoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate nodepoints (point A, point B) from synapses for given neuron(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>CatmaidNeuron | CatmaidNeuronList</em><em> or </em><em>TreeNeuron | NeuronList</em>) – neuron or neuronlist of different formats</p></li>
+<li><p><strong>layer_scale</strong> (<em>int | float</em>) – scaling from voxel to native space in ‘x’, ‘y’, ‘z’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>synapsepointscollec_df</strong> – contains synapse points in point A - point B format used in flywire annotations.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.synapses.upload_synapses">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.synapses.</span></span><span class="sig-name descname"><span class="pre">upload_synapses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/synapses.html#upload_synapses"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.synapses.upload_synapses" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upload synpases from a neuron or neuronlist.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>CatmaidNeuron | CatmaidNeuronList</em><em> or </em><em>TreeNeuron | NeuronList</em>) – neuron or neuronlist of different formats</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – local path of the precomputed hosted layer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyroglancer.utils">
+<span id="pyroglancer-utils-module"></span><h2>pyroglancer.utils module<a class="headerlink" href="#module-pyroglancer.utils" title="Permalink to this headline">¶</a></h2>
+<p>Module contains utility functions.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.utils.get_alphavalue">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.utils.</span></span><span class="sig-name descname"><span class="pre">get_alphavalue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer_kws</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/utils.html#get_alphavalue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.utils.get_alphavalue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get alpha values from the interface APIs.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.utils.get_annotationstatetype">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.utils.</span></span><span class="sig-name descname"><span class="pre">get_annotationstatetype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer_kws</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/utils.html#get_annotationstatetype"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.utils.get_annotationstatetype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get alpha values from the interface APIs.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.utils.get_hexcolor">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.utils.</span></span><span class="sig-name descname"><span class="pre">get_hexcolor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer_kws</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/utils.html#get_hexcolor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.utils.get_hexcolor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert text based color to hex value.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.utils.get_scalevalue">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.utils.</span></span><span class="sig-name descname"><span class="pre">get_scalevalue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer_kws</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/utils.html#get_scalevalue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.utils.get_scalevalue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get scale values from the interface APIs.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.utils.obj2pointcloud">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.utils.</span></span><span class="sig-name descname"><span class="pre">obj2pointcloud</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objurl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/utils.html#obj2pointcloud"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.utils.obj2pointcloud" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert object url to point cloud data in open3d format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>objurl</strong> (<em>str</em>) – url containing the obj file.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>pcd</strong> – point cloud object of open3d PointCloud class.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>o3d.geometry.PointCloud</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.utils.pointcloud2meshes">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.utils.</span></span><span class="sig-name descname"><span class="pre">pointcloud2meshes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pcd_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'rollingball'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/utils.html#pointcloud2meshes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.utils.pointcloud2meshes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert point cloud files to volumetric meshes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pcd_data</strong> (<em>o3d.geometry.PointCloud</em><em> or </em><em>str</em>) – pointcloud object or file location in polygon file format.</p></li>
+<li><p><strong>algorithm</strong> (<em>str</em>) – algorithm of either ‘rollingball’ or ‘marchingcubes’ to convert points to meshes.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ret_mesh</strong> – mesh object of navis volume class.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>navis.Volume</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyroglancer.volumes">
+<span id="pyroglancer-volumes-module"></span><h2>pyroglancer.volumes module<a class="headerlink" href="#module-pyroglancer.volumes" title="Permalink to this headline">¶</a></h2>
+<p>Module contains functions to handle mesh data.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.volumes.to_ngmesh">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.volumes.</span></span><span class="sig-name descname"><span class="pre">to_ngmesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/volumes.html#to_ngmesh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.volumes.to_ngmesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate mesh (of cloudvolume class) for given volume.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>volume</strong> (<em>Navis Volume | Navis mesh neuron | List</em>) – volume or volumelist of different formats</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>volumedatasource</strong> (<em>list</em>) – contains volumes of cloud volume class.</p></li>
+<li><p><strong>volumeidlist</strong> (<em>list</em>) – contains the volume ids.</p></li>
+<li><p><strong>volumenamelist</strong> (<em>list</em>) – contains the names of volumes.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.volumes.to_precomputedsingleresmeshes">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.volumes.</span></span><span class="sig-name descname"><span class="pre">to_precomputedsingleresmeshes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">volumedatasource</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/volumes.html#to_precomputedsingleresmeshes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.volumes.to_precomputedsingleresmeshes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upload mesh (of cloudvolume class) to a local server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>volumedatasource</strong> (<em>list</em>) – contains cloud volume meshes.</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – local path of the precomputed hosted layer.</p></li>
+<li><p><strong>layer_name</strong> (<em>str</em>) – layer name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.volumes.to_precomputedsingleresmeshesinfo">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.volumes.</span></span><span class="sig-name descname"><span class="pre">to_precomputedsingleresmeshesinfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">volumeidlist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volumenamelist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/volumes.html#to_precomputedsingleresmeshesinfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.volumes.to_precomputedsingleresmeshesinfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upload mesh (of cloudvolume class) info to a local server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>volumeidlist</strong> (<em>list</em>) – contains the volume ids.</p></li>
+<li><p><strong>volumenamelist</strong> (<em>list</em>) – contains the names of volumes.</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – local path of the precomputed hosted layer.</p></li>
+<li><p><strong>layer_name</strong> (<em>str</em>) – layer name.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>cv</strong> – object of cloudvolume class</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>CloudVolume</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.volumes.uploadmultiresmeshes">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.volumes.</span></span><span class="sig-name descname"><span class="pre">uploadmultiresmeshes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">volumedatasource</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volumeidlist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volumenamelist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/volumes.html#uploadmultiresmeshes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.volumes.uploadmultiresmeshes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upload multi-res mesh to a local server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>volumedatasource</strong> (<em>list</em>) – contains cloud volume meshes.</p></li>
+<li><p><strong>volumeidlist</strong> (<em>list</em>) – contains the volume ids.</p></li>
+<li><p><strong>volumenamelist</strong> (<em>list</em>) – contains the names of volumes.</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – local path of the precomputed hosted layer.</p></li>
+<li><p><strong>layer_name</strong> (<em>str</em>) – layer name.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>cv</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>cloudvolume class object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.volumes.uploadshardedmultiresmeshes">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.volumes.</span></span><span class="sig-name descname"><span class="pre">uploadshardedmultiresmeshes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">volumedatasource</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volumeidlist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volumenamelist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shardprogress</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/volumes.html#uploadshardedmultiresmeshes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.volumes.uploadshardedmultiresmeshes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upload sharded multi-res mesh to a local server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>volumedatasource</strong> (<em>list</em>) – contains cloud volume meshes.</p></li>
+<li><p><strong>volumeidlist</strong> (<em>list</em>) – contains the volume ids.</p></li>
+<li><p><strong>volumenamelist</strong> (<em>list</em>) – contains the names of volumes.</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – local path of the precomputed hosted layer.</p></li>
+<li><p><strong>layer_name</strong> (<em>str</em>) – layer name.</p></li>
+<li><p><strong>shardprogress</strong> (<em>bool</em>) – progress bar for sharding operation</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>cv</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>cloudvolume class object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyroglancer.volumes.uploadsingleresmeshes">
+<span class="sig-prename descclassname"><span class="pre">pyroglancer.volumes.</span></span><span class="sig-name descname"><span class="pre">uploadsingleresmeshes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">volumedatasource</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volumeidlist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volumenamelist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyroglancer/volumes.html#uploadsingleresmeshes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyroglancer.volumes.uploadsingleresmeshes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upload mesh (of cloudvolume class) to a local server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>volumedatasource</strong> (<em>list</em>) – contains volumes of cloud volume class.</p></li>
+<li><p><strong>volumeidlist</strong> (<em>list</em>) – contains the volume ids.</p></li>
+<li><p><strong>volumenamelist</strong> (<em>list</em>) – contains the names of volumes.</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – local path of the precomputed hosted layer.</p></li>
+<li><p><strong>layer_name</strong> (<em>str</em>) – layer name.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>cv</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>cloudvolume class object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyroglancer">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyroglancer" title="Permalink to this headline">¶</a></h2>
+<p>Module contains functions to handle init etc.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="modules.html" class="btn btn-neutral float-left" title="pyroglancer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Sridhar Jagannathan.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

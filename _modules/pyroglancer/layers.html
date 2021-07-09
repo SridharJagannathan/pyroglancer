@@ -1,0 +1,947 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>pyroglancer.layers &mdash; Pyroglancer 0.0.4 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Pyroglancer
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Install Pyroglancer</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/local_neuroglancer.html">Starting a local neuroglancer session with FAFB dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/examples_flywirecoplotting.html">Examples of different co-plotting with flywire</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/catmaid2flywire.html">Co-plotting CATMAID skeleton with flywire dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/flywire2fafb.html">Co-plotting flywire mesh with FAFB autosegments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/hemibrain2flywire.html">Co-plotting hemibrain skeleton with flywire dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/gal4line2flywire.html">Co-plotting split-gal4 line, hemibrain skeleton with flywire dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/shardeddataset.html">Creating sharded datasets with FAFB</a></li>
+</ul>
+<p class="caption"><span class="caption-text">hemibraindataset</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../30k_hemibraindataset.html">30k hemibrain2fafb</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">pyroglancer</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Pyroglancer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>pyroglancer.layers</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pyroglancer.layers</h1><div class="highlight"><pre>
+<span></span><span class="c1">#    This script is part of pyroglancer (https://github.com/SridharJagannathan/pyroglancer).</span>
+<span class="c1">#    Copyright (C) 2020 Sridhar Jagannathan</span>
+<span class="c1">#</span>
+<span class="c1">#    This program is free software: you can redistribute it and/or modify</span>
+<span class="c1">#    it under the terms of the GNU General Public License as published by</span>
+<span class="c1">#    the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1">#    (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1">#    This program is distributed in the hope that it will be useful,</span>
+<span class="c1">#    but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1">#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1">#    GNU General Public License for more details.</span>
+
+<span class="sd">&quot;&quot;&quot;Module contains functions to handle different types of neuroglancer layers.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">.loadconfig</span> <span class="kn">import</span> <span class="n">getconfigdata</span>
+<span class="kn">from</span> <span class="nn">.ngviewer</span> <span class="kn">import</span> <span class="n">openviewer</span>
+<span class="kn">from</span> <span class="nn">.points</span> <span class="kn">import</span> <span class="n">annotate_points</span>
+<span class="kn">from</span> <span class="nn">.points</span> <span class="kn">import</span> <span class="n">create_pointinfo</span>
+<span class="kn">from</span> <span class="nn">.points</span> <span class="kn">import</span> <span class="n">upload_points</span>
+<span class="kn">from</span> <span class="nn">.skeletons</span> <span class="kn">import</span> <span class="n">to_ngskeletons</span>
+<span class="kn">from</span> <span class="nn">.skeletons</span> <span class="kn">import</span> <span class="n">uploadshardedskeletons</span>
+<span class="kn">from</span> <span class="nn">.skeletons</span> <span class="kn">import</span> <span class="n">uploadskeletons</span>
+<span class="kn">from</span> <span class="nn">.synapses</span> <span class="kn">import</span> <span class="n">create_synapseinfo</span>
+<span class="kn">from</span> <span class="nn">.synapses</span> <span class="kn">import</span> <span class="n">upload_synapses</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">get_alphavalue</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">get_annotationstatetype</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">get_hexcolor</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">get_scalevalue</span>
+<span class="kn">from</span> <span class="nn">.volumes</span> <span class="kn">import</span> <span class="n">to_ngmesh</span>
+<span class="kn">from</span> <span class="nn">.volumes</span> <span class="kn">import</span> <span class="n">uploadsingleresmeshes</span>
+<span class="kn">from</span> <span class="nn">.volumes</span> <span class="kn">import</span> <span class="n">uploadmultiresmeshes</span>
+<span class="kn">from</span> <span class="nn">.volumes</span> <span class="kn">import</span> <span class="n">uploadshardedmultiresmeshes</span>
+
+
+<span class="kn">import</span> <span class="nn">neuroglancer</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+
+<span class="k">def</span> <span class="nf">_get_ngspace</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">):</span>
+    <span class="n">space</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="p">[</span><span class="s1">&#39;ngspace&#39;</span><span class="p">]</span>
+    <span class="n">configfileloc</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;configfileloc&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;config file loc is at:&#39;</span><span class="p">,</span> <span class="n">configfileloc</span><span class="p">)</span>
+    <span class="n">configdata</span> <span class="o">=</span> <span class="n">getconfigdata</span><span class="p">(</span><span class="n">configfileloc</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">ngspaceconfig</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">ngspace</span><span class="p">:</span> <span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;ngspace&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">space</span><span class="p">,</span> <span class="n">configdata</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;exception has occured, perhaps the requested space is not present in the yml file??&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">ngspaceconfig</span>
+
+
+<span class="k">def</span> <span class="nf">_handle_ngdimensions</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the dimensions of different neuroglancer spaces.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    layer_kws: dict</span>
+<span class="sd">        containing details about dimensions or neuroglancer space name</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dimensions:  neuroglancer.CoordinateSpace</span>
+<span class="sd">        object of neuroglancer coordinate space class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># return dimensions either based on already set ngspace or a string &#39;ngspace&#39;.</span>
+    <span class="n">dimensions</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="s1">&#39;ngspace&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+        <span class="n">layer_kws</span><span class="p">[</span><span class="s1">&#39;ngspace&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="s1">&#39;ngspace&#39;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="s1">&#39;dimensions&#39;</span> <span class="ow">in</span> <span class="n">layer_kws</span><span class="p">:</span>
+        <span class="n">dimensions</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="p">[</span><span class="s1">&#39;dimensions&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="s1">&#39;ngspace&#39;</span> <span class="ow">in</span> <span class="n">layer_kws</span><span class="p">:</span>
+        <span class="n">ngspace</span> <span class="o">=</span> <span class="n">_get_ngspace</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions are in :&#39;</span><span class="p">,</span> <span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;ngspace&#39;</span><span class="p">])</span>
+        <span class="n">dimensions</span> <span class="o">=</span> <span class="n">neuroglancer</span><span class="o">.</span><span class="n">CoordinateSpace</span><span class="p">(</span>
+                     <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">],</span> <span class="n">units</span><span class="o">=</span><span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;dimension&#39;</span><span class="p">][</span><span class="s1">&#39;units&#39;</span><span class="p">],</span>
+                     <span class="n">scales</span><span class="o">=</span><span class="p">[</span><span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;dimension&#39;</span><span class="p">][</span><span class="s1">&#39;x&#39;</span><span class="p">],</span>
+                             <span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;dimension&#39;</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">],</span>
+                             <span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;dimension&#39;</span><span class="p">][</span><span class="s1">&#39;z&#39;</span><span class="p">]])</span>
+
+    <span class="k">if</span> <span class="n">dimensions</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;dimensions is not set already: either use &#39;ngspace&#39; or &#39;dimensions&#39;&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">dimensions</span>
+
+
+<div class="viewcode-block" id="add_precomputed"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.layers.add_precomputed">[docs]</a><span class="k">def</span> <span class="nf">add_precomputed</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add data in a precomputed format to the specific folder hosted via http.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    layer_kws: dict</span>
+<span class="sd">        containing details about different neuroglancer layers</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    layer_host:  str</span>
+<span class="sd">        port number of the http host.</span>
+<span class="sd">    layer_name | skelseglist | volumeidlist:  str | list</span>
+<span class="sd">        either a layer name or list containing ids of skeletons or volume ids.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># This function is for adding data to the precomputed folders.</span>
+    <span class="n">layer_type</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">layer_type</span> <span class="o">==</span> <span class="s1">&#39;skeletons&#39;</span><span class="p">:</span>
+        <span class="n">layer_source</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">]</span>
+        <span class="n">layer_name</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;skeletons&#39;</span><span class="p">)</span>
+        <span class="n">layer_serverdir</span><span class="p">,</span> <span class="n">layer_host</span> <span class="o">=</span> <span class="n">get_ngserver</span><span class="p">()</span>
+        <span class="n">flush_precomputed</span><span class="p">(</span><span class="n">layer_serverdir</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">)</span>
+
+        <span class="n">skelsource</span><span class="p">,</span> <span class="n">skelseglist</span><span class="p">,</span> <span class="n">skelsegnamelist</span> <span class="o">=</span> <span class="n">to_ngskeletons</span><span class="p">(</span><span class="n">layer_source</span><span class="p">)</span>
+        <span class="n">layer_shard</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sharding&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">layer_shard</span><span class="p">:</span>
+            <span class="n">shardprogress</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;progress&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+            <span class="n">uploadshardedskeletons</span><span class="p">(</span><span class="n">skelsource</span><span class="p">,</span> <span class="n">skelseglist</span><span class="p">,</span> <span class="n">skelsegnamelist</span><span class="p">,</span>
+                                   <span class="n">layer_serverdir</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">,</span> <span class="n">shardprogress</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">uploadskeletons</span><span class="p">(</span><span class="n">skelsource</span><span class="p">,</span> <span class="n">skelseglist</span><span class="p">,</span> <span class="n">skelsegnamelist</span><span class="p">,</span> <span class="n">layer_serverdir</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">skelseglist</span><span class="p">,</span> <span class="n">layer_host</span>
+    <span class="k">elif</span> <span class="n">layer_type</span> <span class="o">==</span> <span class="s1">&#39;volumes&#39;</span><span class="p">:</span>
+        <span class="n">layer_source</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">]</span>
+        <span class="n">layer_name</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;volumes&#39;</span><span class="p">)</span>
+        <span class="n">layer_serverdir</span><span class="p">,</span> <span class="n">layer_host</span> <span class="o">=</span> <span class="n">get_ngserver</span><span class="p">()</span>
+        <span class="n">flush_precomputed</span><span class="p">(</span><span class="n">layer_serverdir</span><span class="p">,</span> <span class="n">layer_name</span><span class="o">+</span><span class="s1">&#39;/mesh&#39;</span><span class="p">)</span>
+
+        <span class="n">volumedatasource</span><span class="p">,</span> <span class="n">volumeidlist</span><span class="p">,</span> <span class="n">volumenamelist</span> <span class="o">=</span> <span class="n">to_ngmesh</span><span class="p">(</span><span class="n">layer_source</span><span class="p">)</span>
+        <span class="n">layer_shard</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sharding&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">layer_res</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;multires&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">layer_res</span> <span class="ow">or</span> <span class="n">layer_shard</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">layer_shard</span><span class="p">:</span>
+                <span class="n">shardprogress</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;progress&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+                <span class="n">uploadshardedmultiresmeshes</span><span class="p">(</span><span class="n">volumedatasource</span><span class="p">,</span> <span class="n">volumeidlist</span><span class="p">,</span> <span class="n">volumenamelist</span><span class="p">,</span> <span class="n">layer_serverdir</span><span class="p">,</span>
+                                            <span class="n">layer_name</span><span class="p">,</span> <span class="n">shardprogress</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">uploadmultiresmeshes</span><span class="p">(</span><span class="n">volumedatasource</span><span class="p">,</span> <span class="n">volumeidlist</span><span class="p">,</span> <span class="n">volumenamelist</span><span class="p">,</span> <span class="n">layer_serverdir</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">uploadsingleresmeshes</span><span class="p">(</span><span class="n">volumedatasource</span><span class="p">,</span> <span class="n">volumeidlist</span><span class="p">,</span> <span class="n">volumenamelist</span><span class="p">,</span> <span class="n">layer_serverdir</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">volumeidlist</span><span class="p">,</span> <span class="n">layer_host</span>
+    <span class="k">elif</span> <span class="n">layer_type</span> <span class="o">==</span> <span class="s1">&#39;synapses&#39;</span><span class="p">:</span>
+        <span class="n">dimensions</span> <span class="o">=</span> <span class="n">_handle_ngdimensions</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">)</span>
+        <span class="n">layer_source</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">]</span>
+        <span class="n">linked_layername</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="p">[</span><span class="s1">&#39;linked_layername&#39;</span><span class="p">]</span>
+        <span class="n">layer_serverdir</span><span class="p">,</span> <span class="n">layer_host</span> <span class="o">=</span> <span class="n">get_ngserver</span><span class="p">()</span>
+        <span class="n">presynapsedir</span> <span class="o">=</span> <span class="s1">&#39;/precomputed/&#39;</span> <span class="o">+</span> <span class="n">linked_layername</span> <span class="o">+</span> <span class="s1">&#39;/presynapses&#39;</span>
+        <span class="n">postsynapsedir</span> <span class="o">=</span> <span class="s1">&#39;/precomputed/&#39;</span> <span class="o">+</span> <span class="n">linked_layername</span> <span class="o">+</span> <span class="s1">&#39;/postsynapses&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;flushing stuff..&#39;</span><span class="p">)</span>
+        <span class="n">flush_precomputed</span><span class="p">(</span><span class="n">layer_serverdir</span><span class="p">,</span> <span class="n">presynapsedir</span><span class="p">)</span>
+        <span class="n">flush_precomputed</span><span class="p">(</span><span class="n">layer_serverdir</span><span class="p">,</span> <span class="n">postsynapsedir</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;presynapse stuff at:&#39;</span><span class="p">,</span> <span class="n">layer_serverdir</span><span class="p">,</span> <span class="n">presynapsedir</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;postsynapse stuff at:&#39;</span><span class="p">,</span> <span class="n">layer_serverdir</span><span class="p">,</span> <span class="n">postsynapsedir</span><span class="p">)</span>
+
+        <span class="n">layer_path</span> <span class="o">=</span> <span class="n">layer_serverdir</span> <span class="o">+</span> <span class="s1">&#39;/precomputed/&#39;</span> <span class="o">+</span> <span class="n">linked_layername</span>
+
+        <span class="n">synapse_path</span> <span class="o">=</span> <span class="n">create_synapseinfo</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">layer_path</span><span class="p">)</span>
+        <span class="n">upload_synapses</span><span class="p">(</span><span class="n">layer_source</span><span class="p">,</span> <span class="n">synapse_path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">layer_host</span>
+    <span class="k">elif</span> <span class="n">layer_type</span> <span class="o">==</span> <span class="s1">&#39;points&#39;</span><span class="p">:</span>
+        <span class="n">layer_source</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">]</span>
+        <span class="n">layer_name</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+        <span class="n">dimensions</span> <span class="o">=</span> <span class="n">_handle_ngdimensions</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">)</span>
+        <span class="n">layer_serverdir</span><span class="p">,</span> <span class="n">layer_host</span> <span class="o">=</span> <span class="n">get_ngserver</span><span class="p">()</span>
+        <span class="n">layer_scale</span> <span class="o">=</span> <span class="n">get_scalevalue</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">)</span>
+
+        <span class="n">flush_precomputed</span><span class="p">(</span><span class="n">layer_serverdir</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">)</span>
+        <span class="n">points_path</span> <span class="o">=</span> <span class="n">create_pointinfo</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">layer_serverdir</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">)</span>
+        <span class="n">upload_points</span><span class="p">(</span><span class="n">layer_source</span><span class="p">,</span> <span class="n">points_path</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">,</span> <span class="n">layer_scale</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">layer_host</span><span class="p">,</span> <span class="n">layer_name</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="flush_precomputed"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.layers.flush_precomputed">[docs]</a><span class="k">def</span> <span class="nf">flush_precomputed</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">subdir</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Delete/Flush a subfolder inside the precomputed folder that is hosted via http.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    path: str</span>
+<span class="sd">        local path of the precomputed hosted layer</span>
+<span class="sd">    subdir: str</span>
+<span class="sd">        name of the subdirectory inside the local precomputed layer to flush</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># This function is for deleting the subfolders, usually for cleaning up.</span>
+
+    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;precomputed&#39;</span><span class="p">,</span> <span class="n">subdir</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;deleting..&#39;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="setlayerproperty"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.layers.setlayerproperty">[docs]</a><span class="k">def</span> <span class="nf">setlayerproperty</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">,</span> <span class="n">property_kws</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Set the property of a specific layer.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ngviewer : ng.viewer.Viewer</span>
+<span class="sd">        object of Neuroglancer viewer class.</span>
+<span class="sd">    property_kws: dict</span>
+<span class="sd">        containing details about layer name and property value to be set</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ngviewer : ng.viewer.Viewer</span>
+<span class="sd">        updated object of neuroglancer viewer class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># This function is for setting properties of specific layers by name.</span>
+    <span class="n">layer_name</span> <span class="o">=</span> <span class="n">property_kws</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+
+    <span class="k">with</span> <span class="n">ngviewer</span><span class="o">.</span><span class="n">txn</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">layer</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">layer_name</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s1">&#39;visibility&#39;</span> <span class="ow">in</span> <span class="n">property_kws</span><span class="p">:</span>
+                    <span class="n">layer</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="n">property_kws</span><span class="p">[</span><span class="s1">&#39;visibility&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="s1">&#39;segments&#39;</span> <span class="ow">in</span> <span class="n">property_kws</span><span class="p">:</span>
+                    <span class="n">layer</span><span class="o">.</span><span class="n">segments</span> <span class="o">=</span> <span class="n">property_kws</span><span class="p">[</span><span class="s1">&#39;segments&#39;</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">ngviewer</span></div>
+
+
+<div class="viewcode-block" id="get_ngserver"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.layers.get_ngserver">[docs]</a><span class="k">def</span> <span class="nf">get_ngserver</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Return the local folder hosted via http and its corresponding port.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    layer_serverdir:  str</span>
+<span class="sd">        local directory for hosting the precomputed layer.</span>
+<span class="sd">    layer_host:  str</span>
+<span class="sd">        port number of the http host.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># This function fetches: a)the already set neuroglancer local folder(hosted via http).</span>
+    <span class="c1"># b)the port number of the http host</span>
+
+    <span class="n">layer_serverdir</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="s1">&#39;ngserverdir&#39;</span><span class="p">]</span>
+    <span class="n">layer_host</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="s1">&#39;ngserver&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">socket</span><span class="o">.</span><span class="n">getsockname</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">layer_host</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:&#39;</span> <span class="o">+</span> <span class="n">layer_host</span>
+
+    <span class="k">return</span> <span class="n">layer_serverdir</span><span class="p">,</span> <span class="n">layer_host</span></div>
+
+
+<div class="viewcode-block" id="handle_emdata"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.layers.handle_emdata">[docs]</a><span class="k">def</span> <span class="nf">handle_emdata</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">,</span> <span class="n">layer_kws</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add the electron microscopy layer as a neuroglancer layer.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ngviewer : ng.viewer.Viewer</span>
+<span class="sd">        object of Neuroglancer viewer class.</span>
+<span class="sd">    layer_kws: dict</span>
+<span class="sd">        containing details about different neuroglancer layers</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ngviewer : ng.viewer.Viewer</span>
+<span class="sd">        updated object of neuroglancer viewer class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># This function adds EM layer to a neuroglancer instance.</span>
+    <span class="c1"># The EM layers are usually corresponding to spaces like &#39;FAFB&#39;, etc</span>
+    <span class="n">ngspace</span> <span class="o">=</span> <span class="n">_get_ngspace</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">layername</span> <span class="ow">in</span> <span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;layers&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;layers&#39;</span><span class="p">][</span><span class="n">layername</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;image&#39;</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">ngviewer</span><span class="o">.</span><span class="n">txn</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+                <span class="n">s</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="n">layername</span><span class="p">]</span> <span class="o">=</span> <span class="n">neuroglancer</span><span class="o">.</span><span class="n">ImageLayer</span><span class="p">(</span>
+                        <span class="n">source</span><span class="o">=</span><span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;layers&#39;</span><span class="p">][</span><span class="n">layername</span><span class="p">][</span><span class="s1">&#39;source&#39;</span><span class="p">],)</span>
+
+    <span class="k">return</span> <span class="n">ngviewer</span></div>
+
+
+<div class="viewcode-block" id="handle_segmentdata"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.layers.handle_segmentdata">[docs]</a><span class="k">def</span> <span class="nf">handle_segmentdata</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">,</span> <span class="n">layer_kws</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add the different neuron segmentation datasets as a neuroglancer layer.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ngviewer : ng.viewer.Viewer</span>
+<span class="sd">        object of Neuroglancer viewer class.</span>
+<span class="sd">    layer_kws: dict</span>
+<span class="sd">        containing details about different neuroglancer layers</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ngviewer : ng.viewer.Viewer</span>
+<span class="sd">        updated object of neuroglancer viewer class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># This function adds segmentation of EM layer to a neuroglancer instance.</span>
+    <span class="c1"># The EM segmentations usually correspond to autosegs from google for datasets like &#39;FAFB&#39; etc</span>
+    <span class="n">ngspace</span> <span class="o">=</span> <span class="n">_get_ngspace</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">layername</span> <span class="ow">in</span> <span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;layers&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;layers&#39;</span><span class="p">][</span><span class="n">layername</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;segmentation&#39;</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">ngviewer</span><span class="o">.</span><span class="n">txn</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+                <span class="n">s</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="n">layername</span><span class="p">]</span> <span class="o">=</span> <span class="n">neuroglancer</span><span class="o">.</span><span class="n">SegmentationLayer</span><span class="p">(</span>
+                        <span class="n">source</span><span class="o">=</span><span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;layers&#39;</span><span class="p">][</span><span class="n">layername</span><span class="p">][</span><span class="s1">&#39;source&#39;</span><span class="p">],)</span>
+
+    <span class="k">return</span> <span class="n">ngviewer</span></div>
+
+
+<div class="viewcode-block" id="handle_synapticdata"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.layers.handle_synapticdata">[docs]</a><span class="k">def</span> <span class="nf">handle_synapticdata</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">,</span> <span class="n">layer_kws</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add the synapse predictions for the em datasets as a neuroglancer layer.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ngviewer : ng.viewer.Viewer</span>
+<span class="sd">        object of Neuroglancer viewer class.</span>
+<span class="sd">    layer_kws: dict</span>
+<span class="sd">        containing details about different neuroglancer layers</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ngviewer : ng.viewer.Viewer</span>
+<span class="sd">        updated object of neuroglancer viewer class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># This function adds synapse predictions to a neuroglancer instance.</span>
+
+    <span class="n">ngspace</span> <span class="o">=</span> <span class="n">_get_ngspace</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">layername</span> <span class="ow">in</span> <span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;layers&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;layers&#39;</span><span class="p">][</span><span class="n">layername</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;synapsepred&#39;</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">ngviewer</span><span class="o">.</span><span class="n">txn</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+                <span class="n">s</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="n">layername</span><span class="p">]</span> <span class="o">=</span> <span class="n">neuroglancer</span><span class="o">.</span><span class="n">AnnotationLayer</span><span class="p">(</span>
+                        <span class="n">source</span><span class="o">=</span><span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;layers&#39;</span><span class="p">][</span><span class="n">layername</span><span class="p">][</span><span class="s1">&#39;source&#39;</span><span class="p">],</span>
+                        <span class="n">linked_segmentation_layer</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;pre_segment&#39;</span><span class="p">:</span> <span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;layers&#39;</span><span class="p">][</span><span class="n">layername</span><span class="p">][</span><span class="s1">&#39;linkedseg&#39;</span><span class="p">],</span>
+                                                   <span class="s1">&#39;post_segment&#39;</span><span class="p">:</span> <span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;layers&#39;</span><span class="p">][</span><span class="n">layername</span><span class="p">][</span><span class="s1">&#39;linkedseg&#39;</span><span class="p">]},</span>
+                        <span class="n">filter_by_segmentation</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;post_segment&#39;</span><span class="p">,</span> <span class="s1">&#39;pre_segment&#39;</span><span class="p">],</span>
+                        <span class="n">shader</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;#uicontrol vec3 preColor color(default=</span><span class="se">\&quot;</span><span class="s1">blue</span><span class="se">\&quot;</span><span class="s1">)</span>
+<span class="s1">                                  # uicontrol vec3 postColor color(default=</span><span class="se">\&quot;</span><span class="s1">red</span><span class="se">\&quot;</span><span class="s1">)</span>
+<span class="s1">                                  # uicontrol float scorethr slider(min=0, max=1000)</span>
+<span class="s1">                                  # uicontrol int showautapse slider(min=0, max=1)</span>
+
+<span class="s1">                                  void main() {</span>
+<span class="s1">                                  setColor(defaultColor());</span>
+<span class="s1">                                  setEndpointMarkerColor(</span>
+<span class="s1">                                  vec4(preColor, 0.5),</span>
+<span class="s1">                                  vec4(postColor, 0.5));</span>
+<span class="s1">                                  setEndpointMarkerSize(5.0, 5.0);</span>
+<span class="s1">                                  setLineWidth(2.0);</span>
+<span class="s1">                                  if (int(prop_autapse()) &gt; showautapse) discard;</span>
+<span class="s1">                                  if (prop_score()&lt;scorethr) discard;</span>
+<span class="s1">                                  }&#39;&#39;&#39;</span><span class="p">,</span>
+                        <span class="n">shaderControls</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;scorethr&quot;</span><span class="p">:</span> <span class="mi">80</span><span class="p">},</span>
+                                           <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ngviewer</span></div>
+
+
+<div class="viewcode-block" id="handle_synapticclefts"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.layers.handle_synapticclefts">[docs]</a><span class="k">def</span> <span class="nf">handle_synapticclefts</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">,</span> <span class="n">layer_kws</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add the synapse cleft predictions for the em dataset as a neuroglancer layer.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ngviewer : ng.viewer.Viewer</span>
+<span class="sd">        object of Neuroglancer viewer class.</span>
+<span class="sd">    layer_kws: dict</span>
+<span class="sd">        containing details about different neuroglancer layers</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ngviewer : ng.viewer.Viewer</span>
+<span class="sd">        updated object of neuroglancer viewer class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># This function adds synapse cleft predictions to a neuroglancer instance.</span>
+
+    <span class="n">ngspace</span> <span class="o">=</span> <span class="n">_get_ngspace</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">layername</span> <span class="ow">in</span> <span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;layers&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;layers&#39;</span><span class="p">][</span><span class="n">layername</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;synapticcleft&#39;</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">ngviewer</span><span class="o">.</span><span class="n">txn</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+                <span class="n">s</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="n">layername</span><span class="p">]</span> <span class="o">=</span> <span class="n">neuroglancer</span><span class="o">.</span><span class="n">ImageLayer</span><span class="p">(</span>
+                        <span class="n">source</span><span class="o">=</span><span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;layers&#39;</span><span class="p">][</span><span class="n">layername</span><span class="p">][</span><span class="s1">&#39;source&#39;</span><span class="p">],</span>
+                        <span class="n">shader</span><span class="o">=</span><span class="s1">&#39;void main() {emitRGBA(vec4(0.0,0.0,1.0,toNormalized(getDataValue())));}&#39;</span><span class="p">,</span>
+                        <span class="n">opacity</span><span class="o">=</span><span class="mf">0.73</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ngviewer</span></div>
+
+
+<div class="viewcode-block" id="handle_meshes"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.layers.handle_meshes">[docs]</a><span class="k">def</span> <span class="nf">handle_meshes</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">,</span> <span class="n">layer_kws</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add the different surface meshes as a neuroglancer layer.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ngviewer : ng.viewer.Viewer</span>
+<span class="sd">        object of Neuroglancer viewer class.</span>
+<span class="sd">    layer_kws: dict</span>
+<span class="sd">        containing details about different neuroglancer layers</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ngviewer : ng.viewer.Viewer</span>
+<span class="sd">        updated object of neuroglancer viewer class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># This function adds meshes usually based on neuropil boundaries to a neuroglancer instance.</span>
+
+    <span class="n">ngspace</span> <span class="o">=</span> <span class="n">_get_ngspace</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">)</span>
+
+    <span class="c1"># for meshes as a mesh layer</span>
+    <span class="k">for</span> <span class="n">layername</span> <span class="ow">in</span> <span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;layers&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;layers&#39;</span><span class="p">][</span><span class="n">layername</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;surfacemesh&#39;</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">ngviewer</span><span class="o">.</span><span class="n">txn</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+                <span class="n">s</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="n">layername</span><span class="p">]</span> <span class="o">=</span> <span class="n">neuroglancer</span><span class="o">.</span><span class="n">SingleMeshLayer</span><span class="p">(</span>
+                        <span class="n">source</span><span class="o">=</span><span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;layers&#39;</span><span class="p">][</span><span class="n">layername</span><span class="p">][</span><span class="s1">&#39;source&#39;</span><span class="p">],</span>
+                        <span class="n">shader</span><span class="o">=</span><span class="s1">&#39;void main() {emitRGBA(vec4(0.859, 0.859, 0.859, 0.3));}&#39;</span><span class="p">)</span>
+
+    <span class="c1"># for meshes as a segment layer</span>
+    <span class="k">for</span> <span class="n">layername</span> <span class="ow">in</span> <span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;layers&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;layers&#39;</span><span class="p">][</span><span class="n">layername</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;segmentmesh&#39;</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">ngviewer</span><span class="o">.</span><span class="n">txn</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+                <span class="n">s</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="n">layername</span><span class="p">]</span> <span class="o">=</span> <span class="n">neuroglancer</span><span class="o">.</span><span class="n">SegmentationLayer</span><span class="p">(</span>
+                        <span class="n">source</span><span class="o">=</span><span class="n">ngspace</span><span class="p">[</span><span class="s1">&#39;layers&#39;</span><span class="p">][</span><span class="n">layername</span><span class="p">][</span><span class="s1">&#39;source&#39;</span><span class="p">],</span>
+                        <span class="n">segmentQuery</span><span class="o">=</span><span class="s1">&#39;/&#39;</span><span class="p">,</span>
+                        <span class="n">objectAlpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ngviewer</span></div>
+
+
+<div class="viewcode-block" id="handle_skels"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.layers.handle_skels">[docs]</a><span class="k">def</span> <span class="nf">handle_skels</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">,</span> <span class="n">segmentColors</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add skeletons hosted via http as a neuroglancer layer.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ngviewer : ng.viewer.Viewer</span>
+<span class="sd">        object of Neuroglancer viewer class.</span>
+<span class="sd">    path: str</span>
+<span class="sd">        local path of the precomputed hosted layer.</span>
+<span class="sd">    layer_name: str</span>
+<span class="sd">        layer name.</span>
+<span class="sd">    segmentColors: str</span>
+<span class="sd">        colors of segments in named or hexformat</span>
+<span class="sd">    alpha: float</span>
+<span class="sd">        transparency value</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ngviewer : ng.viewer.Viewer</span>
+<span class="sd">        updated object of neuroglancer viewer class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># This function adds skeletons in the precomputed format hosted locally via http to a neuroglancer instance.</span>
+
+    <span class="n">precomputepath</span> <span class="o">=</span> <span class="s1">&#39;precomputed://&#39;</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;/precomputed/&#39;</span> <span class="o">+</span> <span class="n">layer_name</span> <span class="o">+</span> <span class="s1">&#39;/skeletons/&#39;</span>
+    <span class="k">with</span> <span class="n">ngviewer</span><span class="o">.</span><span class="n">txn</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="n">layer_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">neuroglancer</span><span class="o">.</span><span class="n">SegmentationLayer</span><span class="p">(</span>
+            <span class="n">source</span><span class="o">=</span><span class="n">precomputepath</span><span class="p">,</span>
+            <span class="n">segmentQuery</span><span class="o">=</span><span class="s1">&#39;/&#39;</span><span class="p">,</span>
+            <span class="n">segmentColors</span><span class="o">=</span><span class="n">segmentColors</span><span class="p">,</span>
+            <span class="n">objectAlpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ngviewer</span></div>
+
+
+<div class="viewcode-block" id="add_hostedlayer"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.layers.add_hostedlayer">[docs]</a><span class="k">def</span> <span class="nf">add_hostedlayer</span><span class="p">(</span><span class="n">ngviewer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add already hosted layers (via url) directly.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ngviewer : ng.viewer.Viewer</span>
+<span class="sd">        object of Neuroglancer viewer class.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ngviewer : ng.viewer.Viewer</span>
+<span class="sd">        updated object of neuroglancer viewer class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">layer_kws</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;layer_kws&#39;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="n">layer_type</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">]</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">get_alphavalue</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">)</span>
+    <span class="n">ngviewer</span> <span class="o">=</span> <span class="n">openviewer</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">layer_type</span> <span class="o">==</span> <span class="s1">&#39;skeletons&#39;</span><span class="p">:</span>
+        <span class="n">precomputepath</span> <span class="o">=</span> <span class="s1">&#39;precomputed://&#39;</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;/precomputed/skeletons&#39;</span>
+        <span class="n">layer_name</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;skeletons&#39;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">ngviewer</span><span class="o">.</span><span class="n">txn</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+            <span class="n">s</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="n">layer_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">neuroglancer</span><span class="o">.</span><span class="n">SegmentationLayer</span><span class="p">(</span>
+                <span class="n">source</span><span class="o">=</span><span class="n">precomputepath</span><span class="p">,</span>
+                <span class="n">segmentQuery</span><span class="o">=</span><span class="s1">&#39;/&#39;</span><span class="p">,</span>
+                <span class="n">objectAlpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">layer_type</span> <span class="o">==</span> <span class="s1">&#39;volumes&#39;</span><span class="p">:</span>
+        <span class="n">precomputepath</span> <span class="o">=</span> <span class="s1">&#39;precomputed://&#39;</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;/precomputed/neuronmeshes/mesh#type=mesh&#39;</span>
+        <span class="n">layer_name</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;neuronmeshes&#39;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">ngviewer</span><span class="o">.</span><span class="n">txn</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+            <span class="n">s</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="n">layer_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">neuroglancer</span><span class="o">.</span><span class="n">SegmentationLayer</span><span class="p">(</span>
+                <span class="n">source</span><span class="o">=</span><span class="n">precomputepath</span><span class="p">,</span>
+                <span class="n">segmentQuery</span><span class="o">=</span><span class="s1">&#39;/&#39;</span><span class="p">,</span>
+                <span class="n">objectAlpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ngviewer</span></div>
+
+
+<div class="viewcode-block" id="handle_vols"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.layers.handle_vols">[docs]</a><span class="k">def</span> <span class="nf">handle_vols</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">,</span> <span class="n">segmentColors</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">layer_res</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add volumes hosted via http as a neuroglancer layer.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ngviewer : ng.viewer.Viewer</span>
+<span class="sd">        object of Neuroglancer viewer class.</span>
+<span class="sd">    path: str</span>
+<span class="sd">        local path of the precomputed hosted layer.</span>
+<span class="sd">    layer_name: str</span>
+<span class="sd">        layer name.</span>
+<span class="sd">    segmentColors: str</span>
+<span class="sd">        colors of segments in named or hexformat</span>
+<span class="sd">    alpha: float</span>
+<span class="sd">        transparency value</span>
+<span class="sd">    layer_res: bool</span>
+<span class="sd">        single or multi resolution meshes</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ngviewer : ng.viewer.Viewer</span>
+<span class="sd">        updated object of neuroglancer viewer class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># This function adds volumes in the precomputed format hosted locally via http to a neuroglancer instance.</span>
+    <span class="k">if</span> <span class="n">layer_res</span><span class="p">:</span>
+        <span class="n">precomputepath</span> <span class="o">=</span> <span class="s1">&#39;precomputed://&#39;</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;/precomputed/&#39;</span> <span class="o">+</span> <span class="n">layer_name</span> <span class="o">+</span> <span class="s1">&#39;/mesh&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">precomputepath</span> <span class="o">=</span> <span class="s1">&#39;precomputed://&#39;</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;/precomputed/&#39;</span> <span class="o">+</span> <span class="n">layer_name</span> <span class="o">+</span> <span class="s1">&#39;/mesh#type=mesh&#39;</span>
+    <span class="k">with</span> <span class="n">ngviewer</span><span class="o">.</span><span class="n">txn</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="n">layer_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">neuroglancer</span><span class="o">.</span><span class="n">SegmentationLayer</span><span class="p">(</span>
+            <span class="n">source</span><span class="o">=</span><span class="n">precomputepath</span><span class="p">,</span>
+            <span class="n">segmentQuery</span><span class="o">=</span><span class="s1">&#39;/&#39;</span><span class="p">,</span>
+            <span class="n">segmentColors</span><span class="o">=</span><span class="n">segmentColors</span><span class="p">,</span>
+            <span class="n">objectAlpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ngviewer</span></div>
+
+
+<div class="viewcode-block" id="handle_synapses"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.layers.handle_synapses">[docs]</a><span class="k">def</span> <span class="nf">handle_synapses</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">layer_linked</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add pre/post-synapses hosted via http as a neuroglancer layer.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ngviewer : ng.viewer.Viewer</span>
+<span class="sd">        object of Neuroglancer viewer class.</span>
+<span class="sd">    path: str</span>
+<span class="sd">        local path of the precomputed hosted layer.</span>
+<span class="sd">    layer_linked: str</span>
+<span class="sd">        name of the linked layer.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ngviewer : ng.viewer.Viewer</span>
+<span class="sd">        updated object of neuroglancer viewer class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># This function adds synapses in the precomputed format hosted remotely via http to a neuroglancer instance.</span>
+    <span class="n">presynapsepath</span> <span class="o">=</span> <span class="s1">&#39;precomputed://&#39;</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;/precomputed/&#39;</span> <span class="o">+</span> <span class="n">layer_linked</span> <span class="o">+</span> <span class="s1">&#39;/presynapses&#39;</span>
+    <span class="n">postsynapsepath</span> <span class="o">=</span> <span class="s1">&#39;precomputed://&#39;</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;/precomputed/&#39;</span> <span class="o">+</span> <span class="n">layer_linked</span> <span class="o">+</span> <span class="s1">&#39;/postsynapses&#39;</span>
+    <span class="k">with</span> <span class="n">ngviewer</span><span class="o">.</span><span class="n">txn</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="s1">&#39;presynapses&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">neuroglancer</span><span class="o">.</span><span class="n">AnnotationLayer</span><span class="p">(</span>
+            <span class="n">source</span><span class="o">=</span><span class="n">presynapsepath</span><span class="p">,</span>
+            <span class="n">annotationColor</span><span class="o">=</span><span class="s1">&#39;#ff0000&#39;</span><span class="p">,</span>
+            <span class="n">linked_segmentation_layer</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;presynapses_cell&#39;</span><span class="p">:</span> <span class="n">layer_linked</span><span class="p">},</span>
+            <span class="n">filter_by_segmentation</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;presynapses_cell&#39;</span><span class="p">])</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="s1">&#39;postsynapses&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">neuroglancer</span><span class="o">.</span><span class="n">AnnotationLayer</span><span class="p">(</span>
+            <span class="n">source</span><span class="o">=</span><span class="n">postsynapsepath</span><span class="p">,</span>
+            <span class="n">annotationColor</span><span class="o">=</span><span class="s1">&#39;#0000ff&#39;</span><span class="p">,</span>
+            <span class="n">linked_segmentation_layer</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;postsynapses_cell&#39;</span><span class="p">:</span> <span class="n">layer_linked</span><span class="p">},</span>
+            <span class="n">filter_by_segmentation</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;postsynapses_cell&#39;</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">ngviewer</span></div>
+
+
+<div class="viewcode-block" id="handle_points"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.layers.handle_points">[docs]</a><span class="k">def</span> <span class="nf">handle_points</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">,</span> <span class="n">annotationColor</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add points hosted via http as a neuroglancer layer.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ngviewer : ng.viewer.Viewer</span>
+<span class="sd">        object of Neuroglancer viewer class.</span>
+<span class="sd">    path: str</span>
+<span class="sd">        local path of the precomputed hosted layer.</span>
+<span class="sd">    layer_name: str</span>
+<span class="sd">        layer name.</span>
+<span class="sd">    annotationColor: str</span>
+<span class="sd">        color in either named or hexcode format.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ngviewer : ng.viewer.Viewer</span>
+<span class="sd">        updated object of neuroglancer viewer class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># This function adds points in the precomputed format hosted locally via http to a neuroglancer instance.</span>
+    <span class="n">pointpath</span> <span class="o">=</span> <span class="s1">&#39;precomputed://&#39;</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;/precomputed/&#39;</span> <span class="o">+</span> <span class="n">layer_name</span>
+    <span class="k">with</span> <span class="n">ngviewer</span><span class="o">.</span><span class="n">txn</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="n">layer_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">neuroglancer</span><span class="o">.</span><span class="n">AnnotationLayer</span><span class="p">(</span>
+            <span class="n">source</span><span class="o">=</span><span class="n">pointpath</span><span class="p">,</span>
+            <span class="n">annotationColor</span><span class="o">=</span><span class="n">annotationColor</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ngviewer</span></div>
+
+
+<div class="viewcode-block" id="create_nglayer"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.layers.create_nglayer">[docs]</a><span class="k">def</span> <span class="nf">create_nglayer</span><span class="p">(</span><span class="n">ngviewer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="s1">&#39;xy-3d&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create a neuroglancer layer and print the url as output.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ngviewer :  ng.viewer.Viewer</span>
+<span class="sd">        object of Neuroglancer viewer class.</span>
+<span class="sd">    layout :   str</span>
+<span class="sd">        layout of neuroglancer window</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ngviewer :  ng.viewer.Viewer</span>
+<span class="sd">        object of Neuroglancer viewer class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_LAYOUT_OPTIONS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;xy&#39;</span><span class="p">,</span> <span class="s1">&#39;yz&#39;</span><span class="p">,</span> <span class="s1">&#39;xz&#39;</span><span class="p">,</span> <span class="s1">&#39;xy-3d&#39;</span><span class="p">,</span> <span class="s1">&#39;yz-3d&#39;</span><span class="p">,</span> <span class="s1">&#39;xz-3d&#39;</span><span class="p">,</span> <span class="s1">&#39;4panel&#39;</span><span class="p">,</span> <span class="s1">&#39;3d&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">layout</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_LAYOUT_OPTIONS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown method &quot;</span><span class="si">{0}</span><span class="s1">&quot;. Please use either: </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">layout</span><span class="p">,</span> <span class="n">_LAYOUT_OPTIONS</span><span class="p">))</span>
+
+    <span class="n">layer_kws</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;layer_kws&#39;</span><span class="p">,</span> <span class="p">{})</span>
+
+    <span class="n">ngviewer</span> <span class="o">=</span> <span class="n">openviewer</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">layer_kws</span><span class="p">:</span>
+
+        <span class="n">dimensions</span> <span class="o">=</span> <span class="n">_handle_ngdimensions</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">)</span>
+        <span class="n">layer_type</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Layer created: &#39;</span><span class="p">,</span> <span class="n">layer_type</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">layer_type</span> <span class="o">==</span> <span class="s1">&#39;image&#39;</span><span class="p">:</span>
+            <span class="n">handle_emdata</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">,</span> <span class="n">layer_kws</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">layer_type</span> <span class="o">==</span> <span class="s1">&#39;segmentation&#39;</span><span class="p">:</span>
+            <span class="n">handle_segmentdata</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">,</span> <span class="n">layer_kws</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">layer_type</span> <span class="o">==</span> <span class="s1">&#39;synapsepred&#39;</span><span class="p">:</span>
+            <span class="n">handle_synapticdata</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">,</span> <span class="n">layer_kws</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">layer_type</span> <span class="o">==</span> <span class="s1">&#39;synapticcleft&#39;</span><span class="p">:</span>
+            <span class="n">handle_synapticclefts</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">,</span> <span class="n">layer_kws</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">layer_type</span> <span class="o">==</span> <span class="s1">&#39;surfacemesh&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">layer_type</span> <span class="o">==</span> <span class="s1">&#39;segmentmesh&#39;</span><span class="p">):</span>
+            <span class="n">handle_meshes</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">,</span> <span class="n">layer_kws</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">layer_type</span> <span class="o">==</span> <span class="s1">&#39;skeletons&#39;</span><span class="p">:</span>
+            <span class="n">layer_name</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;skeletons&#39;</span><span class="p">)</span>
+            <span class="n">skelseglist</span><span class="p">,</span> <span class="n">layer_host</span> <span class="o">=</span> <span class="n">add_precomputed</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">)</span>
+
+            <span class="n">hexcolor</span> <span class="o">=</span> <span class="n">get_hexcolor</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">)</span>
+            <span class="n">alpha</span> <span class="o">=</span> <span class="n">get_alphavalue</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hexcolor</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">segmentColors</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">hexcolor</span><span class="p">),</span> <span class="n">skelseglist</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">segmentColors</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">skelseglist</span><span class="p">,</span> <span class="n">hexcolor</span><span class="p">))</span>
+
+            <span class="n">ngviewer</span> <span class="o">=</span> <span class="n">handle_skels</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">,</span> <span class="n">layer_host</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">,</span> <span class="n">segmentColors</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">layer_type</span> <span class="o">==</span> <span class="s1">&#39;volumes&#39;</span><span class="p">:</span>
+            <span class="n">layer_name</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;volumes&#39;</span><span class="p">)</span>
+            <span class="n">volumeidlist</span><span class="p">,</span> <span class="n">layer_host</span> <span class="o">=</span> <span class="n">add_precomputed</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">)</span>
+
+            <span class="n">hexcolor</span> <span class="o">=</span> <span class="n">get_hexcolor</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">)</span>
+            <span class="n">alpha</span> <span class="o">=</span> <span class="n">get_alphavalue</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hexcolor</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">segmentColors</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">hexcolor</span><span class="p">),</span> <span class="n">volumeidlist</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">segmentColors</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">volumeidlist</span><span class="p">,</span> <span class="n">hexcolor</span><span class="p">))</span>
+
+            <span class="n">layer_res</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;multires&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+            <span class="n">ngviewer</span> <span class="o">=</span> <span class="n">handle_vols</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">,</span> <span class="n">layer_host</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">,</span> <span class="n">segmentColors</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">layer_res</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">layer_type</span> <span class="o">==</span> <span class="s1">&#39;synapses&#39;</span><span class="p">:</span>
+            <span class="n">layer_linked</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="p">[</span><span class="s1">&#39;linked_layername&#39;</span><span class="p">]</span>
+            <span class="n">layer_host</span> <span class="o">=</span> <span class="n">add_precomputed</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">)</span>
+
+            <span class="c1"># layer_source = layer_kws[&#39;source&#39;]</span>
+            <span class="c1"># layer_serverdir, layer_host = get_ngserver()</span>
+
+            <span class="c1"># flush_precomputed(layer_serverdir, &#39;presynapses&#39;)</span>
+            <span class="c1"># flush_precomputed(layer_serverdir, &#39;postsynapses&#39;)</span>
+
+            <span class="c1"># synapse_path = create_synapseinfo(dimensions, layer_serverdir)</span>
+            <span class="c1"># upload_synapses(layer_source, synapse_path)</span>
+
+            <span class="n">ngviewer</span> <span class="o">=</span> <span class="n">handle_synapses</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">,</span> <span class="n">layer_host</span><span class="p">,</span> <span class="n">layer_linked</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">layer_type</span> <span class="o">==</span> <span class="s1">&#39;points&#39;</span><span class="p">:</span>
+            <span class="n">layer_annottype</span> <span class="o">=</span> <span class="n">get_annotationstatetype</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">)</span>
+            <span class="n">layer_name</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+
+            <span class="n">hexcolor</span> <span class="o">=</span> <span class="n">get_hexcolor</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">)</span>
+            <span class="n">annotationColors</span> <span class="o">=</span> <span class="n">hexcolor</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="c1"># alpha = get_alphavalue(layer_kws)</span>
+
+            <span class="n">layer_serverdir</span><span class="p">,</span> <span class="n">layer_host</span> <span class="o">=</span> <span class="n">get_ngserver</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">layer_annottype</span> <span class="o">==</span> <span class="s1">&#39;precomputed&#39;</span><span class="p">:</span>
+                <span class="n">add_precomputed</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">)</span>
+
+                <span class="c1"># flush_precomputed(layer_serverdir, layer_name)</span>
+                <span class="c1"># points_path = create_pointinfo(dimensions, layer_serverdir, layer_name)</span>
+                <span class="c1"># upload_points(layer_source, points_path, layer_name, layer_scale)</span>
+
+                <span class="n">ngviewer</span> <span class="o">=</span> <span class="n">handle_points</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">,</span> <span class="n">layer_host</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">,</span> <span class="n">annotationColors</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">layer_source</span> <span class="o">=</span> <span class="n">layer_kws</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">]</span>
+                <span class="n">layer_scale</span> <span class="o">=</span> <span class="n">get_scalevalue</span><span class="p">(</span><span class="n">layer_kws</span><span class="p">)</span>
+                <span class="n">annotate_points</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">annotationColors</span><span class="p">,</span> <span class="n">layer_source</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">,</span> <span class="n">layer_scale</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">layout</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">ngviewer</span><span class="o">.</span><span class="n">txn</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Using layout :&#39;</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
+            <span class="n">s</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="n">neuroglancer</span><span class="o">.</span><span class="n">layout_specification</span> <span class="o">=</span> <span class="n">layout</span>
+
+    <span class="c1"># setup some stuff at the end..</span>
+    <span class="k">with</span> <span class="n">ngviewer</span><span class="o">.</span><span class="n">txn</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">show_slices</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">return</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Sridhar Jagannathan.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

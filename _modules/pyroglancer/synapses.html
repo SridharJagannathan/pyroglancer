@@ -1,0 +1,547 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>pyroglancer.synapses &mdash; Pyroglancer 0.0.4 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Pyroglancer
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Install Pyroglancer</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/local_neuroglancer.html">Starting a local neuroglancer session with FAFB dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/examples_flywirecoplotting.html">Examples of different co-plotting with flywire</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/catmaid2flywire.html">Co-plotting CATMAID skeleton with flywire dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/flywire2fafb.html">Co-plotting flywire mesh with FAFB autosegments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/hemibrain2flywire.html">Co-plotting hemibrain skeleton with flywire dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/gal4line2flywire.html">Co-plotting split-gal4 line, hemibrain skeleton with flywire dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/shardeddataset.html">Creating sharded datasets with FAFB</a></li>
+</ul>
+<p class="caption"><span class="caption-text">hemibraindataset</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../30k_hemibraindataset.html">30k hemibrain2fafb</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">pyroglancer</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Pyroglancer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>pyroglancer.synapses</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pyroglancer.synapses</h1><div class="highlight"><pre>
+<span></span><span class="c1">#    This script is part of pyroglancer (https://github.com/SridharJagannathan/pyroglancer).</span>
+<span class="c1">#    Copyright (C) 2020 Sridhar Jagannathan</span>
+<span class="c1">#</span>
+<span class="c1">#    This program is free software: you can redistribute it and/or modify</span>
+<span class="c1">#    it under the terms of the GNU General Public License as published by</span>
+<span class="c1">#    the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1">#    (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1">#    This program is distributed in the hope that it will be useful,</span>
+<span class="c1">#    but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1">#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1">#    GNU General Public License for more details.</span>
+
+<span class="sd">&quot;&quot;&quot;Module contains functions to handle synapse data.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">navis</span>
+<span class="kn">import</span> <span class="nn">neuroglancer</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pymaid</span>
+<span class="kn">import</span> <span class="nn">struct</span>
+
+
+<div class="viewcode-block" id="commit_info"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.synapses.commit_info">[docs]</a><span class="k">def</span> <span class="nf">commit_info</span><span class="p">(</span><span class="n">synapseinfo</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">synapsetype</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Commit the info file created for the synapses based on precomputed format.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    synapseinfo : dict</span>
+<span class="sd">        info in json format for the synapses</span>
+<span class="sd">    path: str</span>
+<span class="sd">        local path of the precomputed hosted layer.</span>
+<span class="sd">    synapsetype : str</span>
+<span class="sd">        pre or postsynapses</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">synapsefilepath</span> <span class="o">=</span> <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">synapsetype</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">synapsefilepath</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">synapsefilepath</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;creating:&#39;</span><span class="p">,</span> <span class="n">synapsefilepath</span><span class="p">)</span>
+    <span class="n">infofile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">synapsefilepath</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">infofile</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">synapseinfo</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="create_synapseinfo"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.synapses.create_synapseinfo">[docs]</a><span class="k">def</span> <span class="nf">create_synapseinfo</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create info file for the synapse based precomputed format.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    path: str</span>
+<span class="sd">        local path of the precomputed hosted layer.</span>
+<span class="sd">    dimensions:  neuroglancer.CoordinateSpace</span>
+<span class="sd">        object of neuroglancer coordinate space class.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">synapseinfo</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;neuroglancer_annotations_v1&#39;</span><span class="p">,</span>
+        <span class="s2">&quot;annotation_type&quot;</span><span class="p">:</span> <span class="s2">&quot;POINT&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;by_id&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;by_id&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;dimensions&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">scale</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unit</span><span class="p">],</span>
+            <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">scale</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unit</span><span class="p">],</span>
+            <span class="s2">&quot;z&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">scale</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unit</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;lower_bound&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;relationships&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;spatial&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;chunk_size&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">34422</span><span class="p">,</span> <span class="mi">37820</span><span class="p">,</span> <span class="mi">41362</span><span class="p">],</span>
+                <span class="s2">&quot;grid_shape&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;spatial0&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;limit&quot;</span><span class="p">:</span> <span class="mi">10000</span>
+            <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;upper_bound&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">34422</span><span class="p">,</span> <span class="mi">37820</span><span class="p">,</span> <span class="mi">41362</span><span class="p">]</span>
+    <span class="p">}</span>
+    <span class="n">synapseinfo</span><span class="p">[</span><span class="s2">&quot;relationships&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;presynapses_cell&quot;</span><span class="p">,</span>
+                                     <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;presynapses_cell&quot;</span><span class="p">}]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;synapses info path:&#39;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="n">commit_info</span><span class="p">(</span><span class="n">synapseinfo</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">synapsetype</span><span class="o">=</span><span class="s1">&#39;presynapses&#39;</span><span class="p">)</span>
+    <span class="n">synapseinfo</span><span class="p">[</span><span class="s2">&quot;relationships&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;postsynapses_cell&quot;</span><span class="p">,</span>
+                                     <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;postsynapses_cell&quot;</span><span class="p">}]</span>
+    <span class="n">commit_info</span><span class="p">(</span><span class="n">synapseinfo</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">synapsetype</span><span class="o">=</span><span class="s1">&#39;postsynapses&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">path</span></div>
+
+
+<div class="viewcode-block" id="put_synapsefile"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.synapses.put_synapsefile">[docs]</a><span class="k">def</span> <span class="nf">put_synapsefile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">synapsetype</span><span class="p">,</span> <span class="n">synapses</span><span class="p">,</span> <span class="n">skeletonid</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Put synapse in the local dataserver.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    path: str</span>
+<span class="sd">        local path of the precomputed hosted layer.</span>
+<span class="sd">    synapsetype : str</span>
+<span class="sd">        pre or postsynapses</span>
+<span class="sd">    synapses : dataframe</span>
+<span class="sd">        contains &#39;x&#39;, &#39;y&#39;, &#39;z&#39; columns</span>
+<span class="sd">    skeletonid : int</span>
+<span class="sd">        skeleton id to be associated with the corresponding synapse</span>
+<span class="sd">    pointsname : str</span>
+<span class="sd">        name for the points (not yet implemented)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">synapsefilepath</span> <span class="o">=</span> <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">synapsetype</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">synapsetype</span> <span class="o">+</span> <span class="s1">&#39;_cell/&#39;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">synapsefilepath</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">synapsefilepath</span><span class="p">)</span>
+        <span class="c1"># print(&#39;creating:&#39;, synapsefilepath)</span>
+    <span class="n">synapsefile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">synapsefilepath</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">skeletonid</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;making:&#39;</span><span class="p">,</span> <span class="n">synapsefile</span><span class="p">)</span>
+    <span class="n">synapselocs</span> <span class="o">=</span> <span class="n">synapses</span><span class="p">[[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="o">/</span><span class="mi">1000</span>
+
+    <span class="c1"># implementation based on logic suggested by https://github.com/google/neuroglancer/issues/227</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">synapsefile</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outputbytefile</span><span class="p">:</span>
+        <span class="n">total_synapses</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">synapselocs</span><span class="p">)</span>  <span class="c1"># coordinates is a list of tuples (x,y,z)</span>
+        <span class="n">buffer</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s1">&#39;&lt;Q&#39;</span><span class="p">,</span> <span class="n">total_synapses</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="ow">in</span> <span class="n">synapselocs</span><span class="p">:</span>
+            <span class="n">synapsepoint</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s1">&#39;&lt;3f&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+            <span class="n">buffer</span> <span class="o">+=</span> <span class="n">synapsepoint</span>
+        <span class="c1"># write the ids of the individual points at the very end..</span>
+        <span class="n">synapseid_buffer</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s1">&#39;&lt;</span><span class="si">%s</span><span class="s1">Q&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">synapselocs</span><span class="p">),</span> <span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">synapselocs</span><span class="p">)))</span>
+        <span class="n">buffer</span> <span class="o">+=</span> <span class="n">synapseid_buffer</span>
+        <span class="n">outputbytefile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="upload_synapses"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.synapses.upload_synapses">[docs]</a><span class="k">def</span> <span class="nf">upload_synapses</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Upload synpases from a neuron or neuronlist.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x :  CatmaidNeuron | CatmaidNeuronList or TreeNeuron | NeuronList</span>
+<span class="sd">       neuron or neuronlist of different formats</span>
+<span class="sd">    path: str</span>
+<span class="sd">        local path of the precomputed hosted layer.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pymaid</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">CatmaidNeuron</span><span class="p">):</span>
+        <span class="n">neuronlist</span> <span class="o">=</span> <span class="n">pymaid</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">CatmaidNeuronList</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">navis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">TreeNeuron</span><span class="p">):</span>
+        <span class="n">neuronlist</span> <span class="o">=</span> <span class="n">navis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">NeuronList</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pymaid</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">CatmaidNeuronList</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">navis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">NeuronList</span><span class="p">)):</span>
+        <span class="n">neuronlist</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Expected neuron or neuronlist, got &quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">neuronidx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">neuronlist</span><span class="p">)):</span>
+        <span class="n">neuronelement</span> <span class="o">=</span> <span class="n">neuronlist</span><span class="p">[</span><span class="n">neuronidx</span><span class="p">]</span>
+        <span class="n">presynapses</span> <span class="o">=</span> <span class="n">neuronelement</span><span class="o">.</span><span class="n">presynapses</span>
+        <span class="n">postsynapses</span> <span class="o">=</span> <span class="n">neuronelement</span><span class="o">.</span><span class="n">postsynapses</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Adding neuron: &#39;</span><span class="p">,</span> <span class="n">neuronelement</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="n">put_synapsefile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;presynapses&#39;</span><span class="p">,</span> <span class="n">presynapses</span><span class="p">,</span> <span class="n">neuronelement</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="n">put_synapsefile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;postsynapses&#39;</span><span class="p">,</span> <span class="n">postsynapses</span><span class="p">,</span> <span class="n">neuronelement</span><span class="o">.</span><span class="n">id</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="annotate_synapses"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.synapses.annotate_synapses">[docs]</a><span class="k">def</span> <span class="nf">annotate_synapses</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Annotate postsynapses of a neuron/neuronlist. (defunct do not use..).</span>
+
+<span class="sd">    This function annotates synapses of a neuron/neuronlist</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ngviewer : ng.viewer.Viewer</span>
+<span class="sd">        object of Neuroglancer viewer class.</span>
+<span class="sd">    dimensions:  neuroglancer.CoordinateSpace</span>
+<span class="sd">        object of neuroglancer coordinate space class.</span>
+<span class="sd">    x :  CatmaidNeuron | CatmaidNeuronList or TreeNeuron | NeuronList</span>
+<span class="sd">       neuron or neuronlist of different formats</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    status :     bool</span>
+<span class="sd">        annotation status</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pymaid</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">CatmaidNeuron</span><span class="p">):</span>
+        <span class="n">neuronlist</span> <span class="o">=</span> <span class="n">pymaid</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">CatmaidNeuronList</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">navis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">TreeNeuron</span><span class="p">):</span>
+        <span class="n">neuronlist</span> <span class="o">=</span> <span class="n">navis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">NeuronList</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pymaid</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">CatmaidNeuronList</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">navis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">NeuronList</span><span class="p">)):</span>
+        <span class="n">neuronlist</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Expected neuron or neuronlist, got &quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+
+    <span class="n">skeldatasegidlist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">neuron</span> <span class="ow">in</span> <span class="n">neuronlist</span><span class="p">:</span>
+        <span class="n">skeldatasegidlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">neuron</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+    <span class="c1"># postsynapses first..</span>
+    <span class="k">with</span> <span class="n">ngviewer</span><span class="o">.</span><span class="n">txn</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;post_synapses&quot;</span><span class="p">,</span>
+            <span class="n">layer</span><span class="o">=</span><span class="n">neuroglancer</span><span class="o">.</span><span class="n">LocalAnnotationLayer</span><span class="p">(</span>
+                <span class="n">dimensions</span><span class="o">=</span><span class="n">dimensions</span><span class="p">,</span>
+                <span class="n">annotation_relationships</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;post_synapses&#39;</span><span class="p">],</span>
+                <span class="n">linked_segmentation_layer</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;post_synapses&#39;</span><span class="p">:</span> <span class="s1">&#39;skeletons&#39;</span><span class="p">},</span>
+                <span class="n">filter_by_segmentation</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;post_synapses&#39;</span><span class="p">],</span>
+                <span class="n">ignore_null_segment_filter</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">annotation_properties</span><span class="o">=</span><span class="p">[</span>
+                    <span class="n">neuroglancer</span><span class="o">.</span><span class="n">AnnotationPropertySpec</span><span class="p">(</span>
+                        <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;color&#39;</span><span class="p">,</span>
+                        <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;rgb&#39;</span><span class="p">,</span>
+                        <span class="n">default</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="p">],</span>
+                <span class="n">shader</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">                        void main() {</span>
+<span class="s1">                          setColor(prop_color());</span>
+<span class="s1">                          setPointMarkerSize(5.0);</span>
+<span class="s1">                        }</span>
+<span class="s1">                        &#39;&#39;&#39;</span><span class="p">,</span>
+            <span class="p">))</span>
+
+    <span class="k">with</span> <span class="n">ngviewer</span><span class="o">.</span><span class="n">txn</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">neuronidx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">neuronlist</span><span class="p">)):</span>
+            <span class="n">neuronelement</span> <span class="o">=</span> <span class="n">neuronlist</span><span class="p">[</span><span class="n">neuronidx</span><span class="p">]</span>
+            <span class="n">postsynapses</span> <span class="o">=</span> <span class="n">neuronelement</span><span class="o">.</span><span class="n">postsynapses</span>
+            <span class="n">postsynapses</span> <span class="o">=</span> <span class="n">postsynapses</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+            <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">postsyn</span> <span class="ow">in</span> <span class="n">postsynapses</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+                <span class="n">s</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="s1">&#39;post_synapses&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">neuroglancer</span><span class="o">.</span><span class="n">PointAnnotation</span><span class="p">(</span>
+                        <span class="nb">id</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">),</span>
+                        <span class="n">point</span><span class="o">=</span><span class="p">[</span><span class="n">postsyn</span><span class="o">.</span><span class="n">x</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="n">postsyn</span><span class="o">.</span><span class="n">y</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="n">postsyn</span><span class="o">.</span><span class="n">z</span><span class="o">/</span><span class="mi">1000</span><span class="p">],</span>
+                        <span class="n">segments</span><span class="o">=</span><span class="p">[[</span><span class="n">skeldatasegidlist</span><span class="p">[</span><span class="n">neuronidx</span><span class="p">]]],</span>
+                        <span class="n">props</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#0000ff&#39;</span><span class="p">],</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+
+    <span class="c1"># presynapses next..</span>
+    <span class="k">with</span> <span class="n">ngviewer</span><span class="o">.</span><span class="n">txn</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;pre_synapses&quot;</span><span class="p">,</span>
+            <span class="n">layer</span><span class="o">=</span><span class="n">neuroglancer</span><span class="o">.</span><span class="n">LocalAnnotationLayer</span><span class="p">(</span>
+                <span class="n">dimensions</span><span class="o">=</span><span class="n">dimensions</span><span class="p">,</span>
+                <span class="n">annotation_relationships</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pre_synapses&#39;</span><span class="p">],</span>
+                <span class="n">linked_segmentation_layer</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;pre_synapses&#39;</span><span class="p">:</span> <span class="s1">&#39;skeletons&#39;</span><span class="p">},</span>
+                <span class="n">filter_by_segmentation</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pre_synapses&#39;</span><span class="p">],</span>
+                <span class="n">ignore_null_segment_filter</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">annotation_properties</span><span class="o">=</span><span class="p">[</span>
+                    <span class="n">neuroglancer</span><span class="o">.</span><span class="n">AnnotationPropertySpec</span><span class="p">(</span>
+                        <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;color&#39;</span><span class="p">,</span>
+                        <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;rgb&#39;</span><span class="p">,</span>
+                        <span class="n">default</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="p">],</span>
+                <span class="n">shader</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">                        void main() {</span>
+<span class="s1">                          setColor(prop_color());</span>
+<span class="s1">                          setPointMarkerSize(5.0);</span>
+<span class="s1">                        }</span>
+<span class="s1">                        &#39;&#39;&#39;</span><span class="p">,</span>
+            <span class="p">))</span>
+
+    <span class="k">with</span> <span class="n">ngviewer</span><span class="o">.</span><span class="n">txn</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">neuronidx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">neuronlist</span><span class="p">)):</span>
+            <span class="n">neuronelement</span> <span class="o">=</span> <span class="n">neuronlist</span><span class="p">[</span><span class="n">neuronidx</span><span class="p">]</span>
+            <span class="n">presynapses</span> <span class="o">=</span> <span class="n">neuronelement</span><span class="o">.</span><span class="n">presynapses</span>
+            <span class="n">presynapses</span> <span class="o">=</span> <span class="n">presynapses</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+            <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">presyn</span> <span class="ow">in</span> <span class="n">presynapses</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+                <span class="n">s</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="s1">&#39;pre_synapses&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">annotations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">neuroglancer</span><span class="o">.</span><span class="n">PointAnnotation</span><span class="p">(</span>
+                        <span class="nb">id</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">),</span>
+                        <span class="n">point</span><span class="o">=</span><span class="p">[</span><span class="n">presyn</span><span class="o">.</span><span class="n">x</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="n">presyn</span><span class="o">.</span><span class="n">y</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="n">presyn</span><span class="o">.</span><span class="n">z</span><span class="o">/</span><span class="mi">1000</span><span class="p">],</span>
+                        <span class="n">segments</span><span class="o">=</span><span class="p">[[</span><span class="n">skeldatasegidlist</span><span class="p">[</span><span class="n">neuronidx</span><span class="p">]]],</span>
+                        <span class="n">props</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#ff0000&#39;</span><span class="p">],</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+
+    <span class="n">status</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="n">status</span></div>
+
+
+<div class="viewcode-block" id="synapses2nodepoints"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.synapses.synapses2nodepoints">[docs]</a><span class="k">def</span> <span class="nf">synapses2nodepoints</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">layer_scale</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate nodepoints (point A, point B) from synapses for given neuron(s).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x :             CatmaidNeuron | CatmaidNeuronList or TreeNeuron | NeuronList</span>
+<span class="sd">       neuron or neuronlist of different formats</span>
+<span class="sd">    layer_scale : int | float</span>
+<span class="sd">        scaling from voxel to native space in &#39;x&#39;, &#39;y&#39;, &#39;z&#39;</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    synapsepointscollec_df : dataframe</span>
+<span class="sd">      contains synapse points in point A - point B format used in flywire annotations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pymaid</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">CatmaidNeuron</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">pymaid</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">CatmaidNeuronList</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">navis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">TreeNeuron</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">navis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">NeuronList</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pymaid</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">CatmaidNeuronList</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">navis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">NeuronList</span><span class="p">)):</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Expected neuron or neuronlist, got &quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+
+    <span class="n">synapsepointscollec_df</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">neuronelement</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+        <span class="n">presynapses</span> <span class="o">=</span> <span class="n">neuronelement</span><span class="o">.</span><span class="n">presynapses</span>
+        <span class="n">postsynapses</span> <span class="o">=</span> <span class="n">neuronelement</span><span class="o">.</span><span class="n">postsynapses</span>
+
+        <span class="n">presyn_pt</span> <span class="o">=</span> <span class="n">presynapses</span><span class="p">[[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">postsyn_pt</span> <span class="o">=</span> <span class="n">postsynapses</span><span class="p">[[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+
+        <span class="c1"># scale the points incase it is in voxel coordinates..</span>
+        <span class="n">presyn_pt</span> <span class="o">=</span> <span class="n">presyn_pt</span> <span class="o">/</span> <span class="n">layer_scale</span>
+        <span class="n">postsyn_pt</span> <span class="o">=</span> <span class="n">postsyn_pt</span> <span class="o">/</span> <span class="n">layer_scale</span>
+
+        <span class="n">pre_syn_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">presyn_pt</span><span class="o">.</span><span class="n">tolist</span><span class="p">()),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;presyn_pt&#39;</span><span class="p">])</span>
+        <span class="n">post_syn_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">postsyn_pt</span><span class="o">.</span><span class="n">tolist</span><span class="p">()),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;postsyn_pt&#39;</span><span class="p">])</span>
+
+        <span class="n">synapsepointscollec_df</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">neuronelement</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">pre_syn_df</span><span class="p">,</span> <span class="n">post_syn_df</span><span class="p">])</span>
+    <span class="n">synapsepointscollec_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">synapsepointscollec_df</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;pre_syn_df&#39;</span><span class="p">,</span> <span class="s1">&#39;post_syn_df&#39;</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">synapsepointscollec_df</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Sridhar Jagannathan.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,787 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Starting a local neuroglancer session with FAFB dataset"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### This example shows how to start a local neuroglancer session and further add neurons, synapses, neuropil meshes from a public catmaid instance"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Import neccesary library modules now"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import navis\n",
+    "import fafbseg\n",
+    "import pymaid"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import pandas as pd\n",
+    "import numpy as np\n",
+    "import os\n",
+    "from copy import deepcopy"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import io\n",
+    "from PIL import Image"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from pyroglancer.layers import create_nglayer, setlayerproperty\n",
+    "from pyroglancer.localserver import startdataserver, closedataserver\n",
+    "from pyroglancer.ngviewer import openviewer, closeviewer,setviewerstate, get_ngscreenshot\n",
+    "from pyroglancer.ngspaces import create_ngspace\n",
+    "from pyroglancer.createconfig import createconfig"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Set configurations to fetch from data from CATMAID"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "publicurl = 'https://fafb.catmaid.virtualflybrain.org/'"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "INFO  : Global CATMAID instance set. Caching is ON. (pymaid)\n",
+      "INFO - 2021-05-19 22:00:43,902 - client - Global CATMAID instance set. Caching is ON.\n"
+     ]
+    }
+   ],
+   "source": [
+    "working_rm = pymaid.CatmaidInstance(publicurl, api_token=None, project_id = 1)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Get sample skids and neuropil meshes from CATMAID"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "sample_skids = ['40637','27295','57311','2863104','57323']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "Make nrn:   0%|          | 0/5 [00:00<?, ?it/s]             INFO - 2021-05-19 22:00:44,720 - utils - NumExpr defaulting to 8 threads.\n",
+      "                                                       \r"
+     ]
+    }
+   ],
+   "source": [
+    "catmiad_neuronlist=pymaid.get_neurons(sample_skids,remote_instance = working_rm)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "                                                      \r"
+     ]
+    }
+   ],
+   "source": [
+    "vols = pymaid.get_volume(['AL_L', 'AL_R'], color=(255, 0, 0, .2))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "{'AL_R': <navis.Volume(name=AL_R, id=200, color=(255, 0, 0, 0.2), vertices.shape=(622, 3), faces.shape=(1240, 3))>,\n",
+       " 'AL_L': <navis.Volume(name=AL_L, id=300, color=(255, 0, 0, 0.2), vertices.shape=(612, 3), faces.shape=(1228, 3))>}"
+      ]
+     },
+     "execution_count": 10,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "vols['AL_R'].id = 200\n",
+    "vols['AL_L'].id = 300\n",
+    "vols"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Start the dataserver to host precomputed data.."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Serving data from:  "
+     ]
+    }
+   ],
+   "source": [
+    "startdataserver()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Start a basic neuroglancer local session with all FAFB configurations.."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7\n",
+      "Serving directory at http://127.0.0.1:8000\n"
+     ]
+    }
+   ],
+   "source": [
+    "configdata = [dict(\n",
+    "             ngspace='FAFB',\n",
+    "             dimension=dict(x=1, y=1,z=1,units='um'),\n",
+    "             voxelsize=dict(x=4,y=4,z=40,units='nm'),\n",
+    "             layers=dict(\n",
+    "                    fafb_v14_clahe=dict(\n",
+    "                    type='image',\n",
+    "                    source='precomputed://gs://neuroglancer-fafb-data/fafb_v14/fafb_v14_clahe'),\n",
+    "                    fafb_surf=dict(\n",
+    "                    type='surfacemesh',\n",
+    "                    source='vtk://https://storage.googleapis.com/neuroglancer-fafb-data/elmr-data/FAFB.surf.vtk.gz'\n",
+    "                    ))\n",
+    "                  )]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "configfileloc = '/Users/sri/.pyroglancer/config_temp.yml'"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "setting default config file loc\n"
+     ]
+    }
+   ],
+   "source": [
+    "createconfig(configdata, configfileloc)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "layer_kws = {'ngspace': 'FAFB'}"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "config file loc is at: None\n",
+      "using default location at:  /Users/sri/.pyroglancer/config_temp.yml\n",
+      "Neuroglancer viewer created at:  http://127.0.0.1:58817/v/a51569d4574735f355dd0a0f034e16ffafb1eae9/\n",
+      "config file loc is at: None\n",
+      "using default location at:  /Users/sri/.pyroglancer/config_temp.yml\n",
+      "Dimensions are in : FAFB\n",
+      "Layer created:  image\n",
+      "config file loc is at: None\n",
+      "using default location at:  /Users/sri/.pyroglancer/config_temp.yml\n",
+      "Using layout : xy-3d\n",
+      "config file loc is at: None\n",
+      "using default location at:  /Users/sri/.pyroglancer/config_temp.yml\n",
+      "Dimensions are in : FAFB\n",
+      "Layer created:  surfacemesh\n",
+      "config file loc is at: None\n",
+      "using default location at:  /Users/sri/.pyroglancer/config_temp.yml\n",
+      "Using layout : xy-3d\n",
+      "config file loc is at: None\n",
+      "using default location at:  /Users/sri/.pyroglancer/config_temp.yml\n",
+      "Dimensions are in : FAFB\n",
+      "Layer created:  synapsepred\n",
+      "config file loc is at: None\n",
+      "using default location at:  /Users/sri/.pyroglancer/config_temp.yml\n",
+      "Using layout : xy-3d\n",
+      "config file loc is at: None\n",
+      "using default location at:  /Users/sri/.pyroglancer/config_temp.yml\n",
+      "Dimensions are in : FAFB\n",
+      "Layer created:  segmentation\n",
+      "config file loc is at: None\n",
+      "using default location at:  /Users/sri/.pyroglancer/config_temp.yml\n",
+      "Using layout : xy-3d\n"
+     ]
+    }
+   ],
+   "source": [
+    "create_ngspace(layer_kws)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Add skids to neuroglancer layers.."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "config file loc is at: None\n",
+      "using default location at:  /Users/sri/.pyroglancer/config_temp.yml\n",
+      "Dimensions are in : FAFB\n",
+      "Layer created:  skeletons\n",
+      "/private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/catmaid_skels/skeletons/40637\n",
+      "/private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/catmaid_skels/skeletons/27295\n",
+      "/private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/catmaid_skels/skeletons/57311\n",
+      "/private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/catmaid_skels/skeletons/2863104\n",
+      "/private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/catmaid_skels/skeletons/57323\n",
+      "creating: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/catmaid_skels/skeletons/seg_props\n",
+      "Using layout : xy-3d\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "127.0.0.1 - - [19/May/2021 22:00:46] \"GET /precomputed/catmaid_skels/skeletons/info HTTP/1.1\" 200 -\n",
+      "127.0.0.1 - - [19/May/2021 22:00:46] \"GET /precomputed/catmaid_skels/skeletons/seg_props/info HTTP/1.1\" 200 -\n"
+     ]
+    }
+   ],
+   "source": [
+    "tmpviewer = create_nglayer(layer_kws = {'type': 'skeletons',\n",
+    "                                        'source': catmiad_neuronlist,\n",
+    "                                        'name':'catmaid_skels',\n",
+    "                                        'color': 'green',\n",
+    "                                        'alpha': 0.5})"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Add synapses to neuroglancer layers.."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "config file loc is at: None\n",
+      "using default location at:  /Users/sri/.pyroglancer/config_temp.yml\n",
+      "Dimensions are in : FAFB\n",
+      "Layer created:  synapses\n",
+      "config file loc is at: None\n",
+      "using default location at:  /Users/sri/.pyroglancer/config_temp.yml\n",
+      "Dimensions are in : FAFB\n",
+      "flushing stuff..\n",
+      "presynapse stuff at: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7 /precomputed/catmaid_skels/presynapses\n",
+      "postsynapse stuff at: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7 /precomputed/catmaid_skels/postsynapses\n",
+      "synapses info path: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/catmaid_skels\n",
+      "creating: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/catmaid_skels/presynapses\n",
+      "creating: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/catmaid_skels/postsynapses\n",
+      "Adding neuron:  40637\n",
+      "making: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/catmaid_skels/presynapses/presynapses_cell/40637\n",
+      "making: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/catmaid_skels/postsynapses/postsynapses_cell/40637\n",
+      "Adding neuron:  27295\n",
+      "making: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/catmaid_skels/presynapses/presynapses_cell/27295\n",
+      "making: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/catmaid_skels/postsynapses/postsynapses_cell/27295\n",
+      "Adding neuron:  57311\n",
+      "making: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/catmaid_skels/presynapses/presynapses_cell/57311\n",
+      "making: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/catmaid_skels/postsynapses/postsynapses_cell/57311\n",
+      "Adding neuron:  2863104\n",
+      "making: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/catmaid_skels/presynapses/presynapses_cell/2863104\n",
+      "making: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/catmaid_skels/postsynapses/postsynapses_cell/2863104\n",
+      "Adding neuron:  57323\n",
+      "making: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/catmaid_skels/presynapses/presynapses_cell/57323\n",
+      "making: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/catmaid_skels/postsynapses/postsynapses_cell/57323\n",
+      "Using layout : xy-3d\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "127.0.0.1 - - [19/May/2021 22:01:00] \"GET /precomputed/catmaid_skels/presynapses/info HTTP/1.1\" 200 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:00] \"GET /precomputed/catmaid_skels/postsynapses/info HTTP/1.1\" 200 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:00] code 404, message File not found\n",
+      "127.0.0.1 - - [19/May/2021 22:01:00] \"GET /precomputed/catmaid_skels/presynapses/spatial0/0_0_0 HTTP/1.1\" 404 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:00] code 404, message File not found\n",
+      "127.0.0.1 - - [19/May/2021 22:01:00] \"GET /precomputed/catmaid_skels/postsynapses/spatial0/0_0_0 HTTP/1.1\" 404 -\n"
+     ]
+    }
+   ],
+   "source": [
+    "tmpviewer = create_nglayer(layer_kws = {'type': 'synapses',\n",
+    "                                        'linked_layername': 'catmaid_skels',\n",
+    "                                        'source': catmiad_neuronlist})"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Add neuropil meshes to neuroglancer layers.."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "config file loc is at: None\n",
+      "using default location at:  /Users/sri/.pyroglancer/config_temp.yml\n",
+      "Dimensions are in : FAFB\n",
+      "Layer created:  volumes\n",
+      "mesh/200\n",
+      "Seg id is: 200\n",
+      "Full filepath: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/neuropils/mesh/200\n",
+      "mesh/300\n",
+      "Seg id is: 300\n",
+      "Full filepath: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/neuropils/mesh/300\n",
+      "creating: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/neuropils/mesh/segment_properties\n",
+      "creating: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/neuropils/mesh/segment_names\n",
+      "Using layout : xy-3d\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "127.0.0.1 - - [19/May/2021 22:01:02] \"GET /precomputed/neuropils/mesh/info HTTP/1.1\" 200 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:03] \"GET /precomputed/neuropils/mesh/segment_properties/info HTTP/1.1\" 200 -\n"
+     ]
+    }
+   ],
+   "source": [
+    "tmpviewer = create_nglayer(layer_kws = {'type': 'volumes','source': [vols['AL_R'],vols['AL_L']],\n",
+    "                                        'name': 'neuropils','color': ['magenta', 'blue'], 'alpha': 0.3})"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Add annotations meshes to neuroglancer layers.."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "temp_pts = pd.DataFrame([[123072, 47001, 3375]],columns=['x','y','z'])\n",
+    "temp_pts = pd.DataFrame([[123072, 47001, 3375], [120000, 17001, 3000]], columns=['x', 'y', 'z'])\n",
+    "temp_pts['description'] = ['center_pt','above_pt']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "config file loc is at: None\n",
+      "using default location at:  /Users/sri/.pyroglancer/config_temp.yml\n",
+      "Dimensions are in : FAFB\n",
+      "Layer created:  points\n",
+      "config file loc is at: None\n",
+      "using default location at:  /Users/sri/.pyroglancer/config_temp.yml\n",
+      "Dimensions are in : FAFB\n",
+      "using default location at:  /Users/sri/.pyroglancer/config_temp.yml\n",
+      "using  voxel space with scale:  [4, 4, 40]\n",
+      "creating: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/landmarks\n",
+      "/private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/landmarks/spatial0/0_0_0\n",
+      "/private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/landmarks/by_id/0\n",
+      "/private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7/precomputed/landmarks/by_id/1\n",
+      "Using layout : xy-3d\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "127.0.0.1 - - [19/May/2021 22:01:03] \"GET /precomputed/landmarks/info HTTP/1.1\" 200 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:04] \"GET /precomputed/landmarks/spatial0/0_0_0 HTTP/1.1\" 200 -\n"
+     ]
+    }
+   ],
+   "source": [
+    "#plot landmarks..\n",
+    "tmpviewer = create_nglayer(layer_kws = {'type': 'points','name': 'landmarks',\n",
+    "                                        \"annotationstatetype\": 'precomputed',\n",
+    "                                        'source': temp_pts,'color': 'orange'})"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Set settings of the viewer/segments"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "tmpviewer = setlayerproperty(tmpviewer, property_kws = {'name': 'synapses_buhmann2019','visibility': False})"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "127.0.0.1 - - [19/May/2021 22:01:05] \"GET /precomputed/catmaid_skels/skeletons/2863104 HTTP/1.1\" 200 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:05] \"GET /precomputed/catmaid_skels/skeletons/57323 HTTP/1.1\" 200 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:05] \"GET /precomputed/catmaid_skels/skeletons/40637 HTTP/1.1\" 200 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:05] \"GET /precomputed/catmaid_skels/skeletons/57311 HTTP/1.1\" 200 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:05] \"GET /precomputed/catmaid_skels/skeletons/27295 HTTP/1.1\" 200 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:05] \"GET /precomputed/catmaid_skels/postsynapses/postsynapses_cell/2863104 HTTP/1.1\" 200 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:05] \"GET /precomputed/catmaid_skels/postsynapses/postsynapses_cell/40637 HTTP/1.1\" 200 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:05] \"GET /precomputed/catmaid_skels/postsynapses/postsynapses_cell/27295 HTTP/1.1\" 200 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:05] \"GET /precomputed/catmaid_skels/postsynapses/postsynapses_cell/57323 HTTP/1.1\" 200 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:05] \"GET /precomputed/catmaid_skels/postsynapses/postsynapses_cell/57311 HTTP/1.1\" 200 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:05] \"GET /precomputed/catmaid_skels/presynapses/presynapses_cell/2863104 HTTP/1.1\" 200 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:05] \"GET /precomputed/catmaid_skels/presynapses/presynapses_cell/57311 HTTP/1.1\" 200 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:05] \"GET /precomputed/catmaid_skels/presynapses/presynapses_cell/40637 HTTP/1.1\" 200 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:05] \"GET /precomputed/catmaid_skels/presynapses/presynapses_cell/27295 HTTP/1.1\" 200 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:05] \"GET /precomputed/catmaid_skels/presynapses/presynapses_cell/57323 HTTP/1.1\" 200 -\n"
+     ]
+    }
+   ],
+   "source": [
+    "tmpviewer = setlayerproperty(tmpviewer, property_kws = {'name': 'catmaid_skels','segments': sample_skids})"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "127.0.0.1 - - [19/May/2021 22:01:10] \"GET /precomputed/neuropils/mesh/300:0 HTTP/1.1\" 200 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:10] \"GET /precomputed/neuropils/mesh/200:0 HTTP/1.1\" 200 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:10] \"GET /precomputed/neuropils/mesh/200 HTTP/1.1\" 200 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:10] \"GET /precomputed/neuropils/mesh/300 HTTP/1.1\" 200 -\n"
+     ]
+    }
+   ],
+   "source": [
+    "tmpviewer = setlayerproperty(tmpviewer, property_kws = {'name': 'neuropils','segments': [vols['AL_R'].id, vols['AL_L'].id]})"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "tmpviewer = setviewerstate(axis_lines = False, bounding_box = False)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/catmaid_skels/skeletons/info HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/catmaid_skels/presynapses/info HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/catmaid_skels/postsynapses/info HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/neuropils/mesh/info HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/landmarks/info HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/catmaid_skels/skeletons/seg_props/info HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/neuropils/mesh/segment_properties/info HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/catmaid_skels/presynapses/presynapses_cell/57311 HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/catmaid_skels/presynapses/presynapses_cell/40637 HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/catmaid_skels/postsynapses/postsynapses_cell/57311 HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/catmaid_skels/presynapses/presynapses_cell/57323 HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/catmaid_skels/postsynapses/postsynapses_cell/57323 HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/catmaid_skels/postsynapses/postsynapses_cell/27295 HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/catmaid_skels/presynapses/presynapses_cell/27295 HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/catmaid_skels/postsynapses/postsynapses_cell/2863104 HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/catmaid_skels/presynapses/presynapses_cell/2863104 HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/catmaid_skels/postsynapses/postsynapses_cell/40637 HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/landmarks/spatial0/0_0_0 HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/neuropils/mesh/200:0 HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/neuropils/mesh/300:0 HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/catmaid_skels/skeletons/57311 HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/catmaid_skels/skeletons/2863104 HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/catmaid_skels/skeletons/57323 HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/catmaid_skels/skeletons/40637 HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/catmaid_skels/skeletons/27295 HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/neuropils/mesh/200 HTTP/1.1\" 304 -\n",
+      "127.0.0.1 - - [19/May/2021 22:01:59] \"GET /precomputed/neuropils/mesh/300 HTTP/1.1\" 304 -\n"
+     ]
+    }
+   ],
+   "source": [
+    "#adjust the zoom factor a bit according your settings, screen, viewer state before etc.\n",
+    "tmpviewer = setviewerstate(tmpviewer, axis_lines=False, bounding_box=False, layout='3d', zoom_factor = 208000)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Screenshot of the neuroglancer instance"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "screenshot = get_ngscreenshot(tmpviewer, viewer_size=[1000, 1000])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "imageStream = io.BytesIO(screenshot.image)\n",
+    "imageFile = Image.open(imageStream)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 29,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "current_folder = globals()['_dh'][0]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'/Users/sri/Documents/Python/pyroglancer/docs/source/tutorials/pics/local_neuroglancersession.png'"
+      ]
+     },
+     "execution_count": 30,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "imagefilepath = os.path.join(current_folder, 'pics/local_neuroglancersession.png')\n",
+    "imagefilepath"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 31,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "imageFile.save(imagefilepath)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "![alt text](pics/local_neuroglancersession.png \"local neuroglancer session with neurons, synapses, neuropils etc\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Close the viewer and dataserver"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "closing already existing ng viewer\n"
+     ]
+    }
+   ],
+   "source": [
+    "closeviewer()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Closing server at http://127.0.0.1:8000\n",
+      "Cleaning directory at /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmp37r6z4p7\n"
+     ]
+    }
+   ],
+   "source": [
+    "closedataserver()"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3.8 (XPython)",
+   "language": "python",
+   "name": "xpython"
+  },
+  "language_info": {
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "version": "3.8.8"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
