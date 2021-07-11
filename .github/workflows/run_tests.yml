@@ -23,6 +23,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements-dev.txt
+        pip install git+https://github.com/sphinx-doc/sphinx
     
     - name: Install pyroglancer from Github
       run: pip install git+git://github.com/SridharJagannathan/pyroglancer@master
