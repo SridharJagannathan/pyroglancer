@@ -52,7 +52,7 @@ jobs:
       uses: codecov/codecov-action@v1
 
   sphinx-docs:
-    name: Check sphinx docs on Linux
+    name: update documentation
     runs-on: "ubuntu-latest"
     defaults:
       run:
