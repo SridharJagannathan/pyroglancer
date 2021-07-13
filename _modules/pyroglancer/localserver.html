@@ -94,29 +94,8 @@
               
             
             
-              <p class="caption"><span class="caption-text">Get Started</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Install Pyroglancer</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Tutorials</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorials/local_neuroglancer.html">Starting a local neuroglancer session with FAFB dataset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorials/examples_flywirecoplotting.html">Examples of different co-plotting with flywire</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorials/catmaid2flywire.html">Co-plotting CATMAID skeleton with flywire dataset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorials/flywire2fafb.html">Co-plotting flywire mesh with FAFB autosegments</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorials/hemibrain2flywire.html">Co-plotting hemibrain skeleton with flywire dataset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorials/gal4line2flywire.html">Co-plotting split-gal4 line, hemibrain skeleton with flywire dataset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorials/shardeddataset.html">Creating sharded datasets with FAFB</a></li>
-</ul>
-<p class="caption"><span class="caption-text">hemibraindataset</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../30k_hemibraindataset.html">30k hemibrain2fafb</a></li>
-</ul>
-<p class="caption"><span class="caption-text">API Documentation</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">pyroglancer</a></li>
-</ul>
-
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
             
           
         </div>
@@ -213,7 +192,7 @@
 <span class="kn">import</span> <span class="nn">shutil</span>
 
 
-<div class="viewcode-block" id="copy_byte_range"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.localserver.copy_byte_range">[docs]</a><span class="k">def</span> <span class="nf">copy_byte_range</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">outfile</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bufsize</span><span class="o">=</span><span class="mi">16</span><span class="o">*</span><span class="mi">1024</span><span class="p">):</span>
+<div class="viewcode-block" id="copy_byte_range"><a class="viewcode-back" href="../../source/pyroglancer.html#pyroglancer.localserver.copy_byte_range">[docs]</a><span class="k">def</span> <span class="nf">copy_byte_range</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">outfile</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bufsize</span><span class="o">=</span><span class="mi">16</span><span class="o">*</span><span class="mi">1024</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Like shutil.copyfileobj, but only copy a range of the streams.</span>
 <span class="sd">    Both start and stop are inclusive.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -230,7 +209,7 @@
 <span class="n">BYTE_RANGE_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;bytes=(\d+)-(\d+)?$&#39;</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="parse_byte_range"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.localserver.parse_byte_range">[docs]</a><span class="k">def</span> <span class="nf">parse_byte_range</span><span class="p">(</span><span class="n">byte_range</span><span class="p">):</span>
+<div class="viewcode-block" id="parse_byte_range"><a class="viewcode-back" href="../../source/pyroglancer.html#pyroglancer.localserver.parse_byte_range">[docs]</a><span class="k">def</span> <span class="nf">parse_byte_range</span><span class="p">(</span><span class="n">byte_range</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Returns the two numbers in &#39;bytes=123-456&#39; or throws ValueError.</span>
 <span class="sd">    The last number or both numbers may be None.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -247,20 +226,20 @@
     <span class="k">return</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span></div>
 
 
-<div class="viewcode-block" id="RequestHandler"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.localserver.RequestHandler">[docs]</a><span class="k">class</span> <span class="nc">RequestHandler</span><span class="p">(</span><span class="n">SimpleHTTPRequestHandler</span><span class="p">):</span>
+<div class="viewcode-block" id="RequestHandler"><a class="viewcode-back" href="../../source/pyroglancer.html#pyroglancer.localserver.RequestHandler">[docs]</a><span class="k">class</span> <span class="nc">RequestHandler</span><span class="p">(</span><span class="n">SimpleHTTPRequestHandler</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This class provides support for generic cors access, HTTP &#39;Range&#39; requests</span>
 <span class="sd">    In case of the range implementation, the approach is to:</span>
 <span class="sd">    - Override send_head to look for &#39;Range&#39; and respond appropriately.</span>
 <span class="sd">    - Override copyfile to only transmit a range when requested.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="RequestHandler.do_OPTIONS"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.localserver.RequestHandler.do_OPTIONS">[docs]</a>    <span class="k">def</span> <span class="nf">do_OPTIONS</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RequestHandler.do_OPTIONS"><a class="viewcode-back" href="../../source/pyroglancer.html#pyroglancer.localserver.RequestHandler.do_OPTIONS">[docs]</a>    <span class="k">def</span> <span class="nf">do_OPTIONS</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">send_response</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="s2">&quot;ok&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">send_header</span><span class="p">(</span><span class="s1">&#39;Access-Control-Allow-Methods&#39;</span><span class="p">,</span> <span class="s1">&#39;GET, OPTIONS&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">send_header</span><span class="p">(</span><span class="s2">&quot;Access-Control-Allow-Headers&quot;</span><span class="p">,</span> <span class="s2">&quot;Range&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">send_head</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="RequestHandler.send_head"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.localserver.RequestHandler.send_head">[docs]</a>    <span class="k">def</span> <span class="nf">send_head</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RequestHandler.send_head"><a class="viewcode-back" href="../../source/pyroglancer.html#pyroglancer.localserver.RequestHandler.send_head">[docs]</a>    <span class="k">def</span> <span class="nf">send_head</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="s1">&#39;Range&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">range</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">return</span> <span class="n">SimpleHTTPRequestHandler</span><span class="o">.</span><span class="n">send_head</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -303,12 +282,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">end_headers</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">f</span></div>
 
-<div class="viewcode-block" id="RequestHandler.end_headers"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.localserver.RequestHandler.end_headers">[docs]</a>    <span class="k">def</span> <span class="nf">end_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RequestHandler.end_headers"><a class="viewcode-back" href="../../source/pyroglancer.html#pyroglancer.localserver.RequestHandler.end_headers">[docs]</a>    <span class="k">def</span> <span class="nf">end_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Allow responses to be shared with any requester without any credentials.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">send_header</span><span class="p">(</span><span class="s1">&#39;Access-Control-Allow-Origin&#39;</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">)</span>
         <span class="n">SimpleHTTPRequestHandler</span><span class="o">.</span><span class="n">end_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="RequestHandler.copyfile"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.localserver.RequestHandler.copyfile">[docs]</a>    <span class="k">def</span> <span class="nf">copyfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">outputfile</span><span class="p">):</span>
+<div class="viewcode-block" id="RequestHandler.copyfile"><a class="viewcode-back" href="../../source/pyroglancer.html#pyroglancer.localserver.RequestHandler.copyfile">[docs]</a>    <span class="k">def</span> <span class="nf">copyfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">outputfile</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">range</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">SimpleHTTPRequestHandler</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">outputfile</span><span class="p">)</span>
 
@@ -318,7 +297,7 @@
         <span class="n">copy_byte_range</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">outputfile</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="Server"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.localserver.Server">[docs]</a><span class="k">class</span> <span class="nc">Server</span><span class="p">(</span><span class="n">HTTPServer</span><span class="p">):</span>
+<div class="viewcode-block" id="Server"><a class="viewcode-back" href="../../source/pyroglancer.html#pyroglancer.localserver.Server">[docs]</a><span class="k">class</span> <span class="nc">Server</span><span class="p">(</span><span class="n">HTTPServer</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Class for basic HTTP server.&quot;&quot;&quot;</span>
 
     <span class="n">protocol_version</span> <span class="o">=</span> <span class="s1">&#39;HTTP/1.1&#39;</span>
@@ -328,7 +307,7 @@
         <span class="n">HTTPServer</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">server_address</span><span class="p">,</span> <span class="n">RequestHandler</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="closedataserver"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.localserver.closedataserver">[docs]</a><span class="k">def</span> <span class="nf">closedataserver</span><span class="p">(</span><span class="n">removefiles</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="closedataserver"><a class="viewcode-back" href="../../source/pyroglancer.html#pyroglancer.localserver.closedataserver">[docs]</a><span class="k">def</span> <span class="nf">closedataserver</span><span class="p">(</span><span class="n">removefiles</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Close a already started dataserver.</span>
 
 <span class="sd">    Parameters</span>
@@ -422,7 +401,7 @@
         <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="startdataserver"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.localserver.startdataserver">[docs]</a><span class="k">def</span> <span class="nf">startdataserver</span><span class="p">(</span><span class="n">address</span><span class="o">=</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">directory</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="startdataserver"><a class="viewcode-back" href="../../source/pyroglancer.html#pyroglancer.localserver.startdataserver">[docs]</a><span class="k">def</span> <span class="nf">startdataserver</span><span class="p">(</span><span class="n">address</span><span class="o">=</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">directory</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                     <span class="n">restart</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Start a dataserver thread(return control back) that can host local folder via http.</span>
 

@@ -94,29 +94,8 @@
               
             
             
-              <p class="caption"><span class="caption-text">Get Started</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Install Pyroglancer</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Tutorials</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorials/local_neuroglancer.html">Starting a local neuroglancer session with FAFB dataset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorials/examples_flywirecoplotting.html">Examples of different co-plotting with flywire</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorials/catmaid2flywire.html">Co-plotting CATMAID skeleton with flywire dataset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorials/flywire2fafb.html">Co-plotting flywire mesh with FAFB autosegments</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorials/hemibrain2flywire.html">Co-plotting hemibrain skeleton with flywire dataset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorials/gal4line2flywire.html">Co-plotting split-gal4 line, hemibrain skeleton with flywire dataset</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorials/shardeddataset.html">Creating sharded datasets with FAFB</a></li>
-</ul>
-<p class="caption"><span class="caption-text">hemibraindataset</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../30k_hemibraindataset.html">30k hemibrain2fafb</a></li>
-</ul>
-<p class="caption"><span class="caption-text">API Documentation</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">pyroglancer</a></li>
-</ul>
-
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
             
           
         </div>
@@ -201,7 +180,7 @@
 <span class="kn">import</span> <span class="nn">webbrowser</span>
 
 
-<div class="viewcode-block" id="openviewer"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.ngviewer.openviewer">[docs]</a><span class="k">def</span> <span class="nf">openviewer</span><span class="p">(</span><span class="n">ngviewer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headless</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="openviewer"><a class="viewcode-back" href="../../source/pyroglancer.html#pyroglancer.ngviewer.openviewer">[docs]</a><span class="k">def</span> <span class="nf">openviewer</span><span class="p">(</span><span class="n">ngviewer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headless</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Open a neuroglancer viewing engine.</span>
 
 <span class="sd">    Parameters</span>
@@ -232,7 +211,7 @@
     <span class="k">return</span> <span class="n">ngviewer</span></div>
 
 
-<div class="viewcode-block" id="closeviewer"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.ngviewer.closeviewer">[docs]</a><span class="k">def</span> <span class="nf">closeviewer</span><span class="p">():</span>
+<div class="viewcode-block" id="closeviewer"><a class="viewcode-back" href="../../source/pyroglancer.html#pyroglancer.ngviewer.closeviewer">[docs]</a><span class="k">def</span> <span class="nf">closeviewer</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Close a already started ngviewer.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="s1">&#39;ngviewerinst&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
@@ -244,7 +223,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;exception occurred while stopping&#39;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="setviewerstate"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.ngviewer.setviewerstate">[docs]</a><span class="k">def</span> <span class="nf">setviewerstate</span><span class="p">(</span><span class="n">ngviewer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">axis_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bounding_box</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">zoom_factor</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="setviewerstate"><a class="viewcode-back" href="../../source/pyroglancer.html#pyroglancer.ngviewer.setviewerstate">[docs]</a><span class="k">def</span> <span class="nf">setviewerstate</span><span class="p">(</span><span class="n">ngviewer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">axis_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bounding_box</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">zoom_factor</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Set state of neuroglancer viewing engine.</span>
 
 <span class="sd">    Parameters</span>
@@ -287,7 +266,7 @@
     <span class="k">return</span> <span class="n">ngviewer</span></div>
 
 
-<div class="viewcode-block" id="get_ngscreenshot"><a class="viewcode-back" href="../../pyroglancer.html#pyroglancer.ngviewer.get_ngscreenshot">[docs]</a><span class="k">def</span> <span class="nf">get_ngscreenshot</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">,</span> <span class="n">viewer_size</span><span class="o">=</span><span class="p">[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">]):</span>
+<div class="viewcode-block" id="get_ngscreenshot"><a class="viewcode-back" href="../../source/pyroglancer.html#pyroglancer.ngviewer.get_ngscreenshot">[docs]</a><span class="k">def</span> <span class="nf">get_ngscreenshot</span><span class="p">(</span><span class="n">ngviewer</span><span class="p">,</span> <span class="n">viewer_size</span><span class="o">=</span><span class="p">[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">]):</span>
     <span class="sd">&quot;&quot;&quot;Get screenshot of neuroglancer viewing engine.</span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>

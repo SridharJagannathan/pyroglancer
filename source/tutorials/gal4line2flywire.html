@@ -1,0 +1,1089 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Co-plotting split-gal4 line, hemibrain skeleton with flywire dataset &mdash; Pyroglancer 0.0.4 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Pyroglancer
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Co-plotting split-gal4 line, hemibrain skeleton with flywire dataset</a><ul>
+<li><a class="reference internal" href="#This-section-contains-example-of-split-gal4-line,-skeleton-from-hemibrain-dataset-and-co-plotting-with-a-flywire-instance">This section contains example of split-gal4 line, skeleton from hemibrain dataset and co-plotting with a flywire instance</a></li>
+<li><a class="reference internal" href="#Import-neccesary-library-modules-now">Import neccesary library modules now</a></li>
+<li><a class="reference internal" href="#Get-the-Split-Gal4-line">Get the Split-Gal4 line</a></li>
+<li><a class="reference internal" href="#Convert-the-gal4-line-to-either-a-mesh-(-a-bit-efficient)-or-to-a-skeleton-(involves-manual-processing)">Convert the gal4 line to either a mesh ( a bit efficient) or to a skeleton (involves manual processing)</a></li>
+<li><a class="reference internal" href="#Set-configurations-to-fetch-from-data-from-neuprint">Set configurations to fetch from data from neuprint</a></li>
+<li><a class="reference internal" href="#Get-the-matching-skid-from-neuprint-using-the-info-from-neuronbridge-website-like-here">Get the matching skid from neuprint using the info from neuronbridge website like here</a></li>
+<li><a class="reference internal" href="#Transform-them-to-flywire-space">Transform them to flywire space</a></li>
+<li><a class="reference internal" href="#Start-the-dataserver-to-host-precomputed-data">Start the dataserver to host precomputed data</a></li>
+<li><a class="reference internal" href="#Get-the-url-from-flywire-to-append-data-onto">Get the url from flywire to append data onto</a></li>
+<li><a class="reference internal" href="#Add-bodyids-to-flywire-layers">Add bodyids to flywire layers</a></li>
+<li><a class="reference internal" href="#Screenshot-of-the-flywire-instance">Screenshot of the flywire instance</a><ul>
+<li><a class="reference internal" href="#The-magenta-neuron-is-the-gal4line-from-vfb-whereas-the-red-neuron-is-the-corresponding-match-from-hemibrain-according-to-neuronbridge-and-the-green-neuron-is-the-corresponding-flywire-segment-that-is-closest-match">The magenta neuron is the gal4line from vfb whereas the red neuron is the corresponding match from hemibrain according to neuronbridge and the green neuron is the corresponding flywire segment that is closest match</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Close-the-dataserver">Close the dataserver</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Pyroglancer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Co-plotting split-gal4 line, hemibrain skeleton with flywire dataset</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/source/tutorials/gal4line2flywire.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="Co-plotting-split-gal4-line,-hemibrain-skeleton-with-flywire-dataset">
+<h1>Co-plotting split-gal4 line, hemibrain skeleton with flywire dataset<a class="headerlink" href="#Co-plotting-split-gal4-line,-hemibrain-skeleton-with-flywire-dataset" title="Permalink to this headline">¶</a></h1>
+<section id="This-section-contains-example-of-split-gal4-line,-skeleton-from-hemibrain-dataset-and-co-plotting-with-a-flywire-instance">
+<h2>This section contains example of split-gal4 line, skeleton from hemibrain dataset and co-plotting with a flywire instance<a class="headerlink" href="#This-section-contains-example-of-split-gal4-line,-skeleton-from-hemibrain-dataset-and-co-plotting-with-a-flywire-instance" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="Import-neccesary-library-modules-now">
+<h2>Import neccesary library modules now<a class="headerlink" href="#Import-neccesary-library-modules-now" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">navis</span>
+<span class="kn">import</span> <span class="nn">fafbseg</span>
+<span class="kn">import</span> <span class="nn">flybrains</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">trimesh</span> <span class="k">as</span> <span class="nn">tm</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">navis</span>
+<span class="kn">from</span> <span class="nn">vfb_connect.cross_server_tools</span> <span class="kn">import</span> <span class="n">VfbConnect</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pyroglancer.localserver</span> <span class="kn">import</span> <span class="n">startdataserver</span><span class="p">,</span> <span class="n">closedataserver</span>
+<span class="kn">from</span> <span class="nn">pyroglancer.flywire</span> <span class="kn">import</span> <span class="n">flywireurl2dict</span><span class="p">,</span> <span class="n">flywiredict2url</span><span class="p">,</span> <span class="n">add_flywirelayer</span><span class="p">,</span> <span class="n">set_flywireviewerstate</span>
+<span class="kn">from</span> <span class="nn">pyroglancer.utils</span> <span class="kn">import</span> <span class="n">pointcloud2meshes</span><span class="p">,</span> <span class="n">obj2pointcloud</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">navis.interfaces.neuprint</span> <span class="k">as</span> <span class="nn">neu</span>
+<span class="kn">from</span> <span class="nn">navis.interfaces.neuprint</span> <span class="kn">import</span> <span class="n">NeuronCriteria</span> <span class="k">as</span> <span class="n">NC</span><span class="p">,</span> <span class="n">SynapseCriteria</span> <span class="k">as</span> <span class="n">SC</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Get-the-Split-Gal4-line">
+<h2>Get the Split-Gal4 line<a class="headerlink" href="#Get-the-Split-Gal4-line" title="Permalink to this headline">¶</a></h2>
+<p>Select the gal4 line you are interested in for example, here I choose the line R65G01 from the neuronbridge website <a class="reference external" href="https://neuronbridge.janelia.org/search?q=R65G01">here</a></p>
+</section>
+<section id="Convert-the-gal4-line-to-either-a-mesh-(-a-bit-efficient)-or-to-a-skeleton-(involves-manual-processing)">
+<h2>Convert the gal4 line to either a mesh ( a bit efficient) or to a skeleton (involves manual processing)<a class="headerlink" href="#Convert-the-gal4-line-to-either-a-mesh-(-a-bit-efficient)-or-to-a-skeleton-(involves-manual-processing)" title="Permalink to this headline">¶</a></h2>
+<p><em>Using a mesh object</em>: Go to the virtualflybrain site like <a class="reference external" href="https://v2.virtualflybrain.org/org.geppetto.frontend/geppetto?id=VFB_00023647&amp;i=VFB_00101567,VFB_00023647">here</a> and get the vfb id here: VFB_00023647</p>
+<p><em>Using a skeleton object</em>: 1) Download the above line as <em>.nrrd</em> by following the link to the virtualflybrain site like <a class="reference external" href="https://v2.virtualflybrain.org/org.geppetto.frontend/geppetto?id=VFB_00023647&amp;i=VFB_00101567,VFB_00023647">here</a> 2) Use the <em>.nrrd</em> file in FiJi and skeletonise using the simple image tracer as illustrated in this video <a class="reference external" href="https://youtu.be/xdqAb1fC91I">here</a> 3) Save the skeletonised file as <em>.swc</em> format</p>
+<p>The rest of the tutorial only involves the mesh object based co-visualisation</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">BASE_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="s2">&quot;__file__&quot;</span><span class="p">)))))</span>
+<span class="n">BASE_DIR</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;/Users/sri/Documents/Python/pyroglancer&#39;
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># vfb_neuron = navis.read_swc(swc_files, delimiter=&#39;\s+&#39;,units = &#39;um&#39;)</span>
+<span class="c1"># swc_files = os.path.join(BASE_DIR, &#39;data/snt_tracings/VFB_00023647_snt_skel-000.swc&#39;)</span>
+<span class="c1"># navis.health_check(vfb_neuron)</span>
+<span class="c1"># vfb_neuron = navis.graph.clinic.merge_duplicate_nodes(vfb_neuron)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">#utility function for transforming vfbids to meshes</span>
+<span class="k">def</span> <span class="nf">vfbid2mesh</span><span class="p">(</span><span class="n">vfb_id</span><span class="p">):</span>
+    <span class="n">vc</span> <span class="o">=</span> <span class="n">VfbConnect</span><span class="p">()</span>
+    <span class="n">vcinfo</span> <span class="o">=</span> <span class="n">vc</span><span class="o">.</span><span class="n">neo_query_wrapper</span><span class="o">.</span><span class="n">get_anatomical_individual_TermInfo</span><span class="p">([</span><span class="n">vfb_id</span><span class="p">])</span>
+    <span class="n">image_url</span> <span class="o">=</span> <span class="n">vcinfo</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;channel_image&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;image&#39;</span><span class="p">][</span><span class="s1">&#39;image_folder&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;volume.obj&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;point cloud located at: &#39;</span><span class="p">,</span> <span class="n">image_url</span><span class="p">)</span>
+    <span class="n">pcd</span> <span class="o">=</span> <span class="n">obj2pointcloud</span><span class="p">(</span><span class="n">image_url</span><span class="p">)</span>
+    <span class="n">vfb_mesh</span> <span class="o">=</span> <span class="n">pointcloud2meshes</span><span class="p">(</span><span class="n">pcd</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;rollingball&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">vfb_mesh</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">vfbmeshes_dict</span> <span class="o">=</span> <span class="p">{}</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">vfbmeshes_dict</span><span class="p">[</span><span class="s1">&#39;VFB_00023647&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vfbid2mesh</span><span class="p">(</span><span class="s1">&#39;VFB_00023647&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+point cloud located at:  http://www.virtualflybrain.org/data/VFB/i/0002/3647/VFB_00101567/volume.obj
+The mesh is not convex
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">vfbmeshes_dict</span><span class="p">[</span><span class="s1">&#39;VFB_00020203&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vfbid2mesh</span><span class="p">(</span><span class="s1">&#39;VFB_00020203&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+point cloud located at:  http://www.virtualflybrain.org/data/VFB/i/0002/0203/VFB_00101567/volume.obj
+The mesh is not convex
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">jrc2018u_mesh</span> <span class="o">=</span> <span class="n">navis</span><span class="o">.</span><span class="n">Volume</span><span class="p">(</span><span class="n">flybrains</span><span class="o">.</span><span class="n">JRC2018U</span><span class="o">.</span><span class="n">mesh</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">vfbmeshes_dict</span><span class="p">[</span><span class="s1">&#39;VFB_00023647&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;ilPN&#39;</span>
+<span class="n">vfbmeshes_dict</span><span class="p">[</span><span class="s1">&#39;VFB_00023647&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;magenta&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">vfbmeshes_dict</span><span class="p">[</span><span class="s1">&#39;VFB_00020203&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;DM5&#39;</span>
+<span class="n">vfbmeshes_dict</span><span class="p">[</span><span class="s1">&#39;VFB_00020203&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">navis</span><span class="o">.</span><span class="n">plot2d</span><span class="p">([</span><span class="n">vfbmeshes_dict</span><span class="p">[</span><span class="s1">&#39;VFB_00023647&#39;</span><span class="p">],</span><span class="n">jrc2018u_mesh</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;2d&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/source_tutorials_gal4line2flywire_24_0.png" src="../../_images/source_tutorials_gal4line2flywire_24_0.png" />
+</div>
+</div>
+</section>
+<section id="Set-configurations-to-fetch-from-data-from-neuprint">
+<h2>Set configurations to fetch from data from neuprint<a class="headerlink" href="#Set-configurations-to-fetch-from-data-from-neuprint" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">neuprint_token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;NEUPRINT_APPLICATION_CREDENTIALS&#39;</span><span class="p">]</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">neu</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="s1">&#39;https://neuprint.janelia.org/&#39;</span><span class="p">,</span> <span class="n">dataset</span><span class="o">=</span><span class="s1">&#39;hemibrain:v1.1&#39;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="n">neuprint_token</span><span class="p">)</span>
+<span class="n">client</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Client(&#34;https://neuprint.janelia.org&#34;, &#34;hemibrain:v1.1&#34;)
+</pre></div></div>
+</div>
+</section>
+<section id="Get-the-matching-skid-from-neuprint-using-the-info-from-neuronbridge-website-like-here">
+<h2>Get the matching skid from neuprint using the info from neuronbridge website like <a class="reference external" href="https://neuronbridge.janelia.org/search/lines/R65G01/matches/2711776921103892491">here</a><a class="headerlink" href="#Get-the-matching-skid-from-neuprint-using-the-info-from-neuronbridge-website-like-here" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">hemibrain_skel</span> <span class="o">=</span> <span class="n">neu</span><span class="o">.</span><span class="n">fetch_skeletons</span><span class="p">(</span><span class="mi">1912789965</span><span class="p">,</span> <span class="n">heal</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">max_threads</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO - 2021-06-07 08:45:48,706 - utils - NumExpr defaulting to 8 threads.
+</pre></div></div>
+</div>
+</section>
+<section id="Transform-them-to-flywire-space">
+<h2>Transform them to flywire space<a class="headerlink" href="#Transform-them-to-flywire-space" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">#vfb_neuron=navis.xform_brain(vfb_neuron,source=&#39;JRC2018U&#39;, target=&#39;FLYWIRE&#39;)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">vfb2flywiremeshes</span> <span class="o">=</span> <span class="p">{}</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">vfb2flywiremeshes</span><span class="p">[</span><span class="s1">&#39;VFB_00023647&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">navis</span><span class="o">.</span><span class="n">xform_brain</span><span class="p">(</span><span class="n">vfbmeshes_dict</span><span class="p">[</span><span class="s1">&#39;VFB_00023647&#39;</span><span class="p">],</span><span class="n">source</span><span class="o">=</span><span class="s1">&#39;JRC2018U&#39;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;FLYWIRE&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Transform path: JRC2018U -&gt; JRC2018F -&gt; FAFB14um -&gt; FAFB14 -&gt; FAFB14raw -&gt; FLYWIREraw -&gt; FLYWIRE
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">vfb2flywiremeshes</span><span class="p">[</span><span class="s1">&#39;VFB_00020203&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">navis</span><span class="o">.</span><span class="n">xform_brain</span><span class="p">(</span><span class="n">vfbmeshes_dict</span><span class="p">[</span><span class="s1">&#39;VFB_00020203&#39;</span><span class="p">],</span><span class="n">source</span><span class="o">=</span><span class="s1">&#39;JRC2018U&#39;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;FLYWIRE&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Transform path: JRC2018U -&gt; JRC2018F -&gt; FAFB14um -&gt; FAFB14 -&gt; FAFB14raw -&gt; FLYWIREraw -&gt; FLYWIRE
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">hemibrain2flywire_skel</span><span class="o">=</span><span class="n">navis</span><span class="o">.</span><span class="n">xform_brain</span><span class="p">(</span><span class="n">hemibrain_skel</span><span class="p">,</span><span class="n">source</span><span class="o">=</span><span class="s1">&#39;JRCFIB2018Fraw&#39;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;FLYWIRE&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Transform path: JRCFIB2018Fraw -&gt; JRCFIB2018F -&gt; JRCFIB2018Fum -&gt; JRC2018F -&gt; FAFB14um -&gt; FAFB14 -&gt; FAFB14raw -&gt; FLYWIREraw -&gt; FLYWIRE
+</pre></div></div>
+</div>
+</section>
+<section id="Start-the-dataserver-to-host-precomputed-data">
+<h2>Start the dataserver to host precomputed data<a class="headerlink" href="#Start-the-dataserver-to-host-precomputed-data" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">startdataserver</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Closing server at http://127.0.0.1:8000
+Cleaning directory at /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmpd8yw3_fb
+Serving data from:  /var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmph11kfa8u
+Serving directory at http://127.0.0.1:8000
+</pre></div></div>
+</div>
+</section>
+<section id="Get-the-url-from-flywire-to-append-data-onto">
+<h2>Get the url from flywire to append data onto<a class="headerlink" href="#Get-the-url-from-flywire-to-append-data-onto" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">shorturl</span> <span class="o">=</span> <span class="s1">&#39;https://ngl.flywire.ai/?json_url=https://globalv1.flywire-daf.com/nglstate/5169621741076480&#39;</span>
+<span class="c1">#This flywire segments has some stuff similar (in blue), you will notice their closeness in the final plot</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Add-bodyids-to-flywire-layers">
+<h2>Add bodyids to flywire layers<a class="headerlink" href="#Add-bodyids-to-flywire-layers" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># vfb_neuron.id = 1234</span>
+<span class="c1"># matchingneurons = navis.NeuronList(vfb_neuron)</span>
+<span class="c1"># matchingneurons += hemibrain2flywire_skel</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">tmpviewer</span> <span class="o">=</span> <span class="n">add_flywirelayer</span><span class="p">(</span><span class="n">flywireurl2dict</span><span class="p">(</span><span class="n">shorturl</span><span class="p">),</span> <span class="n">layer_kws</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;skeletons&#39;</span><span class="p">,</span>
+                                                                     <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="n">hemibrain2flywire_skel</span><span class="p">,</span>
+                                                                     <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">],</span>
+                                                                     <span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;hemibrain_1912789965&#39;</span>
+                                                                     <span class="c1">#&#39;space&#39;: &#39;FAFBv14.1&#39;,</span>
+                                                                     <span class="c1">#&#39;annotationstatetype&#39;: &#39;precomputed&#39;</span>
+                                                                    <span class="p">})</span>
+<span class="c1">#&#39;alpha&#39;: 0.3, doesn&#39;t work yet in skeleton layers..</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmph11kfa8u/precomputed/hemibrain_1912789965/skeletons/1912789965
+creating: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmph11kfa8u/precomputed/hemibrain_1912789965/skeletons/seg_props
+{&#39;1912789965&#39;: [&#39;#ff0000&#39;]}
+flywire url at: https://ngl.flywire.ai/?json_url=https://globalv1.flywire-daf.com/nglstate/5828375906091008
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">vfb2flywiremeshes</span><span class="p">[</span><span class="s1">&#39;VFB_00023647&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="mi">23647</span>
+<span class="n">vfb2flywiremeshes</span><span class="p">[</span><span class="s1">&#39;VFB_00020203&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="mi">20203</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">vfb2flywiremeshes</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;VFB_00023647&#39;: &lt;navis.Volume(name=None, id=23647, color=(0.85, 0.85, 0.85, 0.2), vertices.shape=(12213, 3), faces.shape=(12861, 3))&gt;,
+ &#39;VFB_00020203&#39;: &lt;navis.Volume(name=None, id=20203, color=(0.85, 0.85, 0.85, 0.2), vertices.shape=(30152, 3), faces.shape=(30941, 3))&gt;}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">tmpviewer</span> <span class="o">=</span> <span class="n">add_flywirelayer</span><span class="p">(</span><span class="n">flywireurl2dict</span><span class="p">(</span><span class="n">tmpviewer</span><span class="p">),</span> <span class="n">layer_kws</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;volumes&#39;</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;vfb_&#39;</span> <span class="o">+</span> <span class="n">vfbmeshes_dict</span><span class="p">[</span><span class="s1">&#39;VFB_00023647&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                                                        <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="n">vfb2flywiremeshes</span><span class="p">[</span><span class="s1">&#39;VFB_00023647&#39;</span><span class="p">],</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;magenta&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+mesh/23647
+Seg id is: 23647
+Full filepath: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmph11kfa8u/precomputed/vfb_ilPN/mesh/23647
+creating: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmph11kfa8u/precomputed/vfb_ilPN/mesh/segment_properties
+creating: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmph11kfa8u/precomputed/vfb_ilPN/mesh/segment_names
+flywire url at: https://ngl.flywire.ai/?json_url=https://globalv1.flywire-daf.com/nglstate/5341474052898816
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># if you want to add the next vfb neuron..</span>
+<span class="n">tmpviewer</span> <span class="o">=</span> <span class="n">add_flywirelayer</span><span class="p">(</span><span class="n">flywireurl2dict</span><span class="p">(</span><span class="n">tmpviewer</span><span class="p">),</span> <span class="n">layer_kws</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;volumes&#39;</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;vfb_&#39;</span> <span class="o">+</span> <span class="n">vfbmeshes_dict</span><span class="p">[</span><span class="s1">&#39;VFB_00020203&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                                                        <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="n">vfb2flywiremeshes</span><span class="p">[</span><span class="s1">&#39;VFB_00020203&#39;</span><span class="p">],</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+mesh/20203
+Seg id is: 20203
+Full filepath: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmph11kfa8u/precomputed/vfb_DM5/mesh/20203
+creating: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmph11kfa8u/precomputed/vfb_DM5/mesh/segment_properties
+creating: /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmph11kfa8u/precomputed/vfb_DM5/mesh/segment_names
+flywire url at: https://ngl.flywire.ai/?json_url=https://globalv1.flywire-daf.com/nglstate/4650243190685696
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">#tmpviewer,shorturl = set_flywireviewerstate(tmpviewer, axis_lines=False, bounding_box=False)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+flywire url at: https://ngl.flywire.ai/?json_url=https://globalv1.flywire-daf.com/nglstate/5829114439139328
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+127.0.0.1 - - [07/Jun/2021 08:52:21] &#34;GET /precomputed/hemibrain_1912789965/skeletons//info HTTP/1.1&#34; 200 -
+127.0.0.1 - - [07/Jun/2021 08:52:21] &#34;GET /precomputed/vfb_ilPN/mesh/info HTTP/1.1&#34; 200 -
+127.0.0.1 - - [07/Jun/2021 08:52:21] &#34;GET /precomputed/vfb_DM5/mesh/info HTTP/1.1&#34; 200 -
+127.0.0.1 - - [07/Jun/2021 08:52:21] &#34;GET /precomputed/vfb_ilPN/mesh/23647:0 HTTP/1.1&#34; 200 -
+127.0.0.1 - - [07/Jun/2021 08:52:21] &#34;GET /precomputed/vfb_DM5/mesh/20203:0 HTTP/1.1&#34; 200 -
+127.0.0.1 - - [07/Jun/2021 08:52:21] &#34;GET /precomputed/hemibrain_1912789965/skeletons//1912789965 HTTP/1.1&#34; 200 -
+127.0.0.1 - - [07/Jun/2021 08:52:21] &#34;GET /precomputed/vfb_ilPN/mesh/23647 HTTP/1.1&#34; 200 -
+127.0.0.1 - - [07/Jun/2021 08:52:21] &#34;GET /precomputed/vfb_DM5/mesh/20203 HTTP/1.1&#34; 200 -
+127.0.0.1 - - [07/Jun/2021 08:53:42] &#34;GET /precomputed/hemibrain_1912789965/skeletons//info HTTP/1.1&#34; 304 -
+127.0.0.1 - - [07/Jun/2021 08:53:42] &#34;GET /precomputed/vfb_ilPN/mesh/info HTTP/1.1&#34; 304 -
+127.0.0.1 - - [07/Jun/2021 08:53:42] &#34;GET /precomputed/vfb_DM5/mesh/info HTTP/1.1&#34; 304 -
+127.0.0.1 - - [07/Jun/2021 08:53:42] &#34;GET /precomputed/vfb_DM5/mesh/20203:0 HTTP/1.1&#34; 304 -
+127.0.0.1 - - [07/Jun/2021 08:53:42] &#34;GET /precomputed/hemibrain_1912789965/skeletons//1912789965 HTTP/1.1&#34; 304 -
+127.0.0.1 - - [07/Jun/2021 08:53:42] &#34;GET /precomputed/vfb_ilPN/mesh/23647:0 HTTP/1.1&#34; 304 -
+127.0.0.1 - - [07/Jun/2021 08:53:42] &#34;GET /precomputed/vfb_DM5/mesh/20203 HTTP/1.1&#34; 304 -
+127.0.0.1 - - [07/Jun/2021 08:53:42] &#34;GET /precomputed/vfb_ilPN/mesh/23647 HTTP/1.1&#34; 304 -
+127.0.0.1 - - [07/Jun/2021 08:55:44] &#34;GET /precomputed/hemibrain_1912789965/skeletons//info HTTP/1.1&#34; 304 -
+127.0.0.1 - - [07/Jun/2021 08:55:44] &#34;GET /precomputed/vfb_ilPN/mesh/info HTTP/1.1&#34; 304 -
+127.0.0.1 - - [07/Jun/2021 08:55:44] &#34;GET /precomputed/vfb_DM5/mesh/info HTTP/1.1&#34; 304 -
+127.0.0.1 - - [07/Jun/2021 08:55:44] &#34;GET /precomputed/hemibrain_1912789965/skeletons//1912789965 HTTP/1.1&#34; 304 -
+127.0.0.1 - - [07/Jun/2021 08:55:44] &#34;GET /precomputed/vfb_DM5/mesh/20203:0 HTTP/1.1&#34; 304 -
+127.0.0.1 - - [07/Jun/2021 08:55:44] &#34;GET /precomputed/vfb_ilPN/mesh/23647:0 HTTP/1.1&#34; 304 -
+127.0.0.1 - - [07/Jun/2021 08:55:44] &#34;GET /precomputed/vfb_ilPN/mesh/23647 HTTP/1.1&#34; 304 -
+127.0.0.1 - - [07/Jun/2021 08:55:44] &#34;GET /precomputed/vfb_DM5/mesh/20203 HTTP/1.1&#34; 304 -
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># # if you want to add everything in one tab (source)..</span>
+<span class="c1"># tmpviewer = add_flywirelayer(flywireurl2dict(tmpviewer), layer_kws = {&#39;type&#39;: &#39;volumes&#39;,</span>
+<span class="c1">#                                                                       &#39;name&#39;: &#39;vfb_meshes&#39;,</span>
+<span class="c1">#                                                                       &#39;source&#39;: list(vfb2flywiremeshes.values()),</span>
+<span class="c1">#                                                                       &#39;color&#39;: [&#39;magenta&#39;,&#39;blue&#39;]})</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Screenshot-of-the-flywire-instance">
+<h2>Screenshot of the flywire instance<a class="headerlink" href="#Screenshot-of-the-flywire-instance" title="Permalink to this headline">¶</a></h2>
+<section id="The-magenta-neuron-is-the-gal4line-from-vfb-whereas-the-red-neuron-is-the-corresponding-match-from-hemibrain-according-to-neuronbridge-and-the-green-neuron-is-the-corresponding-flywire-segment-that-is-closest-match">
+<h3>The magenta neuron is the gal4line from vfb whereas the red neuron is the corresponding match from hemibrain according to neuronbridge and the green neuron is the corresponding flywire segment that is closest match<a class="headerlink" href="#The-magenta-neuron-is-the-gal4line-from-vfb-whereas-the-red-neuron-is-the-corresponding-match-from-hemibrain-according-to-neuronbridge-and-the-green-neuron-is-the-corresponding-flywire-segment-that-is-closest-match" title="Permalink to this headline">¶</a></h3>
+<p><img alt="alt text" src="../../_images/gal4line_hemibrain2flywire.png" /></p>
+</section>
+</section>
+<section id="Close-the-dataserver">
+<h2>Close the dataserver<a class="headerlink" href="#Close-the-dataserver" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">closedataserver</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Closing server at http://127.0.0.1:8000
+Cleaning directory at /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/tmph11kfa8u
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Sridhar Jagannathan.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
