@@ -46,7 +46,9 @@
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Creating sharded datasets with FAFB" href="shardeddataset.html" />
+    <link rel="prev" title="Co-plotting hemibrain skeleton with flywire dataset" href="hemibrain2flywire.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -95,28 +97,29 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Co-plotting split-gal4 line, hemibrain skeleton with flywire dataset</a><ul>
-<li><a class="reference internal" href="#This-section-contains-example-of-split-gal4-line,-skeleton-from-hemibrain-dataset-and-co-plotting-with-a-flywire-instance">This section contains example of split-gal4 line, skeleton from hemibrain dataset and co-plotting with a flywire instance</a></li>
-<li><a class="reference internal" href="#Import-neccesary-library-modules-now">Import neccesary library modules now</a></li>
-<li><a class="reference internal" href="#Get-the-Split-Gal4-line">Get the Split-Gal4 line</a></li>
-<li><a class="reference internal" href="#Convert-the-gal4-line-to-either-a-mesh-(-a-bit-efficient)-or-to-a-skeleton-(involves-manual-processing)">Convert the gal4 line to either a mesh ( a bit efficient) or to a skeleton (involves manual processing)</a></li>
-<li><a class="reference internal" href="#Set-configurations-to-fetch-from-data-from-neuprint">Set configurations to fetch from data from neuprint</a></li>
-<li><a class="reference internal" href="#Get-the-matching-skid-from-neuprint-using-the-info-from-neuronbridge-website-like-here">Get the matching skid from neuprint using the info from neuronbridge website like here</a></li>
-<li><a class="reference internal" href="#Transform-them-to-flywire-space">Transform them to flywire space</a></li>
-<li><a class="reference internal" href="#Start-the-dataserver-to-host-precomputed-data">Start the dataserver to host precomputed data</a></li>
-<li><a class="reference internal" href="#Get-the-url-from-flywire-to-append-data-onto">Get the url from flywire to append data onto</a></li>
-<li><a class="reference internal" href="#Add-bodyids-to-flywire-layers">Add bodyids to flywire layers</a></li>
-<li><a class="reference internal" href="#Screenshot-of-the-flywire-instance">Screenshot of the flywire instance</a><ul>
-<li><a class="reference internal" href="#The-magenta-neuron-is-the-gal4line-from-vfb-whereas-the-red-neuron-is-the-corresponding-match-from-hemibrain-according-to-neuronbridge-and-the-green-neuron-is-the-corresponding-flywire-segment-that-is-closest-match">The magenta neuron is the gal4line from vfb whereas the red neuron is the corresponding match from hemibrain according to neuronbridge and the green neuron is the corresponding flywire segment that is closest match</a></li>
+              <p class="caption" role="heading"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Install Pyroglancer</a></li>
 </ul>
-</li>
-<li><a class="reference internal" href="#Close-the-dataserver">Close the dataserver</a></li>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="local_neuroglancer.html">Starting a local neuroglancer session with FAFB dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples_flywirecoplotting.html">Examples of different co-plotting with flywire</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catmaid2flywire.html">Co-plotting CATMAID skeleton with flywire dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flywire2fafb.html">Co-plotting flywire mesh with FAFB autosegments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hemibrain2flywire.html">Co-plotting hemibrain skeleton with flywire dataset</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Co-plotting split-gal4 line, hemibrain skeleton with flywire dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shardeddataset.html">Creating sharded datasets with FAFB</a></li>
 </ul>
-</li>
+<p class="caption" role="heading"><span class="caption-text">hemibraindataset</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../30k_hemibraindataset.html">30k hemibrain2fafb</a></li>
 </ul>
-</div>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">pyroglancer</a></li>
+</ul>
+
             
           
         </div>
@@ -1047,6 +1050,10 @@ Cleaning directory at /private/var/folders/_l/lrfvj_8j3ps0c37ncbr3c8dh0000gn/T/t
            
           </div>
           <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="shardeddataset.html" class="btn btn-neutral float-right" title="Creating sharded datasets with FAFB" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="hemibrain2flywire.html" class="btn btn-neutral float-left" title="Co-plotting hemibrain skeleton with flywire dataset" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 
