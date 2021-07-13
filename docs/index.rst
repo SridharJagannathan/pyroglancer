@@ -5,29 +5,29 @@ Pyroglancer
    :maxdepth: 2
    :caption: Get Started
 
-   installation
+   source/installation
 
 .. toctree::
    :titlesonly:
    :maxdepth: 1
    :caption: Tutorials
    
-   tutorials/local_neuroglancer.ipynb
-   tutorials/examples_flywirecoplotting.ipynb
-   tutorials/catmaid2flywire.ipynb
-   tutorials/flywire2fafb.ipynb
-   tutorials/hemibrain2flywire.ipynb
-   tutorials/gal4line2flywire.ipynb
-   tutorials/shardeddataset.ipynb
+   source/tutorials/local_neuroglancer.ipynb
+   source/tutorials/examples_flywirecoplotting.ipynb
+   source/tutorials/catmaid2flywire.ipynb
+   source/tutorials/flywire2fafb.ipynb
+   source/tutorials/hemibrain2flywire.ipynb
+   source/tutorials/gal4line2flywire.ipynb
+   source/tutorials/shardeddataset.ipynb
 
 .. toctree::
    :maxdepth: 2
    :caption: hemibraindataset
 
-   30k_hemibraindataset
+   source/30k_hemibraindataset
 
 .. toctree::
    :maxdepth: 2
    :caption: API Documentation
    
-   modules
+   source/modules
