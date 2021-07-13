@@ -51,4 +51,19 @@ jobs:
     - name: Upload Coverage to Codecov
       uses: codecov/codecov-action@v1
 
-   
+  sphinx-docs:
+    name: Check sphinx docs on Linux
+    runs-on: "ubuntu-latest"
+    defaults:
+      run:
+        shell: bash -l {0}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install pyroglancer
+      run: |
+        pip install -e .
+    - name: Install Sphinx dependencies
+      run: |
+        cd docs
+        pip install -r requirements.txt
+        sphinx-build -b html . _build
