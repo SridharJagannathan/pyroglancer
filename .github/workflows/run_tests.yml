@@ -80,25 +80,14 @@ jobs:
     # ===============================
     - name: Commit documentation changes
       run: |
-        git clone https://github.com/SridharJagannathan/pyroglancer.git --branch gh-pages --single-branch gh-pages
-        cd gh-pages
-        git rm -r *
-        cd ..
-        cp -r docs/_build/* gh-pages/
-        cd gh-pages
+        cd docs/_build/
+        git init
+        git checkout -b gh-actions
         touch .nojekyll
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add .
         git commit -m "Update documentation" -a || true
-        # The above command will fail if no changes were present, so we ignore
-        # that.
-        git branch -D gh-pages
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        branch: gh-pages
-        directory: gh-pages
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        force: true
+        git remote add origin https://github.com/SridharJagannathan/pyroglancer.git
+        git push origin gh-actions:gh-pages
     # ===============================
