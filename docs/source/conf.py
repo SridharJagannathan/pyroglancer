@@ -9,8 +9,9 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 import os
 import sys
+# import pyroglancer
 sys.path.insert(0, os.path.abspath('../../pyroglancer'))
-import pyroglancer
+
 
 # -- Project information -----------------------------------------------------
 
@@ -19,9 +20,9 @@ copyright = '2021, Sridhar Jagannathan'
 author = 'Sridhar Jagannathan'
 
 # The short X.Y version.
-version = pyroglancer.__version__
+version = 0.0 #pyroglancer.__version__
 # The full version, including alpha/beta/rc tags.
-release = pyroglancer.__version__
+release = 0.0 #pyroglancer.__version__
 
 
 # -- General configuration ---------------------------------------------------
@@ -45,6 +46,7 @@ extensions = [
     'nbsphinx',
     'sphinx_copybutton',
     'nbsphinx',
+    'sphinx.ext.githubpages',
     #     'myst-parser'
 ]
 
