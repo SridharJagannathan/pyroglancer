@@ -7,10 +7,10 @@
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-# import os
-# import sys
-# import pyroglancer
-# sys.path.insert(0, os.path.abspath('../../pyroglancer'))
+import os
+import sys
+import pyroglancer
+sys.path.insert(0, os.path.abspath('../../pyroglancer'))
 
 
 # -- Project information -----------------------------------------------------
@@ -19,10 +19,10 @@ project = 'Pyroglancer'
 copyright = '2021, Sridhar Jagannathan'
 author = 'Sridhar Jagannathan'
 
-# # The short X.Y version.
-# version = pyroglancer.__version__
-# # The full version, including alpha/beta/rc tags.
-# release = pyroglancer.__version__
+# The short X.Y version.
+version = pyroglancer.__version__
+# The full version, including alpha/beta/rc tags.
+release = pyroglancer.__version__
 
 
 # -- General configuration ---------------------------------------------------
