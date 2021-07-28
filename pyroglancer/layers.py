@@ -472,7 +472,8 @@ def add_hostedlayer(ngviewer=None, **kwargs):
     ngviewer = openviewer(ngviewer)
 
     if layer_type == 'skeletons':
-        precomputepath = 'precomputed://' + path + '/precomputed/skeletons'
+        layer_name = layer_kws.get('name', 'skeletons')
+        precomputepath = 'precomputed://' + path + f'/precomputed/{layer_name}'
         layer_name = layer_kws.get('name', 'skeletons')
         with ngviewer.txn() as s:
             s.layers[layer_name] = neuroglancer.SegmentationLayer(
@@ -481,8 +482,8 @@ def add_hostedlayer(ngviewer=None, **kwargs):
                 objectAlpha=alpha)
 
     if layer_type == 'volumes':
-        precomputepath = 'precomputed://' + path + '/precomputed/neuronmeshes/mesh#type=mesh'
         layer_name = layer_kws.get('name', 'neuronmeshes')
+        precomputepath = 'precomputed://' + path + f'/precomputed/{layer_name}/mesh#type=mesh'
         with ngviewer.txn() as s:
             s.layers[layer_name] = neuroglancer.SegmentationLayer(
                 source=precomputepath,
