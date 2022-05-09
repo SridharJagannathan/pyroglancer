@@ -26,7 +26,7 @@ jobs:
         python3 -m pip install sphinx
     
     - name: Install pyroglancer from Github
-      run: pip install git+git://github.com/SridharJagannathan/pyroglancer@master
+      run: pip install git+https://github.com/SridharJagannathan/pyroglancer@master
 
     - name: Lint with flake8
       run: |
