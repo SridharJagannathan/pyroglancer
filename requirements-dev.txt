@@ -13,3 +13,4 @@ sphinx-copybutton
 sphinx_rtd_theme
 nbsphinx
 sphinx_autodoc_typehints
+markupsafe<2.1.0
