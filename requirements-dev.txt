@@ -4,7 +4,6 @@ codecov
 coverage
 flake8
 pytest
-markupsafe==2.0.1
 sphinx
 # These are dependencies of various sphinx extensions for documentation.
 ipython
