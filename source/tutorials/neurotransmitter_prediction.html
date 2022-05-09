@@ -1,39 +1,18 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Co-plotting hemibrain skeleton with flywire dataset for predicting neurotransmitters of typed hemibrain neurons &mdash; Pyroglancer 0.0.5 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
@@ -41,41 +20,21 @@
         <script src="../../_static/clipboard.min.js"></script>
         <script src="../../_static/copybutton.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> Pyroglancer
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 0.0.5
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -83,18 +42,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Get Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Install Pyroglancer</a></li>
@@ -118,71 +66,30 @@
 <li class="toctree-l1"><a class="reference internal" href="../modules.html">pyroglancer</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">Pyroglancer</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Co-plotting hemibrain skeleton with flywire dataset for predicting neurotransmitters of typed hemibrain neurons</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../../_sources/source/tutorials/neurotransmitter_prediction.ipynb.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   
 <style>
 /* CSS for nbsphinx extension */
@@ -393,7 +300,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt a.copybtn {
+.prompt .copybtn {
     display: none;
 }
 
@@ -454,18 +361,17 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="Co-plotting-hemibrain-skeleton-with-flywire-dataset-for-predicting-neurotransmitters-of-typed-hemibrain-neurons">
-<h1>Co-plotting hemibrain skeleton with flywire dataset for predicting neurotransmitters of typed hemibrain neurons<a class="headerlink" href="#Co-plotting-hemibrain-skeleton-with-flywire-dataset-for-predicting-neurotransmitters-of-typed-hemibrain-neurons" title="Permalink to this headline">¶</a></h1>
+<h1>Co-plotting hemibrain skeleton with flywire dataset for predicting neurotransmitters of typed hemibrain neurons<a class="headerlink" href="#Co-plotting-hemibrain-skeleton-with-flywire-dataset-for-predicting-neurotransmitters-of-typed-hemibrain-neurons" title="Permalink to this headline"></a></h1>
 <section id="This-section-contains-example-of-fetching-skeleton-from-hemibrain-dataset-and-co-plotting-with-a-flywire-instance">
-<h2>This section contains example of fetching skeleton from hemibrain dataset and co-plotting with a flywire instance<a class="headerlink" href="#This-section-contains-example-of-fetching-skeleton-from-hemibrain-dataset-and-co-plotting-with-a-flywire-instance" title="Permalink to this headline">¶</a></h2>
+<h2>This section contains example of fetching skeleton from hemibrain dataset and co-plotting with a flywire instance<a class="headerlink" href="#This-section-contains-example-of-fetching-skeleton-from-hemibrain-dataset-and-co-plotting-with-a-flywire-instance" title="Permalink to this headline"></a></h2>
 </section>
 <section id="Import-neccesary-library-modules-now">
-<h2>Import neccesary library modules now<a class="headerlink" href="#Import-neccesary-library-modules-now" title="Permalink to this headline">¶</a></h2>
+<h2>Import neccesary library modules now<a class="headerlink" href="#Import-neccesary-library-modules-now" title="Permalink to this headline"></a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">navis</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">navis</span>
 <span class="kn">import</span> <span class="nn">fafbseg</span>
 <span class="kn">import</span> <span class="nn">flybrains</span>
 </pre></div>
@@ -475,8 +381,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pyroglancer.localserver</span> <span class="kn">import</span> <span class="n">startdataserver</span><span class="p">,</span> <span class="n">closedataserver</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyroglancer.localserver</span> <span class="kn">import</span> <span class="n">startdataserver</span><span class="p">,</span> <span class="n">closedataserver</span>
 <span class="kn">from</span> <span class="nn">pyroglancer.flywire</span> <span class="kn">import</span> <span class="n">flywireurl2dict</span><span class="p">,</span> <span class="n">add_flywirelayer</span><span class="p">,</span> <span class="n">set_flywireviewerstate</span>
 </pre></div>
 </div>
@@ -485,8 +390,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">navis.interfaces.neuprint</span> <span class="k">as</span> <span class="nn">neu</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">navis.interfaces.neuprint</span> <span class="k">as</span> <span class="nn">neu</span>
 <span class="kn">from</span> <span class="nn">navis.interfaces.neuprint</span> <span class="kn">import</span> <span class="n">NeuronCriteria</span> <span class="k">as</span> <span class="n">NC</span><span class="p">,</span> <span class="n">SynapseCriteria</span> <span class="k">as</span> <span class="n">SC</span>
 </pre></div>
 </div>
@@ -495,8 +399,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="c1">#font = {&#39;family&#39;: &#39;serif&#39;, &#39;serif&#39;: [&#39;Palatino&#39;]}</span>
 <span class="c1">#font = {&#39;family&#39;: &#39;serif&#39;, &#39;serif&#39;: [&#39;Helvetica&#39;]}</span>
 <span class="c1">#plt.rc(&#39;font&#39;, **font)</span>
@@ -522,13 +425,12 @@ div.rendered_html tbody tr:hover {
 </div>
 </section>
 <section id="Set-configurations-to-fetch-from-data-from-neuprint">
-<h2>Set configurations to fetch from data from neuprint<a class="headerlink" href="#Set-configurations-to-fetch-from-data-from-neuprint" title="Permalink to this headline">¶</a></h2>
+<h2>Set configurations to fetch from data from neuprint<a class="headerlink" href="#Set-configurations-to-fetch-from-data-from-neuprint" title="Permalink to this headline"></a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">client</span> <span class="o">=</span> <span class="n">neu</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="s1">&#39;https://neuprint.janelia.org/&#39;</span><span class="p">,</span> <span class="n">dataset</span><span class="o">=</span><span class="s1">&#39;hemibrain:v1.2.1&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">neu</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="s1">&#39;https://neuprint.janelia.org/&#39;</span><span class="p">,</span> <span class="n">dataset</span><span class="o">=</span><span class="s1">&#39;hemibrain:v1.2.1&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -536,8 +438,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">client</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">client</span>
 </pre></div>
 </div>
 </div>
@@ -552,13 +453,12 @@ Client(&#34;https://neuprint.janelia.org&#34;, &#34;hemibrain:v1.2.1&#34;)
 </div>
 </section>
 <section id="Get-some-typed-neurons-and-neuropil-meshes-from-neuprint">
-<h2>Get some typed neurons and neuropil meshes from neuprint<a class="headerlink" href="#Get-some-typed-neurons-and-neuropil-meshes-from-neuprint" title="Permalink to this headline">¶</a></h2>
+<h2>Get some typed neurons and neuropil meshes from neuprint<a class="headerlink" href="#Get-some-typed-neurons-and-neuropil-meshes-from-neuprint" title="Permalink to this headline"></a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">neurons_df</span><span class="p">,</span> <span class="n">roi_counts_df</span> <span class="o">=</span> <span class="n">neu</span><span class="o">.</span><span class="n">fetch_neurons</span><span class="p">(</span><span class="n">NC</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="s1">&#39;Traced&#39;</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;ER5&#39;</span><span class="p">,</span><span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span> <span class="c1">#get some ER5 neurons..</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">neurons_df</span><span class="p">,</span> <span class="n">roi_counts_df</span> <span class="o">=</span> <span class="n">neu</span><span class="o">.</span><span class="n">fetch_neurons</span><span class="p">(</span><span class="n">NC</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="s1">&#39;Traced&#39;</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;ER5&#39;</span><span class="p">,</span><span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span> <span class="c1">#get some ER5 neurons..</span>
 </pre></div>
 </div>
 </div>
@@ -566,8 +466,7 @@ Client(&#34;https://neuprint.janelia.org&#34;, &#34;hemibrain:v1.2.1&#34;)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">er5bodyidList</span> <span class="o">=</span> <span class="n">neurons_df</span><span class="p">[[</span><span class="s1">&#39;bodyId&#39;</span><span class="p">]]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">er5bodyidList</span> <span class="o">=</span> <span class="n">neurons_df</span><span class="p">[[</span><span class="s1">&#39;bodyId&#39;</span><span class="p">]]</span>
 </pre></div>
 </div>
 </div>
@@ -575,8 +474,7 @@ Client(&#34;https://neuprint.janelia.org&#34;, &#34;hemibrain:v1.2.1&#34;)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">er5bodyidList</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">er5bodyidList</span>
 </pre></div>
 </div>
 </div>
@@ -695,8 +593,7 @@ Client(&#34;https://neuprint.janelia.org&#34;, &#34;hemibrain:v1.2.1&#34;)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">er5_skel</span> <span class="o">=</span> <span class="n">neu</span><span class="o">.</span><span class="n">fetch_skeletons</span><span class="p">(</span><span class="n">er5bodyidList</span><span class="p">,</span> <span class="n">heal</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">max_threads</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">er5_skel</span> <span class="o">=</span> <span class="n">neu</span><span class="o">.</span><span class="n">fetch_skeletons</span><span class="p">(</span><span class="n">er5bodyidList</span><span class="p">,</span> <span class="n">heal</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">max_threads</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -732,8 +629,7 @@ WARNING - 2021-08-11 19:23:15,028 - connectionpool - Connection pool is full, di
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1">#fetch mesh for Right Antenna lobe..</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#fetch mesh for Right Antenna lobe..</span>
 <span class="n">al_R</span> <span class="o">=</span> <span class="n">neu</span><span class="o">.</span><span class="n">fetch_roi</span><span class="p">(</span><span class="s1">&#39;AL(R)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -742,8 +638,7 @@ WARNING - 2021-08-11 19:23:15,028 - connectionpool - Connection pool is full, di
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">hemibrain_mesh</span> <span class="o">=</span> <span class="n">navis</span><span class="o">.</span><span class="n">Volume</span><span class="p">(</span><span class="n">flybrains</span><span class="o">.</span><span class="n">JRCFIB2018Fraw</span><span class="o">.</span><span class="n">mesh</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hemibrain_mesh</span> <span class="o">=</span> <span class="n">navis</span><span class="o">.</span><span class="n">Volume</span><span class="p">(</span><span class="n">flybrains</span><span class="o">.</span><span class="n">JRCFIB2018Fraw</span><span class="o">.</span><span class="n">mesh</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -751,8 +646,7 @@ WARNING - 2021-08-11 19:23:15,028 - connectionpool - Connection pool is full, di
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">figwidth_size</span> <span class="o">=</span> <span class="mi">5</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">figwidth_size</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">figheigth_size</span> <span class="o">=</span> <span class="mi">5</span>
 </pre></div>
 </div>
@@ -761,8 +655,7 @@ WARNING - 2021-08-11 19:23:15,028 - connectionpool - Connection pool is full, di
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1">#navis display options for frontal view..</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#navis display options for frontal view..</span>
 <span class="n">elev</span> <span class="o">=</span> <span class="o">-</span><span class="mi">180</span>
 <span class="n">azim</span> <span class="o">=</span> <span class="o">-</span><span class="mi">90</span>
 <span class="n">dist</span> <span class="o">=</span> <span class="mi">6</span>
@@ -773,8 +666,7 @@ WARNING - 2021-08-11 19:23:15,028 - connectionpool - Connection pool is full, di
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">figwidth_size</span><span class="p">,</span> <span class="n">figheigth_size</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">figwidth_size</span><span class="p">,</span> <span class="n">figheigth_size</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span> <span class="o">=</span> <span class="s1">&#39;3d&#39;</span><span class="p">)</span>
 <span class="n">navis</span><span class="o">.</span><span class="n">plot2d</span><span class="p">(</span><span class="n">er5_skel</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">connectors</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">navis</span><span class="o">.</span><span class="n">plot2d</span><span class="p">(</span><span class="n">hemibrain_mesh</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span> <span class="n">connectors</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -800,13 +692,12 @@ WARNING - 2021-08-11 19:23:15,028 - connectionpool - Connection pool is full, di
 </div>
 </section>
 <section id="Transform-them-to-Flywire-space..">
-<h2>Transform them to Flywire space..<a class="headerlink" href="#Transform-them-to-Flywire-space.." title="Permalink to this headline">¶</a></h2>
+<h2>Transform them to Flywire space..<a class="headerlink" href="#Transform-them-to-Flywire-space.." title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">flywire_neuron</span><span class="o">=</span><span class="n">navis</span><span class="o">.</span><span class="n">xform_brain</span><span class="p">(</span><span class="n">er5_skel</span><span class="p">,</span><span class="n">source</span><span class="o">=</span><span class="s1">&#39;JRCFIB2018Fraw&#39;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;FLYWIRE&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flywire_neuron</span><span class="o">=</span><span class="n">navis</span><span class="o">.</span><span class="n">xform_brain</span><span class="p">(</span><span class="n">er5_skel</span><span class="p">,</span><span class="n">source</span><span class="o">=</span><span class="s1">&#39;JRCFIB2018Fraw&#39;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;FLYWIRE&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -837,8 +728,7 @@ Transform path: JRCFIB2018Fraw -&gt; JRCFIB2018F -&gt; JRCFIB2018Fum -&gt; JRC20
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">flywirevol</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flywirevol</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">flywirevol</span><span class="p">[</span><span class="s1">&#39;hemibrain&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">navis</span><span class="o">.</span><span class="n">xform_brain</span><span class="p">(</span><span class="n">hemibrain_mesh</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="s1">&#39;JRCFIB2018Fraw&#39;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;FLYWIRE&#39;</span><span class="p">)</span>
 <span class="n">flywirevol</span><span class="p">[</span><span class="s1">&#39;AL_R&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">navis</span><span class="o">.</span><span class="n">xform_brain</span><span class="p">(</span><span class="n">al_R</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="s1">&#39;JRCFIB2018Fraw&#39;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;FLYWIRE&#39;</span><span class="p">)</span>
 </pre></div>
@@ -857,8 +747,7 @@ Transform path: JRCFIB2018Fraw -&gt; JRCFIB2018F -&gt; JRCFIB2018Fum -&gt; JRC20
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">flywirevol</span><span class="p">[</span><span class="s1">&#39;hemibrain&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="mi">200</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flywirevol</span><span class="p">[</span><span class="s1">&#39;hemibrain&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="mi">200</span>
 <span class="n">flywirevol</span><span class="p">[</span><span class="s1">&#39;AL_R&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="mi">300</span>
 <span class="n">flywirevol</span>
 </pre></div>
@@ -876,13 +765,12 @@ Transform path: JRCFIB2018Fraw -&gt; JRCFIB2018F -&gt; JRCFIB2018Fum -&gt; JRC20
 </div>
 </section>
 <section id="Start-the-dataserver-to-host-precomputed-data..">
-<h2>Start the dataserver to host precomputed data..<a class="headerlink" href="#Start-the-dataserver-to-host-precomputed-data.." title="Permalink to this headline">¶</a></h2>
+<h2>Start the dataserver to host precomputed data..<a class="headerlink" href="#Start-the-dataserver-to-host-precomputed-data.." title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">startdataserver</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">startdataserver</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -897,26 +785,24 @@ Serving directory at http://127.0.0.1:8000
 </div>
 </section>
 <section id="Get-the-url-from-flywire-to-append-data-onto..">
-<h2>Get the url from flywire to append data onto..<a class="headerlink" href="#Get-the-url-from-flywire-to-append-data-onto.." title="Permalink to this headline">¶</a></h2>
+<h2>Get the url from flywire to append data onto..<a class="headerlink" href="#Get-the-url-from-flywire-to-append-data-onto.." title="Permalink to this headline"></a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">shorturl</span> <span class="o">=</span> <span class="s1">&#39;https://ngl.flywire.ai/?json_url=https://globalv1.flywire-daf.com/nglstate/4646812430368768&#39;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shorturl</span> <span class="o">=</span> <span class="s1">&#39;https://ngl.flywire.ai/?json_url=https://globalv1.flywire-daf.com/nglstate/4646812430368768&#39;</span>
 <span class="c1">#This flywire segments has some stuff similar to the DA1 PNs, you will notice their closeness in the final plot</span>
 </pre></div>
 </div>
 </div>
 </section>
 <section id="Add-bodyids-to-flywire-layers..">
-<h2>Add bodyids to flywire layers..<a class="headerlink" href="#Add-bodyids-to-flywire-layers.." title="Permalink to this headline">¶</a></h2>
+<h2>Add bodyids to flywire layers..<a class="headerlink" href="#Add-bodyids-to-flywire-layers.." title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">tmpviewer</span> <span class="o">=</span> <span class="n">add_flywirelayer</span><span class="p">(</span><span class="n">flywireurl2dict</span><span class="p">(</span><span class="n">shorturl</span><span class="p">),</span> <span class="n">layer_kws</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;skeletons&#39;</span><span class="p">,</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tmpviewer</span> <span class="o">=</span> <span class="n">add_flywirelayer</span><span class="p">(</span><span class="n">flywireurl2dict</span><span class="p">(</span><span class="n">shorturl</span><span class="p">),</span> <span class="n">layer_kws</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;skeletons&#39;</span><span class="p">,</span>
                                                                      <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="n">flywire_neuron</span><span class="p">,</span>
                                                                      <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;hemibrain_skels&#39;</span><span class="p">,</span>
                                                                      <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">})</span>
@@ -957,13 +843,12 @@ flywire url at: https://ngl.flywire.ai/?json_url=https://globalv1.flywire-daf.co
 </div>
 </section>
 <section id="Add-neuropil-meshes-to-flywire-layers">
-<h2>Add neuropil meshes to flywire layers<a class="headerlink" href="#Add-neuropil-meshes-to-flywire-layers" title="Permalink to this headline">¶</a></h2>
+<h2>Add neuropil meshes to flywire layers<a class="headerlink" href="#Add-neuropil-meshes-to-flywire-layers" title="Permalink to this headline"></a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">shorturl</span> <span class="o">=</span> <span class="n">tmpviewer</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shorturl</span> <span class="o">=</span> <span class="n">tmpviewer</span>
 </pre></div>
 </div>
 </div>
@@ -971,8 +856,7 @@ flywire url at: https://ngl.flywire.ai/?json_url=https://globalv1.flywire-daf.co
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">tmpviewer</span> <span class="o">=</span> <span class="n">add_flywirelayer</span><span class="p">(</span><span class="n">flywireurl2dict</span><span class="p">(</span><span class="n">shorturl</span><span class="p">),</span> <span class="n">layer_kws</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;volumes&#39;</span><span class="p">,</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tmpviewer</span> <span class="o">=</span> <span class="n">add_flywirelayer</span><span class="p">(</span><span class="n">flywireurl2dict</span><span class="p">(</span><span class="n">shorturl</span><span class="p">),</span> <span class="n">layer_kws</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;volumes&#39;</span><span class="p">,</span>
                                                                      <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">flywirevol</span><span class="p">[</span><span class="s1">&#39;hemibrain&#39;</span><span class="p">],</span>
                                                                                 <span class="n">flywirevol</span><span class="p">[</span><span class="s1">&#39;AL_R&#39;</span><span class="p">]],</span>
                                                                      <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;hemibrain_neuropils&#39;</span><span class="p">,</span>
@@ -1002,8 +886,7 @@ flywire url at: https://ngl.flywire.ai/?json_url=https://globalv1.flywire-daf.co
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">tmpviewer</span><span class="p">,</span><span class="n">shorturl</span> <span class="o">=</span> <span class="n">set_flywireviewerstate</span><span class="p">(</span><span class="n">tmpviewer</span><span class="p">,</span> <span class="n">axis_lines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bounding_box</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tmpviewer</span><span class="p">,</span><span class="n">shorturl</span> <span class="o">=</span> <span class="n">set_flywireviewerstate</span><span class="p">(</span><span class="n">tmpviewer</span><span class="p">,</span> <span class="n">axis_lines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bounding_box</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1056,8 +939,7 @@ flywire url at: https://ngl.flywire.ai/?json_url=https://globalv1.flywire-daf.co
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -1065,8 +947,7 @@ flywire url at: https://ngl.flywire.ai/?json_url=https://globalv1.flywire-daf.co
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1">#some matches are.. 1231066732 --&gt; 720575940630849069, 5812979604 --&gt; 720575940624108862</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#some matches are.. 1231066732 --&gt; 720575940630849069, 5812979604 --&gt; 720575940624108862</span>
 </pre></div>
 </div>
 </div>
@@ -1074,8 +955,7 @@ flywire url at: https://ngl.flywire.ai/?json_url=https://globalv1.flywire-daf.co
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1">#some of our matching er5 neurons are..</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#some of our matching er5 neurons are..</span>
 <span class="c1">#pre_syn = fafbseg.flywire.fetch_synapses([720575940620940045], transmitters=True, post=False)</span>
 <span class="c1">#fafbseg.flywire.predict_transmitter([720575940620940045], single_pred=True)</span>
 </pre></div>
@@ -1085,8 +965,7 @@ flywire url at: https://ngl.flywire.ai/?json_url=https://globalv1.flywire-daf.co
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">fafbseg</span><span class="o">.</span><span class="n">flywire</span><span class="o">.</span><span class="n">predict_transmitter</span><span class="p">([</span><span class="mi">720575940630849069</span><span class="p">,</span> <span class="mi">720575940624108862</span><span class="p">])</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fafbseg</span><span class="o">.</span><span class="n">flywire</span><span class="o">.</span><span class="n">predict_transmitter</span><span class="p">([</span><span class="mi">720575940630849069</span><span class="p">,</span> <span class="mi">720575940624108862</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1162,27 +1041,25 @@ flywire url at: https://ngl.flywire.ai/?json_url=https://globalv1.flywire-daf.co
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
 </section>
 <section id="Screenshot-of-the-flywire-instance">
-<h2>Screenshot of the flywire instance<a class="headerlink" href="#Screenshot-of-the-flywire-instance" title="Permalink to this headline">¶</a></h2>
+<h2>Screenshot of the flywire instance<a class="headerlink" href="#Screenshot-of-the-flywire-instance" title="Permalink to this headline"></a></h2>
 <section id="you-can-see-the-skeletons-from-hemibrain-(red)-plotted-in-the-skeleton-layer,-and-some-similar-neurons-(meshes)-of-the-flywire-dataset-plotted-in-green-and-cyan">
-<h3>you can see the skeletons from hemibrain (red) plotted in the skeleton layer, and some similar neurons (meshes) of the flywire dataset plotted in green and cyan<a class="headerlink" href="#you-can-see-the-skeletons-from-hemibrain-(red)-plotted-in-the-skeleton-layer,-and-some-similar-neurons-(meshes)-of-the-flywire-dataset-plotted-in-green-and-cyan" title="Permalink to this headline">¶</a></h3>
+<h3>you can see the skeletons from hemibrain (red) plotted in the skeleton layer, and some similar neurons (meshes) of the flywire dataset plotted in green and cyan<a class="headerlink" href="#you-can-see-the-skeletons-from-hemibrain-(red)-plotted-in-the-skeleton-layer,-and-some-similar-neurons-(meshes)-of-the-flywire-dataset-plotted-in-green-and-cyan" title="Permalink to this headline"></a></h3>
 <p><img alt="alt text" src="../../_images/neurotransmitterpred.png" /></p>
 </section>
 </section>
 <section id="Close-the-dataserver">
-<h2>Close the dataserver<a class="headerlink" href="#Close-the-dataserver" title="Permalink to this headline">¶</a></h2>
+<h2>Close the dataserver<a class="headerlink" href="#Close-the-dataserver" title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">closedataserver</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">closedataserver</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1199,8 +1076,7 @@ Cleaning directory at /private/var/folders/4_/1td4h5lj50z735wckw6pjd5h0000gn/T/t
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -1209,46 +1085,30 @@ Cleaning directory at /private/var/folders/4_/1td4h5lj50z735wckw6pjd5h0000gn/T/t
 
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Sridhar Jagannathan.
-
-    </p>
+    <p>&#169; Copyright 2021, Sridhar Jagannathan.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
